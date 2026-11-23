@@ -1870,7 +1870,7 @@ const CASE_EXPRESS={
         {id:"toddy",label:"Il bicchiere del toddy",clue:"e_toddy",text:"Un bicchiere da toddy della compagnia, vuoto, con la fetta di limone e il chiodo di garofano sul fondo. Odora di whisky e di laudano. MacRae giura di averlo lasciato fuori dalla porta alle undici e mezza."},
         {id:"orologio",label:"L'orologio da tasca",clue:"e_orologio",text:"Un orologio d'argento appeso al gancio della cuccetta. Fermo alle 5:52. Lo scuoti: riparte. Non è rotto. Si è semplicemente scaricato."},
         {id:"tazze",label:"Il vassoio del tè",clue:"e_tazze",text:"Il vassoio che MacRae ha portato alle 22:40, con una tazza. Ma le tazze sono due. La seconda ha il bordo dorato del vagone ristorante e, sul fondo, un deposito biancastro dall'odore acre e dolciastro."},
-        {id:"corpo_g",label:"Il corpo",when:g=>locOf("graham")==="scomp4",text:"Sir Alastair è chino sul corpo e ti sbarra il passo con un sorriso. «Lasci fare a un medico, avvocato. Laudano, senza dubbio. Nessun segno di violenza.» Ti conviene tornare quando non c'è."},
+        {id:"corpo_g",label:"Il corpo",when:g=>locOf("graham")==="scomp4",text:"Sir Alastair è chino sul corpo e ti sbarra il passo con un sorriso. «Lasci fare a un medico, avvocato. Laudano, senza dubbio. Nessun segno di violenza.» Ti conviene tornare quando non c'è: controlla sulla Mappa quando lascia lo scompartimento."},
         {id:"corpo",label:"Il corpo",clue:"e_ago",when:g=>locOf("graham")!=="scomp4",text:"Sollevi il lenzuolo dal fondo della cuccetta. I piedi nudi di Pell. Tra il quarto e il quinto dito del sinistro, un forellino minuscolo con un alone livido. Lyle trattiene il fiato. «Sono dottore in lettere, non in medicina. Ma questo lo riconosco anch'io: un'iniezione. Dove nessun medico di provincia guarderebbe mai.» Poi, piano: «Non lo dica a nessuno. Un segreto, in mano nostra, vale più di una prova.»"},
         {id:"macchina",label:"La macchina per scrivere",clue:"e_macchina",text:"Una portatile pieghevole americana, l'ultima novità. Nella custodia, tre lettere battute da Pell nei giorni scorsi: margini perfetti, battute uniformi, nessun errore. Mani da dattilografo."},
         {id:"cappotto",label:"Il cappotto appeso",clue:"e_nastro",text:"Un cappotto grigio, consumato ai polsi. All'occhiello, un nastrino azzurro: la Lega della Temperanza. Chi lo porta ha giurato di non toccare alcol."},
@@ -2744,6 +2744,7 @@ function openOptions(){AU.sfx("page");const row=(t,sub,lab,on)=>`<div class="opt
 let fastText=false;try{fastText=localStorage.getItem("cc_fast")==="1"}catch(e){}
 function wipeAll(){note("Cancellare tutto?",`<p>Verranno cancellati il salvataggio in corso e l'elenco dei casi risolti.</p><div class="row"><button class="btn red" onclick="try{localStorage.removeItem(SAVE);localStorage.removeItem(DONE);localStorage.removeItem(BEST);localStorage.removeItem(MED)}catch(e){};closeOv();closePanels();buildTitle()">Cancella</button><button class="btn ink" onclick="closeOv()">Annulla</button></div>`,true);}
 function howTo(){note("Come si gioca",`<p>Ogni caso è diviso in <b>atti</b>. In ognuno hai un numero limitato di spostamenti: le candele accanto all'orologio. Ogni stanza raggiunta costa un quarto d'ora.</p>
+<p>Le <b>persone si spostano</b>: con il passare delle ore e da un atto all'altro cambiano stanza. Sulla <b>Mappa</b> le loro iniziali mostrano dove sono adesso; nel Taccuino, alla scheda <b>Persone</b>, puoi raggiungerle. Alcune cose si possono fare solo quando una certa persona c'è, o quando non c'è.</p>
 <p>Nelle stanze, i <b>bagliori</b> indicano che cosa si può esaminare. Tocca le <b>sagome</b> per interrogare i presenti, e mostra loro i reperti del taccuino: le reazioni giuste aprono nuove piste.</p>
 <p>La <b>Bacheca</b> lega gli indizi alle teorie con il filo rosso. Alcune teorie sono false piste perfettamente coerenti.</p>
 <p>Puoi <b>accusare</b> in ogni momento, una volta sola. Ci sono finali sbagliati, finali parziali e una sola verità.</p>
@@ -2759,7 +2760,7 @@ function newGame(id,confirmFirst){
 function continueGame(){G=loadSave();S=STORIES.find(s=>s.id===G.story);if(!S){G=null;return;}accAns={};wAng.last=null;closePanels();
   $("#title").classList.remove("on");$("#game").classList.add("on");snow(false);render();AU.music(true,"act"+G.act);}
 function replayFilm(){const st=STORIES.find(s=>s.film);if(!st)return;S=S||st;playFilm(st.film,()=>{buildTitle();AU.music(true,"title");});}
-function actIntro(i){const a=S.acts[i];chapter({eb:a.label,title:a.title,paras:a.intro,art:a.room,plate:a.plate?`Tav. ${ROMAN[i]} — ${a.plate}`:"",mood:i<3?"murder":"storm",onDone:()=>{render();setTimeout(()=>tip(i?"act"+i:"start"),900);}});}
+function actIntro(i){const a=S.acts[i];chapter({eb:a.label,title:a.title,paras:a.intro,art:a.room,plate:a.plate?`Tav. ${ROMAN[i]} — ${a.plate}`:"",mood:i<3?"murder":"storm",onDone:()=>{render();setTimeout(()=>tip(i?"act"+i:"start"),900);if(i)setTimeout(()=>toast("Nuovo atto: le persone hanno cambiato stanza. Guarda la Mappa."),600);}});}
 
 /* ---------------- FILMATO ---------------- */
 let filmT=[],filmEnd=null;
@@ -2881,15 +2882,24 @@ function mapSVG(){const m=S.map;let s=`<svg viewBox="-6 -46 352 456" xmlns="http
   const cr=m.rooms.find(r=>r.id===G.room),[px,py]=roomPinXY(cr);
   s+=`<g id="pin" class="pin" style="transform:translate(${px}px,${py}px)"><ellipse cx="2" cy="1" rx="5" ry="2" fill="#000" opacity=".3"/><path d="M0 0C-5 -7 -7 -11 -7 -14A7 7 0 1 1 7 -14C7 -11 5 -7 0 0Z" fill="#a01818" stroke="#4a0808"/><circle cx="0" cy="-14" r="2.5" fill="#f3d0c6"/></g>`;
   return s+`</svg>`;}
-function mapView(){return `<div class="plan">${mapSVG()}<div class="legend">Tocca una stanza per raggiungerla · un quarto d'ora a spostamento · <span style="color:#8a1414">✕</span> scena del delitto</div></div>`;}
+function mapView(){return `<div class="plan">${mapSVG()}<div class="legend">Tocca una stanza per raggiungerla · un quarto d'ora a spostamento · <span style="color:#8a1414">✕</span> scena del delitto<br>Le iniziali nei cerchi sono le persone: <b>si spostano</b> con il passare delle ore e da un atto all'altro</div></div>`;}
 
 function goRoom(id){
   if(G.ended){setTab("accuse");return;}
   if(G.room===id){setTab("room");return;}
   const lk=roomLocked(id);if(lk){AU.sfx("door");note(S.rooms[id].name,`<p>${lk}</p>`,true);return;}
   if(G.actions<=0){endAct();return;}
-  const doMove=()=>{AU.sfx("step");const f=$("#fade");f.classList.add("on");setTimeout(()=>{G.actions--;G.time+=15;G.room=id;G.visited[id]=1;G.tab="room";save();render();$("#main").scrollTop=0;AU.sfx("tick");f.classList.remove("on");},700);};
+  const doMove=()=>{AU.sfx("step");const f=$("#fade");f.classList.add("on");setTimeout(()=>{const before=locSnap();G.actions--;G.time+=15;G.room=id;G.visited[id]=1;G.tab="room";save();render();$("#main").scrollTop=0;AU.sfx("tick");f.classList.remove("on");announceMoves(before);},700);};
   const pin=$("#pin");if(G.tab==="map"&&pin){const r=S.map.rooms.find(x=>x.id===id),[px,py]=roomPinXY(r);pin.style.transform=`translate(${px}px,${py}px)`;setTimeout(doMove,750);}else doMove();}
+/* ---------- le persone si spostano: avvisa il giocatore ---------- */
+function locSnap(){const o={};Object.keys(S.chars).forEach(id=>{if(alive(id))o[id]=locOf(id);});return o;}
+function rName(r){return r&&S.rooms[r]?S.rooms[r].name:"";}
+function announceMoves(before){if(!G||G.ended)return;const mv=Object.keys(before).filter(id=>alive(id)&&before[id]&&locOf(id)&&before[id]!==locOf(id));if(!mv.length)return;
+  const line=mv.map(id=>`${S.chars[id].short} → ${rName(locOf(id))}`).join(" · ");
+  G.tips=G.tips||{};
+  if(!G.tips.moved){G.tips.moved=1;save();const c=S.chars[mv[0]];
+    setTimeout(()=>lyleSay(`«Ha notato? ${c.short} ha cambiato stanza (ora: ${rName(locOf(mv[0]))}). Le persone non stanno ferme: si muovono con le ore e da un atto all'altro. Sulla Mappa le iniziali dicono dov'è ciascuno. Certe cose si possono fare solo quando qualcuno c'è, o quando non c'è.»`),900);return;}
+  setTimeout(()=>toast("Nel frattempo: "+line),500);}
 function askWait(){if(G.ended)return;const last=G.act>=S.acts.length-1;
   note("Lasciar passare il tempo?",`<p>${last?"Se aspetti, arriverà la mezzanotte. E qualcuno potrebbe non vedere l'alba.":"Puoi chiudere questo capitolo e passare al successivo. Gli indizi che non hai trovato potrebbero cambiare, o sparire."}</p><div class="row"><button class="btn red" onclick="closeOv();endAct()">Attendi</button><button class="btn ink" onclick="closeOv()">Continua a indagare</button></div>`,true);}
 function endAct(){closeTalk();
