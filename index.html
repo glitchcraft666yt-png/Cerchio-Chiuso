@@ -454,6 +454,8 @@ body.filming #snow{z-index:52}
 .topics button.last{background-color:#2b1d10;color:var(--gold2);font-style:italic}
 .ft-sub{font-style:italic;color:var(--paper2);font-size:clamp(1rem,3vw,1.25rem);margin-top:14px;opacity:0;animation:rise 1.6s 2s forwards;line-height:1.4}
 .fchoice{position:absolute;left:0;right:0;margin:0 auto;bottom:calc(11vh + 6px + var(--sb));width:min(560px,92vw);z-index:8;background:rgba(10,7,5,.88);border:1px solid rgba(201,164,92,.6);padding:14px 14px 12px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.8);animation:rise .6s both}
+.fctx{font-style:italic;color:#cbbd9d;font-size:.95rem;line-height:1.35;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(201,164,92,.25)}
+.fchoice .fgo{display:block;width:auto;text-align:center;margin:10px auto 0;font-family:'IM Fell English SC',serif;letter-spacing:.14em;color:var(--gold2);border:1px solid var(--gold);padding:7px 18px;background:rgba(201,164,92,.12)}
 .fchoice p{font-family:'IM Fell English',serif;font-size:1.2rem;color:#f1e6cc;margin-bottom:10px}
 .fchoice button{display:block;width:100%;margin:6px 0;padding:10px 12px;font-family:'IM Fell English',serif;font-size:1.05rem;color:#e9dcbc;background:rgba(255,240,210,.06);border:1px solid rgba(201,164,92,.35);text-align:left}
 .fchoice button:hover{background:rgba(201,164,92,.16)}.fchoice button.ok{border-color:#c9a45c;background:rgba(201,164,92,.25)}.fchoice button.no{opacity:.4;text-decoration:line-through}
@@ -2711,24 +2713,32 @@ function playFilm(shots,onDone){AU.init();AU.music(true,"title");
   const finish=()=>{if(ended)return;ended=true;clear();f.style.transition="opacity 1.1s";f.style.opacity="0";AU.music(false);
     setTimeout(()=>{f.classList.remove("on");f.innerHTML="";document.body.classList.remove("filming");snow(false);onDone&&onDone();},1100);};
   filmEnd=finish;
-  const next=()=>{clear();idx++;if(idx>=shots.length){finish();return;}const sh=shots[idx];
+  const RT=t=>Math.max(3200,String(t||"").replace(/<[^>]+>/g,"").length*72+1400);
+  let stT=null,advance=null;
+  const next=()=>{clear();idx++;if(idx>=shots.length){finish();return;}const sh=shots[idx],t0=Date.now();
     const el=document.createElement("div");el.className="shot";
     el.innerHTML=`<div class="cam">${sh.img?`<img src="${artURL(sh.img)}" alt="">`:""}${sh.svg?sh.svg():""}${sh.svgBg?`<div style="position:absolute;inset:0;opacity:.35">${sh.svgBg()}</div>`:""}</div><div class="tint"></div>${sh.html||""}`;
     $("#shots").appendChild(el);const old=cur;cur=el;
     requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add("on")));
     if(old)setTimeout(()=>old.remove(),1500);
-    if(sh.cam&&el.querySelector(".cam").animate)el.querySelector(".cam").animate([{transform:sh.cam[0]},{transform:sh.cam[1]}],{duration:sh.dur+1600,easing:"ease-in-out",fill:"forwards"});
+    const stages=[];if(sh.cap)stages.push((sh.place?`<span class="place">${sh.place}</span>`:"")+sh.cap);if(sh.cap2)stages.push(sh.cap2);
+    const est=Math.max(sh.dur,(sh.capAt||900)+stages.reduce((a,x)=>a+RT(x)+700,0)+(sh.choice?9000:600));
+    if(sh.cam&&el.querySelector(".cam").animate)el.querySelector(".cam").animate([{transform:sh.cam[0]},{transform:sh.cam[1]}],{duration:est+1600,easing:"ease-in-out",fill:"forwards"});
     snow(!!sh.snow);
     const c=$("#capt");c.classList.remove("on");
-    if(sh.cap)T(()=>{c.innerHTML=(sh.place?`<span class="place">${sh.place}</span>`:"")+sh.cap;c.classList.add("on");},sh.capAt||900);
-    if(sh.cap2)T(()=>{c.classList.remove("on");T(()=>{c.innerHTML=sh.cap2;c.classList.add("on");},700);},sh.cap2At);
-    T(()=>c.classList.remove("on"),sh.dur-700);
     if(sh.run)sh.run(el,T);
-    if(sh.choice){waiting=true;T(()=>{c.classList.remove("on");const ch=document.createElement("div");ch.className="fchoice";ch.innerHTML=`<p>${sh.choice.prompt}</p>${sh.choice.opts.map((o,i)=>`<button data-i="${i}">${o.t}</button>`).join("")}<div class="fr" id="fr"></div>`;el.appendChild(ch);
-      ch.onclick=e=>{e.stopPropagation();const b=e.target.closest("button");if(!b)return;const o=sh.choice.opts[+b.dataset.i];const fr=ch.querySelector("#fr");fr.textContent=o.r;fr.className="fr "+(o.ok?"ok":"no");AU.sfx(o.ok?"stamp":"tick");
-        if(o.ok){ch.querySelectorAll("button").forEach(x=>x.disabled=true);b.classList.add("ok");T(()=>{waiting=false;next();},2900);}else{b.disabled=true;b.classList.add("no");}};},sh.capAt?sh.capAt+2600:3600);return;}
-    T(next,sh.dur);};
-  f.onclick=e=>{if(e.target.id==="skipb"){AU.sfx("page");finish();return;}if(ended||waiting)return;AU.init();next();};
+    let si=-1,lastCap="";
+    const showChoice=()=>{waiting=true;c.classList.remove("on");const ch=document.createElement("div");ch.className="fchoice";
+      ch.innerHTML=`${lastCap?`<div class="fctx">${lastCap.replace(/<span class="place">[^<]*<\/span>/,"")}</div>`:""}<p>${sh.choice.prompt}</p>${sh.choice.opts.map((o,i)=>`<button data-i="${i}">${o.t}</button>`).join("")}<div class="fr" id="fr"></div>`;el.appendChild(ch);
+      ch.onclick=e=>{e.stopPropagation();if(e.target.classList.contains("fgo")){waiting=false;next();return;}const b=e.target.closest("button[data-i]");if(!b||b.disabled)return;const o=sh.choice.opts[+b.dataset.i];const fr=ch.querySelector("#fr");fr.textContent=o.r;fr.className="fr "+(o.ok?"ok":"no");AU.sfx(o.ok?"stamp":"tick");
+        if(o.ok){ch.querySelectorAll("button[data-i]").forEach(x=>x.disabled=true);b.classList.add("ok");fr.insertAdjacentHTML("afterend",`<button class="fgo">Continua ›</button>`);T(()=>{if(waiting){waiting=false;next();}},RT(o.r)+2500);}else{b.disabled=true;b.classList.add("no");}};};
+    const afterText=()=>{if(sh.choice){showChoice();return;}const left=Math.max(900,sh.dur-(Date.now()-t0));T(()=>c.classList.remove("on"),Math.max(200,left-700));T(next,left);};
+    const showStage=()=>{clearTimeout(stT);si++;if(si>=stages.length){advance=null;afterText();return;}
+      const go=()=>{lastCap=stages[si];c.innerHTML=stages[si];c.classList.add("on");stT=setTimeout(showStage,RT(stages[si]));filmT.push(stT);};
+      if(si>0){c.classList.remove("on");stT=setTimeout(go,650);filmT.push(stT);}else go();};
+    advance=()=>{if(si<stages.length)showStage();};
+    if(stages.length){stT=setTimeout(showStage,sh.capAt||900);filmT.push(stT);}else{advance=null;afterText();}};
+  f.onclick=e=>{if(e.target.id==="skipb"){AU.sfx("page");finish();return;}if(ended||waiting)return;AU.init();if(advance)advance();else next();};
   next();}
 
 /* le inquadrature del prologo di Ravenscourt */
