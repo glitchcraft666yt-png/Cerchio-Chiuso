@@ -363,7 +363,55 @@ body.filming #snow{z-index:52}
 .dedcard h3{font-family:'IM Fell English',serif;font-weight:400;font-size:1.5rem;line-height:1.1;margin:6px 0 8px}
 .dedcard .dt{font-style:italic;font-size:1rem}
 .strip button.ded{background:#f1dca4}
-#toast{position:fixed;left:50%;bottom:calc(84px + var(--sb));z-index:46;transform:translateX(-50%);max-width:min(90vw,460px);background:#1c140d;color:var(--gold2);border:1px solid var(--gold);padding:10px 16px;font-style:italic;text-align:center;opacity:0;pointer-events:none}
+/* selettore dei reperti */
+#pick{position:fixed;inset:0;z-index:46;display:none;flex-direction:column;justify-content:flex-end;background:rgba(4,3,2,.78);padding-top:calc(10px + var(--st))}
+#pick.on{display:flex;animation:tIn .25s ease}
+.pk-sheet{width:100%;max-width:760px;margin:0 auto;max-height:100%;display:flex;flex-direction:column;background-image:var(--noise);background-color:#efe4c8;background-blend-mode:multiply;color:var(--sepia);box-shadow:0 -14px 40px rgba(0,0,0,.7);border-top:3px solid var(--gold);animation:pkUp .3s cubic-bezier(.2,.8,.3,1)}
+@keyframes pkUp{from{transform:translateY(40px);opacity:.4}}
+.pk-head{display:flex;align-items:flex-start;gap:8px;padding:12px 8px 4px 16px}
+.pk-head>div{flex:1}
+.pk-t{font-family:'IM Fell English SC',serif;letter-spacing:.08em;color:var(--blood);font-size:1.05rem;line-height:1.2}
+.pk-s{font-style:italic;font-size:.92rem;color:#5a4a34;line-height:1.3;margin-top:2px}
+.pk-x{width:44px;height:44px;flex:0 0 44px;font-size:1.3rem;color:var(--sepia);margin-top:-8px}
+.pk-q{margin:4px 16px 2px;width:calc(100% - 32px);font:inherit;font-size:16px;padding:8px 12px;border:1px solid #a8936c;background:#fbf5e6;color:var(--sepia);border-radius:0;-webkit-appearance:none;user-select:text;-webkit-user-select:text}
+.pk-chips{display:flex;gap:6px;overflow-x:auto;padding:8px 16px 8px;scrollbar-width:none;flex:0 0 auto}
+.pk-chips::-webkit-scrollbar{display:none}
+.pk-chips button{flex:0 0 auto;min-height:36px;padding:4px 12px;border:1px solid #a8936c;font-family:'IM Fell English',serif;font-size:.92rem;color:var(--sepia);background:#f6eedb;white-space:nowrap}
+.pk-chips button i{font-style:normal;font-size:.78rem;opacity:.7;margin-left:2px}
+.pk-chips button.on{background:var(--blood);border-color:var(--blood);color:#f6e6d6}
+.pk-grid{flex:1 1 auto;min-height:120px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:10px;align-content:start;padding:6px 16px 14px;box-shadow:inset 0 8px 8px -8px rgba(0,0,0,.25),inset 0 -8px 8px -8px rgba(0,0,0,.25)}
+.pkc{position:relative;background:#fbf5e6;padding:4px 4px 6px;box-shadow:0 3px 7px rgba(0,0,0,.35);color:var(--sepia);font-family:'IM Fell English',serif;font-size:.78rem;line-height:1.12;transition:transform .15s;text-align:center}
+.pkc svg{width:100%;display:block;margin-bottom:3px}
+.pkc.ded{background:#f1dca4}
+.pkc.sel{outline:3px solid var(--blood);transform:translateY(-3px) rotate(-1.5deg)}
+.pkc.shown{opacity:.62}
+.pkc .bdg,.dcard .bdg{position:absolute;top:-6px;right:-4px;font-style:normal;font-family:'IM Fell English SC',serif;font-size:.66rem;letter-spacing:.05em;background:var(--blood);color:#f6e6d6;padding:1px 6px;box-shadow:0 2px 4px rgba(0,0,0,.4)}
+.pkc .bdg.g,.dcard .bdg.g{background:#4a3a28}
+.pk-empty{grid-column:1/-1;font-style:italic;color:#7a6a50;text-align:center;padding:20px 0}
+.pk-foot{flex:0 0 auto;padding:10px 16px calc(12px + var(--sb));border-top:1px solid rgba(59,42,26,.25)}
+.pk-hint{font-style:italic;font-size:.9rem;color:#6a5a44;text-align:center}
+.pk-prev{display:flex;gap:12px;align-items:flex-start;max-height:min(30vh,190px);overflow-y:auto}
+.pk-prev .th{flex:0 0 84px}.pk-prev .th svg{width:100%;display:block}
+.pk-prev h4{font-family:'IM Fell English',serif;font-weight:400;font-size:1.08rem;line-height:1.15;color:var(--blood)}
+.pk-prev p{font-size:.95rem;line-height:1.38;margin-top:2px}
+.pk-btns{display:flex;gap:8px;margin-top:10px}.pk-btns .btn{flex:1}
+.pk-none{display:block;margin:0 auto}
+.s-act .btn.big{max-width:420px}
+/* deduzioni: compatte */
+.dedlist{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 2px}
+.dedlist button{background:#f1dca4;color:var(--sepia);font-family:'IM Fell English',serif;font-size:.86rem;padding:5px 10px;min-height:34px;box-shadow:0 2px 4px rgba(0,0,0,.3);text-align:left;line-height:1.15}
+.dedlist button:before{content:"∴ ";color:var(--blood)}
+.dcard{position:relative}
+.dedfold summary{cursor:pointer;list-style:none;min-height:34px;display:flex;align-items:center}.dedfold summary::-webkit-details-marker{display:none}.dedfold summary:after{content:"▸";margin-left:8px;transition:transform .2s}.dedfold[open] summary:after{transform:rotate(90deg)}
+.ded-slots .slot{flex-direction:row;gap:8px;min-height:50px;text-align:left}.ded-slots .slot svg{width:54px;flex:0 0 54px;margin:0}
+.ded-left{font-size:.9rem;line-height:1.3}
+.pk-btns .btn{min-height:42px;padding:6px 10px;white-space:nowrap;font-size:1rem}
+.dcard.tried{opacity:.38}
+.dcard.tried:after{content:"già provato";position:absolute;left:0;right:0;top:32%;font-family:'IM Fell English SC',serif;font-size:.7rem;color:#f6e6d6;background:rgba(43,29,16,.85);padding:2px 0}
+.ded-chips{padding:4px 0 2px;margin:0 -4px}
+@media(max-width:420px){.ded-head .hand{font-size:1rem;line-height:1.25}.ded-slots .slot{min-height:46px;flex-basis:140px;font-size:.8rem}.ded-slots .slot svg{width:42px;flex-basis:42px}.pk-grid,.dgrid{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}}
+@media(max-height:500px){.pk-s{display:none}.pk-grid{min-height:64px}.pk-prev{max-height:72px}.pk-prev .th{flex-basis:56px}.pk-head{padding-top:6px}.pk-q{padding:5px 10px;margin-top:0}.pk-chips{padding-top:4px;padding-bottom:4px}.has-sel .pk-q,.has-sel .pk-chips{display:none}.pk-btns{margin-top:6px}.pk-foot{padding-top:6px}}
+#toast{position:fixed;left:50%;bottom:calc(84px + var(--sb));z-index:48;transform:translateX(-50%);max-width:min(90vw,460px);background:#1c140d;color:var(--gold2);border:1px solid var(--gold);padding:10px 16px;font-style:italic;text-align:center;opacity:0;pointer-events:none}
 #toast.on{animation:toast 2.8s}
 @keyframes toast{0%{opacity:0;transform:translate(-50%,10px)}10%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0}}
 
@@ -495,6 +543,7 @@ body.filming #snow{z-index:52}
 <div id="plate" onclick="if(event.target===this)closePlate()"></div>
 <div id="chap"></div>
 <div id="salon"></div>
+<div id="pick" onclick="if(event.target===this)closePicker(true)"></div>
 <div id="lyle" onclick="lyleHide()"></div>
 <div id="report"></div>
 <div id="tav" onclick="closeTavola()"></div>
@@ -2106,19 +2155,25 @@ function dedFor(a,b){return (S.deductions||[]).find(d=>(d.a.includes(a)&&d.b.inc
 function dedOpen(){return (S.deductions||[]).filter(d=>!has(d.id)&&d.a.some(has)&&d.b.some(has)).length;}
 let dedSel=[];
 function dedView(){const raw=G.clues.filter(id=>S.clues[id].cat!=="Deduzione"),found=G.clues.filter(id=>S.clues[id].cat==="Deduzione"),open=dedOpen();
-  let h=`<div class="ded-head"><p class="hand">Tocca due reperti per collegarli. Se il filo regge, ne nasce una deduzione.</p>
+  let h=`<div class="ded-head">${found.length?"":`<p class="hand">Tocca due reperti per collegarli. Se il filo regge, ne nasce una deduzione.</p>`}
   <div class="ded-slots"><div class="slot${dedSel[0]?" full":""}">${dedSel[0]?`${evThumb(dedSel[0])}<span>${S.clues[dedSel[0]].name}</span>`:"primo reperto"}</div><div class="link">⟷</div><div class="slot${dedSel[1]?" full":""}">${dedSel[1]?`${evThumb(dedSel[1])}<span>${S.clues[dedSel[1]].name}</span>`:"secondo reperto"}</div></div>
   <div class="ded-left">${open?`Tra i tuoi reperti ci sono ancora <b>${open}</b> ${open===1?"collegamento":"collegamenti"} da scoprire.`:raw.length?"Nessun nuovo collegamento possibile, per ora: cerca altri reperti.":""}</div></div>`;
-  if(found.length){h+=`<div class="jsect">Deduzioni (${found.length}/${S.deductions.length})</div>`;found.slice().reverse().forEach(id=>{h+=`<div class="entry dedent" onclick="viewClue('${id}')"><div class="th">${evThumb(id)}</div><div><h4>${S.clues[id].name}</h4><p>${S.clues[id].text}</p></div></div>`;});}
-  h+=`<div class="jsect">Reperti</div>${raw.length?`<div class="dgrid">${raw.map(id=>`<button class="dcard${dedSel.includes(id)?" sel":""}" onclick="dedPick('${id}')">${evThumb(id)}<span>${S.clues[id].name}</span></button>`).join("")}</div>`:`<p class="hand">Il taccuino è ancora vuoto.</p>`}`;
+  if(found.length){h+=`<details class="dedfold"${dedFold?" open":""} ontoggle="dedFold=this.open"><summary class="jsect">Deduzioni trovate (${found.length}/${S.deductions.length})</summary><div class="dedlist">${found.slice().reverse().map(id=>`<button onclick="viewClue('${id}')">${S.clues[id].name}</button>`).join("")}</div></details>`;}
+  const cnt=c=>c==="all"?raw.length:raw.filter(id=>S.clues[id].cat===c).length;if(dedCat!=="all"&&!cnt(dedCat))dedCat="all";
+  const tried=dedSel.length===1?triedWith(dedSel[0]):[],list=raw.slice().reverse().filter(id=>dedCat==="all"||S.clues[id].cat===dedCat||dedSel.includes(id));
+  h+=`<div class="jsect">Reperti</div>${raw.length>5?`<div class="pk-chips ded-chips">${PK_CATS.filter(([c])=>c!=="Deduzione"&&cnt(c)).map(([c,l])=>`<button class="${dedCat===c?"on":""}" onclick="dedCat='${c}';AU.sfx('tick');const y=$('#main').scrollTop;render();$('#main').scrollTop=y">${l} <i>${cnt(c)}</i></button>`).join("")}</div>`:""}
+  ${raw.length?`<div class="dgrid">${list.map(id=>`<button class="dcard${dedSel.includes(id)?" sel":""}${tried.includes(id)?" tried":""}" onclick="dedPick('${id}')">${evThumb(id)}<span>${S.clues[id].name}</span>${G.newClues.includes(id)&&!dedSel.includes(id)?`<em class="bdg">nuovo</em>`:""}</button>`).join("")}</div>`:`<p class="hand">Il taccuino è ancora vuoto.</p>`}`;
   return h;}
-function dedPick(id){AU.sfx("page");const i=dedSel.indexOf(id);if(i>=0)dedSel.splice(i,1);else{dedSel.push(id);if(dedSel.length>2)dedSel.shift();}
+let dedCat="all",dedFold=false;
+function pairKey(a,b){return [a,b].sort().join("|");}
+function triedWith(a){return (G.tried||[]).map(k=>k.split("|")).filter(p=>p.includes(a)).map(p=>p[0]===a?p[1]:p[0]);}
+function dedPick(id){if(dedSel.length===1&&dedSel[0]!==id&&triedWith(dedSel[0]).includes(id)){AU.sfx("tick");toast("Li hai già collegati: il filo non regge.");return;}AU.sfx("page");const i=dedSel.indexOf(id);if(i>=0)dedSel.splice(i,1);else{dedSel.push(id);if(dedSel.length>2)dedSel.shift();}
   const y=$("#main").scrollTop;render();$("#main").scrollTop=y;if(dedSel.length===2)setTimeout(tryDeduce,380);}
 function tryDeduce(){const [a,b]=dedSel;if(!a||!b)return;const d=dedFor(a,b);dedSel=[];
   if(d&&!has(d.id)){addClue(d.id);save();AU.sfx("eureka");
     showPlate("Deduzione",d.name,clueArt(d.id),`<p class="got center">Collegati: ${S.clues[a].name} · ${S.clues[b].name}</p>`,d.id);render();return;}
   const y=$("#main").scrollTop;render();$("#main").scrollTop=y;
-  if(d)toast("Questa deduzione l'hai già fatta.");else{G.wrongDed=(G.wrongDed||0)+1;save();lyleSay(LYLE_WRONG[G.wrongDed%LYLE_WRONG.length]);AU.sfx("tick");}}
+  if(d)toast("Questa deduzione l'hai già fatta.");else{G.wrongDed=(G.wrongDed||0)+1;G.tried=G.tried||[];const pk=pairKey(a,b);if(!G.tried.includes(pk))G.tried.push(pk);save();const y2=$("#main").scrollTop;render();$("#main").scrollTop=y2;lyleSay(LYLE_WRONG[G.wrongDed%LYLE_WRONG.length]);AU.sfx("tick");}}
 function toast(t){let el=$("#toast");if(!el){el=document.createElement("div");el.id="toast";document.body.appendChild(el);}el.textContent=t;el.classList.remove("on");void el.offsetWidth;el.classList.add("on");}
 function dedCard(id){const k=S.clues[id];return `<div class="dedcard"><div class="dk">∴ Deduzione</div><h3>${k.name}</h3><div class="dt">${k.text}</div></div>`;}
 function dedThumb(){return `<svg viewBox="0 0 300 200"><rect width="300" height="200" fill="#1c140e"/><g transform="rotate(-3 150 100)"><rect x="70" y="20" width="160" height="166" fill="#e9d29a"/><rect x="78" y="28" width="144" height="150" fill="none" stroke="#8a6a2a" stroke-width="2"/><text x="150" y="122" text-anchor="middle" font-size="74" fill="#6a4a14" font-family="IM Fell English, serif">∴</text></g></svg>`;}
@@ -2154,8 +2209,9 @@ function renderSalon(){const st=SL.steps[SL.i],who=accAns.who,ids=["allegra","ri
   <div class="s-text"><p class="ssay">${say}</p>${res}</div>
   <div class="s-act">${SL.res?`<button class="btn red" onclick="salonNext()">${SL.i<SL.steps.length-1?"Avanti":"Concludi"}</button>`:
     `<div class="s-lab">${st.t==="clear"?`Presenta la prova che scagiona ${S.chars[st.who].short}`:`Presenta la prova decisiva contro ${S.chars[who].short}`}</div>
-    <div class="strip">${ev.map(id=>`<button class="${S.clues[id].cat==="Deduzione"?"ded":""}" onclick="salonPick('${id}')">${evThumb(id)}<span>${S.clues[id].name}</span></button>`).join("")}</div>
+    <button class="btn red big" onclick="salonOpenPick()">Scegli la prova</button>
     <button class="btn ink sm" onclick="salonPick(null)">Non ho una prova</button>`}</div>`;}
+function salonOpenPick(){const st=SL.steps[SL.i],who=accAns.who;openPicker({title:st.t==="clear"?`Prova che scagiona ${S.chars[st.who].short}`:`Prova decisiva contro ${S.chars[who].short}`,act:"Presenta",none:"Non ho una prova",onPick:salonPick});}
 function salonPick(id){const st=SL.steps[SL.i],info=st.t==="clear"?SALON.clear[st.who]:SALON.accuse[st.who],ok=!!id&&info.ok.includes(id);
   if(st.t==="clear"&&ok)SL.cleared[st.who]=1;if(st.t==="clear"&&!ok)SL.failed.push(st.who);if(st.t==="accuse")SL.dec=ok;
   SL.res={ok,text:(id?`<span class="pres">Presenti: ${S.clues[id].name}.</span> `:"")+(ok?info.good:info.bad)};
@@ -2319,7 +2375,8 @@ const OBJ={
 const OBJ_NO=["«E con questo?»","«Non vedo che cosa c'entri.»","«Lei confonde le cose, avvocato.»","Un silenzio educato. La tua obiezione cade nel vuoto."];
 let objMode=null;
 function objOpen(k,who){who=who||talkWith;const o=OBJ[who+"|"+k];return !!o&&!(G.obj||{})[who+"|"+k]&&!(o.unlock&&has(o.unlock));}
-function objStart(k){finishType();lyleHide();objMode=k;pickOpen=true;AU.sfx("page");renderTalk();}
+function objStart(k){finishType();lyleHide();objMode=k;renderTalk();if(!G.clues.length){objMode=null;renderTalk();toast("Il taccuino è ancora vuoto.");return;}
+  openPicker({title:"Obiezione!",sub:"Con quale reperto contesti la frase di "+S.chars[talkWith].short+"?",act:"Obietta",onPick:objPick,onCancel:()=>{objMode=null;renderTalk();}});}
 function objPick(id){const key=talkWith+"|"+objMode,o=OBJ[key];objMode=null;pickOpen=false;G.obj=G.obj||{};
   if(id==="e_ago")G.agoKnown=1;
   if(o.ok.includes(id)){G.obj[key]=1;if(o.calm)pressCulprit(o.calm);save();objFx();setTimeout(()=>{pushLog("Obiezione! — "+S.clues[id].name,o.a,true,o.unlock);},1300);}
@@ -2486,7 +2543,7 @@ function renderTrap(){const T=S.trap,st=T.steps[TP.i];
   <div class="s-ring"><div class="fire"></div>${ring}</div>
   <div class="s-text"><p class="ssay">${st.say}</p>${res}</div>
   <div class="s-act">${TP.r?`<button class="btn red" onclick="trapNext()">${TP.i<T.steps.length-1?"Avanti":"Concludi"}</button>`:
-    `<div class="s-lab">${st.lab}</div><div class="strip">${G.clues.map(id=>`<button class="${S.clues[id].cat==="Deduzione"?"ded":""}" onclick="trapPick('${id}')">${evThumb(id)}<span>${S.clues[id].name}</span></button>`).join("")}</div>
+    `<div class="s-lab">${st.lab}</div><button class="btn red big" onclick="trapOpenPick()">${st.secret?"Scegli il dettaglio":"Scegli la prova"}</button>
     ${st.secret?"":`<button class="btn ink sm" onclick="trapPick(null)">Non ho una prova</button>`}`}</div>`;}
 function trapPick(id){const st=S.trap.steps[TP.i];let ok=!!id&&st.ok.includes(id),text;
   if(id==="e_ago"&&!st.secret)G.agoKnown=1;
@@ -2495,6 +2552,7 @@ function trapPick(id){const st=S.trap.steps[TP.i];let ok=!!id&&st.ok.includes(id
     else text=`<span class="pres">«…${id?S.clues[id].name.toLowerCase():"niente"}.»</span> Sir Alastair ti guarda con compatimento. «È tutto, avvocato? Allora, con permesso.» Non è cascato in niente.`;}
   else{TP.res[TP.i]=ok;text=(id?`<span class="pres">Presenti: ${S.clues[id].name}.</span> `:"")+(ok?st.good:st.bad);}
   TP.r={ok,text};AU.sfx(ok?"stamp":"tick");if(ok)pressCulprit(15);renderTrap();}
+function trapOpenPick(){const st=S.trap.steps[TP.i];openPicker({title:st.lab,sub:st.say.replace(/<[^>]+>/g,""),act:"Presenta",none:st.secret?null:"Non ho una prova",onPick:trapPick});}
 function trapNext(){TP.r=null;TP.i++;AU.sfx("page");if(TP.i<S.trap.steps.length){renderTrap();return;}
   const sl={res:TP.res,trap:TP.trap,ok:TP.res.filter(Boolean).length+(TP.trap?1:0),n:S.trap.steps.length,dec:TP.trap,failed:[]};
   const e=TP.onDone(sl),fin=()=>{$("#salon").classList.remove("on");showEnding();};
@@ -2774,7 +2832,7 @@ function chapter(o){snow(!o.art);const el=$("#chap"),step=fastText?.35:.85,long=
   if(o.mood==="murder"){AU.sfx("drone");setTimeout(()=>lightning(),1200);}else if(o.mood==="storm")setTimeout(()=>lightning(),700);else if(o.mood==="end"){AU.sfx("drone");}}
 
 /* ---------------- RENDER ---------------- */
-function render(){if(!G)return;if(AU.ctx&&$("#game").classList.contains("on"))AU.setRoom(G.room);hud();nav();const M=$("#main");M.innerHTML=`<div class="wrap">${({room:roomView,map:mapView,notes:notesView,board:boardView,accuse:accuseView})[G.tab]()}</div>`;post();}
+function render(){if(!G)return;if(AU.ctx&&$("#game").classList.contains("on"))AU.setRoom(G.room);hud();nav();armBack();const M=$("#main");M.innerHTML=`<div class="wrap">${({room:roomView,map:mapView,notes:notesView,board:boardView,accuse:accuseView})[G.tab]()}</div>`;post();}
 function post(){if(G.tab==="room"){placeHots();lampInit();}if(G.tab==="board"){requestAnimationFrame(drawStrings);setTimeout(drawStrings,120);setTimeout(drawStrings,600);}if(G.tab==="notes"&&G.newClues.length){G.newClues=[];save();setTimeout(nav,600);}}
 function hud(){const a=S.acts[G.act];$("#hAct").textContent=a.label;$("#hRoom").textContent=S.rooms[G.room].name;$("#hTime").textContent=fmt(G.time);
   let c="";for(let i=0;i<a.actions;i++){const lit=i<G.actions;c+=`<svg viewBox="0 0 8 24">${lit?`<path class="flame" d="M4 1q-2.6 3.6 0 6q2.6 -2.4 0 -6z" fill="#ffd27a"/><rect x="1.8" y="8" width="4.4" height="16" fill="#efe6d2"/>`:`<rect x="1.8" y="18" width="4.4" height="6" fill="#7a7062"/><path d="M4 18v-3" stroke="#666" stroke-width=".7"/>`}</svg>`;}$("#cands").innerHTML=c;
@@ -2847,10 +2905,12 @@ function examine(oid){const R=S.rooms[G.room],o=R.objects.find(x=>x.id===oid);if
   save();const cid=o.clue;let art="";if(cid)art=clueArt(cid);else if(item)art=`<div class="art">${itemArt(item)}</div>`;
   if(o.item&&cid)art+=`<div class="art small">${itemArt(o.item)}</div>`;
   showPlate(`${cid?`Reperto n. ${G.clues.indexOf(cid)+1} · ${S.clues[cid].cat}`:item?"Oggetto":"Osservazione"}`,o.label,art,`<div class="txt">${val(o.text)}</div>${item?`<p class="got">Hai preso: ${S.items[item]}</p>`:""}`,nw);render();}
-function viewClue(id){const k=S.clues[id],dd=k.cat==="Deduzione";showPlate(dd?"Deduzione":`Reperto n. ${G.clues.indexOf(id)+1} · ${k.cat}`,k.name,clueArt(id),dd?"":`<div class="txt">${k.text}</div>`,null);}
+function viewClue(id){const k=S.clues[id],dd=k.cat==="Deduzione",lk=!dd&&!G.ended&&(S.deductions||[]).length&&!$("#talk").classList.contains("on");
+  showPlate(dd?"Deduzione":`Reperto n. ${G.clues.indexOf(id)+1} · ${k.cat}`,k.name,clueArt(id),dd?"":`<div class="txt">${k.text}</div>`,null,lk?`<button class="btn" onclick="linkFrom('${id}')">Collega con…</button>`:"");}
+function linkFrom(id){closePlate();dedSel=[id];noteTab="deduz";dedCat="all";setTab("notes");$("#main").scrollTop=0;toast("Ora tocca il reperto da collegare.");}
 function viewItem(it){showPlate("Oggetto",S.items[it],`<div class="art">${itemArt(it)}</div>`,"",null);}
-function showPlate(tag,title,art,body,nw){$("#plate").innerHTML=`<div class="pl" id="pl"><div class="tag">${tag}</div><h2>${title}</h2>${art}${body}${nw?`<div class="stamp">Agli atti</div>`:""}<div class="acts"><button class="btn ink" onclick="closePlate(${nw?`'${nw}'`:""})">Riponi</button></div></div>`;
-  $("#plate").classList.add("on");$("#plate").scrollTop=0;AU.sfx("page");if(nw){setTimeout(()=>AU.sfx("stamp"),420);setTimeout(()=>AU.sfx("clue"),760);}}
+function showPlate(tag,title,art,body,nw,extra){$("#plate").innerHTML=`<div class="pl" id="pl"><div class="tag">${tag}</div><h2>${title}</h2>${art}${body}${nw?`<div class="stamp">Agli atti</div>`:""}<div class="acts">${extra||""}<button class="btn ink" onclick="closePlate(${nw?`'${nw}'`:""})">Riponi</button></div></div>`;
+  $("#plate").classList.add("on");armBack();$("#plate").scrollTop=0;AU.sfx("page");if(nw){setTimeout(()=>AU.sfx("stamp"),420);setTimeout(()=>AU.sfx("clue"),760);}}
 function closePlate(fly){if(fly)flyToNotes(fly);$("#plate").classList.remove("on");if(G&&!G.ended)setTimeout(()=>lyleCheck(fly),700);}
 function lyleCheck(fly){if(fly==="e_ago"){tip("ago");return;}const ld=(S.lyleDed&&S.lyleDed[fly])||LYLE_DED[fly];if(fly&&ld){lyleSay(ld);return;}G.tips=G.tips||{};
   if(G.clues.length&&!G.tips.firstClue){tip("firstClue");return;}
@@ -2862,7 +2922,7 @@ function flyToNotes(cid){const src=document.querySelector("#pl .art,#pl .doc,#pl
   setTimeout(()=>{d.remove();btn.classList.add("bump");setTimeout(()=>btn.classList.remove("bump"),600);},850);}
 
 /* ---------------- INTERROGATORI ---------------- */
-function openTalk(id){talkWith=id;pickOpen=false;objMode=null;obsMode=false;if(canObserve(id))setTimeout(()=>{if(talkWith)tip("observe");},700);AU.sfx("door");$("#talk").classList.add("on");renderTalk();}
+function openTalk(id){talkWith=id;pickOpen=false;objMode=null;obsMode=false;if(canObserve(id))setTimeout(()=>{if(talkWith)tip("observe");},700);AU.sfx("door");$("#talk").classList.add("on");armBack();renderTalk();}
 function closeTalk(){const was=talkWith;talkWith=null;const t=$("#talk");if(t)t.classList.remove("on");if(was&&G&&!G.ended)setTimeout(()=>lyleCheck(),500);}
 let typer=null;
 function renderTalk(typeIdx){const c=S.chars[talkWith],log=G.log[talkWith]||[];
@@ -2871,14 +2931,15 @@ function renderTalk(typeIdx){const c=S.chars[talkWith],log=G.log[talkWith]||[];
   const sh=G.shown[talkWith]||[];
   $("#talk").innerHTML=`<div class="tk-glow"></div><div class="tk-head"><div class="pf">${portrait(c.p)}</div><div class="tk-id"><div class="np">${c.name}</div><div class="role">${c.role}, ${c.age} anni</div>${talkWith===S.culprit?calmMeter():""}${canObserve(talkWith)?`<button class="obsb" onclick="obsOpen()">Osserva</button>`:""}</div><button class="tk-close" onclick="closeTalk()" aria-label="Chiudi">✕</button></div>
   <div class="tk-log" id="tklog" onclick="finishType()">${L}</div>
-  <div class="tk-act"><div class="topics"><button onclick="talk('alibi')">Dov'era?</button><button onclick="talk('crime')">Il delitto</button><button onclick="talk('others')">Gli altri</button><button onclick="talk('self')">Di sé</button>${talkWith===S.culprit?`<button class="last" onclick="lastThing()">Un'ultima cosa…</button>`:""}<button class="show" onclick="${objMode?"objMode=null;pickOpen=false;renderTalk()":"togglePick()"}">${objMode?"Annulla l'obiezione":pickOpen?"Chiudi il taccuino":"Mostra un reperto"}</button></div>
-  ${objMode?`<div class="objlab">Con quale reperto contesti la frase?</div>`:""}${pickOpen?(G.clues.length?`<div class="strip">${G.clues.map(id=>`<button class="${!objMode&&sh.includes(id)?"shown":""}" onclick="${objMode?"objPick":"showClue"}('${id}')">${evThumb(id)}<span>${S.clues[id].name}</span></button>`).join("")}</div>`:`<p class="muted center">Il taccuino è ancora vuoto.</p>`):""}</div>`;
+  <div class="tk-act"><div class="topics"><button onclick="talk('alibi')">Dov'era?</button><button onclick="talk('crime')">Il delitto</button><button onclick="talk('others')">Gli altri</button><button onclick="talk('self')">Di sé</button>${talkWith===S.culprit?`<button class="last" onclick="lastThing()">Un'ultima cosa…</button>`:""}<button class="show" onclick="pickShow()">Mostra un reperto</button></div></div>`;
   const lg=$("#tklog");lg.scrollTop=lg.scrollHeight;if(typeIdx!==undefined)typeIt();}
 function typeIt(){const el=$("#typing");if(!el)return;const full=el.textContent;el.textContent="";let i=0;clearInterval(typer);
   typer=setInterval(()=>{i+=2;el.textContent=full.slice(0,i);const lg=$("#tklog");if(lg)lg.scrollTop=lg.scrollHeight;if(i>=full.length){clearInterval(typer);typer=null;el.removeAttribute("id");}},16);
   el.dataset.full=full;}
 function finishType(){const el=$("#typing");if(el&&typer){clearInterval(typer);typer=null;el.textContent=el.dataset.full;el.removeAttribute("id");}}
-function togglePick(){pickOpen=!pickOpen;lyleHide();renderTalk();}
+function togglePick(){pickShow();}
+function pickShow(){if(!talkWith)return;const c=S.chars[talkWith];if(!G.clues.length){toast("Il taccuino è ancora vuoto.");return;}
+  openPicker({title:"Mostra a "+c.short,sub:"Tocca un reperto per rileggerlo, poi mostralo.",shown:G.shown[talkWith]||[],act:"Mostra",onPick:showClue});}
 function pushLog(q,a,react,unlock,k){finishType();const L=(G.log[talkWith]=G.log[talkWith]||[]);L.push({q,a,r:!!react,k});if(k&&objOpen(k))setTimeout(()=>tip("objection"),1800);if(unlock&&TAVOLE[unlock]&&!has(unlock))setTimeout(()=>{if(["#salon","#film","#chap"].some(x=>$(x).classList.contains("on")))return;finishType();showTavola(unlock);},Math.min(5000,a.length*9+900));const idx=L.length-1;
   if(unlock&&addClue(unlock)){L.push({q:"",a:`<span class="nc"><b>Nuovo reperto nel taccuino</b>${S.clues[unlock].name}</span>`});setTimeout(()=>AU.sfx("clue"),500);}
   save();renderTalk(idx);nav();if(unlock)setTimeout(()=>{if(!$("#talk").classList.contains("on"))lyleCheck();},300);}
@@ -2893,6 +2954,50 @@ function showClue(id){const c=S.chars[talkWith];let r=c.react&&c.react[id],text,
   if(r){if(typeof r==="string")text=r;else{text=r.text;un=r.unlock;}}else text=c.def[(G.clues.indexOf(id)+talkWith.length)%c.def.length];
   (G.shown[talkWith]=G.shown[talkWith]||[]);if(!G.shown[talkWith].includes(id))G.shown[talkWith].push(id);if(id==="e_ago")G.agoKnown=1;if(talkWith===S.culprit&&r&&r.press){G.pressed=G.pressed||{};if(!G.pressed[id]){G.pressed[id]=1;pressCulprit(10);}}
   pickOpen=false;AU.sfx("page");pushLog("Gli mostri: "+S.clues[id].name,text,!!r,un,r?"react:"+id:null);}
+
+/* ---------------- SELETTORE DEI REPERTI (unico per dialoghi, obiezioni, trappola, salone) ---------------- */
+let PK=null,pkCat="all",pkQ="";
+const PK_CATS=[["all","Tutti"],["Deduzione","Deduzioni"],["Reperto","Reperti"],["Documento","Documenti"],["Testimonianza","Testimonianze"],["Osservazione","Osservazioni"]];
+function openPicker(o){finishType();lyleHide();PK=Object.assign({ids:G.clues.slice(),shown:[],act:"Mostra",none:null,onCancel:null,sub:""},o);PK.sel=null;pkQ="";
+  if(pkCat!=="all"&&!PK.ids.some(id=>S.clues[id].cat===pkCat))pkCat="all";
+  $("#pick").classList.add("on");armBack();AU.sfx("page");renderPicker();}
+function closePicker(cancel){if(!PK)return;const c=PK.onCancel;PK=null;$("#pick").classList.remove("on");$("#pick").innerHTML="";if(cancel&&c)c();}
+function pkList(){let ids=PK.ids.slice().reverse();
+  ids.sort((a,b)=>(S.clues[b].cat==="Deduzione")-(S.clues[a].cat==="Deduzione"));
+  if(pkCat!=="all")ids=ids.filter(id=>S.clues[id].cat===pkCat);
+  const q=pkQ.trim().toLowerCase();if(q)ids=ids.filter(id=>(S.clues[id].name+" "+S.clues[id].text).toLowerCase().includes(q));
+  return ids;}
+function pkCards(){const list=pkList();return list.length?list.map(id=>{const k=S.clues[id],nw=G.newClues.includes(id),sh=PK.shown.includes(id);
+  return `<button class="pkc${k.cat==="Deduzione"?" ded":""}${PK.sel===id?" sel":""}${sh?" shown":""}" onclick="pkSel('${id}')">${evThumb(id)}<span>${k.name}</span>${sh?`<em class="bdg g">già mostrato</em>`:nw?`<em class="bdg">nuovo</em>`:""}</button>`;}).join(""):
+  `<p class="pk-empty">${pkQ.trim()?"Nessun reperto corrisponde alla ricerca.":"Nessun reperto in questa categoria."}</p>`;}
+function pkGrid(){const g=$("#pkgrid");if(g)g.innerHTML=pkCards();}
+function renderPicker(){if(!PK)return;const all=PK.ids,cnt=c=>c==="all"?all.length:all.filter(id=>S.clues[id].cat===c).length,g0=$("#pkgrid"),y=g0?g0.scrollTop:0;
+  const chips=PK_CATS.filter(([c])=>cnt(c)).map(([c,l])=>`<button class="${pkCat===c?"on":""}" onclick="pkSetCat('${c}')">${l} <i>${cnt(c)}</i></button>`).join("");
+  const k=PK.sel&&S.clues[PK.sel];
+  const foot=k?`<div class="pk-prev"><div class="th">${evThumb(PK.sel)}</div><div><h4>${k.name}</h4><p>${k.text}</p></div></div><div class="pk-btns"><button class="btn red" onclick="pkGo()">${PK.act}</button><button class="btn ink" onclick="pkSel(null)">Altro reperto</button></div>`:
+    `<p class="pk-hint">Tocca un reperto per rileggerlo prima di usarlo.</p>${PK.none?`<button class="btn ink sm pk-none" onclick="pkNone()">${PK.none}</button>`:""}`;
+  $("#pick").innerHTML=`<div class="pk-sheet${k?" has-sel":""}"><div class="pk-head"><div><div class="pk-t">${PK.title}</div>${PK.sub?`<div class="pk-s">${PK.sub}</div>`:""}</div><button class="pk-x" onclick="closePicker(true)" aria-label="Chiudi">✕</button></div>
+  ${all.length>8?`<input class="pk-q" type="search" enterkeyhint="search" placeholder="Cerca tra i reperti…" value="${pkQ.replace(/"/g,"&quot;")}" oninput="pkQ=this.value;pkGrid()">`:""}
+  ${cnt("all")>5?`<div class="pk-chips">${chips}</div>`:""}
+  <div class="pk-grid" id="pkgrid">${pkCards()}</div><div class="pk-foot">${foot}</div></div>`;
+  const g=$("#pkgrid");if(g)g.scrollTop=y;}
+function pkSetCat(c){pkCat=c;AU.sfx("tick");const g=$("#pkgrid");renderPicker();const g2=$("#pkgrid");if(g2)g2.scrollTop=0;}
+function pkSel(id){if(!PK)return;PK.sel=PK.sel===id?null:id;const q=$(".pk-q");if(q)q.blur();AU.sfx("page");renderPicker();}
+function pkGo(){if(!PK||!PK.sel)return;const id=PK.sel,f=PK.onPick;PK=null;$("#pick").classList.remove("on");$("#pick").innerHTML="";f(id);}
+function pkNone(){if(!PK)return;const f=PK.onPick;PK=null;$("#pick").classList.remove("on");$("#pick").innerHTML="";f(null);}
+
+/* ---------------- Indietro (Android/iOS): chiude il pannello aperto invece di uscire ---------------- */
+function armBack(){try{if(!(history.state&&history.state.cc))history.pushState({cc:1},"");}catch(e){}}
+window.addEventListener("popstate",()=>{let h=true;const on=x=>{const e=$(x);return !!e&&e.classList.contains("on");};
+  if(PK)closePicker(true);
+  else if(on("#ov"))closeOv();
+  else if(on("#plate"))closePlate();
+  else if(on("#report"))closeReport();
+  else if(talkWith)closeTalk();
+  else if(on("#salon")||on("#film")||on("#chap")){}
+  else if(G&&on("#game")){if(G.tab!=="room")setTab("room");else toMenu();}
+  else h=false;
+  if(h)armBack();});
 
 /* ---------------- TACCUINO ---------------- */
 function notesView(){let h=`<div class="journal"><div class="ribbons">${[["indizi","Reperti ("+G.clues.length+")"],["deduz","Deduzioni"+(dedOpen()?" ✦":"")],["persone","Persone"],["oggetti","Oggetti"]].map(t=>`<button class="${noteTab===t[0]?"on":""}" onclick="noteTab='${t[0]}';AU.sfx('page');render()">${t[1]}</button>`).join("")}</div><div class="pg">`;
@@ -2949,7 +3054,7 @@ function revealTruth(sure){if(!sure){$("#chap").classList.remove("on");note("Leg
   chapter({eb:"La soluzione",title:"Che cosa è successo davvero",paras:S.truth,mood:"end",buttons:`<button class="btn red" id="ng">Rigioca il caso</button><button class="btn" id="mn">Menu principale</button>`});bindEnd();}
 
 /* ---------------- FINESTRE ---------------- */
-function note(title,html,raw){$("#sheet").innerHTML=`<button class="x" onclick="closeOv()">✕</button><h2>${title}</h2>${raw?html:html}`;$("#ov").classList.add("on");AU.sfx("page");}
+function note(title,html,raw){$("#sheet").innerHTML=`<button class="x" onclick="closeOv()">✕</button><h2>${title}</h2>${raw?html:html}`;$("#ov").classList.add("on");armBack();AU.sfx("page");}
 function closeOv(){$("#ov").classList.remove("on");}
 function pause(){note("Pausa",`<div class="pmenu"><button class="btn ink" onclick="closeOv()">Riprendi l'indagine</button><button class="btn ink" onclick="AU.toggle();pause()">Audio: ${AU.on?"acceso":"spento"}</button><button class="btn ink" onclick="closeOv();toggleFull()">${isFull()?"Esci dallo schermo intero":"Schermo intero"}</button><button class="btn ink" onclick="howTo()">Come si gioca</button><button class="btn ink" onclick="closeOv();toMenu()">Torna al menu principale</button></div>`,true);}
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeOv();$("#plate").classList.remove("on");closeTalk();}});
