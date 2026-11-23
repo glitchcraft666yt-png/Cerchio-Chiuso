@@ -1770,7 +1770,7 @@ const CASE_EXPRESS={
     A:{name:"La versione di Sir Alastair: suicidio",desc:"Pell, depresso, ha bevuto il toddy e poi il laudano, tra mezzanotte e l'una. Così dice l'unico medico a bordo."},
     B:{name:"L'alibi del whist",desc:"Dalle 23:05 all'1:15 Sir Alastair non si è mosso dal tavolo da gioco, davanti a due testimoni."},
     C:{name:"Il movente: il dossier",desc:"Pell aveva le prove degli undici morti dell'«intervento Graham». Il dossier è sparito."},
-    T:{name:"Il delitto delle 22:50",hiddenName:"Che cosa è successo prima delle undici?",desc:"Pell è morto prima che cominciasse la partita. L'alibi copre l'ora sbagliata."}
+    T:{name:"Il delitto delle 22:50",hiddenName:"Che cosa è successo prima delle undici?",desc:"Pell era già perduto prima che cominciasse la partita. L'alibi copre l'ora sbagliata."}
   },
   clues:{
     e_biglietto:{name:"Il biglietto d'addio",cat:"Documento",th:{A:2},text:"Battuto a macchina, firmato con una «H.» battuta anch'essa: «Non posso più guardarmi allo specchio. Ho fallito come medico e come uomo. Margaret, perdonami.»"},
@@ -1786,7 +1786,7 @@ const CASE_EXPRESS={
     e_servizio:{name:"La tazza mancante",cat:"Osservazione",th:{B:-1,T:1},text:"Al servizio da tè del vagone ristorante manca una tazza col bordo dorato. A cena, assicura il cameriere, c'erano tutte."},
     e_segnapunti:{name:"Il segnapunti del whist",cat:"Documento",th:{B:2},text:"Di pugno del capitano Lennox: «Inizio 23:05. Sir A. lascia all'1:15, va a letto.» L'alibi, nero su bianco. Dalle 23:05. All'1:15."},
     e_borsa:{name:"La borsa del chirurgo",cat:"Reperto",th:{T:2},text:"Cloralio idrato, un astuccio di morfina con una fiala mancante su sei, una siringa pulita di fresco con l'acido fenico."},
-    e_lettera_g:{name:"La lettera di Pell a Graham",cat:"Documento",th:{C:2},text:"Nella tasca del cappotto di Sir Alastair: «Saremo sullo stesso treno, scompartimento 4. Mi porti la sua risposta prima di Inverness. H. P.»"},
+    e_lettera_g:{name:"La lettera di Pell a Graham",cat:"Documento",th:{C:2},text:"Scivolata nella fodera del cappotto di Sir Alastair, da una tasca scucita: «Saremo sullo stesso treno, scompartimento 4. Mi porti la sua risposta prima di Inverness. H. P.»"},
     e_cenere:{name:"La cenere nella stufa",cat:"Reperto",th:{C:2,T:1},text:"Un fermaglio d'ottone fuso e un lembo di carta: «…registro operatorio, Ospedale di San Bartolomeo, 1909… undici decessi…». Il dossier di Pell."},
     e_parete:{name:"La parete sottile",cat:"Osservazione",th:{},text:"Tra il 4 e il 5 c'è una parete di legno sottile come un'anta d'armadio. A treno fermo, si sente tutto."},
     e_rito:{name:"L'orologio delle undici",cat:"Testimonianza",th:{T:2,A:-1},text:"Margaret: «Henry caricava l'orologio ogni sera alle undici in punto, da quando aveva dieci anni. Non ha mai saltato una sera.»"},
@@ -1822,7 +1822,7 @@ const CASE_EXPRESS={
         {id:"orologio",label:"L'orologio da tasca",clue:"e_orologio",text:"Un orologio d'argento appeso al gancio della cuccetta. Fermo alle 5:52. Lo scuoti: riparte. Non è rotto. Si è semplicemente scaricato."},
         {id:"tazze",label:"Il vassoio del tè",clue:"e_tazze",text:"Il vassoio che MacRae ha portato alle 22:40, con una tazza. Ma le tazze sono due. La seconda ha il bordo dorato del vagone ristorante e, sul fondo, un deposito biancastro dall'odore acre e dolciastro."},
         {id:"corpo_g",label:"Il corpo",when:g=>locOf("graham")==="scomp4",text:"Sir Alastair è chino sul corpo e ti sbarra il passo con un sorriso. «Lasci fare a un medico, avvocato. Laudano, senza dubbio. Nessun segno di violenza.» Ti conviene tornare quando non c'è."},
-        {id:"corpo",label:"Il corpo",clue:"e_ago",when:g=>locOf("graham")!=="scomp4",text:"Sollevi il lenzuolo dal fondo della cuccetta. I piedi nudi di Pell. Tra il quarto e il quinto dito del sinistro, un forellino minuscolo con un alone livido. Lyle trattiene il fiato. «Un'iniezione. Dove nessun medico di provincia guarderebbe mai.» Poi, piano: «Non lo dica a nessuno. Un segreto, in mano nostra, vale più di una prova.»"},
+        {id:"corpo",label:"Il corpo",clue:"e_ago",when:g=>locOf("graham")!=="scomp4",text:"Sollevi il lenzuolo dal fondo della cuccetta. I piedi nudi di Pell. Tra il quarto e il quinto dito del sinistro, un forellino minuscolo con un alone livido. Lyle trattiene il fiato. «Sono dottore in lettere, non in medicina. Ma questo lo riconosco anch'io: un'iniezione. Dove nessun medico di provincia guarderebbe mai.» Poi, piano: «Non lo dica a nessuno. Un segreto, in mano nostra, vale più di una prova.»"},
         {id:"macchina",label:"La macchina per scrivere",clue:"e_macchina",text:"Una portatile pieghevole americana, l'ultima novità. Nella custodia, tre lettere battute da Pell nei giorni scorsi: margini perfetti, battute uniformi, nessun errore. Mani da dattilografo."},
         {id:"cappotto",label:"Il cappotto appeso",clue:"e_nastro",text:"Un cappotto grigio, consumato ai polsi. All'occhiello, un nastrino azzurro: la Lega della Temperanza. Chi lo porta ha giurato di non toccare alcol."},
         {id:"taccuino",label:"Il taccuino sotto il cuscino",clue:"e_taccuino",text:"Un taccuino nero. L'ultima pagina, di ieri: «Martedì. G. sarà sul treno. Gli do tempo fino a Inverness: o rinuncia alla nomina, o il dossier va al Consiglio Medico.» Il dossier non è da nessuna parte."},
@@ -1838,7 +1838,7 @@ const CASE_EXPRESS={
       desc:["Lo scompartimento di Sir Alastair, ordinato come una sala operatoria. Odore di acqua di colonia e di acido fenico.","Sir Alastair non c'è. La sua borsa è sotto la cuccetta.","I bagagli sono già chiusi, le etichette scritte: «Kingussie»."],
       objects:[
         {id:"borsa",label:"La borsa del chirurgo",clue:"e_borsa",text:"Una borsa di cuoio con le iniziali A. G. Bisturi, garze, una boccetta di cloralio idrato a metà. Un astuccio di morfina: sei alloggi, cinque fiale. E una siringa d'argento, pulita di fresco: odora ancora di acido fenico."},
-        {id:"cappotto7",label:"Il cappotto da viaggio",clue:"e_lettera_g",text:"Un cappotto con il collo di astrakan. Nella tasca interna, una lettera piegata in quattro: «Saremo sullo stesso treno, scompartimento 4. Mi porti la sua risposta prima di Inverness. H. P.» Sir Alastair ha bruciato il dossier. Questa, se l'è dimenticata."},
+        {id:"cappotto7",label:"Il cappotto da viaggio",clue:"e_lettera_g",text:"Un cappotto con il collo di astrakan. Nella fodera, dietro una tasca interna scucita, una lettera piegata in quattro: «Saremo sullo stesso treno, scompartimento 4. Mi porti la sua risposta prima di Inverness. H. P.» La carta è annerita su un angolo. Doveva finire nella stufa insieme al dossier, all'una e mezza. Sir Alastair l'ha cercata, e ha creduto di averla bruciata."},
         {id:"scarpe",label:"Le scarpe da sera",text:"Scarpe di vernice, lucidate. Un uomo che non è mai uscito dal salottino fumatori, stanotte, non dovrebbe avere il bordo delle suole macchiato di cenere grigia."},
         {id:"lavabo7",label:"Il lavabo",text:"Una saponetta all'acido fenico consumata quasi del tutto. Un chirurgo si lava le mani, certo. Ma questa saponetta era nuova ieri sera: lo dice la carta, ancora nel cestino."}]},
     dispensa:{name:"Dispensa del conduttore",mapName:"Dispensa",crimeFrom:99,
@@ -1979,7 +1979,7 @@ const CASE_EXPRESS={
     "Alle 22:45 Graham portò a Pell una tazza di tè «per fare pace», con dentro il cloralio. Quando Pell si addormentò, gli iniettò la morfina tra le dita del piede, batté il biglietto con due dita sulla sua macchina, svuotò la boccetta di laudano nel lavabo tenendone da parte un dito, la pulì e prese il dossier. Alle 23:05 era al tavolo del whist.",
     "Alle 23:20 ordinò a MacRae un toddy per Pell, da lasciare fuori dalla porta: la prova che Pell era vivo alle undici e mezza. Il medico che avrebbe stabilito l'ora della morte sarebbe stato lui stesso.",
     "Alle 23:40 la neve fermò il treno. Il silenzio gli giocò contro: all'una e venti, quando rientrò nel 4 a vuotare il toddy nel lavabo e a versare nel bicchiere l'ultimo dito di laudano, Margaret Pell lo sentì attraverso la parete. All'una e mezza, quando bruciò il dossier nella stufa della dispensa, il macchinista vide il fumo.",
-    "E Henry Pell, che caricava l'orologio ogni sera alle undici da quando aveva dieci anni, quella sera non lo caricò. Era già morto."
+    "E Henry Pell, che caricava l'orologio ogni sera alle undici da quando aveva dieci anni, quella sera non lo caricò. Dormiva già il sonno da cui non si sarebbe più svegliato."
   ]
 };
 
@@ -1988,7 +1988,7 @@ CASE_EXPRESS.trap={
   cast:["graham","margaret","lennox","macrae"],
   steps:[
     {say:"«Signori, Henry Pell non si è ucciso.»",lab:"Presenta la prova che non è un suicidio",ok:["e_dattilo","d2_lettera","d2_toddy","e_nastro"],good:"«Il biglietto è battuto con due dita: Pell ne usava dieci. E il toddy al whisky l'avrebbe bevuto un astemio che portava il nastrino della Lega da vent'anni?» Margaret chiude gli occhi. Sir Alastair accavalla le gambe.",bad:"Sir Alastair sorride. «Il dolore fa vedere cose che non ci sono, avvocato. Anche a lei, a quanto pare.»"},
-    {say:"«E non è morto tra mezzanotte e l'una, come ha stabilito il nostro unico medico.»",lab:"Presenta la prova dell'ora della morte",ok:["d2_ora","e_rito"],good:"«Henry Pell caricava l'orologio ogni sera alle undici in punto. Ieri sera non l'ha caricato. Alle undici era già morto.» Per la prima volta, Sir Alastair smette di sorridere.",bad:"«L'ora della morte la stabilisce un medico, avvocato. E l'unico medico, qui, sono io.»"},
+    {say:"«E non è morto tra mezzanotte e l'una, come ha stabilito il nostro unico medico.»",lab:"Presenta la prova dell'ora della morte",ok:["d2_ora","e_rito"],good:"«Henry Pell caricava l'orologio ogni sera alle undici in punto. Ieri sera non l'ha caricato. Alle undici dormiva già, con la morfina in corpo, e non si è più svegliato.» Per la prima volta, Sir Alastair smette di sorridere.",bad:"«L'ora della morte la stabilisce un medico, avvocato. E l'unico medico, qui, sono io.»"},
     {say:"«Sir Alastair. Il suo alibi è perfetto. Copre esattamente le ore sbagliate.»",lab:"Presenta la prova che Sir Alastair era con Pell",ok:["d2_ultimo","e_ammissione","d2_visita","d2_fischio","e_toddy_fuori","d2_tazza"],good:"«Alle 22:45 lei era nel 4, con una tazza di tè. All'una e venti c'è tornato, a vuotare il toddy nel lavabo: la signorina Pell l'ha sentita fischiettare.» Lennox posa il bicchiere. MacRae si fa il segno della croce.",bad:"«Il capitano e il signor Cobb mi hanno visto per tutta la notte, avvocato. Tutta la notte.»"},
     {say:"«E il dossier, Sir Alastair. Gli undici nomi.»",lab:"Presenta la prova del movente",ok:["d2_dossier","e_cenere","e_lettera_g","d2_movente"],good:"Posi sul tavolo il lembo bruciato: «…undici decessi…». Margaret legge, e si alza in piedi. Sir Alastair guarda fuori dal finestrino, nel buio.",bad:"«Quale dossier? Henry aveva molte fantasie, e pochi documenti.»"},
     {secret:true,say:"Sir Alastair si alza, si infila i guanti. Hai un'ultima carta. «Ah, Sir Alastair… un'ultima cosa.»",lab:"Quale dettaglio, che solo l'assassino può conoscere, nomini per farlo tradire?",ok:["e_ago"]}
@@ -1996,7 +1996,7 @@ CASE_EXPRESS.trap={
 };
 
 CASE_EXPRESS.deductions=[
-  {id:"d2_ora",name:"Morto prima delle undici",th:{T:3,A:-1,B:-2},a:["e_orologio"],b:["e_rito"],text:"Pell caricava l'orologio ogni sera alle undici in punto. Ieri sera non l'ha caricato: alle undici era già morto. Non tra mezzanotte e l'una, come dice Sir Alastair."},
+  {id:"d2_ora",name:"Perduto prima delle undici",th:{T:3,A:-1,B:-2},a:["e_orologio"],b:["e_rito"],text:"Pell caricava l'orologio ogni sera alle undici in punto. Ieri sera non l'ha caricato: alle undici era già incosciente, e non si è più svegliato. Il delitto è avvenuto prima, non tra mezzanotte e l'una, come dice Sir Alastair."},
   {id:"d2_toddy",name:"Un toddy per un astemio",th:{A:-2,B:-1},a:["e_toddy","e_registro"],b:["e_nastro"],text:"Pell portava il nastrino della Lega della Temperanza e non beveva da vent'anni. Il toddy non l'ha chiesto lui. L'ha ordinato Sir Alastair, per far credere che alle 23:30 fosse vivo."},
   {id:"d2_lettera",name:"Non l'ha battuto lui",th:{A:-3},a:["e_biglietto"],b:["e_dattilo","e_macchina"],text:"Le lettere di Pell sono battute con dieci dita, regolari. Il biglietto d'addio con due dita, a strappi. Qualcun altro l'ha scritto sulla sua macchina."},
   {id:"d2_tazza",name:"La tazza dal bordo dorato",th:{T:2,B:-1},a:["e_tazze"],b:["e_servizio"],text:"Nel 4 c'è una tazza del vagone ristorante, con il cloralio sul fondo. Qualcuno l'ha portata da cena: e Sir Alastair ha lasciato la tavola alle 22:45 con una tazza in mano."},
@@ -2004,7 +2004,7 @@ CASE_EXPRESS.deductions=[
   {id:"d2_fischio",name:"Lo stesso motivetto",th:{B:-2,T:1},a:["e_porta"],b:["e_fischio"],text:"All'una e venti, nel 4, qualcuno fischiettava. Sir Alastair fischietta i Pirati di Penzance da tutta la sera. Margaret ha riconosciuto l'aria."},
   {id:"d2_dossier",name:"Bruciato all'una e mezza",th:{C:3},a:["e_cenere"],b:["e_fumo","e_registro"],text:"MacRae ha coperto la stufa all'una ed è andato a dormire. All'una e mezza il comignolo fumava. Qualcuno ha riaperto la stufa e ci ha bruciato il dossier di Pell."},
   {id:"d2_movente",name:"Il prezzo della nomina",th:{C:2},a:["e_taccuino","e_lettera_g"],b:["e_cenere","e_taccuino"],text:"Pell aveva dato a Sir Alastair tempo fino a Inverness: rinunciare alla nomina a chirurgo del Re, o il dossier degli undici morti al Consiglio Medico. Sir Alastair non ha rinunciato."},
-  {id:"d2_ultimo",name:"L'ultimo a vederlo vivo",th:{T:2,B:-2},a:["e_ammissione"],b:["e_rito","e_orologio"],text:"Pell è morto prima delle undici. Sir Alastair ammette di essere stato con lui dalle 22:45 alle 23. Nessun altro, in quella mezz'ora, è entrato nel 4."}
+  {id:"d2_ultimo",name:"L'ultimo a vederlo vivo",th:{T:2,B:-2},a:["e_ammissione"],b:["e_rito","e_orologio"],text:"Alle undici Pell era già incosciente, con la morfina in corpo. Sir Alastair ammette di essere stato con lui dalle 22:45 alle 23. Nessun altro, in quella mezz'ora, è entrato nel 4."}
 ];
 CASE_EXPRESS.deductions.forEach(d=>{CASE_EXPRESS.clues[d.id]={name:d.name,cat:"Deduzione",th:d.th,text:d.text};});
 
