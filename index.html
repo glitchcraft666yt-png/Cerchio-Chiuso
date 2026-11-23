@@ -344,6 +344,54 @@ body.filming #snow{z-index:52}
 .blood{position:absolute;right:-6px;top:calc(10px + var(--st));width:150px;opacity:.85;pointer-events:none;z-index:3}
 #chap .ch-art+.in .blood{top:-34px;width:110px}
 @media(max-width:600px){.blood,#chap .ch-art+.in .blood{width:78px;top:-26px;right:-8px;opacity:.75}}
+/* deduzioni */
+.ded-head{position:sticky;top:-14px;z-index:3;background:inherit;margin:-14px -14px 6px -30px;padding:12px 14px 8px 30px;background-color:#efe4c8;background-image:var(--noise);background-blend-mode:multiply;box-shadow:0 6px 10px -8px rgba(0,0,0,.4)}
+.ded-slots{display:flex;align-items:center;gap:8px;justify-content:center;margin:6px 0}
+.ded-slots .slot{flex:0 1 150px;min-height:64px;border:1.5px dashed #8a7a5a;display:flex;flex-direction:column;align-items:center;justify-content:center;font-style:italic;color:#8a7a5a;font-size:.85rem;padding:4px;text-align:center;line-height:1.1}
+.ded-slots .slot.full{border-style:solid;border-color:var(--blood);color:var(--sepia);background:#fbf5e6}
+.ded-slots .slot svg{width:70px;display:block;margin-bottom:3px}
+.ded-slots .link{font-size:1.6rem;color:var(--blood)}
+.ded-left{text-align:center;font-size:.9rem;color:#5a4428;font-style:italic}.ded-left b{color:var(--blood);font-style:normal}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-top:6px}
+.dcard{background:#fbf5e6;padding:4px 4px 6px;box-shadow:0 3px 7px rgba(0,0,0,.35);color:var(--sepia);font-family:'IM Fell English',serif;font-size:.76rem;line-height:1.1;transition:transform .15s}
+.dcard svg{width:100%;display:block;margin-bottom:3px}.dcard.sel{outline:3px solid var(--blood);transform:translateY(-4px) rotate(-2deg)}
+.entry.dedent .th{border-color:#e9d29a}.entry.dedent h4{color:#6a4a14}
+.dedcard{max-width:440px;margin:0 auto 14px;background:linear-gradient(160deg,#f1dca4,#d9b86a);color:#3a2808;padding:18px 20px 20px;box-shadow:0 0 0 2px #8a6a2a,0 0 0 6px #f1dca4,0 0 0 7px #8a6a2a,0 10px 24px rgba(0,0,0,.45);text-align:center;animation:dedIn .9s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes dedIn{from{transform:scale(.6) rotate(-6deg);opacity:0}to{transform:none;opacity:1}}
+.dedcard .dk{font-family:'IM Fell English SC',serif;letter-spacing:.3em;font-size:.78rem;color:#7a1a0a}
+.dedcard h3{font-family:'IM Fell English',serif;font-weight:400;font-size:1.5rem;line-height:1.1;margin:6px 0 8px}
+.dedcard .dt{font-style:italic;font-size:1rem}
+.strip button.ded{background:#f1dca4}
+#toast{position:fixed;left:50%;bottom:calc(84px + var(--sb));z-index:46;transform:translateX(-50%);max-width:min(90vw,460px);background:#1c140d;color:var(--gold2);border:1px solid var(--gold);padding:10px 16px;font-style:italic;text-align:center;opacity:0;pointer-events:none}
+#toast.on{animation:toast 2.8s}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,10px)}10%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0}}
+
+/* il salone */
+#salon{position:fixed;inset:0;z-index:42;display:none;flex-direction:column;background:radial-gradient(ellipse at 50% 55%,#3a2212 0%,#120a06 55%,#030202 100%);overflow-y:auto;padding:calc(12px + var(--st)) 12px calc(14px + var(--sb))}
+#salon.on{display:flex;animation:tIn .8s}
+.s-top{text-align:center}.s-top .eb{font-family:'IM Fell English SC',serif;letter-spacing:.3em;color:var(--gold);font-size:.8rem}
+.s-prog{display:flex;gap:6px;justify-content:center;margin-top:8px}.s-prog i{width:22px;height:3px;background:rgba(201,164,92,.25)}.s-prog i.d{background:var(--gold)}.s-prog i.c{background:var(--blood2)}
+.s-ring{position:relative;display:flex;justify-content:center;align-items:flex-start;gap:clamp(6px,2.5vw,26px);width:min(620px,100%);margin:14px auto 0;padding-bottom:34px;flex:0 0 auto}
+.s-ring .fire{position:absolute;left:50%;top:62%;width:160px;height:110px;margin:-55px 0 0 -80px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,190,100,.5),rgba(255,120,40,.1) 55%,transparent 72%);will-change:opacity;animation:glow 2.6s infinite alternate}
+.seat{position:relative;width:min(23%,118px);text-align:center;transition:opacity .8s,filter .8s,transform .8s}
+.seat .pf svg{width:100%;display:block;filter:drop-shadow(0 8px 14px rgba(0,0,0,.7))}
+.seat .nm{font-family:'IM Fell English SC',serif;color:var(--paper2);font-size:.85rem;letter-spacing:.06em;margin-top:2px}
+.seat.s0,.seat.s3{transform:translateY(30px)}
+.seat.focus{transform:scale(1.1)}.seat.s0.focus,.seat.s3.focus{transform:translateY(30px) scale(1.1)}.seat.focus .nm{color:var(--gold2)}
+.seat.cleared{opacity:.35;filter:grayscale(1)}.seat.gone{opacity:.3}
+.seat .stp{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%) rotate(-12deg);border:2px solid #c0392b;color:#f0c8c0;background:rgba(40,8,8,.75);font-family:'IM Fell English SC',serif;font-size:.68rem;letter-spacing:.1em;padding:1px 6px;white-space:nowrap;animation:stampIn .45s both cubic-bezier(.3,1.6,.5,1)}
+.s-text{max-width:640px;margin:8px auto 0;text-align:center;flex:1 0 auto}
+.ssay{font-family:'IM Fell English',serif;font-size:clamp(1.15rem,3.6vw,1.4rem);color:#f1e6cc;line-height:1.35}
+.sres{margin-top:12px;font-size:1.06rem;font-style:italic;animation:pin .8s both}.sres.ok{color:#e9d29a}.sres.no{color:#c9a59a}
+.sres .pres{display:block;font-style:normal;font-family:'IM Fell English SC',serif;letter-spacing:.08em;font-size:.82rem;color:var(--gold);margin-bottom:4px}
+.s-act{max-width:760px;width:100%;margin:10px auto 0;text-align:center}
+.s-lab{font-family:'IM Fell English SC',serif;letter-spacing:.12em;color:var(--gold);font-size:.85rem}
+.glove-sc{margin:auto;text-align:center;max-width:520px}
+.gl-svg{width:min(260px,60vw);display:block;margin:0 auto}
+.gl-off{animation:gloveOff 4.2s .6s cubic-bezier(.5,0,.3,1) forwards}
+@keyframes gloveOff{0%{transform:none}30%{transform:translateY(-10px)}100%{transform:translate(70px,-380px) rotate(18deg);opacity:0}}
+.gl-cap{font-family:'IM Fell English',serif;font-style:italic;color:var(--paper2);font-size:1.2rem;margin-top:16px;opacity:0;animation:pin 1.2s 1.2s forwards}
+
 /* finestre */
 .ov{position:fixed;inset:0;z-index:45;background:rgba(4,3,2,.86);display:none;align-items:center;justify-content:center;padding:16px}
 .ov.on{display:flex}
@@ -376,6 +424,7 @@ body.filming #snow{z-index:52}
 <div id="talk"></div>
 <div id="plate" onclick="if(event.target===this)closePlate()"></div>
 <div id="chap"></div>
+<div id="salon"></div>
 <div class="ov" id="ov" onclick="if(event.target===this)closeOv()"><div class="sheet" id="sheet"></div></div>
 <div id="film"></div>
 <div id="fade"></div><div id="flash"></div><div id="vig"></div><div id="grain"></div>
@@ -414,6 +463,9 @@ ${damask("damR","#3a1715","#4f201c")}${damask("damG","#16241d","#213428")}${dama
 <linearGradient id="gShadeL" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".8"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient>
 <linearGradient id="gShadeR" x1="1" x2="0"><stop offset="0" stop-color="#000" stop-opacity=".8"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient>
 <linearGradient id="gFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".65"/><stop offset="1" stop-color="#000" stop-opacity=".1"/></linearGradient>
+<pattern id="eH1" width="2.4" height="2.4" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><line x1="0" y1="0" x2="0" y2="2.4" stroke="#2b1d10" stroke-width=".85"/></pattern>
+<pattern id="eH2" width="2.4" height="2.4" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><line x1="0" y1="0" x2="0" y2="2.4" stroke="#2b1d10" stroke-width=".85"/></pattern>
+<pattern id="eHh" width="3" height="3" patternUnits="userSpaceOnUse"><line x1="0" y1="1.5" x2="3" y2="1.5" stroke="#2b1d10" stroke-width=".5"/></pattern>
 <radialGradient id="gBlood"><stop offset="0" stop-color="#4a0606"/><stop offset=".7" stop-color="#6e0c0c"/><stop offset="1" stop-color="#3a0505"/></radialGradient>
 </defs></svg>`;
 
@@ -514,48 +566,89 @@ function figure(f,name){
   return `<ellipse cx="0" cy="0" rx="36" ry="7" fill="#000" opacity=".55"/><g class="breathe"><g class="fbody" fill="#0c0907" stroke="rgba(255,200,130,.38)" stroke-width="1.2">${b}</g>${extra}</g><text class="fname" y="-192" text-anchor="middle">${name}</text>`;
 }
 
-/* ---------------- RITRATTI ---------------- */
+/* ---------------- RITRATTI (incisioni a tratteggio, stile rivista illustrata) ---------------- */
+const INK="#2b1d10",PAPER="#efe4c9";
+const ENGR={
+  allegra:{w:14.5,h:46,jaw:-2,age:2,lids:1,brow:-1.5,mouth:"thin",hair:"veil",dress:"dark",col:"high",acc:"pearls"},
+  rinaldi:{w:17,h:46,jaw:3,age:2,lids:1,brow:1,mouth:"soft",hair:"grey",beard:"chops",dress:"coat",col:"wing",acc:"specs"},
+  sofia:{w:13.5,h:42,jaw:-3,age:0,lids:0,brow:0,mouth:"full",hair:"long",dress:"dark",col:"lace",acc:"locket"},
+  anselmo:{w:18,h:45,jaw:4,age:3,lids:2,brow:1.5,mouth:"soft",hair:"bald",dress:"cassock",col:"roman",acc:""},
+  elena:{w:14,h:44,jaw:-1,age:1,lids:0,brow:-1,mouth:"thin",hair:"bun",dress:"grey",col:"high",acc:"pincenez"},
+  rina:{w:16,h:42,jaw:1,age:1,lids:1,brow:.5,mouth:"soft",hair:"cap",dress:"maid",col:"plain",acc:"apron"},
+  jacopo:{w:14.5,h:45,jaw:0,age:0,lids:1,brow:-.5,mouth:"smirk",hair:"slick",beard:"tash",dress:"coat",col:"wing",acc:"cravat",dimple:1},
+  lionel:{w:15,h:45,jaw:1,age:0,lids:0,brow:0,mouth:"soft",hair:"slick",beard:"tash",dress:"uniform",col:"mil",acc:"",dimple:1}
+};
 function portrait(p,dead,attrs){
-  const id=uid("pt"),t=p.tone,d=p.dress,hl=shade(t,.25),dk=shade(t,-.3);let back="",front="",acc="";
-  switch(p.hair){
-    case "veil":back=`<path d="M22 120L27 62Q26 20 50 19Q74 20 73 62L78 120Z" fill="#070606"/>`;front=`<path d="M33 52Q33 30 50 29Q67 30 67 52Q61 37 50 37Q39 37 33 52Z" fill="#3a3430"/><path d="M27 46Q30 16 50 15Q70 16 73 46Q66 26 50 25Q34 26 27 46Z" fill="#0d0b0a"/><path d="M40 30Q50 26 60 30" stroke="#6a6460" stroke-width=".6" fill="none"/>`;break;
-    case "bun":back=`<circle cx="50" cy="28" r="10" fill="#5b4a3a"/>`;front=`<path d="M33 52Q31 30 50 29Q69 30 67 52Q63 37 50 36Q37 37 33 52Z" fill="#5b4a3a"/><path d="M38 34Q50 30 62 34" stroke="#7a6650" stroke-width=".7" fill="none"/>`;break;
-    case "bun2":back=`<circle cx="50" cy="29" r="9" fill="#2b2018"/>`;front=`<path d="M33 52Q31 31 50 30Q69 31 67 52Q62 38 50 37Q38 38 33 52Z" fill="#2b2018"/>`;break;
-    case "long":back=`<path d="M27 100Q22 52 33 34Q50 22 67 34Q78 52 73 100Z" fill="#3b2416"/>`;front=`<path d="M33 54Q30 29 50 28Q70 29 67 54Q62 35 47 38Q38 42 33 54Z" fill="#3b2416"/><path d="M44 31Q56 30 64 40" stroke="#5a3a24" stroke-width=".8" fill="none"/>`;break;
-    case "grey":front=`<path d="M33 48Q33 29 50 29Q67 29 67 48Q63 37 50 36Q37 37 33 48Z" fill="#8b847a"/><path d="M42 67.5Q46 65 50 66.5Q54 65 58 67.5Q54 69.5 50 68Q46 69.5 42 67.5Z" fill="#8b847a"/>`;break;
-    case "bald":front=`<path d="M33 54Q32 42 35 39L36 54ZM67 54Q68 42 65 39L64 54Z" fill="#cfcac2"/><path d="M40 34Q50 31 60 34" stroke="${hl}" stroke-width="2" fill="none" opacity=".6"/>`;break;
-    case "slick":front=`<path d="M33 50Q30 26 50 26Q70 26 67 50Q65 34 52 33Q46 32 50 37Q38 35 33 50Z" fill="#14100c"/><path d="M40 30Q52 27 62 33" stroke="#3a3028" stroke-width=".8" fill="none"/>`;break;
-  }
-  switch(p.acc){
-    case "pearls":acc=`<path d="M30 92Q50 76 70 92L70 96L30 96Z" fill="#0d0b0a"/><path d="M38 86Q50 95 62 86" fill="none" stroke="#ece4d2" stroke-width="2.6" stroke-dasharray=".1 3.4" stroke-linecap="round"/>`;break;
-    case "glasses":acc=`<g fill="none" stroke="#c9b48a" stroke-width=".9"><circle cx="43" cy="53" r="5"/><circle cx="57" cy="53" r="5"/><path d="M48 53Q50 51.5 52 53M38 52L33 50M62 52L67 50"/></g>`;break;
-    case "collar":acc=`<rect x="45" y="83" width="10" height="5" fill="#f2efe8"/>`;break;
-    case "locket":acc=`<path d="M41 85L50 96L59 85" fill="none" stroke="#c9a45c" stroke-width=".7"/><ellipse cx="50" cy="99" rx="3.4" ry="4.2" fill="url(#gGold)"/>`;break;
-    case "apron":acc=`<path d="M36 102L64 102L66 122L34 122Z" fill="#d9d2c4" opacity=".9"/><path d="M40 86Q50 90 60 86" stroke="#d9d2c4" stroke-width="2" fill="none"/>`;break;
-    case "tie":acc=`<path d="M44 82L50 88L56 82L53 112L47 112Z" fill="#6b1515"/><path d="M41 81L50 89L59 81" fill="none" stroke="#efe9dc" stroke-width="2.4"/>`;break;
-  }
-  const lap=p.lapels?`<path d="M38 84L50 112L34 122ZM62 84L50 112L66 122Z" fill="${shade(d,-.35)}"/><path d="M45 83L50 92L55 83" fill="#e9e2d4"/>`:"";
-  return `<svg ${attrs||""} viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg"><defs>
-<radialGradient id="${id}b" cx="50%" cy="30%" r="75%"><stop offset="0" stop-color="#4a3626"/><stop offset="1" stop-color="#0e0a07"/></radialGradient>
-<radialGradient id="${id}s" cx="40%" cy="36%" r="70%"><stop offset="0" stop-color="${hl}"/><stop offset=".65" stop-color="${t}"/><stop offset="1" stop-color="${dk}"/></radialGradient>
-<linearGradient id="${id}d" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${shade(d,.14)}"/><stop offset="1" stop-color="${shade(d,-.4)}"/></linearGradient>
-<clipPath id="${id}c"><ellipse cx="50" cy="60" rx="45" ry="55"/></clipPath></defs>
-<g clip-path="url(#${id}c)"><rect width="100" height="120" fill="url(#${id}b)"/><ellipse cx="34" cy="34" rx="30" ry="24" fill="#c9a45c" opacity=".08"/>${back}
-<path d="M6 124Q10 90 50 83Q90 90 94 124Z" fill="url(#${id}d)"/>${lap}
-<path d="M43 72L57 72L58 86Q50 90 42 86Z" fill="${dk}"/>
-<ellipse cx="33.5" cy="56" rx="2.6" ry="5" fill="${t}"/><ellipse cx="66.5" cy="56" rx="2.6" ry="5" fill="${dk}"/>
-<ellipse cx="50" cy="55" rx="16.5" ry="20.5" fill="url(#${id}s)"/>
-<path d="M58 40Q67 52 63 66Q58 74 50 75.5Q60 70 62 58Q63 48 58 40Z" fill="#000" opacity=".13"/>
-<path d="M38 47Q43 44.6 47.5 46.6M52.5 46.6Q57 44.6 62 47" stroke="#2a1d14" stroke-width="1.25" fill="none" stroke-linecap="round"/>
-<path d="M39.5 52.6Q43 50.2 46.5 52.6Q43 54.4 39.5 52.6ZM53.5 52.6Q57 50.2 60.5 52.6Q57 54.4 53.5 52.6Z" fill="#efe6da"/>
-<circle cx="43" cy="52.5" r="1.45" fill="#20160f"/><circle cx="57" cy="52.5" r="1.45" fill="#20160f"/>
-<path d="M39.3 52.2Q43 49.6 46.7 52.2M53.3 52.2Q57 49.6 60.7 52.2" stroke="#2a1d14" stroke-width=".8" fill="none"/>
-<path d="M50.5 54Q49 60.5 47 62.8Q49.5 64.4 52.5 63.4" stroke="${dk}" stroke-width=".9" fill="none"/>
-<path d="M45.5 68.3Q50 69.6 54.5 68.3Q50 71.6 45.5 68.3Z" fill="#94584a"/><path d="M45.5 68.3Q50 67.4 54.5 68.3" stroke="#6a3a30" stroke-width=".6" fill="none"/>
-<ellipse cx="42" cy="62" rx="3.5" ry="2" fill="#c0605a" opacity=".1"/><ellipse cx="58" cy="62" rx="3.5" ry="2" fill="#c0605a" opacity=".1"/>
-${front}${acc}<rect width="100" height="120" fill="url(#hatch)" opacity=".08"/></g>
+  const e=ENGR[p.k]||ENGR[p.hair==="slick"?"lionel":"rinaldi"],id=uid("pt"),w=e.w,cy=31,chin=cy+e.h,j=e.jaw;
+  const face=`M${50-w} 52Q${50-w} ${cy+1} 50 ${cy}Q${50+w} ${cy+1} ${50+w} 52Q${50+w} ${62+j} ${50+w*.55} ${70+j*.7}Q50 ${chin+2} ${50-w*.55} ${70+j*.7}Q${50-w} ${62+j} ${50-w} 52Z`;
+  const L=(d,sw)=>`<path d="${d}" stroke="${INK}" stroke-width="${sw||.9}" fill="none" stroke-linecap="round"/>`;
+  const H1=`url(#eH1)`,H2=`url(#eH2)`;
+  let back="",body="",hair="",feat="",acc="";
+  // abito
+  const shoulders=`M2 124Q6 96 30 88Q40 84 44 ${chin-4}L56 ${chin-4}Q60 84 70 88Q94 96 98 124Z`;
+  if(e.dress==="dark"||e.dress==="cassock"||e.dress==="coat"||e.dress==="uniform")body+=`<path d="${shoulders}" fill="${e.dress==="uniform"?"#7a2a1a":"#6a5640"}"/><path d="${shoulders}" fill="${H1}"/><path d="${shoulders}" fill="${H2}"/>`;
+  else if(e.dress==="grey")body+=`<path d="${shoulders}" fill="${PAPER}"/><path d="${shoulders}" fill="${H1}"/>`;
+  else body+=`<path d="${shoulders}" fill="#8a7458"/><path d="${shoulders}" fill="${H1}"/><path d="${shoulders}" fill="${H2}" opacity=".6"/>`;
+  body+=L(shoulders,1.1);
+  if(e.dress==="coat")body+=`<path d="M40 88L50 120L60 88L66 124H34Z" fill="#3a2c1e"/>`+L("M40 88L50 120L60 88",.8);
+  if(e.dress==="uniform")body+=`<path d="M46 88V124M54 88V124" stroke="#c9a45c" stroke-width="1.2"/>${[96,104,112].map(y=>`<circle cx="50" cy="${y}" r="1.4" fill="#c9a45c"/>`).join("")}`;
+  if(e.acc==="apron")body+=`<path d="M34 98L66 98L68 124H32Z" fill="${PAPER}"/>`+L("M34 98L66 98L68 124H32Z",.8)+L("M36 98L30 88M64 98L70 88",2.2);
+  // colletto
+  const nk=`M42 ${chin-10}L58 ${chin-10}L58 88Q50 92 42 88Z`;
+  let neck=`<path d="${nk}" fill="${PAPER}"/><path d="M52 ${chin-8}L58 ${chin-10}L58 88Q55 90 52 90Z" fill="${H1}"/>`+L(`M42 ${chin-8}L42 88M58 ${chin-8}L58 88`,.8);
+  if(e.col==="high")neck+=`<path d="M40 74Q50 ${chin+4} 60 74L61 90Q50 94 39 90Z" fill="${e.dress==="grey"?PAPER:"#4a3a2a"}"/><path d="M40 74Q50 ${chin+4} 60 74L61 90Q50 94 39 90Z" fill="${H2}"/>`+L(`M40 74Q50 ${chin+4} 60 74L61 90Q50 94 39 90Z`,.9);
+  if(e.col==="wing")neck+=`<path d="M42 84L50 90L58 84L59 90L50 94L41 90Z" fill="${PAPER}"/>`+L("M42 84L50 90L58 84",.8);
+  if(e.col==="roman")neck+=`<path d="M41 86Q50 90 59 86L59 90Q50 94 41 90Z" fill="#fff"/>`+L("M41 86Q50 90 59 86M41 90Q50 94 59 90",.7);
+  if(e.col==="lace")neck+=`<path d="M36 90Q50 98 64 90" stroke="${INK}" stroke-width="2.4" stroke-dasharray="1 1.6" fill="none"/>`;
+  if(e.col==="mil")neck+=`<path d="M40 84H60V91H40Z" fill="#7a2a1a"/><path d="M40 84H60V91H40Z" fill="${H1}"/><path d="M41 86H59" stroke="#c9a45c" stroke-width="1"/>`;
+  // capelli dietro
+  if(e.hair==="veil")back=`<path d="M${50-w-8} 124L${50-w-6} 60Q${50-w-4} 20 50 18Q${50+w+4} 20 ${50+w+6} 60L${50+w+8} 124Z" fill="#4a3a2a"/><path d="M${50-w-8} 124L${50-w-6} 60Q${50-w-4} 20 50 18Q${50+w+4} 20 ${50+w+6} 60L${50+w+8} 124Z" fill="${H2}"/><path d="M${50-w-8} 124L${50-w-6} 60Q${50-w-4} 20 50 18Q${50+w+4} 20 ${50+w+6} 60L${50+w+8} 124Z" fill="${H1}"/>`;
+  if(e.hair==="long")back=`<path d="M${50-w-6} 104Q${50-w-9} 50 ${50-w+2} 32Q50 22 ${50+w-2} 32Q${50+w+9} 50 ${50+w+6} 104Q50 96 ${50-w-6} 104Z" fill="#5a4630"/><path d="M${50-w-6} 104Q${50-w-9} 50 ${50-w+2} 32Q50 22 ${50+w-2} 32Q${50+w+9} 50 ${50+w+6} 104Q50 96 ${50-w-6} 104Z" fill="${H1}"/>`;
+  if(e.hair==="bun")back=`<circle cx="50" cy="${cy-3}" r="8" fill="#6a5640"/><circle cx="50" cy="${cy-3}" r="8" fill="${H1}"/>`+L(`M44 ${cy-3}a6 6 0 0 1 12 0`,.7);
+  // viso
+  const sh=`M${50+w*.35} ${cy+3}Q${50+w+1} 44 ${50+w} 54Q${50+w} ${62+j} ${50+w*.55} ${70+j*.7}Q${50+w*.2} ${chin-2} ${50+w*.1} ${chin}Q${50+w*.7} 60 ${50+w*.35} ${cy+3}Z`;
+  feat+=`<path d="${face}" fill="${PAPER}"/><clipPath id="${id}f"><path d="${face}"/></clipPath><g clip-path="url(#${id}f)"><path d="${sh}" fill="${H1}"/></g>`;
+  // orecchie
+  feat+=`<path d="M${50-w} 50q-4 2 -3 8q1 5 4 4" fill="${PAPER}"/>`+L(`M${50-w} 50q-4 2 -3 8q1 5 4 4`,.8)+`<path d="M${50+w} 50q4 2 3 8q-1 5 -4 4" fill="${H1}"/>`+L(`M${50+w} 50q4 2 3 8q-1 5 -4 4`,.8);
+  feat+=L(face,1.15);
+  // occhi e sopracciglia
+  const by=47+e.brow*.6,ey=53;
+  feat+=L(`M${41-1} ${by+.6}Q43.5 ${by-1.6-e.brow*.4} 47 ${by+.4}M53 ${by+.4}Q56.5 ${by-1.6-e.brow*.4} 60 ${by+.6}`,1.5);
+  [43.5,56.5].forEach(x=>{feat+=`<path d="M${x-3.6} ${ey}Q${x} ${ey-2.6} ${x+3.6} ${ey}Q${x} ${ey+1.8} ${x-3.6} ${ey}Z" fill="#fff"/><circle cx="${x}" cy="${ey-.2}" r="1.4" fill="${INK}"/>`+L(`M${x-3.8} ${ey}Q${x} ${ey-2.8-(e.lids?-.6:0)} ${x+3.8} ${ey}`,1.1);
+    if(e.lids)feat+=L(`M${x-3.4} ${ey-1.9}Q${x} ${ey-3.9} ${x+3.4} ${ey-1.9}`,.6);
+    if(e.age>1)feat+=L(`M${x-3} ${ey+2.4}Q${x} ${ey+3.8} ${x+3} ${ey+2.2}`,.5);});
+  // naso
+  feat+=L(`M49.5 ${ey+1}Q48.6 ${ey+7} 47 ${ey+9.6}Q49.5 ${ey+11} 52.4 ${ey+10}`,.95)+L(`M53 ${ey+2}Q53.4 ${ey+6} 53.6 ${ey+8.6}`,.5);
+  // bocca
+  const my=ey+15.5+(e.h-44)*.3;
+  if(e.mouth==="thin")feat+=L(`M45 ${my}Q50 ${my+.6} 55 ${my}`,1.2)+L(`M47 ${my+2.4}Q50 ${my+3} 53 ${my+2.4}`,.5);
+  else if(e.mouth==="full")feat+=`<path d="M45 ${my}Q50 ${my-1.6} 55 ${my}Q50 ${my+3.4} 45 ${my}Z" fill="#a8685a" opacity=".7"/>`+L(`M45 ${my}Q50 ${my+.8} 55 ${my}`,1);
+  else if(e.mouth==="smirk")feat+=L(`M45.5 ${my+.4}Q50 ${my+1} 55 ${my-1}`,1.1);
+  else feat+=L(`M45 ${my}Q50 ${my+1.4} 55 ${my}`,1)+L(`M47 ${my+2.6}Q50 ${my+3.2} 53 ${my+2.6}`,.5);
+  if(e.age)feat+=L(`M45 ${ey+9}Q43 ${my-1} 44 ${my+2}M55 ${ey+9}Q57 ${my-1} 56 ${my+2}`,.55);
+  if(e.age>1)feat+=L(`M40 ${by-4}Q44 ${by-5.4} 48 ${by-4.4}M52 ${by-4.4}Q56 ${by-5.4} 60 ${by-4}`,.45);
+  if(e.dimple)feat+=L(`M50 ${chin-3.2}v1.8`,.8);
+  if(e.beard==="tash")feat+=`<path d="M44 ${my-2.4}Q50 ${my-5} 56 ${my-2.4}Q50 ${my-1.2} 44 ${my-2.4}Z" fill="${INK}"/>`;
+  if(e.beard==="chops")feat+=`<path d="M${50-w} 54Q${50-w-1} 70 ${50-w*.5} 74L${50-w*.62} 60ZM${50+w} 54Q${50+w+1} 70 ${50+w*.5} 74L${50+w*.62} 60Z" fill="#9a8c78"/><path d="M${50-w} 54Q${50-w-1} 70 ${50-w*.5} 74L${50-w*.62} 60ZM${50+w} 54Q${50+w+1} 70 ${50+w*.5} 74L${50+w*.62} 60Z" fill="${H1}"/><path d="M43 ${my-2}Q50 ${my-5.5} 57 ${my-2}Q50 ${my-.6} 43 ${my-2}Z" fill="#9a8c78"/><path d="M43 ${my-2}Q50 ${my-5.5} 57 ${my-2}Q50 ${my-.6} 43 ${my-2}Z" fill="${H1}"/>`;
+  // capelli davanti
+  const top=`M${50-w-1} 52Q${50-w-3} ${cy-3} 50 ${cy-4}Q${50+w+3} ${cy-3} ${50+w+1} 52`;
+  if(e.hair==="slick")hair=`<path d="${top}Q${50+w-2} 40 52 ${cy+5}Q50 ${cy+8} 47 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="#3a2c1e"/><path d="${top}Q${50+w-2} 40 52 ${cy+5}Q50 ${cy+8} 47 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${H2}"/>`+L(`M44 ${cy-1}Q52 ${cy-3} 60 ${cy+3}M42 ${cy+2}Q50 ${cy} 58 ${cy+5}`,.5);
+  if(e.hair==="long"||e.hair==="bun")hair=`<path d="${top}Q${50+w-3} 38 50 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${e.hair==="bun"?"#6a5640":"#5a4630"}"/><path d="${top}Q${50+w-3} 38 50 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${H1}"/>`+L(`M50 ${cy-4}V${cy+4}`,.7);
+  if(e.hair==="grey")hair=`<path d="M${50-w-1} 54Q${50-w-2} 38 ${50-w*.5} ${cy+1}L${50-w*.4} 46ZM${50+w+1} 54Q${50+w+2} 38 ${50+w*.5} ${cy+1}L${50+w*.4} 46Z" fill="#b8ac98"/>`+L(`M${50-w-1} 54Q${50-w-2} 38 ${50-w*.5} ${cy+1}M${50+w+1} 54Q${50+w+2} 38 ${50+w*.5} ${cy+1}`,.7)+L(`M44 ${cy+1}Q50 ${cy-1} 56 ${cy+1}`,.4);
+  if(e.hair==="bald")hair=`<path d="M${50-w-1} 56Q${50-w-2} 46 ${50-w+2} 42L${50-w+3} 56ZM${50+w+1} 56Q${50+w+2} 46 ${50+w-2} 42L${50+w-3} 56Z" fill="#cfc4b0"/>`+L(`M${50-w-1} 56Q${50-w-2} 46 ${50-w+2} 42M${50+w+1} 56Q${50+w+2} 46 ${50+w-2} 42`,.6)+L(`M42 ${cy+4}Q46 ${cy+2} 50 ${cy+2}`,.6);
+  if(e.hair==="veil")hair=`<path d="${top}Q${50+w-3} 38 50 ${cy+5}Q${50-w+3} 38 ${50-w-1} 52Z" fill="#3a2c1e"/><path d="${top}Q${50+w-3} 38 50 ${cy+5}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${H2}"/><path d="M${50-w-5} 44Q50 ${cy-12} ${50+w+5} 44" stroke="${INK}" stroke-width="1.4" stroke-dasharray=".8 1.4" fill="none"/>`;
+  if(e.hair==="cap")hair=`<path d="${top}Q${50+w-3} 38 50 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="#3a2c1e"/><path d="${top}Q${50+w-3} 38 50 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${H1}"/><path d="M${50-w-3} ${cy+2}Q50 ${cy-12} ${50+w+3} ${cy+2}Q50 ${cy-4} ${50-w-3} ${cy+2}Z" fill="#fff"/>`+L(`M${50-w-3} ${cy+2}Q50 ${cy-12} ${50+w+3} ${cy+2}Q50 ${cy-4} ${50-w-3} ${cy+2}Z`,.8)+`<path d="M${50-w-3} ${cy+2}Q50 ${cy-15} ${50+w+3} ${cy+2}" stroke="${INK}" stroke-width=".7" stroke-dasharray="1 1.2" fill="none"/>`;
+  // accessori
+  if(e.acc==="pearls")acc=`<path d="M38 82Q50 92 62 82" stroke="#fff" stroke-width="2.6" stroke-dasharray=".1 3.2" stroke-linecap="round" fill="none"/><path d="M38 82Q50 92 62 82" stroke="${INK}" stroke-width=".4" fill="none"/><ellipse cx="50" cy="100" rx="4" ry="5" fill="${PAPER}" stroke="${INK}" stroke-width=".8"/><path d="M48.6 102q1.4 -4 2.8 0" stroke="${INK}" stroke-width=".6" fill="none"/>`;
+  if(e.acc==="specs")acc=`<g fill="none" stroke="${INK}" stroke-width=".8"><circle cx="43.5" cy="53" r="4.6"/><circle cx="56.5" cy="53" r="4.6"/><path d="M48.1 52.6Q50 51 51.9 52.6M38.9 52L${50-w} 50.5M61.1 52L${50+w} 50.5"/></g>`;
+  if(e.acc==="pincenez")acc=`<g fill="none" stroke="${INK}" stroke-width=".7"><ellipse cx="43.5" cy="53.4" rx="4" ry="3.4"/><ellipse cx="56.5" cy="53.4" rx="4" ry="3.4"/><path d="M47.5 53Q50 51.6 52.5 53M39.5 54Q34 62 36 80"/></g><ellipse cx="50" cy="90" rx="3" ry="2.4" fill="#c9a45c" stroke="${INK}" stroke-width=".6"/>`;
+  if(e.acc==="locket")acc=`<path d="M41 86L50 98L59 86" fill="none" stroke="${INK}" stroke-width=".6" stroke-dasharray="1 1"/><ellipse cx="50" cy="101" rx="3.6" ry="4.4" fill="#c9a45c" stroke="${INK}" stroke-width=".7"/>`;
+  if(e.acc==="cravat")acc=`<path d="M46 90Q50 94 54 90L53 102Q50 104 47 102Z" fill="#6b1515"/>`+L("M46 90Q50 94 54 90L53 102Q50 104 47 102Z",.6)+`<circle cx="50" cy="96" r=".9" fill="#e9d29a"/>`;
+  return `<svg ${attrs||""} viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="${id}c"><ellipse cx="50" cy="60" rx="45" ry="55"/></clipPath></defs>
+<g clip-path="url(#${id}c)"${dead?` style="filter:grayscale(1) brightness(.92)"`:""}><rect width="100" height="120" fill="${PAPER}"/><rect width="100" height="120" fill="url(#eHh)" opacity=".75"/><ellipse cx="50" cy="56" rx="30" ry="36" fill="${PAPER}" opacity=".85"/>
+${back}${body}${neck}${feat}${hair}${acc}</g>
 <ellipse cx="50" cy="60" rx="45" ry="55" fill="none" stroke="url(#gGold)" stroke-width="4.5"/><ellipse cx="50" cy="60" rx="41.6" ry="51.6" fill="none" stroke="#3b2a12" stroke-width="1"/>
-${dead?`<path d="M50 104v12M45 108h10" stroke="#c0392b" stroke-width="2"/>`:""}</svg>`;
+${dead?`<path d="M50 104v12M45 108h10" stroke="#8a1414" stroke-width="2"/>`:""}</svg>`;
 }
 
 /* ---------------- STANZE ---------------- */
@@ -627,7 +720,7 @@ const EVA={
   lace:()=>PAP("#d8ccb0")+`<path d="M0 56L300 50L300 118L0 122Z" fill="url(#hatchX)" opacity=".5"/>`+LACE(90)+`<path d="M0 56L300 50" stroke="#0b0b0b" stroke-width="3"/>`,
   glass:()=>{const r=rng(4);let d="";for(let i=0;i<26;i++)d+=`<circle cx="${(126+r()*48).toFixed(1)}" cy="${(122+r()*8).toFixed(1)}" r="${(.8+r()*1.4).toFixed(1)}" fill="#f2ede2" opacity=".85"/>`;return VEL+`<ellipse cx="150" cy="176" rx="64" ry="9" fill="#000" opacity=".45"/><path d="M98 54Q82 122 150 134Q218 122 202 54Z" fill="#d6e2e8" opacity=".14" stroke="#e8f0f3" stroke-width="1.6"/><path d="M90 98Q150 116 210 98Q206 128 150 134Q94 128 90 98Z" fill="#8a4a14" opacity=".88"/><ellipse cx="150" cy="99" rx="60" ry="7" fill="#b06a26" opacity=".6"/>${d}<rect x="146" y="133" width="8" height="34" fill="#dfe9ee" opacity=".45"/><ellipse cx="150" cy="170" rx="40" ry="7" fill="#dfe9ee" opacity=".35"/><path d="M110 66Q103 98 114 120" stroke="#fff" stroke-width="3.5" opacity=".45" fill="none"/>`;},
   book:()=>{let l="";for(let y=72;y<158;y+=9)l+=`<path d="M38 ${y}L138 ${y+3}" stroke="#8a7d66" stroke-width="1.2" opacity=".5"/>`;const rows=[["Genitori","Figli"],["O × O","O"],["A × O","A, O"],["O × AB","A, B"],["AB × AB","A, B, AB"]];let t="";rows.forEach((r,i)=>{const y=70+i*17;t+=`<text x="164" y="${y}" font-size="9.5">${r[0]}</text><text x="226" y="${y}" font-size="9.5">${r[1]}</text><path d="M162 ${y+4}H264" stroke="#a89c80" stroke-width=".6"/>`});return VEL+`<ellipse cx="150" cy="184" rx="130" ry="10" fill="#000" opacity=".4"/><path d="M26 34L148 46L148 178L26 166Z" fill="#e6dcc4"/><path d="M152 46L274 34L274 166L152 178Z" fill="#efe6d0"/><path d="M147 46h6v132h-6z" fill="#9a8c70"/><text x="40" y="60" font-size="9" letter-spacing="1.5" fill="#2b1d10" font-family="IM Fell English SC,serif">Landsteiner · 1901</text>${l}<g font-family="EB Garamond,serif" fill="#2b1d10">${t}</g><path d="M162 142Q210 136 262 140" stroke="#a01818" stroke-width="2" fill="none"/><text x="168" y="160" font-family="La Belle Aurore,cursive" font-size="13" fill="#7a1010" transform="rotate(-4 168 160)">AB non può dare O</text>`;},
-  ritratto:()=>VEL+`<rect x="92" y="12" width="116" height="152" fill="url(#gGold)"/><rect x="99" y="19" width="102" height="138" fill="#120c08"/>`+portrait({hair:"slick",acc:"tie",dress:"#2c3a4a",tone:"#dcbf9e",lapels:1},false,`x="99" y="19" width="102" height="138"`)+`<rect x="128" y="170" width="44" height="10" fill="#a88449"/><text x="150" y="178" font-size="7" text-anchor="middle" fill="#2b1d10" font-family="IM Fell English SC,serif">SIR L. ASHCOMBE</text>`,
+  ritratto:()=>VEL+`<rect x="92" y="12" width="116" height="152" fill="url(#gGold)"/><rect x="99" y="19" width="102" height="138" fill="#120c08"/>`+portrait({k:"lionel",hair:"slick",acc:"tie",dress:"#2c3a4a",tone:"#dcbf9e",lapels:1},false,`x="99" y="19" width="102" height="138"`)+`<rect x="128" y="170" width="44" height="10" fill="#a88449"/><text x="150" y="178" font-size="7" text-anchor="middle" fill="#2b1d10" font-family="IM Fell English SC,serif">SIR L. ASHCOMBE</text>`,
   setting:()=>PAP("#efe9dc")+`<circle cx="160" cy="96" r="52" fill="#fbf8f0" stroke="#d8d0be" stroke-width="2"/><circle cx="160" cy="96" r="38" fill="none" stroke="#e6dfcf"/><rect x="232" y="46" width="6" height="100" rx="3" fill="#b9bcc0"/><path d="M98 46v100M92 46v26M104 46v26M92 72q6 8 12 0" stroke="#b9bcc0" stroke-width="4" fill="none"/><circle cx="54" cy="70" r="20" fill="#cfe0e6" opacity=".6" stroke="#b7c7cf"/><circle cx="54" cy="70" r="14" fill="none" stroke="#fff" opacity=".7"/><path d="M36 126q12 -10 26 -2q14 8 4 20q-10 12 -24 4q-14 -10 -6 -22z" fill="#7a1a1a" opacity=".55"/><text x="150" y="188" text-anchor="middle" font-family="IM Fell English,serif" font-size="11" fill="#5a4428" font-style="italic">il posto di Lady Agatha</text>`,
   cup:()=>{const r=rng(9);let d="";for(let i=0;i<30;i++)d+=`<circle cx="${(110+r()*80).toFixed(1)}" cy="${(92+r()*10).toFixed(1)}" r=".9" fill="#9a8f80" opacity=".7"/>`;return VEL+`<ellipse cx="150" cy="160" rx="80" ry="16" fill="#efe9dc"/><ellipse cx="150" cy="156" rx="60" ry="10" fill="#e2dccd"/><path d="M104 98Q108 150 150 152Q192 150 196 98Z" fill="#f4efe4" stroke="#d8d0be"/><ellipse cx="150" cy="98" rx="46" ry="9" fill="#e9e3d6" stroke="#d8d0be"/><path d="M196 108q22 0 18 18q-4 14 -22 12" stroke="#f4efe4" stroke-width="6" fill="none"/>${[[128,124],[160,132],[176,118]].map(([x,y])=>`<g fill="#6a3a9a">${[0,72,144,216,288].map(a=>`<circle cx="${(x+4*Math.cos(a*Math.PI/180)).toFixed(1)}" cy="${(y+4*Math.sin(a*Math.PI/180)).toFixed(1)}" r="2.6"/>`).join("")}<circle cx="${x}" cy="${y}" r="1.4" fill="#e8c84a"/></g><path d="M${x+5} ${y+4}q6 6 12 2" stroke="#4a6a3a" stroke-width="2" fill="none"/>`).join("")}${d}`;},
   photo:(e)=>VEL+`<g transform="rotate(-4 150 100)"><rect x="66" y="12" width="168" height="170" fill="#f2e8d0"/><rect x="76" y="22" width="148" height="122" fill="#c8a878"/>${photoScene(e.v)}<rect x="76" y="22" width="148" height="122" fill="url(#gVig)" opacity=".55"/><text x="150" y="166" text-anchor="middle" font-family="La Belle Aurore,cursive" font-size="12.5" fill="#3b2a1a">${e.cap}</text></g>`,
@@ -677,7 +770,7 @@ function docThumb(e){const k=e.doc,r=rng(k.length*7+3);let L="";
   else for(let y=52;y<172;y+=k==="hand"?14:11)L+=k==="hand"?`<path d="M96 ${y}q12 -4 24 0t24 0t24 0t24 0" stroke="#1f2a4a" stroke-width="1.6" fill="none" opacity=".7"/>`:`<path d="M96 ${y}H${(170+r()*34).toFixed(0)}" stroke="#2b1d10" stroke-width="1.6" opacity=".55"/>`;
   return `<svg viewBox="0 0 300 200"><rect width="300" height="200" fill="#1c140e"/><g transform="rotate(-4 150 100)"><rect x="84" y="24" width="132" height="166" fill="${e.paper==="diary"?"#e6d8b4":"#ece0c2"}"/>${e.paper==="diary"?`<rect x="76" y="24" width="10" height="166" fill="#3a1a0c"/>`:""}${L}${e.burnt?`<path d="M84 150Q110 140 130 168Q160 150 190 176L216 160V190H84Z" fill="#2a1408"/>`:""}</g></svg>`;}
 function testiThumb(id){const c=CASE_RAVEN.chars[EV[id].t];return `<svg viewBox="0 0 300 200"><rect width="300" height="200" fill="#efe4c8"/>${Array.from({length:7},(_,i)=>`<path d="M0 ${30+i*25}H300" stroke="#c9b991"/>`).join("")}${portrait(c.p,false,`x="24" y="18" width="120" height="164"`)}<text x="226" y="128" text-anchor="middle" font-size="96" fill="#8a1414" font-family="IM Fell English,serif">«»</text></svg>`;}
-function evThumb(id){const e=EV[id]||{};if(e.doc)return docThumb(e);if(e.t)return testiThumb(id);return evArt(id);}
+function evThumb(id){if(S&&S.clues[id]&&S.clues[id].cat==="Deduzione")return dedThumb();const e=EV[id]||{};if(e.doc)return docThumb(e);if(e.t)return testiThumb(id);return evArt(id);}
 function docHTML(e){
   if(e.doc==="form")return `<div class="doc form"><div class="fh">${e.head}</div><div class="fs">${e.sub}</div><table>${e.rows.map(r=>`<tr><td>${r[0]}</td><td class="g">${r[1]}</td></tr>`).join("")}</table><div class="fn">${e.note}</div></div>`;
   if(e.doc==="ledger")return `<div class="doc ledger"><div class="fh">${e.head}</div><table>${e.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</table></div>`;
@@ -1472,6 +1565,109 @@ CASE_RAVEN.ending = function(ans,g){
   return R("errato","La porta sbagliata","Finale errato",p);
 };
 
+Object.keys(CASE_RAVEN.chars).forEach(k=>CASE_RAVEN.chars[k].p.k=k);
+/* ---------------- DEDUZIONI: collegare due reperti ---------------- */
+CASE_RAVEN.deductions=[
+  {id:"d_sinistra",name:"L'assassino usa la sinistra",th:{A:2},a:["c_fermacarte","c_bugiardi","c_taglio"],b:["c_bicchiere_sx","c_ricamo","c_mancina","c_lettera_allegra","c_guanti"],
+   text:"Il colpo alla tempia destra, la scritta sbavata, la gola aperta da destra a sinistra: chi uccide usa la mano sinistra. E in questa casa c'è una mano sinistra che qualcuno ha passato la vita a nascondere."},
+  {id:"d_messinscena",name:"Non c'è stata nessuna lotta",th:{A:1,B:1},a:["c_trascinamento"],b:["c_pupille","c_bicchiere","c_morfina"],
+   text:"Julian era stordito dalla morfina quando è caduto: non poteva lottare. Le sedie rovesciate sono teatro. L'assassino aveva bisogno che fosse inerme, perché non era più forte di lui."},
+  {id:"d_tisana",name:"La tisana che non c'era",th:{A:2},a:["c_tazza"],b:["c_bicchiere"],
+   text:"La tazza è pulita: la tisana delle 22:45 non è mai stata servita. Era l'alibi di Lady Agatha. Ed è proprio l'ora in cui qualcuno mandava a Julian un brandy pieno di morfina."},
+  {id:"d_parricidio",name:"Il veleno del 2 maggio",th:{T:2},a:["c_fiala"],b:["c_calendario","c_diario"],
+   text:"Digitalina bruciata nel camino di Julian. «Tisana — J.» il 2 maggio. Sir Lionel morto il 3, di «cuore». Julian ha avvelenato suo padre."},
+  {id:"d_menzogna",name:"Il referto falso",th:{T:3},a:["c_referto_vero"],b:["c_referto_falso","c_landsteiner"],
+   text:"Nel 1904 Julian risulta di gruppo O, Reid di gruppo AB: un padre AB non può avere un figlio O. Il referto del 1911, firmato da Reid, è un falso. Julian era figlio di Sir Lionel."},
+  {id:"d_somiglianza",name:"Il mento di Sir Lionel",th:{T:1},a:["c_ritratto"],b:["c_foto_viareggio"],
+   text:"Brighton, agosto 1878. Julian nasce nel maggio 1879, con la fossetta e la punta di capelli del baronetto. Qualcuno ha guardato quel viso per trent'anni vedendoci un altro uomo."},
+  {id:"d_movente",name:"Una vendetta per il marito",th:{A:2,T:1},a:["c_lettera_allegra"],b:["c_fiala","c_calendario","c_diario"],
+   text:"Lady Agatha sapeva che Julian aveva avvelenato Lionel. E lo credeva il frutto del suo peccato con Reid. «Rimedierò io a ciò che ho generato» non è una preghiera: è un programma."},
+  {id:"d_cantina",name:"Una signora in cantina",th:{A:1,B:1,C:-1},a:["c_nota_sola"],b:["c_impronte"],
+   text:"Il biglietto dice «verrò sola»; nella polvere di carbone, scarpe da signora e un piede piccolo. Alle tre, in cantina, è scesa una donna. Non Kitty con i suoi zoccoli, e non un uomo."},
+  {id:"d_arma",name:"Il rasoio viene dalla sua camera",th:{A:2},a:["c_rasoio"],b:["c_astuccio_vuoto"],
+   text:"Le iniziali L.A. sulla lama, l'astuccio vuoto nel comò di Lady Agatha. L'arma che ha ucciso Helena è uscita dalla stanza che Lady Agatha tiene chiusa a chiave."},
+  {id:"d_alibi_sophia",name:"Sophia non può essere stata",th:{B:-3},a:["c_alibi_sofia1"],b:["c_alibi_sofia3"],
+   text:"Mentre Julian moriva, Sophia ascoltava Tennyson con padre Ambrose. Mentre Helena moriva, teneva sveglio il dottore con il caffè. Due delitti su tre le sono impossibili."},
+  {id:"d_kitty",name:"Kitty ha mentito, ma non ha ucciso",th:{C:-2},a:["c_rina_destra"],b:["c_taglio","c_bugiardi","c_fermacarte"],
+   text:"La governante usa la destra da trent'anni; le ferite parlano di una mano sinistra. Kitty ha mentito per qualcuno. Non per sé."},
+  {id:"d_prete",name:"Il prete doveva tacere",th:{A:1,T:1},a:["c_nota_anselmo"],b:["c_candelabro","c_corda"],
+   text:"Padre Ambrose voleva parlare «alla madre, prima della Messa». È morto prima della Messa, colpito da qualcuno senza forza. Ha parlato: e la madre lo ha fatto tacere."}
+];
+CASE_RAVEN.deductions.forEach(d=>{CASE_RAVEN.clues[d.id]={name:d.name,cat:"Deduzione",th:d.th,text:d.text};});
+CASE_RAVEN.chars.allegra.react.d_sinistra="Le mani di Lady Agatha restano immobili in grembo, una sull'altra. La destra sopra. «Lei ha una fantasia da romanziere, avvocato.»";
+CASE_RAVEN.chars.allegra.react.d_arma="«Il rasoio di mio marito era nella mia stanza. Lo sapevano tutti.» Una pausa. «Anche questo, lo sapevano tutti.»";
+CASE_RAVEN.chars.rina.react.d_kitty="Kitty si porta le mani al viso. «Grazie, signore. Grazie.» Poi, piano: «Ma io non posso dirle per chi ho mentito.»";
+CASE_RAVEN.chars.sofia.react.d_alibi_sophia="«Allora mi crede.» Sophia stringe il medaglione. «È la prima persona, in questa casa.»";
+CASE_RAVEN.chars.rinaldi.react.d_menzogna="Reid non guarda il foglio. Guarda te. «Sì», dice soltanto. «Sì.»";
+const WRONG_DED=["Due fatti veri non fanno sempre una verità.","Il filo non regge. Prova a tirarne un altro.","Interessante, ma non porta da nessuna parte.","Una coincidenza, non una deduzione.","Non c'è nulla che li leghi. Non ancora, almeno.","Suggestivo. Ma un giudice riderebbe."];
+function dedFor(a,b){return (S.deductions||[]).find(d=>(d.a.includes(a)&&d.b.includes(b))||(d.a.includes(b)&&d.b.includes(a)));}
+function dedOpen(){return (S.deductions||[]).filter(d=>!has(d.id)&&d.a.some(has)&&d.b.some(has)).length;}
+let dedSel=[];
+function dedView(){const raw=G.clues.filter(id=>S.clues[id].cat!=="Deduzione"),found=G.clues.filter(id=>S.clues[id].cat==="Deduzione"),open=dedOpen();
+  let h=`<div class="ded-head"><p class="hand">Tocca due reperti per collegarli. Se il filo regge, ne nasce una deduzione.</p>
+  <div class="ded-slots"><div class="slot${dedSel[0]?" full":""}">${dedSel[0]?`${evThumb(dedSel[0])}<span>${S.clues[dedSel[0]].name}</span>`:"primo reperto"}</div><div class="link">⟷</div><div class="slot${dedSel[1]?" full":""}">${dedSel[1]?`${evThumb(dedSel[1])}<span>${S.clues[dedSel[1]].name}</span>`:"secondo reperto"}</div></div>
+  <div class="ded-left">${open?`Tra i tuoi reperti ci sono ancora <b>${open}</b> ${open===1?"collegamento":"collegamenti"} da scoprire.`:raw.length?"Nessun nuovo collegamento possibile, per ora: cerca altri reperti.":""}</div></div>`;
+  if(found.length){h+=`<div class="jsect">Deduzioni (${found.length}/${S.deductions.length})</div>`;found.slice().reverse().forEach(id=>{h+=`<div class="entry dedent" onclick="viewClue('${id}')"><div class="th">${evThumb(id)}</div><div><h4>${S.clues[id].name}</h4><p>${S.clues[id].text}</p></div></div>`;});}
+  h+=`<div class="jsect">Reperti</div>${raw.length?`<div class="dgrid">${raw.map(id=>`<button class="dcard${dedSel.includes(id)?" sel":""}" onclick="dedPick('${id}')">${evThumb(id)}<span>${S.clues[id].name}</span></button>`).join("")}</div>`:`<p class="hand">Il taccuino è ancora vuoto.</p>`}`;
+  return h;}
+function dedPick(id){AU.sfx("page");const i=dedSel.indexOf(id);if(i>=0)dedSel.splice(i,1);else{dedSel.push(id);if(dedSel.length>2)dedSel.shift();}
+  const y=$("#main").scrollTop;render();$("#main").scrollTop=y;if(dedSel.length===2)setTimeout(tryDeduce,380);}
+function tryDeduce(){const [a,b]=dedSel;if(!a||!b)return;const d=dedFor(a,b);dedSel=[];
+  if(d&&!has(d.id)){addClue(d.id);save();AU.sfx("eureka");
+    showPlate("Deduzione",d.name,clueArt(d.id),`<p class="got center">Collegati: ${S.clues[a].name} · ${S.clues[b].name}</p>`,d.id);render();return;}
+  const y=$("#main").scrollTop;render();$("#main").scrollTop=y;
+  if(d)toast("Questa deduzione l'hai già fatta.");else{G.wrongDed=(G.wrongDed||0)+1;save();toast(WRONG_DED[G.wrongDed%WRONG_DED.length]);AU.sfx("tick");}}
+function toast(t){let el=$("#toast");if(!el){el=document.createElement("div");el.id="toast";document.body.appendChild(el);}el.textContent=t;el.classList.remove("on");void el.offsetWidth;el.classList.add("on");}
+function dedCard(id){const k=S.clues[id];return `<div class="dedcard"><div class="dk">∴ Deduzione</div><h3>${k.name}</h3><div class="dt">${k.text}</div></div>`;}
+function dedThumb(){return `<svg viewBox="0 0 300 200"><rect width="300" height="200" fill="#1c140e"/><g transform="rotate(-3 150 100)"><rect x="70" y="20" width="160" height="166" fill="#e9d29a"/><rect x="78" y="28" width="144" height="150" fill="none" stroke="#8a6a2a" stroke-width="2"/><text x="150" y="122" text-anchor="middle" font-size="74" fill="#6a4a14" font-family="IM Fell English, serif">∴</text></g></svg>`;}
+
+/* ---------------- IL SALONE: la scena dell'accusa ---------------- */
+const SALON={
+  clear:{
+    sofia:{ok:["c_alibi_sofia1","c_alibi_sofia3","d_alibi_sophia"],say:"Cominciamo da Sophia Blake. Aveva ogni ragione di odiare Julian.",good:"«Ma quando Julian moriva, era qui con padre Ambrose. E quando moriva Helena, teneva sveglio il dottore.» Sophia chiude gli occhi. Per la prima volta da due anni sembra respirare.",bad:"Sophia ti guarda senza capire. «È questo che ha contro di me?» Nessuno, nella stanza, si sente più tranquillo."},
+    rina:{ok:["c_rina_destra","d_kitty","c_impronte","d_cantina"],say:"Kitty Moore. Ha mentito sulla tisana, e lo sappiamo tutti.",good:"«Ma Kitty usa la destra, e porta gli zoccoli. Ha mentito per qualcun altro.» La governante si copre il viso con il grembiule.",bad:"Kitty abbassa la testa e non dice niente. La sua bugia resta lì, in mezzo alla stanza."},
+    rinaldi:{ok:["d_cantina","c_nota_sola","c_impronte","c_alibi_sofia3"],say:"Il dottor Reid. Ha firmato un certificato falso e ha mentito per trent'anni.",good:"«Ma alle tre era nel salone, e in cantina è scesa una donna. Il dottore ha ucciso con le bugie, non con le mani.» Reid si lascia cadere su una sedia.",bad:"Reid suda, balbetta, non si difende. Sembra colpevole di tutto. Forse è questo il problema."},
+    allegra:{ok:[],say:"Lady Agatha. La padrona di casa.",good:"",bad:"Lady Agatha sorride appena. «Avanti, avvocato. Mi scagioni, se ci riesce.» Non ci riesci. Nessuno, nella stanza, la guarda più come prima."}
+  },
+  accuse:{
+    allegra:{ok:["d_sinistra","d_tisana","d_arma","d_movente","d_prete","c_testimonianza_rina","c_guanti","c_mancina"],good:"Lady Agatha non risponde. Si guarda la mano sinistra, a lungo, come se la vedesse per la prima volta.",bad:"«Questo non prova niente, avvocato. E lei lo sa.» La voce non trema. La tua sì."},
+    rinaldi:{ok:["c_certificato","c_fiala","c_ricatto"],good:"Reid piange. Ammette il certificato, ammette le bugie. Ma non ammette ciò che non ha fatto, e nella stanza qualcuno respira più tranquillo.",bad:"Reid ti fissa, incredulo. Lady Agatha, accanto al fuoco, sistema una piega del vestito."},
+    sofia:{ok:["c_ciondolo","c_diario_sofia","c_regalo_pizzo"],good:"«Sì, lo odiavo», dice Sophia. «Ma l'odio non spezza il collo a nessuno, avvocato. Servono le mani.»",bad:"Sophia ride, una risata secca. Lady Agatha, accanto al fuoco, sistema una piega del vestito."},
+    rina:{ok:["c_figlio","c_tazza","c_registro"],good:"«Ho mentito, signore», sussurra Kitty. «Ma non per me.» Non dice per chi.",bad:"Kitty ti guarda come si guarda un temporale. Lady Agatha, accanto al fuoco, sistema una piega del vestito."}
+  }
+};
+let SL=null;
+function salonScene(onDone){const who=accAns.who,dead=G.flags.rinaldiMorto,order=["sofia","rina","rinaldi","allegra"].filter(id=>id!==who&&!(id==="rinaldi"&&dead));
+  SL={steps:[...order.map(id=>({t:"clear",who:id})),{t:"accuse",who}],i:0,done:{},cleared:{},picked:false,onDone};
+  const el=$("#salon");el.classList.add("on");AU.sfx("drone");renderSalon();}
+function renderSalon(){const st=SL.steps[SL.i],who=accAns.who,ids=["allegra","rinaldi","sofia","rina"];
+  const ring=ids.map((id,i)=>{const c=S.chars[id],dead=id==="rinaldi"&&G.flags.rinaldiMorto,cls=[SL.cleared[id]?"cleared":"",st.who===id?"focus":"",id===who?"acc":"",dead?"gone":""].join(" ");
+    return `<div class="seat s${i} ${cls}"><div class="pf">${portrait(c.p,dead)}</div><div class="nm">${c.short}</div>${SL.cleared[id]?`<div class="stp">Scagionat${id==="rinaldi"?"o":"a"}</div>`:""}</div>`;}).join("");
+  const info=st.t==="clear"?SALON.clear[st.who]:SALON.accuse[st.who];
+  const say=st.t==="clear"?info.say:`«Resta una sola persona.» Ti volti verso ${S.chars[who].name}. «È stato lei.»`;
+  const res=SL.res?`<p class="sres ${SL.res.ok?"ok":"no"}">${SL.res.text}</p>`:"";
+  const ev=G.clues;
+  $("#salon").innerHTML=`<div class="s-top"><div class="eb">Il salone · Domenica, mezzanotte</div><div class="s-prog">${SL.steps.map((_,i)=>`<i class="${i<SL.i?"d":i===SL.i?"c":""}"></i>`).join("")}</div></div>
+  <div class="s-ring"><div class="fire"></div>${ring}</div>
+  <div class="s-text"><p class="ssay">${say}</p>${res}</div>
+  <div class="s-act">${SL.res?`<button class="btn red" onclick="salonNext()">${SL.i<SL.steps.length-1?"Avanti":"Concludi"}</button>`:
+    `<div class="s-lab">${st.t==="clear"?`Presenta la prova che scagiona ${S.chars[st.who].short}`:`Presenta la prova decisiva contro ${S.chars[who].short}`}</div>
+    <div class="strip">${ev.map(id=>`<button class="${S.clues[id].cat==="Deduzione"?"ded":""}" onclick="salonPick('${id}')">${evThumb(id)}<span>${S.clues[id].name}</span></button>`).join("")}</div>
+    <button class="btn ink sm" onclick="salonPick(null)">Non ho una prova</button>`}</div>`;}
+function salonPick(id){const st=SL.steps[SL.i],info=st.t==="clear"?SALON.clear[st.who]:SALON.accuse[st.who],ok=!!id&&info.ok.includes(id);
+  if(st.t==="clear"&&ok)SL.cleared[st.who]=1;
+  SL.res={ok,text:(id?`<span class="pres">Presenti: ${S.clues[id].name}.</span> `:"")+(ok?info.good:info.bad)};
+  SL.score=(SL.score||0)+(ok?1:0);AU.sfx(ok?"stamp":"tick");if(ok&&st.t==="accuse")AU.sfx("gavel");renderSalon();}
+function salonNext(){SL.res=null;SL.i++;AU.sfx("page");if(SL.i<SL.steps.length){renderSalon();return;}
+  const fin=()=>{$("#salon").classList.remove("on");SL.onDone&&SL.onDone();};
+  if(G.ended&&G.ended.kind==="vera")gloveScene(fin);else{shake();lightning();setTimeout(fin,500);}}
+function gloveScene(done){const el=$("#salon");el.innerHTML=`<div class="glove-sc"><svg viewBox="0 0 300 360" class="gl-svg"><defs><linearGradient id="arm" x1="0" x2="1"><stop offset="0" stop-color="#cdb79a"/><stop offset="1" stop-color="#a88f72"/></linearGradient></defs>
+  <path d="M110 360L118 230Q120 200 136 196L136 120Q136 108 146 108Q156 108 156 120L158 180L160 96Q160 84 170 84Q180 84 180 96L182 178L186 104Q186 92 196 92Q206 92 206 104L204 186L214 132Q216 122 226 124Q236 128 232 140L222 230Q216 270 200 290L196 360Z" fill="url(#arm)" stroke="#5a4630" stroke-width="2"/>
+  <g class="gl-off"><path d="M106 360L114 226Q116 196 134 192L132 116Q132 102 146 102Q160 102 160 116L161 176L156 92Q156 78 170 78Q184 78 184 92L186 174L182 100Q182 86 196 86Q210 86 210 100L208 182L212 128Q216 116 228 118Q242 122 236 138L226 232Q220 274 202 294L200 360Z" fill="#0c0a09" stroke="#2a2420" stroke-width="2"/><path d="M118 330Q156 320 196 330" stroke="#2a2420" stroke-width="2" fill="none"/><ellipse cx="226" cy="150" rx="5" ry="9" fill="#5a1010" opacity=".8"/></g></svg>
+  <p class="gl-cap">Lady Agatha si sfila il guanto sinistro, dito per dito, e lo posa sul bracciolo.</p></div>`;
+  AU.sfx("drone");setTimeout(done,5200);}
+
+
 /* ---------------- ALTRI CASI (in preparazione) ---------------- */
 const STORIES=[
   CASE_RAVEN,
@@ -1520,6 +1716,7 @@ const AU={ctx:null,on:true,master:null,
     if(n==="drone")[55,55.7,82.4].forEach(f=>{const o=c.createOscillator();o.type="sawtooth";o.frequency.value=f;const lp=c.createBiquadFilter();lp.type="lowpass";lp.frequency.value=260;o.connect(lp);const g=c.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.06,t+2);g.gain.linearRampToValueAtTime(0,t+7);lp.connect(g);g.connect(this.master);o.start(t);o.stop(t+7.2);});
     if(n==="gavel")[0,.45].forEach(k=>{this.tone(110,t+k,.002,.8,.4,"triangle");this.burst(t+k,.12,"bandpass",800,.6,1.5);});
     if(n==="crackle")this.burst(t,.012+Math.random()*.02,"highpass",1800+Math.random()*2400,.04+Math.random()*.08);
+    if(n==="eureka"){[523.3,659.3,784,1046.5].forEach((f,i)=>this.tone(f,t+i*.09,.01,.12,1.8));this.tone(261.6,t,.02,.18,2.2,"triangle");}
     if(n==="key"){this.burst(t,.02,"highpass",2600,.18);this.tone(1900,t,.001,.03,.03,"square");}
     if(n==="tock"){this.tone(820,t,.001,.25,.09,"triangle");this.burst(t,.04,"bandpass",2400,.25,3);}
     if(n==="hooves")for(let i=0;i<10;i++){const k=t+i*.27+(i%2)*.05;this.burst(k,.05,"bandpass",900+Math.random()*500,.32,4);this.tone(320+Math.random()*60,k,.002,.12,.06,"triangle");}
@@ -1596,7 +1793,7 @@ function howTo(){note("Come si gioca",`<p>Ogni caso è diviso in <b>atti</b>. In
 <p>La <b>Bacheca</b> lega gli indizi alle teorie con il filo rosso. Alcune teorie sono false piste perfettamente coerenti.</p>
 <p>Puoi <b>accusare</b> in ogni momento, una volta sola. Ci sono finali sbagliati, finali parziali e una sola verità.</p>
 <p class="small">Su iPhone, per lo schermo intero aggiungi la pagina alla schermata Home (Condividi → Aggiungi a Home).</p>`);}
-function toMenu(){closeTalk();closeOv();$("#plate").classList.remove("on");$("#chap").classList.remove("on");showTitle();}
+function toMenu(){closeTalk();closeOv();$("#salon").classList.remove("on");$("#plate").classList.remove("on");$("#chap").classList.remove("on");showTitle();}
 function newGame(id,confirmFirst){
   if(confirmFirst){note("Ricominciare?",`<p>Il fascicolo verrà riaperto da capo e i progressi attuali andranno persi.</p><div class="row"><button class="btn red" onclick="closeOv();newGame('${id}')">Ricomincia</button><button class="btn ink" onclick="closeOv()">Annulla</button></div>`,true);return;}
   S=STORIES.find(s=>s.id===id);
@@ -1735,14 +1932,14 @@ function endAct(){closeTalk();
 
 /* ---------------- REPERTI ---------------- */
 function addClue(id){if(!id||has(id))return false;G.clues.push(id);G.newClues.push(id);return true;}
-function clueArt(cid){const e=EV[cid]||{};if(e.doc)return docHTML(e);if(e.t){const c=S.chars[e.t];return `<div class="testi"><div class="pf">${portrait(c.p,!alive(e.t))}</div><div class="tq">${S.clues[cid].text}</div></div>`;}return `<div class="art">${evArt(cid)}</div>`;}
+function clueArt(cid){if(S.clues[cid]&&S.clues[cid].cat==="Deduzione")return dedCard(cid);const e=EV[cid]||{};if(e.doc)return docHTML(e);if(e.t){const c=S.chars[e.t];return `<div class="testi"><div class="pf">${portrait(c.p,!alive(e.t))}</div><div class="tq">${S.clues[cid].text}</div></div>`;}return `<div class="art">${evArt(cid)}</div>`;}
 function examine(oid){const R=S.rooms[G.room],o=R.objects.find(x=>x.id===oid);if(!o)return;
   if(o.req&&!hasItem(o.req)){AU.sfx("door");note(o.label,`<p>${o.reqMsg}</p>`,true);return;}
   G.seen[G.room+"."+o.id]=1;let nw=null,item=null;if(o.clue&&addClue(o.clue))nw=o.clue;if(o.item&&!hasItem(o.item)){G.items.push(o.item);item=o.item;}
   save();const cid=o.clue;let art="";if(cid)art=clueArt(cid);else if(item)art=`<div class="art">${itemArt(item)}</div>`;
   if(o.item&&cid)art+=`<div class="art small">${itemArt(o.item)}</div>`;
   showPlate(`${cid?`Reperto n. ${G.clues.indexOf(cid)+1} · ${S.clues[cid].cat}`:item?"Oggetto":"Osservazione"}`,o.label,art,`<div class="txt">${val(o.text)}</div>${item?`<p class="got">Hai preso: ${S.items[item]}</p>`:""}`,nw);render();}
-function viewClue(id){const k=S.clues[id];showPlate(`Reperto n. ${G.clues.indexOf(id)+1} · ${k.cat}`,k.name,clueArt(id),`<div class="txt">${k.text}</div>`,null);}
+function viewClue(id){const k=S.clues[id],dd=k.cat==="Deduzione";showPlate(dd?"Deduzione":`Reperto n. ${G.clues.indexOf(id)+1} · ${k.cat}`,k.name,clueArt(id),dd?"":`<div class="txt">${k.text}</div>`,null);}
 function viewItem(it){showPlate("Oggetto",S.items[it],`<div class="art">${itemArt(it)}</div>`,"",null);}
 function showPlate(tag,title,art,body,nw){$("#plate").innerHTML=`<div class="pl" id="pl"><div class="tag">${tag}</div><h2>${title}</h2>${art}${body}${nw?`<div class="stamp">Agli atti</div>`:""}<div class="acts"><button class="btn ink" onclick="closePlate(${nw?`'${nw}'`:""})">Riponi</button></div></div>`;
   $("#plate").classList.add("on");$("#plate").scrollTop=0;AU.sfx("page");if(nw){setTimeout(()=>AU.sfx("stamp"),420);setTimeout(()=>AU.sfx("clue"),760);}}
@@ -1785,11 +1982,12 @@ function showClue(id){const c=S.chars[talkWith];let r=c.react&&c.react[id],text,
   pickOpen=false;AU.sfx("page");pushLog("Gli mostri: "+S.clues[id].name,text,!!r,un);}
 
 /* ---------------- TACCUINO ---------------- */
-function notesView(){let h=`<div class="journal"><div class="ribbons">${[["indizi","Reperti ("+G.clues.length+")"],["persone","Persone"],["oggetti","Oggetti"]].map(t=>`<button class="${noteTab===t[0]?"on":""}" onclick="noteTab='${t[0]}';AU.sfx('page');render()">${t[1]}</button>`).join("")}</div><div class="pg">`;
+function notesView(){let h=`<div class="journal"><div class="ribbons">${[["indizi","Reperti ("+G.clues.length+")"],["deduz","Deduzioni"+(dedOpen()?" ✦":"")],["persone","Persone"],["oggetti","Oggetti"]].map(t=>`<button class="${noteTab===t[0]?"on":""}" onclick="noteTab='${t[0]}';AU.sfx('page');render()">${t[1]}</button>`).join("")}</div><div class="pg">`;
   if(noteTab==="indizi"){if(!G.clues.length)h+=`<p class="hand">Nessun reperto, per ora. Esamina le stanze, interroga i presenti.</p>`;
-    const cats=[["Reperto","Reperti"],["Documento","Documenti"],["Testimonianza","Testimonianze"],["Osservazione","Osservazioni"]];
+    const cats=[["Deduzione","Deduzioni"],["Reperto","Reperti"],["Documento","Documenti"],["Testimonianza","Testimonianze"],["Osservazione","Osservazioni"]];
     cats.forEach(([cat,lab])=>{const list=G.clues.filter(id=>S.clues[id].cat===cat);if(!list.length)return;h+=`<div class="jsect">${lab}</div>`;
       list.slice().reverse().forEach(id=>{const k=S.clues[id];h+=`<div class="entry${G.newClues.includes(id)?" new":""}" onclick="viewClue('${id}')"><div class="th">${evThumb(id)}</div><div><h4>${k.name}</h4><p>${k.text}</p></div></div>`;});});}
+  if(noteTab==="deduz")h+=dedView();
   if(noteTab==="persone")Object.keys(S.chars).forEach(id=>{const c=S.chars[id],al=alive(id),where=al&&c.loc&&c.loc[G.act];
     h+=`<div class="dossier${al?"":" dead"}"><div class="pf">${portrait(c.p,!al)}</div><div><h4>${c.name}</h4><div class="role">${c.role}, ${c.age} anni</div><p>${c.bio}</p><div class="st${al?"":" d"}">${al?"In vita · "+(where?S.rooms[where].name:"—"):"Deceduto"}</div>${where&&where!==G.room?`<button class="btn ink sm" onclick="goRoom('${where}')">Raggiungi · ¼ d'ora</button>`:""}</div></div>`;});
   if(noteTab==="oggetti")h+=G.items.length?G.items.map(i=>`<div class="entry" onclick="viewItem('${i}')"><div class="th">${itemArt(i)}</div><div><h4>${S.items[i]}</h4></div></div>`).join(""):`<p class="hand">Non porti niente con te, a parte la borsa dell'avvocato.</p>`;
@@ -1825,7 +2023,7 @@ function accuseView(){
   return h+`<button class="btn red big" ${ready?"":"disabled"} onclick="confirmAccuse()">Pronuncia l'accusa</button></div>`;}
 function pick(q,v){accAns[q]=v;AU.sfx("page");const y=$("#main").scrollTop;render();$("#main").scrollTop=y;}
 function confirmAccuse(){note("Ne sei sicuro?",`<p>Stai per accusare formalmente <b>${S.chars[accAns.who].name}</b>, davanti a tutti. Non si torna indietro.</p><div class="row"><button class="btn red" onclick="closeOv();doAccuse()">Accuso</button><button class="btn ink" onclick="closeOv()">Aspetta</button></div>`,true);}
-function doAccuse(){AU.sfx("gavel");shake();setTimeout(()=>lightning(),300);const e=S.ending(accAns,G);G.ended=e;G.answers={...accAns};save();setDone(S.id,e.kind);render();setTimeout(showEnding,1100);}
+function doAccuse(){AU.sfx("gavel");const e=S.ending(accAns,G);G.ended=e;G.answers={...accAns};save();setDone(S.id,e.kind);render();setTimeout(()=>salonScene(showEnding),500);}
 function endButtons(){return `${G.ended.kind!=="vera"?`<button class="btn" id="rv">Rivela la verità</button>`:""}<button class="btn red" id="ng">Rigioca il caso</button><button class="btn" id="mn">Menu principale</button>`;}
 function bindEnd(){const rv=$("#rv");if(rv)rv.onclick=()=>revealTruth();$("#ng").onclick=()=>{$("#chap").classList.remove("on");newGame(S.id);};$("#mn").onclick=()=>{$("#chap").classList.remove("on");toMenu();};}
 function showEnding(){const e=G.ended;chapter({eb:e.eyebrow,title:e.title,paras:e.paras,mood:"end",end:true,buttons:endButtons()});bindEnd();}
