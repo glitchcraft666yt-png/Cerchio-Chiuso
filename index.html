@@ -448,6 +448,17 @@ body.filming #snow{z-index:52}
 .mdl{width:34px;flex:0 0 34px}
 .rp-med{margin-top:12px}.rp-med .mitem{background:rgba(255,255,255,.35);border-color:#c9a45c;margin-bottom:6px}.rp-med .mitem span{color:#5a4428}
 .rp-mk{font-family:'IM Fell English SC',serif;letter-spacing:.2em;font-size:.78rem;color:var(--blood);text-align:center;margin-bottom:6px}.rp-mc{text-align:center;font-style:italic;color:#6a5236;font-size:.88rem}
+/* caso II */
+.calm{margin-top:8px;display:flex;align-items:center;gap:8px;font-family:'IM Fell English SC',serif;letter-spacing:.1em;font-size:.72rem;color:var(--paper2)}
+.calm i{display:block;width:110px;height:7px;background:rgba(255,255,255,.12);border:1px solid rgba(201,164,92,.5)}.calm b{display:block;height:100%;background:linear-gradient(90deg,#8a1414,#c9a45c);transition:width .8s}
+.topics button.last{background-color:#2b1d10;color:var(--gold2);font-style:italic}
+.ft-sub{font-style:italic;color:var(--paper2);font-size:clamp(1rem,3vw,1.25rem);margin-top:14px;opacity:0;animation:rise 1.6s 2s forwards;line-height:1.4}
+.fchoice{position:absolute;left:0;right:0;margin:0 auto;bottom:calc(11vh + 6px + var(--sb));width:min(560px,92vw);z-index:8;background:rgba(10,7,5,.88);border:1px solid rgba(201,164,92,.6);padding:14px 14px 12px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.8);animation:rise .6s both}
+.fchoice p{font-family:'IM Fell English',serif;font-size:1.2rem;color:#f1e6cc;margin-bottom:10px}
+.fchoice button{display:block;width:100%;margin:6px 0;padding:10px 12px;font-family:'IM Fell English',serif;font-size:1.05rem;color:#e9dcbc;background:rgba(255,240,210,.06);border:1px solid rgba(201,164,92,.35);text-align:left}
+.fchoice button:hover{background:rgba(201,164,92,.16)}.fchoice button.ok{border-color:#c9a45c;background:rgba(201,164,92,.25)}.fchoice button.no{opacity:.4;text-decoration:line-through}
+.fchoice .fr{min-height:1.2em;margin-top:8px;font-style:italic;font-size:.98rem}.fchoice .fr.ok{color:#e9d29a}.fchoice .fr.no{color:#d8a090}
+.mcase{max-width:720px;width:100%;margin:0 auto 22px}.mcase h3{font-family:'IM Fell English',serif;font-weight:400;font-size:1.3rem;color:var(--gold2);margin-bottom:10px}
 /* finestre */
 .ov{position:fixed;inset:0;z-index:45;background:rgba(4,3,2,.86);display:none;align-items:center;justify-content:center;padding:16px}
 .ov.on{display:flex}
@@ -500,6 +511,11 @@ function shade(hex,f){const n=parseInt(hex.slice(1),16);const m=v=>Math.max(0,Ma
 
 function damask(id,base,mot){return `<pattern id="${id}" width="44" height="56" patternUnits="userSpaceOnUse"><rect width="44" height="56" fill="${base}"/><path d="M22 6C28 16 34 18 38 28C34 38 28 40 22 50C16 40 10 38 6 28C10 18 16 16 22 6Z" fill="${mot}"/><circle cx="22" cy="28" r="4" fill="${base}"/><circle cx="0" cy="0" r="5" fill="${mot}"/><circle cx="44" cy="0" r="5" fill="${mot}"/><circle cx="0" cy="56" r="5" fill="${mot}"/><circle cx="44" cy="56" r="5" fill="${mot}"/></pattern>`;}
 
+
+const TRAIN_DEFS=`<pattern id="runner" width="30" height="16" patternUnits="userSpaceOnUse"><rect width="30" height="16" fill="#5a1414"/><path d="M0 8H30" stroke="#7a2a1a" stroke-width="2"/><circle cx="15" cy="8" r="3" fill="#c9a45c" opacity=".4"/></pattern>
+<pattern id="teak" width="60" height="120" patternUnits="userSpaceOnUse"><rect width="60" height="120" fill="#4a2410"/><rect x="5" y="6" width="50" height="108" fill="#5a2e14" stroke="#2a120a" stroke-width="2"/><path d="M5 114L55 114L55 6" stroke="#7a4420" stroke-width="1.2" fill="none"/><path d="M14 20q8 40 0 80M40 20q-6 40 4 80" stroke="#3a1a0a" opacity=".35" fill="none"/></pattern>
+<pattern id="iron" width="50" height="50" patternUnits="userSpaceOnUse"><rect width="50" height="50" fill="#2a2828"/><circle cx="4" cy="4" r="2" fill="#4a4646"/><circle cx="46" cy="46" r="2" fill="#4a4646"/><path d="M0 .5H50M.5 0V50" stroke="#1a1818" stroke-width="2"/></pattern>
+<pattern id="tartan" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#1f3a2e"/><rect y="14" width="40" height="8" fill="#1a2a4a" opacity=".8"/><rect x="14" width="8" height="40" fill="#1a2a4a" opacity=".8"/><path d="M0 18H40M18 0V40" stroke="#8a1414" stroke-width="1.4"/></pattern>`;
 const DEFS=`<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(38)"><line x1="0" y1="0" x2="0" y2="5" stroke="#000" stroke-width="1.1"/></pattern>
 <pattern id="hatchX" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-40)"><line x1="0" y1="0" x2="0" y2="7" stroke="#000" stroke-width="1"/></pattern>
@@ -527,6 +543,7 @@ ${damask("damR","#3a1715","#4f201c")}${damask("damG","#16241d","#213428")}${dama
 <pattern id="eH1" width="2.4" height="2.4" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><line x1="0" y1="0" x2="0" y2="2.4" stroke="#2b1d10" stroke-width=".85"/></pattern>
 <pattern id="eH2" width="2.4" height="2.4" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><line x1="0" y1="0" x2="0" y2="2.4" stroke="#2b1d10" stroke-width=".85"/></pattern>
 <pattern id="eHh" width="3" height="3" patternUnits="userSpaceOnUse"><line x1="0" y1="1.5" x2="3" y2="1.5" stroke="#2b1d10" stroke-width=".5"/></pattern>
+${TRAIN_DEFS}
 <radialGradient id="gBlood"><stop offset="0" stop-color="#4a0606"/><stop offset=".7" stop-color="#6e0c0c"/><stop offset="1" stop-color="#3a0505"/></radialGradient>
 </defs></svg>`;
 
@@ -690,6 +707,8 @@ function portrait(p,dead,attrs){
   if(e.age>1)feat+=L(`M40 ${by-4}Q44 ${by-5.4} 48 ${by-4.4}M52 ${by-4.4}Q56 ${by-5.4} 60 ${by-4}`,.45);
   if(e.dimple)feat+=L(`M50 ${chin-3.2}v1.8`,.8);
   if(e.beard==="tash")feat+=`<path d="M44 ${my-2.4}Q50 ${my-5} 56 ${my-2.4}Q50 ${my-1.2} 44 ${my-2.4}Z" fill="${INK}"/>`;
+  if(e.beard==="walrus")feat+=`<path d="M41 ${my-1}Q44 ${my-7} 50 ${my-4.5}Q56 ${my-7} 59 ${my-1}Q55 ${my+1.5} 50 ${my-1.5}Q45 ${my+1.5} 41 ${my-1}Z" fill="#6a5640"/><path d="M41 ${my-1}Q44 ${my-7} 50 ${my-4.5}Q56 ${my-7} 59 ${my-1}Q55 ${my+1.5} 50 ${my-1.5}Q45 ${my+1.5} 41 ${my-1}Z" fill="${H1}"/>`;
+  if(e.beard==="full")feat+=`<path d="M${50-w} 56Q${50-w} 74 ${50-w*.5} ${chin-2}Q50 ${chin+8} ${50+w*.5} ${chin-2}Q${50+w} 74 ${50+w} 56Q${50+w*.6} 64 ${50+w*.4} ${my+1}Q50 ${my+4} ${50-w*.4} ${my+1}Q${50-w*.6} 64 ${50-w} 56Z" fill="#5a4a3a"/><path d="M${50-w} 56Q${50-w} 74 ${50-w*.5} ${chin-2}Q50 ${chin+8} ${50+w*.5} ${chin-2}Q${50+w} 74 ${50+w} 56Q${50+w*.6} 64 ${50+w*.4} ${my+1}Q50 ${my+4} ${50-w*.4} ${my+1}Q${50-w*.6} 64 ${50-w} 56Z" fill="${H2}"/><path d="M43 ${my-2}Q50 ${my-5.5} 57 ${my-2}Q50 ${my-.6} 43 ${my-2}Z" fill="#4a3a2a"/>`;
   if(e.beard==="chops")feat+=`<path d="M${50-w} 54Q${50-w-1} 70 ${50-w*.5} 74L${50-w*.62} 60ZM${50+w} 54Q${50+w+1} 70 ${50+w*.5} 74L${50+w*.62} 60Z" fill="#9a8c78"/><path d="M${50-w} 54Q${50-w-1} 70 ${50-w*.5} 74L${50-w*.62} 60ZM${50+w} 54Q${50+w+1} 70 ${50+w*.5} 74L${50+w*.62} 60Z" fill="${H1}"/><path d="M43 ${my-2}Q50 ${my-5.5} 57 ${my-2}Q50 ${my-.6} 43 ${my-2}Z" fill="#9a8c78"/><path d="M43 ${my-2}Q50 ${my-5.5} 57 ${my-2}Q50 ${my-.6} 43 ${my-2}Z" fill="${H1}"/>`;
   // capelli davanti
   const top=`M${50-w-1} 52Q${50-w-3} ${cy-3} 50 ${cy-4}Q${50+w+3} ${cy-3} ${50+w+1} 52`;
@@ -698,12 +717,16 @@ function portrait(p,dead,attrs){
   if(e.hair==="grey")hair=`<path d="M${50-w-1} 54Q${50-w-2} 38 ${50-w*.5} ${cy+1}L${50-w*.4} 46ZM${50+w+1} 54Q${50+w+2} 38 ${50+w*.5} ${cy+1}L${50+w*.4} 46Z" fill="#b8ac98"/>`+L(`M${50-w-1} 54Q${50-w-2} 38 ${50-w*.5} ${cy+1}M${50+w+1} 54Q${50+w+2} 38 ${50+w*.5} ${cy+1}`,.7)+L(`M44 ${cy+1}Q50 ${cy-1} 56 ${cy+1}`,.4);
   if(e.hair==="bald")hair=`<path d="M${50-w-1} 56Q${50-w-2} 46 ${50-w+2} 42L${50-w+3} 56ZM${50+w+1} 56Q${50+w+2} 46 ${50+w-2} 42L${50+w-3} 56Z" fill="#cfc4b0"/>`+L(`M${50-w-1} 56Q${50-w-2} 46 ${50-w+2} 42M${50+w+1} 56Q${50+w+2} 46 ${50+w-2} 42`,.6)+L(`M42 ${cy+4}Q46 ${cy+2} 50 ${cy+2}`,.6);
   if(e.hair==="veil")hair=`<path d="${top}Q${50+w-3} 38 50 ${cy+5}Q${50-w+3} 38 ${50-w-1} 52Z" fill="#3a2c1e"/><path d="${top}Q${50+w-3} 38 50 ${cy+5}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${H2}"/><path d="M${50-w-5} 44Q50 ${cy-12} ${50+w+5} 44" stroke="${INK}" stroke-width="1.4" stroke-dasharray=".8 1.4" fill="none"/>`;
+  if(e.hair==="silver")hair=`<path d="${top}Q${50+w-2} 40 52 ${cy+5}Q50 ${cy+8} 47 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="#d8d2c4"/><path d="${top}Q${50+w-2} 40 52 ${cy+5}Q50 ${cy+8} 47 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${H1}" opacity=".45"/>`+L(`M${50-w-1} 52Q${50-w-3} ${cy-3} 50 ${cy-4}Q${50+w+3} ${cy-3} ${50+w+1} 52`,.9)+L(`M42 ${cy+1}Q50 ${cy-2} 60 ${cy+3}`,.5);
+  if(e.hair==="rcap")hair=`<path d="M${50-w-2} ${cy+8}Q${50-w} ${cy-8} 50 ${cy-9}Q${50+w} ${cy-8} ${50+w+2} ${cy+8}Z" fill="#2a2a3a"/><path d="M${50-w-2} ${cy+8}Q${50-w} ${cy-8} 50 ${cy-9}Q${50+w} ${cy-8} ${50+w+2} ${cy+8}Z" fill="${H2}"/><path d="M${50-w-4} ${cy+8}Q50 ${cy+14} ${50+w+6} ${cy+8}L${50+w+2} ${cy+12}Q50 ${cy+18} ${50-w-2} ${cy+12}Z" fill="#14141c"/><rect x="46" y="${cy-4}" width="8" height="6" fill="#c9a45c" stroke="${INK}" stroke-width=".5"/>`+L(`M${50-w-2} ${cy+8}Q${50-w} ${cy-8} 50 ${cy-9}Q${50+w} ${cy-8} ${50+w+2} ${cy+8}`,.9);
   if(e.hair==="cap")hair=`<path d="${top}Q${50+w-3} 38 50 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="#3a2c1e"/><path d="${top}Q${50+w-3} 38 50 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${H1}"/><path d="M${50-w-3} ${cy+2}Q50 ${cy-12} ${50+w+3} ${cy+2}Q50 ${cy-4} ${50-w-3} ${cy+2}Z" fill="#fff"/>`+L(`M${50-w-3} ${cy+2}Q50 ${cy-12} ${50+w+3} ${cy+2}Q50 ${cy-4} ${50-w-3} ${cy+2}Z`,.8)+`<path d="M${50-w-3} ${cy+2}Q50 ${cy-15} ${50+w+3} ${cy+2}" stroke="${INK}" stroke-width=".7" stroke-dasharray="1 1.2" fill="none"/>`;
   // accessori
   if(e.acc==="pearls")acc=`<path d="M38 82Q50 92 62 82" stroke="#fff" stroke-width="2.6" stroke-dasharray=".1 3.2" stroke-linecap="round" fill="none"/><path d="M38 82Q50 92 62 82" stroke="${INK}" stroke-width=".4" fill="none"/><ellipse cx="50" cy="100" rx="4" ry="5" fill="${PAPER}" stroke="${INK}" stroke-width=".8"/><path d="M48.6 102q1.4 -4 2.8 0" stroke="${INK}" stroke-width=".6" fill="none"/>`;
   if(e.acc==="specs")acc=`<g fill="none" stroke="${INK}" stroke-width=".8"><circle cx="43.5" cy="53" r="4.6"/><circle cx="56.5" cy="53" r="4.6"/><path d="M48.1 52.6Q50 51 51.9 52.6M38.9 52L${50-w} 50.5M61.1 52L${50+w} 50.5"/></g>`;
   if(e.acc==="pincenez")acc=`<g fill="none" stroke="${INK}" stroke-width=".7"><ellipse cx="43.5" cy="53.4" rx="4" ry="3.4"/><ellipse cx="56.5" cy="53.4" rx="4" ry="3.4"/><path d="M47.5 53Q50 51.6 52.5 53M39.5 54Q34 62 36 80"/></g><ellipse cx="50" cy="90" rx="3" ry="2.4" fill="#c9a45c" stroke="${INK}" stroke-width=".6"/>`;
   if(e.acc==="locket")acc=`<path d="M41 86L50 98L59 86" fill="none" stroke="${INK}" stroke-width=".6" stroke-dasharray="1 1"/><ellipse cx="50" cy="101" rx="3.6" ry="4.4" fill="#c9a45c" stroke="${INK}" stroke-width=".7"/>`;
+  if(e.acc==="monocle")acc=`<circle cx="56.5" cy="53" r="4.8" fill="none" stroke="${INK}" stroke-width=".9"/><path d="M61 55Q66 70 62 88" stroke="${INK}" stroke-width=".5" fill="none"/>`;
+  if(e.acc==="ribbon")acc=`<path d="M57 92q-4 -4 -7 -1q3 3 7 1zM57 92q4 -4 7 -1q-3 3 -7 1z" fill="#3a6aaa" stroke="${INK}" stroke-width=".4"/><path d="M56 93l-2 8M58 93l2 8" stroke="#2a5a9a" stroke-width="1.6"/>`;
   if(e.acc==="cravat")acc=`<path d="M46 90Q50 94 54 90L53 102Q50 104 47 102Z" fill="#6b1515"/>`+L("M46 90Q50 94 54 90L53 102Q50 104 47 102Z",.6)+`<circle cx="50" cy="96" r=".9" fill="#e9d29a"/>`;
   return `<svg ${attrs||""} viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="${id}c"><ellipse cx="50" cy="60" rx="45" ry="55"/></clipPath></defs>
 <g clip-path="url(#${id}c)"${dead?` style="filter:grayscale(1) brightness(.92)"`:""}><rect width="100" height="120" fill="${PAPER}"/><rect width="100" height="120" fill="url(#eHh)" opacity=".75"/><ellipse cx="50" cy="56" rx="30" ry="36" fill="${PAPER}" opacity=".85"/>
@@ -764,6 +787,84 @@ const ROOMART={
     props:a=>[["barrels",200,332,1],["winerack",622,300,1],["lantern",300,40,1],...(a>=2?[["writing",420,166,1]]:[]),...(a===2?[["bodySit",430,322,1.05]]:a===3?[["bodySit",430,322,1.05,{sheet:true}]]:[]),["coal",560,430,1.1],["barrels",690,450,.8],...(a>=2?[["steps",300,422,1.2],["razorglint",560,324,1]]:[])],
     hot:{botti:[200,250],parete:[420,150],tasche:[426,286],rasoio:[556,320],pavimento:[340,418]},slots:[[270,448],[520,448]]}
 };
+
+/* ---------------- CASO II: SCENE DEL TRENO ---------------- */
+/* finestrino: di notte nero e neve che vola; di giorno il bianco accecante della brughiera sepolta */
+P.twin=(o={})=>{const c=uid("tw"),w=o.w||120,h=o.h||90,night=o.night;const r=rng(o.seed||3);let fl="";for(let i=0;i<22;i++)fl+=`<circle cx="${(-w/2+r()*w).toFixed(0)}" cy="${(-h+r()*h).toFixed(0)}" r="${(.8+r()*1.8).toFixed(1)}" fill="#fff" opacity="${(.5+r()*.5).toFixed(2)}"/>`;
+  return `<defs><clipPath id="${c}"><rect x="${-w/2}" y="${-h}" width="${w}" height="${h}" rx="8"/></clipPath></defs>
+<rect x="${-w/2-9}" y="${-h-9}" width="${w+18}" height="${h+18}" rx="12" fill="#2a170c"/><rect x="${-w/2-9}" y="${-h-9}" width="${w+18}" height="${h+18}" rx="12" fill="none" stroke="#c9a45c" stroke-width="2" opacity=".6"/>
+<g clip-path="url(#${c})"><rect x="${-w/2}" y="${-h}" width="${w}" height="${h}" class="winsky" fill="${night?"#0c1420":"#c9d3dc"}"/>
+${night?`<path d="M${-w/2} ${-h*.25}Q0 ${-h*.4} ${w/2} ${-h*.28}V0H${-w/2}Z" fill="#3a4a5e"/>`:`<path d="M${-w/2} ${-h*.45}Q${-w*.2} ${-h*.62} 0 ${-h*.5}T${w/2} ${-h*.55}V0H${-w/2}Z" fill="#eef2f5"/><path d="M${-w/2} ${-h*.45}Q${-w*.2} ${-h*.62} 0 ${-h*.5}" stroke="#aab6c2" fill="none"/><rect x="${-w/2}" y="${-h*.3}" width="${w}" height="${h*.3}" fill="#f7f9fb"/>`}
+${fl}<path d="M${-w/2} ${-h*.12}L${w/2} ${-h*.2}" stroke="#fff" stroke-width="${h*.12}" opacity=".5"/></g>
+<rect x="${-w/2}" y="${-h}" width="${w}" height="${h*.22}" fill="#6a1a14"/><path d="M${-w/2} ${-h*.78}h${w}" stroke="#3a0a08" stroke-width="2"/>
+<rect x="${-w/2-12}" y="2" width="${w+24}" height="7" rx="3" fill="#4a2e1c"/>`;};
+/* cuccetta-divano lungo la parete */
+P.berth=(o={})=>{const c=o.c||"#3a2a5a",w=o.w||300;return `<rect x="${-w/2}" y="-112" width="${w}" height="70" rx="10" fill="${shade(c,-.25)}"/>${[0,1,2,3].map(i=>`<path d="M${-w/2+w/8+i*w/4} -108v62" stroke="${shade(c,-.45)}" stroke-width="2"/>`).join("")}
+<rect x="${-w/2-6}" y="-48" width="${w+12}" height="40" rx="8" fill="${c}"/><rect x="${-w/2-6}" y="-48" width="${w+12}" height="9" rx="4" fill="${shade(c,.15)}"/><rect x="${-w/2-10}" y="-10" width="${w+20}" height="10" fill="#2a190e"/>
+${o.bed?`<path d="M${-w/2} -48Q0 -70 ${w/2} -50L${w/2+4} -36Q0 -44 ${-w/2-4} -34Z" fill="#e8e2d4"/><rect x="${w/2-70}" y="-70" width="62" height="24" rx="10" fill="#f3efe6"/>`:""}
+${o.corpse?`<path d="M${-w/2+10} -50Q${-w/2+40} -78 ${-w/4} -74Q0 -82 ${w/6} -76Q${w/2-60} -86 ${w/2-12} -68L${w/2-8} -50Z" fill="#e8e2d4"/><path d="M${-w/4} -74Q0 -64 ${w/6} -76" stroke="#bfb6a3" fill="none"/><path d="M${-w/2+14} -52q10 -20 24 -18q6 8 -4 18z" fill="#d8b896"/><path d="M${-w/2+18} -60q4 -3 8 0" stroke="#3a2a1a"/>`:""}`;};
+/* portapacchi d'ottone con valigia */
+P.rack=(o={})=>`<path d="M-140 0H140M-140 -6H140" stroke="#c9a45c" stroke-width="3"/>${Array.from({length:15},(_,i)=>`<path d="M${-140+i*20} -6V8" stroke="#c9a45c" stroke-width="1.4"/>`).join("")}<path d="M-140 0V30M140 0V30" stroke="#a88449" stroke-width="3"/>${o.bags!==false?`<g transform="translate(-60 -6) scale(.8)">${P.suitcase()}</g><g transform="translate(56 -6) scale(.55)">${P.bag()}</g>`:""}`;
+/* lavabo pieghevole con specchio */
+P.basin=(o={})=>`<rect x="-46" y="-210" width="92" height="64" rx="6" fill="#c9ccd0" stroke="#a88449" stroke-width="4"/><rect x="-40" y="-204" width="80" height="52" fill="#8a9aa8" opacity=".55"/><path d="M-30 -196l40 40" stroke="#fff" opacity=".35" stroke-width="5"/>
+<rect x="-56" y="-120" width="112" height="120" fill="#4a2a16"/><rect x="-50" y="-112" width="100" height="104" fill="none" stroke="#2a170c" stroke-width="3"/><path d="M-62 -132H62L54 -116H-54Z" fill="#a88449"/><ellipse cx="0" cy="-126" rx="40" ry="6" fill="#efe9dc"/><ellipse cx="0" cy="-126" rx="30" ry="3.5" fill="#c8d4dc"/><path d="M0 -150v14" stroke="#c9a45c" stroke-width="5"/>`;
+/* macchina per scrivere portatile */
+P.typer=()=>`<path d="M-34 0L34 0L28 -16L-28 -16Z" fill="#141414"/><rect x="-30" y="-26" width="60" height="12" rx="3" fill="#1c1c1c"/><rect x="-36" y="-34" width="72" height="8" rx="4" fill="#2a2a2a"/><circle cx="-38" cy="-30" r="5" fill="#2a2a2a"/><rect x="-18" y="-58" width="36" height="26" fill="#f6f1e4"/><path d="M-12 -52h22M-12 -46h18M-12 -40h20" stroke="#555" stroke-width="1.2"/>${Array.from({length:9},(_,i)=>`<circle cx="${-24+i*6}" cy="-8" r="2" fill="#d8d0c0"/>`).join("")}`;
+/* tavolino ribaltabile con vassoio, tazze, bicchiere */
+P.ftable=(o={})=>`<rect x="-80" y="-74" width="160" height="10" fill="#5a3a1c"/><path d="M-70 -64L-40 0M70 -64L40 0" stroke="#3a2414" stroke-width="5"/>
+${o.type?`<g transform="translate(-36 -74)">${P.typer()}</g>`:""}
+${o.cups?`<rect x="10" y="-82" width="64" height="8" rx="3" fill="#c9ccd0"/><g fill="#fbf8f0" stroke="#bfb6a3"><path d="M18 -96h18l-3 14h-12z"/><path d="M44 -96h18l-3 14h-12z"/></g><path d="M44 -96h18" stroke="#c9a45c" stroke-width="2"/>`:""}
+${o.glass?`<path d="M74 -100h12l-2 26h-8z" fill="#d6e2e8" opacity=".5" stroke="#e8f0f3"/><circle cx="80" cy="-80" r="2.4" fill="#e8d060"/>`:""}
+${o.bottle?`<rect x="-80" y="-98" width="10" height="24" rx="2" fill="#5a3a14" opacity=".85"/><rect x="-78" y="-104" width="6" height="6" fill="#2a190e"/>`:""}`;
+/* lampada da tavolo */
+P.lampT=()=>`<ellipse cx="0" cy="-70" rx="90" ry="60" fill="url(#gWarm)" opacity=".8"/><path d="M-4 0V-50M-14 0H14" stroke="#c9a45c" stroke-width="4"/><path d="M-22 -50L22 -50L14 -74L-14 -74Z" fill="#8a2a1a"/><path d="M-22 -50L22 -50" stroke="#c9a45c" stroke-width="2"/>`;
+/* porta di scompartimento */
+P.cdoor=(o={})=>`<rect x="-46" y="-220" width="92" height="220" fill="#3a2212"/><rect x="-38" y="-210" width="76" height="90" fill="#2a170c"/><rect x="-32" y="-204" width="64" height="78" fill="#8a7a62" opacity=".45"/><rect x="-38" y="-110" width="76" height="100" fill="#4a2e1c" stroke="#2a170c" stroke-width="3"/><circle cx="30" cy="-106" r="5" fill="#c9a45c"/><rect x="-14" y="-238" width="28" height="18" rx="3" fill="#efe4c8" stroke="#a88449"/><text x="0" y="-224" text-anchor="middle" font-family="IM Fell English SC,serif" font-size="14" fill="#2b1d10">${o.n||""}</text>${o.glass?`<path d="M-8 0h16l-2 -12h-12z" fill="#d6e2e8" opacity=".6"/>`:""}`;
+/* stufetta del conduttore */
+P.tstove=(o={})=>`<ellipse cx="0" cy="-50" rx="110" ry="60" fill="url(#gWarm)" opacity="${o.cold?.15:.55}"/><rect x="-40" y="-90" width="80" height="90" rx="6" fill="#1d1d1f"/><rect x="-44" y="-96" width="88" height="8" fill="#2c2c2e"/><rect x="-26" y="-70" width="52" height="34" rx="3" fill="#111" stroke="#3a3a3c"/><rect x="-20" y="-46" width="40" height="6" fill="${o.cold?"#3a2a20":"#ff7a2a"}" opacity=".8"/><rect x="-8" y="-300" width="16" height="206" fill="#1d1d1f"/><path d="M-30 -118q0 -22 24 -22h12q24 0 24 22v8h-60z" fill="#8a5a2a"/><path d="M24 -126q20 -2 22 12" stroke="#8a5a2a" stroke-width="5" fill="none"/>`;
+/* scaffale di stoviglie */
+P.crock=()=>`<rect x="-80" y="-150" width="160" height="150" fill="#3a2414"/>${[-120,-80,-40].map(y=>`<rect x="-76" y="${y}" width="152" height="4" fill="#24150c"/>`).join("")}${[-120,-80].map(y=>[-60,-30,0,30,60].map(x=>`<path d="M${x-9} ${y}h18l-2 -14h-14z" fill="#fbf8f0" stroke="#bfb6a3"/>`).join("")).join("")}${[-50,-10,30].map(x=>`<ellipse cx="${x}" cy="-44" rx="16" ry="5" fill="#fbf8f0" stroke="#bfb6a3"/>`).join("")}`;
+/* tavoli del vagone ristorante */
+P.dinet=(o={})=>`<path d="M-90 -64H90L76 -84H-76Z" fill="#efe6d2"/><path d="M-90 -64H90V-50Q0 -44 -90 -50Z" fill="#e2d8c2"/><rect x="-6" y="-50" width="12" height="50" fill="#2a190e"/><path d="M-30 0L0 -8L30 0" stroke="#2a190e" stroke-width="5" fill="none"/>${[-50,40].map(x=>`<ellipse cx="${x}" cy="-72" rx="12" ry="3.5" fill="#fbf8f0" stroke="#cfc6b4"/>`).join("")}<g transform="translate(0 -80) scale(.7)">${P.lampT()}</g>`;
+/* poltroncina club */
+P.club=(o={})=>P.armchair({c:o.c||"#5a3a1c"});
+/* cabina della locomotiva */
+P.firebox=(o={})=>`<ellipse cx="0" cy="-80" rx="200" ry="120" fill="url(#gWarm)" opacity=".75"/><rect x="-160" y="-260" width="320" height="260" fill="#1c1a1a"/><rect x="-160" y="-260" width="320" height="260" fill="url(#hatchX)" opacity=".15"/>
+<rect x="-50" y="-110" width="100" height="80" rx="8" fill="#2a2626" stroke="#4a4444" stroke-width="5"/><rect x="-40" y="-100" width="80" height="60" rx="4" fill="#ff8a2a"/><rect x="-40" y="-100" width="80" height="60" rx="4" fill="url(#gFlame)"/><path d="M-30 -70h60M-30 -60h60" stroke="#3a1a0a" stroke-width="3"/>
+${[[-110,-200,26],[-60,-210,20],[80,-205,26]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#efe6d2" stroke="#c9a45c" stroke-width="5"/><path d="M${x} ${y}l${r*.6} ${-r*.4}" stroke="#1a120c" stroke-width="2.5"/>`).join("")}
+<path d="M-140 -150h280" stroke="#c9a45c" stroke-width="6"/><path d="M110 -150v-60M126 -150v-40" stroke="#c9a45c" stroke-width="5"/><path d="M-130 -40l-30 -60" stroke="#6a6a6a" stroke-width="8"/>
+<path d="M-160 0H160L180 30H-180Z" fill="#2a2420"/>${o.coal?`<path d="M-180 30l40 -40l30 20l24 -30l30 28l26 -20l40 42Z" fill="#0e0d0c"/>`:""}`;
+/* striscia di finestrini del corridoio sulla parete sinistra */
+P.sidewins=(o={})=>`${[0,1,2].map(i=>`<g transform="translate(${-8-i*30} ${-170+i*40}) scale(${1-i*.14})">${P.twin({w:60,h:70,seed:i+5,night:o.night})}</g>`).join("")}`;
+
+
+let FILMNIGHT=false;
+Object.assign(ROOMART,{
+  corridoio:{wall:"teak",floor:"runner",lights:[[400,80,180,"gWarm"],[110,220,180,"gCold"]],
+    props:(a,o)=>[["sidewins",120,330,1,{night:o.night}],["cdoor",260,300,.92,{n:3}],["cdoor",400,300,.92,{n:4,glass:a===0&&o.night}],["cdoor",540,300,.92,{n:5}],["lampT",655,250,.7],["rug",400,420,1.25,{c:"#5a1414"}]],
+    hot:{registro:[648,230],porta4:[400,215],lavagna:[540,150]},slots:[[300,446],[560,450]]},
+  scomp4:{wall:"teak",floor:"runner",dark:.32,lights:[[400,160,230,"gCold"],[230,280,150,"gWarm"]],
+    props:(a,o)=>[["twin",400,190,1.25,{night:o.night,seed:4}],["rack",400,74,1],["basin",640,300,1],["berth",340,350,1,{c:"#3a2a5a",bed:true,corpse:!o.night&&a<=1}],["ftable",180,330,1.1,{type:true,cups:true,glass:true,bottle:true}],["coat",95,150,.9]],
+    hot:{biglietto:[150,240],laudano:[96,240],toddy:[268,236],orologio:[560,268],tazze:[228,245],corpo_g:[300,282],corpo:[300,282],macchina:[150,270],cappotto:[95,170],lavabo:[640,190],taccuino:[470,250]},slots:[[520,450],[640,448]]},
+  scomp5:{wall:"teak",floor:"runner",lights:[[400,160,230,"gCold"]],
+    props:(a,o)=>[["twin",400,190,1.25,{night:o.night,seed:9}],["rack",400,74,1],["berth",400,350,1,{c:"#2a4a3a",bed:true}],["basin",660,300,.95],["suitcase",160,420,1]],
+    hot:{parete:[110,200],nastro_m:[160,385],libro:[470,260]},slots:[[300,446],[520,448]]},
+  scomp7:{wall:"teak",floor:"runner",lights:[[400,160,230,"gCold"],[620,300,140,"gWarm"]],
+    props:(a,o)=>[["twin",400,190,1.25,{night:o.night,seed:13}],["rack",400,74,1],["berth",360,350,1,{c:"#4a1a1a",bed:true}],["basin",660,300,.95],["bag",170,420,1.3],["coat",110,150,.9]],
+    hot:{borsa:[170,370],cappotto7:[110,170],scarpe:[300,420],lavabo7:[660,190]},slots:[[520,448],[300,446]]},
+  dispensa:{wall:"teak",floor:"flag",lights:[[300,300,190,"gWarm"]],
+    props:(a,o)=>[["tstove",300,320,1,{cold:a>=1&&!o.night}],["crock",560,300,1],["twin",160,160,.7,{w:90,h:70,night:o.night,seed:2}],["ktable",440,420,.8]],
+    hot:{stufa:[300,270],registro_s:[440,350],stoviglie:[560,200]}},
+  ristorante:{wall:"teak",floor:"runner",lights:[[230,240,150,"gWarm"],[570,240,150,"gWarm"]],
+    props:(a,o)=>[["twin",230,180,.9,{w:120,h:90,night:o.night,seed:21}],["twin",570,180,.9,{w:120,h:90,night:o.night,seed:22}],["dinet",230,330,1],["dinet",570,330,1],["crock",400,300,.75],["chair",130,420,1],["chair",670,420,1]],
+    hot:{servizio:[400,210],tavolo:[230,250],menu:[570,250]},slots:[[330,450],[480,450]]},
+  fumatori:{wall:"tartan",floor:"runner",lights:[[400,250,240,"gWarm"]],
+    props:(a,o)=>[["twin",250,180,.9,{w:110,h:85,night:o.night,seed:31}],["twin",550,180,.9,{w:110,h:85,night:o.night,seed:32}],["club",200,400,1.1,{c:"#5a3a1c"}],["club",600,400,1.1,{c:"#5a3a1c"}],["cardtable",400,410,1.2],["lampT",400,280,.8]],
+    hot:{segnapunti:[400,345],posacenere:[470,350],giornale:[200,330]},slots:[[300,448],[510,450],[650,448]]},
+  locomotiva:{wall:"iron",floor:"iron",dark:.38,lights:[[400,260,240,"gWarm"],[100,140,140,"gCold"]],
+    props:(a,o)=>[["firebox",400,330,1,{coal:true}],["twin",100,170,.8,{w:90,h:90,night:o.night,seed:40}],["twin",700,170,.8,{w:90,h:90,night:o.night,seed:41}]],
+    hot:{giornale_m:[560,200],manometri:[290,130],forno:[400,250]},slots:[[220,448],[600,450]]}
+});
 
 /* ---------------- REPERTI ---------------- */
 const VEL=`<rect width="300" height="200" fill="#151e19"/><ellipse cx="150" cy="105" rx="150" ry="100" fill="#2c3d33" opacity=".75"/>`;
@@ -830,7 +931,7 @@ function docThumb(e){const k=e.doc,r=rng(k.length*7+3);let L="";
   if(k==="form"||k==="ledger")L=`<rect x="96" y="40" width="108" height="9" fill="#2b1d10" opacity=".5"/>`+Array.from({length:6},(_,i)=>`<path d="M96 ${66+i*16}H204" stroke="#8a7a5a"/><rect x="186" y="${56+i*16}" width="12" height="7" fill="#2b1d10" opacity=".55"/>`).join("");
   else for(let y=52;y<172;y+=k==="hand"?14:11)L+=k==="hand"?`<path d="M96 ${y}q12 -4 24 0t24 0t24 0t24 0" stroke="#1f2a4a" stroke-width="1.6" fill="none" opacity=".7"/>`:`<path d="M96 ${y}H${(170+r()*34).toFixed(0)}" stroke="#2b1d10" stroke-width="1.6" opacity=".55"/>`;
   return `<svg viewBox="0 0 300 200"><rect width="300" height="200" fill="#1c140e"/><g transform="rotate(-4 150 100)"><rect x="84" y="24" width="132" height="166" fill="${e.paper==="diary"?"#e6d8b4":"#ece0c2"}"/>${e.paper==="diary"?`<rect x="76" y="24" width="10" height="166" fill="#3a1a0c"/>`:""}${L}${e.burnt?`<path d="M84 150Q110 140 130 168Q160 150 190 176L216 160V190H84Z" fill="#2a1408"/>`:""}</g></svg>`;}
-function testiThumb(id){const c=CASE_RAVEN.chars[EV[id].t];return `<svg viewBox="0 0 300 200"><rect width="300" height="200" fill="#efe4c8"/>${Array.from({length:7},(_,i)=>`<path d="M0 ${30+i*25}H300" stroke="#c9b991"/>`).join("")}${portrait(c.p,false,`x="24" y="18" width="120" height="164"`)}<text x="226" y="128" text-anchor="middle" font-size="96" fill="#8a1414" font-family="IM Fell English,serif">«»</text></svg>`;}
+function testiThumb(id){const c=S.chars[EV[id].t];return `<svg viewBox="0 0 300 200"><rect width="300" height="200" fill="#efe4c8"/>${Array.from({length:7},(_,i)=>`<path d="M0 ${30+i*25}H300" stroke="#c9b991"/>`).join("")}${portrait(c.p,false,`x="24" y="18" width="120" height="164"`)}<text x="226" y="128" text-anchor="middle" font-size="96" fill="#8a1414" font-family="IM Fell English,serif">«»</text></svg>`;}
 function evThumb(id){if(S&&S.clues[id]&&S.clues[id].cat==="Deduzione")return dedThumb();const e=EV[id]||{};if(e.doc)return docThumb(e);if(e.t)return testiThumb(id);return evArt(id);}
 function docHTML(e){
   if(e.doc==="form")return `<div class="doc form"><div class="fh">${e.head}</div><div class="fs">${e.sub}</div><table>${e.rows.map(r=>`<tr><td>${r[0]}</td><td class="g">${r[1]}</td></tr>`).join("")}</table><div class="fn">${e.note}</div></div>`;
@@ -1010,7 +1111,19 @@ ${Array.from({length:30},(_,i)=>`<path d="M${i*60-20} ${660+(i%4)*40}q30 -16 60 
 ${faFlakes(140,9,1600,900,.35)}
 <rect width="1600" height="900" fill="url(#vg)"/></svg>`;}
 
-const FILMART={manor:()=>faManor(),manorTrap:()=>faManor({trap:1}),london:faLondon,desk:faDesk,train:faTrain,dinner:faDinner,lighthouse:faLighthouse};
+function faTrainNight(o={}){const r=rng(7);let cars="";
+  for(let i=0;i<4;i++){const x=150+i*215;cars+=`<rect x="${x}" y="555" width="200" height="78" rx="6" fill="#07070a"/><path d="M${x-4} 556q104 -22 208 0" fill="#07070a"/><path d="M${x-4} 552q104 -24 208 0" stroke="#dfe7ef" stroke-width="6" fill="none" opacity=".8"/>`;for(let w=0;w<5;w++){const lit=r()<.75;cars+=`${lit?`<rect x="${x+4+w*37}" y="560" width="40" height="40" fill="url(#wg)"/>`:""}<rect x="${x+14+w*37}" y="572" width="22" height="22" fill="${lit?"#f2b05a":"#141820"}"/>`;}}
+  const drift=o.stuck?`<path d="M0 640Q200 600 420 618T860 604T1300 622T1600 610V900H0Z" fill="#c9d4df"/><path d="M0 640Q200 600 420 618T860 604T1300 622T1600 610" stroke="#fff" stroke-width="4" fill="none" opacity=".7"/>`:`<path d="M0 655Q400 640 800 650T1600 652V900H0Z" fill="#8a9aae"/>`;
+  let steam="";for(let i=0;i<14;i++){const x=1110-i*(o.stuck?20:75)-r()*20,y=470-i*(o.stuck?22:14)-r()*30,s2=34+i*9;steam+=`<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${s2.toFixed(0)}" fill="#9aa6b4" opacity="${(.4-i*.026).toFixed(2)}"/>`;}
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#03050a"/><stop offset="1" stop-color="#1c2636"/></linearGradient><radialGradient id="wg"><stop offset="0" stop-color="#ffb850" stop-opacity=".55"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient><radialGradient id="hl" cx="0" cy=".5" r="1"><stop offset="0" stop-color="#fff2c0" stop-opacity=".5"/><stop offset="1" stop-color="#fff2c0" stop-opacity="0"/></radialGradient>${FA_VIG}</defs>
+<rect width="1600" height="900" fill="url(#sk)"/>
+<path d="M0 600L160 520L240 540L330 470L420 500L520 560L700 520L800 470L900 500L1040 560L1200 500L1320 450L1420 490L1600 540V700H0Z" fill="#1a2230"/><path d="M330 470l20 30l30 -6M800 470l18 26M1320 450l20 30l26 -8" stroke="#dfe7ef" stroke-width="5" fill="none" opacity=".6"/>
+${drift}${steam}${cars}
+<g fill="#07070a"><rect x="1050" y="565" width="120" height="68" rx="4"/><rect x="1170" y="536" width="120" height="97"/><rect x="1150" y="520" width="160" height="16"/><rect x="1290" y="562" width="190" height="66" rx="30"/><rect x="1440" y="516" width="26" height="54"/><rect x="1432" y="508" width="42" height="12"/><circle cx="1200" cy="632" r="30"/><circle cx="1280" cy="632" r="30"/><circle cx="1360" cy="640" r="20"/><circle cx="1440" cy="640" r="20"/></g>
+<rect x="1190" y="552" width="40" height="34" fill="#f8c070"/><circle cx="1490" cy="592" r="10" fill="#fff0c0"/><path d="M1496 592L1600 540V650Z" fill="url(#hl)"/>
+${o.stuck?`<path d="M1440 600Q1520 560 1600 590V700H1430Z" fill="#dfe7ef"/><path d="M1000 640Q1300 600 1600 630V700H1000Z" fill="#dfe7ef"/>`:""}
+${faFlakes(o.stuck?320:180,o.stuck?12:6,1600,900,.8)}<rect width="1600" height="900" fill="url(#vg)"/></svg>`;}
+const FILMART={trainNight:()=>faTrainNight(),trainStuck:()=>faTrainNight({stuck:1}),manor:()=>faManor(),manorTrap:()=>faManor({trap:1}),london:faLondon,desk:faDesk,train:faTrain,dinner:faDinner,lighthouse:faLighthouse};
 const IMGURL={};
 function artURL(k){if(!IMGURL[k]){try{IMGURL[k]=URL.createObjectURL(new Blob([FILMART[k]()],{type:"image/svg+xml"}));}catch(e){IMGURL[k]="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(FILMART[k]());}}return IMGURL[k];}
 
@@ -1627,6 +1740,323 @@ CASE_RAVEN.endingBase = function(ans,g,sl){
 };
 
 Object.keys(CASE_RAVEN.chars).forEach(k=>CASE_RAVEN.chars[k].p.k=k);
+/* ---------------- CASO II: L'ESPRESSO DELLE HIGHLANDS (giallo rovesciato) ---------------- */
+const CASE_EXPRESS={
+  id:"highlands",num:"Caso II",title:"L'Espresso delle Highlands",inverted:true,culprit:"graham",
+  year:"Linea delle Highlands · gennaio 1913",issue:"N. II · Gennaio 1913",art:"trainNight",
+  plate:"«Un delitto perfetto», disse Sir Alastair. «Salvo la neve.»",
+  blurb:"Questa volta sai chi è l'assassino: lo hai aiutato tu. Un chirurgo del Re, un delitto perfetto sul notturno per Inverness, e una bufera che lo ferma a metà strada. Ora devi dimostrarlo.",
+  start:{room:"corridoio"},
+  mapTitle:"L'Espresso delle Highlands",mapSub:"notturno Edimburgo–Inverness, fermo al passo di Drumochter",
+  acts:[
+    {label:"Atto I · Mercoledì mattina",title:"Lo scompartimento 4",start:7*60+10,actions:9,room:"corridoio",plate:"«Laudano», disse Sir Alastair. «Povero Henry.»",
+     intro:["Alle 7:10 il conduttore MacRae bussa al 4 con il tè. Henry Pell è disteso sulla cuccetta, freddo, con una boccetta di laudano vuota sul tavolino.",
+      "Sir Alastair Graham è il primo ad accorrere. Si inginocchia, ascolta, scuote la testa. «Suicidio. È morto tra mezzanotte e l'una.»",
+      "Il dottor Lyle ti stringe il braccio. «Lei sa che non è vero. Lo abbiamo visto entrambi, stanotte, in quel maledetto sogno che chiamano prologo.» Sorride appena. «Adesso bisogna dimostrarlo.»"]},
+    {label:"Atto II · Mercoledì, mezzogiorno",title:"Un'ultima cosa…",start:12*60,actions:9,room:"dispensa",plate:"Il conduttore MacRae e la stufa ancora tiepida.",
+     intro:["La neve non smette. Il macchinista dice che la locomotiva di soccorso da Inverness arriverà prima di sera.",
+      "MacRae, ripulendo la stufa della dispensa, ha trovato qualcosa nella cenere. Non sa che cosa sia. Tu forse sì.",
+      "Sir Alastair è di ottimo umore. Gioca a carte e fischietta."]},
+    {label:"Atto III · Mercoledì pomeriggio",title:"La trappola",start:16*60,actions:9,room:"ristorante",plate:"«Prima che arrivi la locomotiva», disse il dottor Lyle.",
+     intro:["Alle sei e mezza arriverà la locomotiva di soccorso. A Kingussie Sir Alastair scenderà, con i suoi bagagli e il suo alibi.",
+      "Hai fino ad allora per riunire tutti nella carrozza ristorante e far scattare la trappola."]}
+  ],
+  forced:{eyebrow:"Mercoledì, 18:30",title:"Il fischio della locomotiva",
+    paras:["Un fischio lungo, nel buio: la locomotiva di soccorso. Sir Alastair si alza, si infila i guanti, chiede al conduttore di preparargli i bagagli.","Non c'è più tempo. Se vuoi fermarlo, devi farlo adesso, con quello che hai."]},
+  items:{},
+  theories:{
+    A:{name:"La versione di Sir Alastair: suicidio",desc:"Pell, depresso, ha bevuto il toddy e poi il laudano, tra mezzanotte e l'una. Così dice l'unico medico a bordo."},
+    B:{name:"L'alibi del whist",desc:"Dalle 23:05 all'1:15 Sir Alastair non si è mosso dal tavolo da gioco, davanti a due testimoni."},
+    C:{name:"Il movente: il dossier",desc:"Pell aveva le prove degli undici morti dell'«intervento Graham». Il dossier è sparito."},
+    T:{name:"Il delitto delle 22:50",hiddenName:"Che cosa è successo prima delle undici?",desc:"Pell è morto prima che cominciasse la partita. L'alibi copre l'ora sbagliata."}
+  },
+  clues:{
+    e_biglietto:{name:"Il biglietto d'addio",cat:"Documento",th:{A:2},text:"Battuto a macchina, firmato con una «H.» battuta anch'essa: «Non posso più guardarmi allo specchio. Ho fallito come medico e come uomo. Margaret, perdonami.»"},
+    e_laudano:{name:"La boccetta di laudano",cat:"Reperto",th:{A:1,T:1},text:"Vuota, lucida, senza una sola impronta. Nemmeno quelle di chi l'avrebbe bevuta."},
+    e_toddy:{name:"Il bicchiere del toddy",cat:"Reperto",th:{A:1},text:"Vuoto, sul tavolino, con la fetta di limone e il chiodo di garofano. Odore di whisky e di laudano. MacRae l'aveva lasciato fuori dalla porta alle 23:30."},
+    e_orologio:{name:"L'orologio fermo",cat:"Osservazione",th:{T:1},text:"L'orologio da tasca di Pell, appeso al gancio della cuccetta, è fermo alle 5:52. Si è scaricato."},
+    e_tazze:{name:"Due tazze sul vassoio",cat:"Reperto",th:{T:1,B:-1},text:"Sul vassoio del tè delle 22:40 ci sono due tazze. Una è del vagone letto; l'altra ha il bordo dorato del vagone ristorante, e un deposito amaro sul fondo."},
+    e_ago:{name:"Il segno dell'ago",cat:"Osservazione",th:{A:-3,T:2},text:"Tra il quarto e il quinto dito del piede sinistro, un forellino con un alone livido. Un'iniezione, dove nessuno guarda. Nessuno lo sa, tranne te e Lyle."},
+    e_macchina:{name:"La macchina per scrivere di Pell",cat:"Reperto",th:{},text:"Una portatile pieghevole americana. Nella custodia, lettere battute da Pell nei giorni scorsi: righe regolari, battute uniformi."},
+    e_nastro:{name:"Il nastrino azzurro",cat:"Osservazione",th:{A:-2},text:"All'occhiello del cappotto di Pell, il nastrino azzurro della Lega della Temperanza. Pell non beveva alcol."},
+    e_taccuino:{name:"Il taccuino di Pell",cat:"Documento",th:{C:2},text:"Ultima pagina: «Martedì. G. sarà sul treno. Gli do tempo fino a Inverness: o rinuncia alla nomina, o il dossier va al Consiglio Medico.»"},
+    e_registro:{name:"Il registro del conduttore",cat:"Documento",th:{B:1},text:"22:40 tè al 4. 23:20 toddy ordinato da Sir A. G. per il 4. 23:30 toddy lasciato davanti al 4, nessuna risposta. 01:00 stufa coperta, riposo nel 3."},
+    e_servizio:{name:"La tazza mancante",cat:"Osservazione",th:{B:-1,T:1},text:"Al servizio da tè del vagone ristorante manca una tazza col bordo dorato. A cena, assicura il cameriere, c'erano tutte."},
+    e_segnapunti:{name:"Il segnapunti del whist",cat:"Documento",th:{B:2},text:"Di pugno del capitano Lennox: «Inizio 23:05. Sir A. lascia all'1:15, va a letto.» L'alibi, nero su bianco. Dalle 23:05. All'1:15."},
+    e_borsa:{name:"La borsa del chirurgo",cat:"Reperto",th:{T:2},text:"Cloralio idrato, un astuccio di morfina con una fiala mancante su sei, una siringa pulita di fresco con l'acido fenico."},
+    e_lettera_g:{name:"La lettera di Pell a Graham",cat:"Documento",th:{C:2},text:"Nella tasca del cappotto di Sir Alastair: «Saremo sullo stesso treno, scompartimento 4. Mi porti la sua risposta prima di Inverness. H. P.»"},
+    e_cenere:{name:"La cenere nella stufa",cat:"Reperto",th:{C:2,T:1},text:"Un fermaglio d'ottone fuso e un lembo di carta: «…registro operatorio, Ospedale di San Bartolomeo, 1909… undici decessi…». Il dossier di Pell."},
+    e_parete:{name:"La parete sottile",cat:"Osservazione",th:{},text:"Tra il 4 e il 5 c'è una parete di legno sottile come un'anta d'armadio. A treno fermo, si sente tutto."},
+    e_rito:{name:"L'orologio delle undici",cat:"Testimonianza",th:{T:2,A:-1},text:"Margaret: «Henry caricava l'orologio ogni sera alle undici in punto, da quando aveva dieci anni. Non ha mai saltato una sera.»"},
+    e_porta:{name:"La porta dell'una e venti",cat:"Testimonianza",th:{B:-2,T:1},text:"Margaret, insonne: verso l'una e venti la porta del 4 si è aperta e chiusa, l'acqua è scorsa nel lavabo, e qualcuno fischiettava piano un motivetto. «Henry non fischiava mai.»"},
+    e_fischio:{name:"Il motivetto di Sir Alastair",cat:"Testimonianza",th:{B:-1},text:"Lennox: «Fischietta tutta la sera la stessa aria dei Pirati di Penzance. Mi ha fatto impazzire.»"},
+    e_dattilo:{name:"La perizia di Cobb",cat:"Testimonianza",th:{A:-2},text:"Cobb: il biglietto è battuto con due dita, a strappi, con le lettere più calcate dove l'indice cercava il tasto. Pell batteva con dieci dita."},
+    e_fumo:{name:"Il fumo dell'una e mezza",cat:"Testimonianza",th:{C:1,B:-1},text:"Il macchinista Grant: verso l'una e mezza ha visto fumo uscire dal comignolo della dispensa. MacRae a quell'ora dormiva nel 3."},
+    e_mani:{name:"Le mani fredde",cat:"Testimonianza",th:{B:-1,T:1},text:"Lennox: alle 23:05 Sir Alastair è arrivato al tavolo con le mani gelate, appena lavate, che sapevano di sapone fenicato."},
+    e_ammissione:{name:"La visita delle 22:45",cat:"Testimonianza",th:{T:2,B:-1},text:"Sir Alastair ammette: alle 22:45 ha portato a Pell una tazza di tè «per fare pace», ed è rimasto con lui fino alle 23."},
+    e_toddy_fuori:{name:"Il toddy ancora fuori",cat:"Testimonianza",th:{B:-2,T:1},text:"Sir Alastair si è lasciato sfuggire che all'una e un quarto il toddy era ancora davanti alla porta del 4, intatto. Ma la mattina era dentro, vuoto."},
+    e_obs_graham:{name:"Le mani del chirurgo",cat:"Osservazione",th:{T:1},text:"Le nocche di Sir Alastair sono arrossate e screpolate: le ha strofinate a lungo con il sapone fenicato, più di quanto faccia un chirurgo dopo un'operazione."},
+    e_obs_margaret:{name:"Gli occhi di Margaret",cat:"Osservazione",th:{B:-1},text:"Margaret non dorme da notti: occhiaie profonde, un libro con il segnalibro all'ultima pagina. Stanotte era sveglia."},
+    e_obs_lennox:{name:"La fiaschetta del capitano",cat:"Osservazione",th:{},text:"Lennox beve, ma non perde il conto: il segnapunti è tenuto con la precisione di un furiere."},
+    e_obs_cobb:{name:"Il callo di Cobb",cat:"Osservazione",th:{A:-1},text:"Il pollice destro di Cobb ha il callo della barra spaziatrice: batte a dieci dita da vent'anni. Di macchine per scrivere, sa tutto."}
+  },
+  map:{nostairs:true,nodoors:true,
+    labels:[{t:"LOCOMOTIVA",x:10,y:14},{t:"CARROZZA LETTI E",x:10,y:84},{t:"SALOTTINO FUMATORI",x:10,y:220},{t:"CARROZZA RISTORANTE",x:10,y:300}],
+    rooms:[{id:"locomotiva",x:10,y:20,w:320,h:50},{id:"corridoio",x:10,y:90,w:320,h:32},{id:"dispensa",x:10,y:126,w:72,h:78},{id:"scomp4",x:86,y:126,w:78,h:78},{id:"scomp5",x:168,y:126,w:78,h:78},{id:"scomp7",x:250,y:126,w:80,h:78},{id:"fumatori",x:10,y:226,w:320,h:62},{id:"ristorante",x:10,y:306,w:320,h:92}],
+    deco:''},
+  rooms:{
+    corridoio:{name:"Corridoio della carrozza letti",mapName:"Corridoio",crimeFrom:99,
+      desc:["Un corridoio stretto, rivestito di teak, che sa di cera e di carbone. Dai finestrini, solo bianco: la neve ha sepolto il treno fino ai mozzi delle ruote.","Il corridoio è gelido. Il riscaldamento è stato ridotto per risparmiare vapore. MacRae passa con le coperte.","La luce del pomeriggio è già grigia. Tra due ore sarà buio, e arriverà la locomotiva."],
+      objects:[
+        {id:"registro",label:"Il registro del conduttore",clue:"e_registro",text:"Un quaderno appeso a un chiodo, accanto alla dispensa. MacRae annota tutto, in una grafia da maestro: «22:40 tè al 4. 23:20 toddy ordinato da Sir A. G. per il 4. 23:30 toddy lasciato davanti al 4, nessuna risposta. 01:00 stufa coperta, riposo nel 3.»"},
+        {id:"porta4",label:"La porta del 4",text:"Una porta di teak con il numero d'ottone. Nessuna serratura forzata: non era chiusa a chiave. Chiunque poteva entrare. Chiunque, stanotte, è entrato."},
+        {id:"lavagna",label:"Il quadro dei campanelli",text:"Un quadretto con le bandierine dei campanelli di servizio. Stanotte nessuno ha suonato. Nemmeno Pell, per chiedere il toddy che, a sentire Sir Alastair, desiderava tanto."}]},
+    scomp4:{name:"Scompartimento 4",mapName:"N. 4 · Pell",crimeFrom:0,
+      desc:["Lo scompartimento di Henry Pell. La cuccetta rifatta per la notte, il corpo sotto il lenzuolo, una macchina per scrivere aperta sul tavolino. Fa freddo, e c'è odore di laudano e di whisky.","Il corpo di Pell è ancora qui, coperto. Nessuno vuole spostarlo prima che arrivi la polizia.","La luce si abbassa. Il lenzuolo sulla cuccetta sembra più bianco della neve fuori."],
+      objects:[
+        {id:"biglietto",label:"Il biglietto battuto a macchina",clue:"e_biglietto",text:"Un foglio infilato nel rullo della macchina: «Non posso più guardarmi allo specchio. Ho fallito come medico e come uomo. Margaret, perdonami.» Sotto, una «H.» battuta a macchina. Nessuna firma a mano. Un uomo che si toglie la vita non firma il suo ultimo biglietto?"},
+        {id:"laudano",label:"La boccetta di laudano",clue:"e_laudano",text:"«Tintura d'oppio — Farmacia Duncan, Edimburgo.» Vuota. La giri alla luce: è lucida come uno specchio. Nessuna impronta, nemmeno quelle di Pell. Qualcuno l'ha pulita. I suicidi non puliscono le boccette."},
+        {id:"toddy",label:"Il bicchiere del toddy",clue:"e_toddy",text:"Un bicchiere da toddy della compagnia, vuoto, con la fetta di limone e il chiodo di garofano sul fondo. Odora di whisky e di laudano. MacRae giura di averlo lasciato fuori dalla porta alle undici e mezza."},
+        {id:"orologio",label:"L'orologio da tasca",clue:"e_orologio",text:"Un orologio d'argento appeso al gancio della cuccetta. Fermo alle 5:52. Lo scuoti: riparte. Non è rotto. Si è semplicemente scaricato."},
+        {id:"tazze",label:"Il vassoio del tè",clue:"e_tazze",text:"Il vassoio che MacRae ha portato alle 22:40, con una tazza. Ma le tazze sono due. La seconda ha il bordo dorato del vagone ristorante e, sul fondo, un deposito biancastro dall'odore acre e dolciastro."},
+        {id:"corpo_g",label:"Il corpo",when:g=>locOf("graham")==="scomp4",text:"Sir Alastair è chino sul corpo e ti sbarra il passo con un sorriso. «Lasci fare a un medico, avvocato. Laudano, senza dubbio. Nessun segno di violenza.» Ti conviene tornare quando non c'è."},
+        {id:"corpo",label:"Il corpo",clue:"e_ago",when:g=>locOf("graham")!=="scomp4",text:"Sollevi il lenzuolo dal fondo della cuccetta. I piedi nudi di Pell. Tra il quarto e il quinto dito del sinistro, un forellino minuscolo con un alone livido. Lyle trattiene il fiato. «Un'iniezione. Dove nessun medico di provincia guarderebbe mai.» Poi, piano: «Non lo dica a nessuno. Un segreto, in mano nostra, vale più di una prova.»"},
+        {id:"macchina",label:"La macchina per scrivere",clue:"e_macchina",text:"Una portatile pieghevole americana, l'ultima novità. Nella custodia, tre lettere battute da Pell nei giorni scorsi: margini perfetti, battute uniformi, nessun errore. Mani da dattilografo."},
+        {id:"cappotto",label:"Il cappotto appeso",clue:"e_nastro",text:"Un cappotto grigio, consumato ai polsi. All'occhiello, un nastrino azzurro: la Lega della Temperanza. Chi lo porta ha giurato di non toccare alcol."},
+        {id:"taccuino",label:"Il taccuino sotto il cuscino",clue:"e_taccuino",text:"Un taccuino nero. L'ultima pagina, di ieri: «Martedì. G. sarà sul treno. Gli do tempo fino a Inverness: o rinuncia alla nomina, o il dossier va al Consiglio Medico.» Il dossier non è da nessuna parte."},
+        {id:"lavabo",label:"Il lavabo",text:"Il lavabo pieghevole è asciutto, ma intorno allo scarico c'è un alone ambrato, appiccicoso. Qualcuno ci ha versato del whisky, o del laudano, o tutti e due."}]},
+    scomp5:{name:"Scompartimento 5",mapName:"N. 5 · Margaret",crimeFrom:99,
+      desc:["Lo scompartimento di Margaret Pell, accanto a quello del fratello. Un libro aperto sulla cuccetta, il segnalibro all'ultima pagina.","Margaret non è uscita di qui per tutta la mattina. Il libro è chiuso.","Il baule è pronto. Margaret non ha intenzione di scendere a Kingussie senza una risposta."],
+      objects:[
+        {id:"parete",label:"La parete divisoria",clue:"e_parete",text:"Bussi piano sulla parete che separa il 5 dal 4. Legno sottile, poco più di un'anta d'armadio. Lyle, dall'altra parte, apre il rubinetto del lavabo: lo senti scorrere come se fosse qui."},
+        {id:"nastro_m",label:"Il baule di Margaret",text:"Un baule modesto. Sul coperchio, lo stesso nastrino azzurro della Lega della Temperanza. «Henry l'ha firmata a quindici anni», ti dice Margaret. «Io a dodici. Nostro padre beveva.»"},
+        {id:"libro",label:"Il libro sulla cuccetta",text:"Un romanzo di Stevenson, con il segnalibro all'ultima pagina. Margaret l'ha finito stanotte. Era sveglia."}]},
+    scomp7:{name:"Scompartimento 7",mapName:"N. 7 · Graham",crimeFrom:99,
+      lock:g=>locOf("graham")==="scomp7"?"Sir Alastair è nel suo scompartimento. Ti apre, ti sorride, e ti richiude la porta con garbo. «Più tardi, avvocato. Mi sto radendo.»":null,
+      desc:["Lo scompartimento di Sir Alastair, ordinato come una sala operatoria. Odore di acqua di colonia e di acido fenico.","Sir Alastair non c'è. La sua borsa è sotto la cuccetta.","I bagagli sono già chiusi, le etichette scritte: «Kingussie»."],
+      objects:[
+        {id:"borsa",label:"La borsa del chirurgo",clue:"e_borsa",text:"Una borsa di cuoio con le iniziali A. G. Bisturi, garze, una boccetta di cloralio idrato a metà. Un astuccio di morfina: sei alloggi, cinque fiale. E una siringa d'argento, pulita di fresco: odora ancora di acido fenico."},
+        {id:"cappotto7",label:"Il cappotto da viaggio",clue:"e_lettera_g",text:"Un cappotto con il collo di astrakan. Nella tasca interna, una lettera piegata in quattro: «Saremo sullo stesso treno, scompartimento 4. Mi porti la sua risposta prima di Inverness. H. P.» Sir Alastair ha bruciato il dossier. Questa, se l'è dimenticata."},
+        {id:"scarpe",label:"Le scarpe da sera",text:"Scarpe di vernice, lucidate. Un uomo che non è mai uscito dal salottino fumatori, stanotte, non dovrebbe avere il bordo delle suole macchiato di cenere grigia."},
+        {id:"lavabo7",label:"Il lavabo",text:"Una saponetta all'acido fenico consumata quasi del tutto. Un chirurgo si lava le mani, certo. Ma questa saponetta era nuova ieri sera: lo dice la carta, ancora nel cestino."}]},
+    dispensa:{name:"Dispensa del conduttore",mapName:"Dispensa",crimeFrom:99,
+      desc:["La dispensa di MacRae: una stufetta di ghisa, un bollitore, stoviglie in fila. Qui si preparano tè e toddy per tutta la carrozza.","MacRae ha svuotato la stufa per accenderla di nuovo. Su un giornale, la cenere della notte.","La stufa è accesa. Il bollitore canta."],
+      objects:[
+        {id:"stufa",label:"La stufa",clue:"e_cenere",from:1,text:"Sul giornale steso da MacRae, la cenere della notte. La rigiri con un cucchiaino: un fermaglio d'ottone fuso a metà, e un lembo di carta risparmiato dal fuoco. «…registro operatorio, Ospedale di San Bartolomeo, 1909… undici decessi…» Il dossier di Henry Pell. Bruciato qui, a due passi dal suo cadavere."},
+        {id:"registro_s",label:"Il tavolino di MacRae",text:"Il tè, lo zucchero, il whisky della compagnia, i limoni. Per un toddy servono tre minuti. MacRae l'ha preparato alle 23:25, su ordine di Sir Alastair."},
+        {id:"stoviglie",label:"Le stoviglie",text:"Tazze bianche con lo stemma della ferrovia. Nessuna ha il bordo dorato: quelle stanno nel vagone ristorante."}]},
+    ristorante:{name:"Carrozza ristorante",mapName:"Ristorante",crimeFrom:99,
+      desc:["Tovaglie bianche, lampade dai paralumi rossi, il profumo del porridge. Fuori, la neve all'altezza dei finestrini.","I passeggeri si sono riuniti qui, dove fa più caldo. Si parla sottovoce.","È qui che riunirai tutti, quando sarà il momento."],
+      objects:[
+        {id:"servizio",label:"Il servizio da tè",clue:"e_servizio",text:"Le tazze dal bordo dorato, in fila sulla credenza. Ne conti undici: un posto è vuoto. Il cameriere giura che a cena erano dodici. «Le conto io, signore, ogni sera.»"},
+        {id:"tavolo",label:"Il tavolo di Sir Alastair",text:"Il tavolo dove Sir Alastair ha cenato con Pell. Il cameriere ricorda che si sono parlati poco, e che Pell non ha toccato il vino: «Ha chiesto acqua, signore, come sempre.»"},
+        {id:"menu",label:"Il menù della cena",text:"Zuppa di porri, salmone del Tay, budino. Un piatto onesto. Sir Alastair, ricorda il cameriere, ha lasciato la tavola alle 22:45 portando via una tazza di tè. «Ha detto che era per un amico.»"}]},
+    fumatori:{name:"Salottino fumatori",mapName:"Fumatori",crimeFrom:99,
+      desc:["Poltrone di cuoio, tappezzeria a quadri, un tavolino da gioco ancora coperto di carte. È qui che Sir Alastair ha costruito il suo alibi, mano dopo mano.","Sir Alastair e il capitano giocano di nuovo. Sir Alastair vince, e fischietta.","Il salottino è pieno di fumo e di attesa."],
+      objects:[
+        {id:"segnapunti",label:"Il segnapunti",clue:"e_segnapunti",text:"Un foglio a quadretti con i punti del whist, nella grafia militare del capitano Lennox. In alto: «Inizio 23:05.» In fondo: «Sir A. lascia all'1:15, va a letto.» L'alibi è perfetto: dalle 23:05 all'1:15. Ma chi ha detto che il delitto è avvenuto in quelle ore?"},
+        {id:"posacenere",label:"Il posacenere",text:"Mozziconi di sigaro di Sir Alastair, tutti fumati fino in fondo. Un uomo calmo. O un uomo che ha bisogno di sembrarlo."},
+        {id:"giornale",label:"Il giornale di Edimburgo",text:"Lo «Scotsman» di ieri. In terza pagina: «Sir Alastair Graham sarà nominato chirurgo di Sua Maestà la prossima settimana.» Qualcuno ha cerchiato l'articolo a matita."}]},
+    locomotiva:{name:"La locomotiva",mapName:"Locomotiva",crimeFrom:99,
+      desc:["Per arrivarci affondi nella neve fino alle ginocchia. Nella cabina, il fuoco della caldaia è basso: il macchinista Grant risparmia carbone e acqua.","Grant e il fochista spalano la neve davanti alle ruote. Inutilmente.","La caldaia è di nuovo in pressione. Grant guarda verso nord, dove arriverà il soccorso."],
+      objects:[
+        {id:"giornale_m",label:"Il giornale di macchina",text:"«23:40 fermi al km 71, neve alta un metro e mezzo. 00:30 ridotto riscaldamento carrozze. Linea del telegrafo interrotta.» Grant scrive come parla: poco e preciso."},
+        {id:"manometri",label:"I manometri",text:"Pressione bassa, quanto basta per non far gelare la caldaia. Alle 00:30 il vapore alle carrozze è stato ridotto: da allora, nei corridoi, si gela."},
+        {id:"forno",label:"La bocca del forno",text:"Il fuoco rosso della caldaia. Da qui, guardando indietro lungo il treno, si vedono i comignoli delle carrozze. Grant dice che li guarda per abitudine, di notte, per vedere chi tiene acceso."}]}
+  },
+  chars:{
+    graham:{name:"Sir Alastair Graham",short:"Sir Alastair",mk:"AG",age:56,role:"Chirurgo, designato chirurgo di Sua Maestà",
+      bio:"Il chirurgo più famoso di Londra. Affascinante, spiritoso, servizievole: si è offerto di aiutare l'indagine. Fischietta Gilbert e Sullivan. Tu sai che stanotte ha ucciso.",
+      p:{},loc:["scomp4","fumatori","ristorante"],
+      alibi:["«Dopo cena sono andato dritto al salottino fumatori. Non ho più visto il povero Henry dopo le dieci e mezza.»","«All'una e un quarto sono andato a letto e ho dormito come un sasso fino alle sette. Il whist mi stanca più di un'operazione.»","«Le ho già detto tutto, avvocato. Il capitano e il signor Cobb possono confermare ogni minuto.»"],
+      crime:["«Laudano, senza dubbio. Nessun segno di violenza: l'ho esaminato io. È morto tra mezzanotte e l'una, direi.»","«Henry era un uomo fragile. Brillante, ma fragile. Lo dicevo sempre, a Londra.»","«Un suicidio, avvocato. Triste, ma semplice. Non lo complichi.»"],
+      self:"«Trent'anni di bisturi. Ho operato duchi e lavandaie, con le stesse mani. La prossima settimana opererò il Re, se Dio vuole.»",
+      others:"«Il capitano Lennox gioca male ma paga bene. Il signor Cobb vende macchine per scrivere a chi non sa scrivere. La signorina Pell è sconvolta, poverina: non le dia retta, in questi giorni.»",
+      react:{
+        e_biglietto:"«Le ultime parole di un uomo stanco. Le legga con rispetto, avvocato.»",
+        e_toddy:"«Il toddy? L'aveva chiesto lui, povero Henry: non riusciva a dormire. L'ho ordinato io a MacRae, per gentilezza.»",
+        e_orologio:"«Un orologio che si ferma? Si sarà dimenticato di caricarlo, sconvolto com'era.»",
+        e_laudano:"«Pell soffriva d'insonnia da anni. Il laudano lo conosceva bene.»",
+        e_tazze:{text:"Una pausa appena troppo lunga. «Due tazze? Avrà ricevuto qualcuno.» Sorride. «Non me, se è questo che pensa.»",press:1},
+        e_borsa:{text:"«Ha frugato nella mia borsa? Che maleducazione.» Ride. «Cloralio e morfina: li trova nella borsa di qualunque medico d'Inghilterra.»",press:1},
+        e_lettera_g:{text:"Per un istante il sorriso si irrigidisce. «Henry mi scriveva spesso. Voleva un posto a Londra, e io non potevo darglielo.»",press:1},
+        e_cenere:{text:"«Carta bruciata in una stufa. Che cosa vuole che sia?» Non guarda il lembo di carta. Non lo guarda proprio.",press:1},
+        e_segnapunti:"«Il mio alibi, se vuole chiamarlo così. Non che mi serva un alibi, per un suicidio.»",
+        e_dattilo:{text:"«Due dita? Gli uomini disperati non battono a macchina come segretarie, avvocato.»",press:1},
+        e_rito:{text:"«Abitudini da bambino. La sera in cui decidi di morire, non carichi l'orologio.» È una buona risposta. Ma per un attimo ha guardato l'orologio come si guarda un testimone.",press:1},
+        e_porta:{text:"«La signorina Pell sente porte e fischi nel cuore della notte. Il dolore fa brutti scherzi.»",press:1},
+        e_fischio:"«I Pirati di Penzance. Un'aria allegra. Mi fa compagnia in sala operatoria.»",
+        e_nastro:{text:"«La Lega della Temperanza.» Si stringe nelle spalle. «I nastrini si portano. I giuramenti si rompono.»",press:1},
+        e_fumo:{text:"«Fumo da un comignolo, in un treno. Che scoperta straordinaria.»",press:1},
+        e_ago:{text:"Il colore gli scivola via dalla faccia, e torna. «Un'iniezione? Morfina, allora. Henry se la faceva da sé, lo sapevano tutti a Edimburgo.» Ma adesso sa che tu sai.",press:1}
+      },
+      def:["«Affascinante. Davvero affascinante, avvocato.»","«Non vedo il nesso, ma la ascolto con piacere.»","«Le serve altro? Il capitano mi aspetta per la rivincita.»"]},
+    margaret:{name:"Margaret Pell",short:"Margaret",mk:"MP",age:34,role:"Sorella della vittima, maestra a Inverness",
+      bio:"La sorella di Henry. Insegna a Inverness. Era venuta a prenderlo a Edimburgo per riportarlo a casa. Non crede al suicidio, e lo dice a tutti.",
+      p:{},loc:["scomp5","ristorante","scomp5"],
+      alibi:["«Ero qui, nel 5. Non dormo, non dormo da mesi. Ho letto tutta la notte.»","«Qui. Dove vuole che vada?»","«A preparare il baule. Henry tornava a casa. Torno io, al suo posto.»"],
+      unlock:{crime1:"e_porta"},
+      crime:["«Henry non si è ucciso. Henry aveva paura di una sola cosa al mondo: di diventare come nostro padre. Non avrebbe mai toccato un bicchiere.»","«Stanotte ho sentito delle cose. Non so se contano.» Esita. «Me lo chieda di nuovo, quando non sarò così stanca.»","«Se lei non lo dimostra, avvocato, nessuno lo farà. Sir Alastair è amico del Re.»"],
+      self:"«Faccio la maestra. Insegno ai bambini a contare e a dire la verità. Una delle due cose mi riesce meglio.»",
+      others:"«Sir Alastair è stato gentile con me, stamattina. Troppo gentile. Henry diceva che è l'uomo più pericoloso d'Inghilterra.»",
+      react:{
+        e_orologio:{text:"Margaret prende l'orologio tra le mani. «Fermo.» Lo guarda a lungo. «Henry lo caricava ogni sera alle undici in punto. Da quando aveva dieci anni. Non ha mai saltato una sera, nemmeno con la febbre.» Alza gli occhi. «Allora alle undici era già…»",unlock:"e_rito"},
+        e_toddy:"«Whisky?» Ride, una risata amara. «Henry non ha bevuto una goccia in vita sua. Nostro padre è morto di whisky. Chi gli ha mandato quel bicchiere non lo conosceva affatto.»",
+        e_biglietto:"«Battuto a macchina. Henry mi scriveva sempre a mano, a me. Sempre. Diceva che le macchine sono per gli estranei.»",
+        e_nastro:"«Il nastrino azzurro. L'ha firmata a quindici anni, la Lega. Non se l'è mai tolto.»",
+        e_parete:{text:"«Sì, si sente tutto.» Si porta una mano alla bocca. «Stanotte… verso l'una e venti. La porta di Henry si è aperta e chiusa. Ho sentito l'acqua del lavabo. E qualcuno che fischiettava piano, un motivetto allegro.» Ti guarda. «Henry non fischiava. Non ha mai fischiato in vita sua.»",unlock:"e_porta"},
+        e_taccuino:"«G. È lui, vero? È Graham. Henry aveva lavorato quattro anni con lui, a Londra. Poi è tornato in Scozia e non dormiva più.»",
+        e_cenere:"Legge il lembo di carta e le tremano le mani. «Undici. Henry diceva undici. Li chiamava per nome, la notte.»",
+        e_ago:"«Un ago?» Impallidisce. «Henry aveva il terrore degli aghi. Si faceva vaccinare con gli occhi chiusi.» Poi, piano: «Non lo dirò a nessuno, se lei me lo chiede.»",
+        e_fischio:"«I Pirati di Penzance.» Diventa bianca. «Era quella. Era quella l'aria.»"
+      },
+      def:["«Non so niente di questo.»","«Mi scusi. Non riesco a pensare.»","«Lo chieda a Sir Alastair. Lui ha sempre una risposta.»"]},
+    macrae:{name:"Angus MacRae",short:"MacRae",mk:"MR",age:58,role:"Conduttore della carrozza letti",
+      bio:"Trent'anni sui treni delle Highlands. Annota tutto nel suo registro. Ha trovato lui il corpo, alle 7:10. Si sente in colpa per aver dormito.",
+      p:{},loc:["corridoio","dispensa","corridoio"],
+      alibi:["«Ho servito il tè al 4 alle 22:40, il toddy l'ho lasciato fuori alle 23:30. All'una ho coperto la stufa e mi sono steso nel 3, che era vuoto. Mi vergogno, signore.»","«Qui, a pulire la stufa. Il riscaldamento è ridotto, bisogna tenere il tè caldo per i signori.»","«Sto preparando i bagagli dei signori che scendono a Kingussie.»"],
+      crime:["«Il dottor Pell era vivo alle undici e mezza, signore. Il toddy l'ha preso lui: stamattina il bicchiere era dentro, vuoto.» Si gratta la testa. «Solo che non ha risposto, quando ho bussato.»","«Ho trovato una cosa nella cenere, stamattina. Gliela mostro, se vuole: è sul giornale, accanto alla stufa.»","«In trent'anni non mi era mai morto nessuno nella carrozza. Mai.»"],
+      self:"«Trent'anni sulla linea. Ho portato il tè a due duchi e a un vescovo. Il vescovo dava le mance migliori.»",
+      others:"«Sir Alastair è un vero signore: mi ha dato mezza corona per il toddy. Il capitano beve troppo. Il signor Cobb parla troppo. La signorina Pell non ha toccato la colazione.»",
+      react:{
+        e_toddy:"«Il toddy l'ha ordinato Sir Alastair, alle 23:20, passando dal salottino. Ha detto: il dottor Pell non riesce a dormire, gliene porti uno alle undici e mezza e lo lasci fuori, non lo disturbi.»",
+        e_tazze:"«Due tazze? Io ne ho portata una sola, signore. Quella col bordo d'oro viene dal ristorante.»",
+        e_cenere:"«L'ho trovato io, stamattina. All'una la stufa l'avevo coperta, ci avevo messo solo la brace. Carta non ne ho bruciata, signore. Non io.»",
+        e_registro:"«Annoto tutto, signore. È il regolamento. E poi, alla mia età, la memoria fa scherzi.»",
+        e_segnapunti:"«All'una e un quarto Sir Alastair è andato a letto, sì. Io dormivo già nel 3. Non ho sentito niente.»",
+        e_fumo:"«Fumo all'una e mezza? Ma io la stufa l'avevo coperta all'una!» Si siede. «Allora qualcuno l'ha riaperta.»"
+      },
+      def:["«Non saprei, signore.»","«Lo chieda al capotreno. Io servo il tè.»","«Mi scusi, devo portare le coperte al 2.»"]},
+    lennox:{name:"Cap. Hugh Lennox",short:"Lennox",age:44,role:"Ex ufficiale dei Fucilieri delle Highlands",
+      bio:"Ex capitano, rumoroso, generoso con il whisky e con le opinioni. Ha giocato a whist con Sir Alastair per tutta la notte. È il suo alibi, e non lo sa.",
+      p:{},loc:["fumatori","fumatori","fumatori"],
+      alibi:["«Al salottino, dalle undici alle due. Whist col morto: io, Sir Alastair e quel chiacchierone di Cobb. Il segnapunti è sul tavolo.»","«Qui, a perdere a carte con Sir Alastair. Di nuovo.»","«Dove vuole che stia? Fuori ci sono due metri di neve.»"],
+      unlock:{crime0:"e_mani"},
+      crime:["«Sir Alastair è arrivato al tavolo alle undici e cinque, con le mani gelate, appena lavate. Sapevano di sapone da ospedale. Ho pensato: un chirurgo, che altro?»","«Un suicidio, dice Sir Alastair. Se lo dice lui.»","«In guerra ho visto morire tanta gente. Non ho mai visto un uomo uccidersi con calma, come dicono.»"],
+      self:"«Fucilieri delle Highlands, vent'anni. Sudafrica, Sudan. Ora vendo cavalli a gente che non sa cavalcare.»",
+      others:"«Sir Alastair gioca a whist come opera: senza un errore, e fischiettando. Cobb vende macchine per scrivere e parla come una mitragliatrice. La signorina Pell ha la spina dorsale di un sergente.»",
+      react:{
+        e_segnapunti:"«Il mio segnapunti. Tengo i conti come al reggimento: ora d'inizio, ora di fine. Sir Alastair è andato via all'una e un quarto, l'ho scritto.»",
+        e_porta:{text:"«Un motivetto?» Si batte la fronte. «I Pirati di Penzance! Sir Alastair l'ha fischiettato tutta la sera, quella maledetta aria. Mi ha fatto impazzire.»",unlock:"e_fischio"},
+        e_fischio:"«Ancora quell'aria. La sento anche adesso, dal salottino.»",
+        e_toddy:"«Il toddy per Pell? Sì, Sir Alastair l'ha ordinato a MacRae verso le undici e venti. Ha detto: povero Henry, non dorme mai. Che cuore d'oro, ho pensato.»",
+        e_tazze:"«Una tazza del ristorante? Sir Alastair ha lasciato la cena prima di noi, alle undici meno un quarto. È arrivato al tavolo alle undici e cinque.» Si ferma. «Venti minuti per prendere un sigaro.»",
+        e_mani:"«Gelate. E arrossate, come se le avesse strofinate con la spazzola.»"
+      },
+      def:["«Non capisco niente di queste cose, io.»","«Ne parli con Sir Alastair: è lui il dottore.»","«Un goccio? No? Peggio per lei.»"]},
+    cobb:{name:"Bertram Cobb",short:"Cobb",age:47,role:"Rappresentante di macchine per scrivere",
+      bio:"Commesso viaggiatore di Glasgow, vende macchine per scrivere in tutta la Scozia. Parla senza sosta, e di macchine per scrivere sa tutto.",
+      p:{},loc:["ristorante","fumatori","ristorante"],
+      alibi:["«Whist col morto, signore, dalle undici fino alle due. Sir Alastair è andato via all'una e un quarto. Il capitano e io abbiamo continuato con una partita a due, che è come ballare da soli.»","«A giocare, a parlare, a vendere. Ho quasi convinto il capitano a comprare una portatile.»","«Qui. Sto scrivendo a mia moglie. A mano, che vergogna, per uno del mestiere.»"],
+      crime:["«Una macchina per scrivere sul tavolino del morto, dicono. Una portatile americana! Mi piacerebbe vederla, sa. Per mestiere.»","«Il biglietto battuto a macchina, eh? Me lo faccia vedere, se vuole. Una macchina per scrivere parla, a chi la sa ascoltare.»","«Ci arrivi, avvocato. Io credo che lei ci arrivi.»"],
+      self:"«Vent'anni a vendere macchine per scrivere. Batto ottanta parole al minuto a occhi chiusi. Mia moglie dice che è l'unica cosa che faccio a occhi chiusi.»",
+      others:"«Sir Alastair è un gran signore, ma batte a macchina come un pollo che becca il granturco: l'ho visto una volta a Londra, a una fiera. Il capitano non compra niente. La signorina Pell mi fa pena.»",
+      react:{
+        e_biglietto:{text:"Cobb tiene il foglio controluce, a lungo. «Guardi qui. Le lettere non sono uniformi: alcune sono calcate, altre appena accennate. La «a» e la «q», sotto il mignolo, sono deboli; la «e» e la «o», sotto l'indice, sfondano la carta. Questo l'ha battuto qualcuno che usa due dita e cerca i tasti con gli occhi.» Ti guarda. «Quelle lettere nella custodia, invece, sono di un dattilografo vero. Non è la stessa mano, avvocato.»",unlock:"e_dattilo"},
+        e_macchina:"«Una pieghevole americana, l'ultimo modello! Il dottor Pell aveva gusto. E le sue lettere sono perfette: dieci dita, margini dritti.»",
+        e_segnapunti:"«Sir Alastair all'una e un quarto ha detto: vado a letto, signori. E fischiettava. Fischietta sempre.»",
+        e_dattilo:"«Due dita, glielo giuro sulla testa di mia moglie.»",
+        e_fischio:"«Quella dei Pirati, sì. Era la terza volta, in una sera.»"
+      },
+      def:["«Interessante! Non so che cosa significhi, ma è interessante.»","«Non è il mio campo, signore. Il mio campo è il carrello e la barra spaziatrice.»","«Le ho mai parlato del nuovo nastro bicolore?»"]},
+    dougal:{name:"Dougal Grant",short:"Grant",age:50,role:"Macchinista della locomotiva",
+      bio:"Ha guidato treni sul passo di Drumochter per vent'anni. Parla poco. Di notte guarda i comignoli delle carrozze, per abitudine.",
+      p:{},loc:["locomotiva","locomotiva","locomotiva"],
+      alibi:["«In cabina, tutta la notte. Con un treno fermo nella neve, il macchinista non dorme.»","«A spalare. Inutilmente.»","«Ad aspettare il soccorso da Inverness. Alle sei e mezza, se Dio vuole.»"],
+      crime:["«Ci siamo fermati alle 23:40 in punto. Neve alta un metro e mezzo. A mezzanotte e mezza ho ridotto il vapore alle carrozze.»","«Di notte guardo i comignoli. Per abitudine: si vede chi tiene acceso.» Ci pensa. «All'una e mezza fumava la dispensa della carrozza letti. Strano, ho pensato. MacRae di solito la copre all'una.»","«Il soccorso arriva alle sei e mezza. Poi ognuno per la sua strada.»"],
+      unlock:{crime1:"e_fumo"},
+      self:"«Vent'anni su questa linea. La montagna è la stessa, la neve è la stessa. Gli uomini cambiano.»",
+      others:"«Non conosco i signori. Conosco MacRae: uomo onesto, uno che copre la stufa all'una in punto.»",
+      react:{e_cenere:"«Carta bruciata? Allora era quello, il fumo dell'una e mezza.»",e_registro:"«MacRae copre la stufa all'una. Sempre. Da trent'anni.»"},
+      def:["«Non so niente, io. Io guido la macchina.»","«Chieda ai signori.»","«Mm.»"]}
+  },
+  accusation:[],
+  truth:[
+    "Henry Pell, patologo a Edimburgo, era stato per quattro anni l'assistente di Sir Alastair Graham a Londra. Aveva le prove che l'«intervento Graham», che aveva reso famoso il chirurgo, aveva ucciso undici pazienti, e che Graham aveva falsificato i registri.",
+    "Pell gli scrisse: sarebbero stati sullo stesso treno. O Graham rinunciava alla nomina a chirurgo del Re prima di Inverness, o il dossier andava al Consiglio Medico.",
+    "Alle 22:45 Graham portò a Pell una tazza di tè «per fare pace», con dentro il cloralio. Quando Pell si addormentò, gli iniettò la morfina tra le dita del piede, batté il biglietto con due dita sulla sua macchina, pulì la boccetta di laudano e prese il dossier. Alle 23:05 era al tavolo del whist.",
+    "Alle 23:20 ordinò a MacRae un toddy per Pell, da lasciare fuori dalla porta: la prova che Pell era vivo alle undici e mezza. Il medico che avrebbe stabilito l'ora della morte sarebbe stato lui stesso.",
+    "Alle 23:40 la neve fermò il treno. Il silenzio gli giocò contro: all'una e venti, quando rientrò nel 4 a vuotare il toddy nel lavabo, Margaret Pell lo sentì attraverso la parete. All'una e mezza, quando bruciò il dossier nella stufa della dispensa, il macchinista vide il fumo.",
+    "E Henry Pell, che caricava l'orologio ogni sera alle undici da quando aveva dieci anni, quella sera non lo caricò. Era già morto."
+  ]
+};
+
+/* finale: la trappola nella carrozza ristorante */
+CASE_EXPRESS.trap={
+  cast:["graham","margaret","lennox","macrae"],
+  steps:[
+    {say:"«Signori, Henry Pell non si è ucciso.»",lab:"Presenta la prova che non è un suicidio",ok:["e_dattilo","d2_lettera","d2_toddy","e_nastro"],good:"«Il biglietto è battuto con due dita: Pell ne usava dieci. E il toddy al whisky l'avrebbe bevuto un astemio che portava il nastrino della Lega da vent'anni?» Margaret chiude gli occhi. Sir Alastair accavalla le gambe.",bad:"Sir Alastair sorride. «Il dolore fa vedere cose che non ci sono, avvocato. Anche a lei, a quanto pare.»"},
+    {say:"«E non è morto tra mezzanotte e l'una, come ha stabilito il nostro unico medico.»",lab:"Presenta la prova dell'ora della morte",ok:["d2_ora","e_rito"],good:"«Henry Pell caricava l'orologio ogni sera alle undici in punto. Ieri sera non l'ha caricato. Alle undici era già morto.» Per la prima volta, Sir Alastair smette di sorridere.",bad:"«L'ora della morte la stabilisce un medico, avvocato. E l'unico medico, qui, sono io.»"},
+    {say:"«Sir Alastair. Il suo alibi è perfetto. Copre esattamente le ore sbagliate.»",lab:"Presenta la prova che Sir Alastair era con Pell",ok:["d2_ultimo","e_ammissione","d2_visita","d2_fischio","e_toddy_fuori","d2_tazza"],good:"«Alle 22:45 lei era nel 4, con una tazza di tè. All'una e venti c'è tornato, a vuotare il toddy nel lavabo: la signorina Pell l'ha sentita fischiettare.» Lennox posa il bicchiere. MacRae si fa il segno della croce.",bad:"«Il capitano e il signor Cobb mi hanno visto per tutta la notte, avvocato. Tutta la notte.»"},
+    {say:"«E il dossier, Sir Alastair. Gli undici nomi.»",lab:"Presenta la prova del movente",ok:["d2_dossier","e_cenere","e_lettera_g","d2_movente"],good:"Posi sul tavolo il lembo bruciato: «…undici decessi…». Margaret legge, e si alza in piedi. Sir Alastair guarda fuori dal finestrino, nel buio.",bad:"«Quale dossier? Henry aveva molte fantasie, e pochi documenti.»"},
+    {secret:true,say:"Sir Alastair si alza, si infila i guanti. Hai un'ultima carta. «Ah, Sir Alastair… un'ultima cosa.»",lab:"Quale dettaglio, che solo l'assassino può conoscere, nomini per farlo tradire?",ok:["e_ago"]}
+  ]
+};
+
+CASE_EXPRESS.deductions=[
+  {id:"d2_ora",name:"Morto prima delle undici",th:{T:3,A:-1,B:-2},a:["e_orologio"],b:["e_rito"],text:"Pell caricava l'orologio ogni sera alle undici in punto. Ieri sera non l'ha caricato: alle undici era già morto. Non tra mezzanotte e l'una, come dice Sir Alastair."},
+  {id:"d2_toddy",name:"Un toddy per un astemio",th:{A:-2,B:-1},a:["e_toddy","e_registro"],b:["e_nastro"],text:"Pell portava il nastrino della Lega della Temperanza e non beveva da vent'anni. Il toddy non l'ha chiesto lui. L'ha ordinato Sir Alastair, per far credere che alle 23:30 fosse vivo."},
+  {id:"d2_lettera",name:"Non l'ha battuto lui",th:{A:-3},a:["e_biglietto"],b:["e_dattilo","e_macchina"],text:"Le lettere di Pell sono battute con dieci dita, regolari. Il biglietto d'addio con due dita, a strappi. Qualcun altro l'ha scritto sulla sua macchina."},
+  {id:"d2_tazza",name:"La tazza dal bordo dorato",th:{T:2,B:-1},a:["e_tazze"],b:["e_servizio"],text:"Nel 4 c'è una tazza del vagone ristorante, con il cloralio sul fondo. Qualcuno l'ha portata da cena: e Sir Alastair ha lasciato la tavola alle 22:45 con una tazza in mano."},
+  {id:"d2_visita",name:"L'uomo dell'una e venti",th:{B:-3,T:1},a:["e_porta"],b:["e_segnapunti"],text:"Sir Alastair ha lasciato il whist all'una e un quarto. All'una e venti qualcuno è entrato nel 4, ha vuotato qualcosa nel lavabo ed è uscito. Cinque minuti: il tempo di attraversare il corridoio."},
+  {id:"d2_fischio",name:"Lo stesso motivetto",th:{B:-2,T:1},a:["e_porta"],b:["e_fischio"],text:"All'una e venti, nel 4, qualcuno fischiettava. Sir Alastair fischietta i Pirati di Penzance da tutta la sera. Margaret ha riconosciuto l'aria."},
+  {id:"d2_dossier",name:"Bruciato all'una e mezza",th:{C:3},a:["e_cenere"],b:["e_fumo","e_registro"],text:"MacRae ha coperto la stufa all'una ed è andato a dormire. All'una e mezza il comignolo fumava. Qualcuno ha riaperto la stufa e ci ha bruciato il dossier di Pell."},
+  {id:"d2_movente",name:"Il prezzo della nomina",th:{C:2},a:["e_taccuino","e_lettera_g"],b:["e_cenere","e_taccuino"],text:"Pell aveva dato a Sir Alastair tempo fino a Inverness: rinunciare alla nomina a chirurgo del Re, o il dossier degli undici morti al Consiglio Medico. Sir Alastair non ha rinunciato."},
+  {id:"d2_ultimo",name:"L'ultimo a vederlo vivo",th:{T:2,B:-2},a:["e_ammissione"],b:["e_rito","e_orologio"],text:"Pell è morto prima delle undici. Sir Alastair ammette di essere stato con lui dalle 22:45 alle 23. Nessun altro, in quella mezz'ora, è entrato nel 4."}
+];
+CASE_EXPRESS.deductions.forEach(d=>{CASE_EXPRESS.clues[d.id]={name:d.name,cat:"Deduzione",th:d.th,text:d.text};});
+
+CASE_EXPRESS.tips={
+  start:"«Sappiamo chi è stato. Ora serve dimostrarlo. Cominci dai bagliori, e non perda d'occhio Sir Alastair: un colpevole che aiuta l'indagine è un colpevole che sbaglia.»",
+  act1:"«Mezzogiorno. Torni da Sir Alastair ogni volta che ha qualcosa in mano. «Un'ultima cosa…» lo innervosisce più di qualunque accusa.»",
+  act2:"«Ultimo atto. Quando avrà le prove, vada su «Accusa»: riuniremo tutti nel ristorante. E tenga per sé il segreto dell'ago fino all'ultimo.»",
+  ago:"«Il segno dell'ago. Non lo mostri a nessuno: in un treno fermo tutti parlano, e Sir Alastair ascolta. Tenga questa carta per la fine.»",
+  calm:"«Sir Alastair comincia a perdere la calma. Torni da lui: «Un'ultima cosa…». Prima o poi dirà qualcosa che non dovrebbe sapere.»"
+};
+CASE_EXPRESS.lyleDed={
+  d2_ora:"«L'orologio!» Lyle quasi ride. «Il nostro chirurgo ha fissato l'ora della morte per coprire il suo alibi. E l'orologio di Pell lo smentisce di un'ora intera.»",
+  d2_toddy:"«Un toddy al whisky per un astemio. Sir Alastair non conosceva la sua vittima tanto bene quanto credeva.»",
+  d2_lettera:"«Due dita. Il più grande chirurgo di Londra, e batte a macchina come un bambino. Le mani più abili d'Inghilterra, tradite da una tastiera.»",
+  d2_tazza:"«Una tazza dorata in uno scompartimento di seconda mano. È così che si costruisce un caso: una tazza alla volta.»",
+  d2_visita:"«Cinque minuti tra il whist e la porta del 4. Il suo alibi finisce dove comincia il suo secondo errore.»",
+  d2_fischio:"«I Pirati di Penzance!» Lyle si lascia cadere sulla cuccetta. «L'ha fischiettato nella stanza del morto. Un uomo troppo sicuro di sé.»",
+  d2_dossier:"«Il fumo dell'una e mezza. Se il treno fosse ripartito, nessuno l'avrebbe visto. La neve, avvocato. La neve è la nostra testimone.»",
+  d2_movente:"«Undici morti contro una nomina reale. Per certi uomini il conto torna.»",
+  d2_ultimo:"«L'ultimo a vederlo vivo, per sua stessa ammissione. Adesso manca solo che lo dica lui.»"
+};
+
+/* il finale del caso II dipende dalla trappola */
+CASE_EXPRESS.ending=function(ans,g,sl){
+  const R=(k,title,eyebrow,paras)=>({kind:k,title,eyebrow,paras});const res=(sl&&sl.res)||[],ok=res.slice(0,4).filter(Boolean).length,trap=!!(sl&&sl.trap);
+  if(trap&&ok>=3)return R("vera","Un'ultima cosa","Finale vero",[
+    "«Ah, Sir Alastair… un'ultima cosa. La polizia di Inverness farà l'autopsia. Cercheranno il laudano nello stomaco, naturalmente. E il segno dell'ago.»",
+    "«Ma quale ago? Tra le dita del piede sinistro non c'era nessun…»",
+    "Si ferma. Nella carrozza ristorante non si sente più niente, nemmeno il vento.",
+    "Nessuno, a parte te e il dottor Lyle, sapeva dell'ago. Nessuno sapeva dove fosse. Tranne l'uomo che ce l'aveva messo.",
+    "Sir Alastair si sfila i guanti, con calma, dito per dito, come dopo un intervento. «Ventitré anni senza un errore in sala operatoria», dice. «E mi tradisce un piede.»",
+    "Guarda Margaret. «Suo fratello era il miglior assistente che abbia mai avuto. È per questo che sapeva dove cercare.»",
+    "Alle 18:30 arrivò la locomotiva da Inverness. Sir Alastair scese a Kingussie, come aveva previsto. Solo che, sul marciapiede, lo aspettavano due agenti della polizia della contea.",
+    "La settimana dopo, il Re nominò un altro chirurgo. Il dossier degli undici nomi fu ricostruito dai registri di San Bartolomeo, in tre mesi.",
+    "Hai incastrato un assassino che conoscevi dall'inizio. Questo era il caso: non chi, ma come."]);
+  if((trap&&ok<3)||(!trap&&ok>=3))return R("quasi","Non provato","Finale parzialmente corretto",[
+    trap?"La trappola è scattata: Sir Alastair ha nominato l'ago tra le dita del piede, e tutti l'hanno sentito. Ma il resto del tuo caso era fragile, e i suoi avvocati lo sapevano.":"Hai smontato il suicidio, l'ora della morte e l'alibi. Ma quando hai teso l'ultima trappola, Sir Alastair non ci è caduto. «Un ago? Ne parla tutto il treno, avvocato.»",
+    "Il processo si tenne a Inverness, in aprile. I giornali di Londra mandarono i loro migliori cronisti.",
+    "La giuria si ritirò per sei ore. Poi pronunciò il verdetto che solo la legge scozzese conosce: non colpevole, non innocente. Non provato.",
+    "Sir Alastair Graham lasciò il tribunale libero, e non operò mai più. Il Re nominò un altro chirurgo.",
+    "Margaret Pell, all'uscita, ti strinse la mano. «Non provato», disse. «Ma lo sappiamo, lei e io.»",
+    "Il caso era giusto. Mancava un anello. Rigioca per chiudere il cerchio."]);
+  if(ok>=1)return R("parziale","Un dubbio ragionevole","Finale parzialmente corretto",[
+    "Hai mostrato ai presenti che qualcosa non tornava. Ma un dubbio non è una prova, e Sir Alastair è l'uomo più rispettato d'Inghilterra.",
+    "La polizia di Inverness archiviò il caso come suicidio, con una nota a margine: «circostanze non del tutto chiarite».",
+    "Sir Alastair fu nominato chirurgo di Sua Maestà la settimana dopo. Al ricevimento, qualcuno sentì che fischiettava.",
+    "Hai visto il delitto con i tuoi occhi, nel prologo. Ora sai quanto è difficile dimostrarlo. Rigioca."]);
+  return R("errato","Il suicidio di Henry Pell","Finale errato",[
+    "Sir Alastair ti ha ascoltato con pazienza, poi ha posato una mano sulla spalla di Margaret. «Il dolore, signorina. Il dolore.»",
+    "Il certificato di morte, firmato da lui, diceva: suicidio per laudano, tra mezzanotte e l'una.",
+    "Alle 18:30 arrivò la locomotiva. Sir Alastair scese a Kingussie, salutò con il cappello, e la settimana dopo operò il Re.",
+    "Il delitto perfetto esiste, avvocato. Sono quelli che nessuno dimostra. Rigioca."]);
+};
+
 CASE_RAVEN.ending=function(ans,g,sl){const e=CASE_RAVEN.endingBase(ans,g,sl);if(!sl)return e;
   const names=sl.failed.map(id=>CASE_RAVEN.chars[id].short),lst=names.length>1?names.slice(0,-1).join(", ")+" e "+names[names.length-1]:names[0];
   const add=[];
@@ -1706,7 +2136,7 @@ const SALON={
   }
 };
 let SL=null;
-function salonScene(onDone){const who=accAns.who,dead=G.flags.rinaldiMorto,order=["sofia","rina","rinaldi","allegra"].filter(id=>id!==who&&!(id==="rinaldi"&&dead));
+function salonScene(onDone){lyleHide();clearTimeout(lyleT);const who=accAns.who,dead=G.flags.rinaldiMorto,order=["sofia","rina","rinaldi","allegra"].filter(id=>id!==who&&!(id==="rinaldi"&&dead));
   SL={steps:[...order.map(id=>({t:"clear",who:id})),{t:"accuse",who}],i:0,done:{},cleared:{},picked:false,onDone,dec:false,failed:[]};
   const el=$("#salon");el.classList.add("on");AU.sfx("drone");renderSalon();}
 function renderSalon(){const st=SL.steps[SL.i],who=accAns.who,ids=["allegra","rinaldi","sofia","rina"];
@@ -1730,10 +2160,10 @@ function salonPick(id){const st=SL.steps[SL.i],info=st.t==="clear"?SALON.clear[s
 function salonNext(){SL.res=null;SL.i++;AU.sfx("page");if(SL.i<SL.steps.length){renderSalon();return;}
   const e=SL.onDone({dec:SL.dec,failed:SL.failed.slice(),ok:SL.score||0,n:SL.steps.length}),fin=()=>{$("#salon").classList.remove("on");showEnding();};
   if(e.kind==="vera")gloveScene(fin);else{shake();lightning();setTimeout(fin,500);}}
-function gloveScene(done){const el=$("#salon");el.innerHTML=`<div class="glove-sc"><svg viewBox="0 0 300 360" class="gl-svg"><defs><linearGradient id="arm" x1="0" x2="1"><stop offset="0" stop-color="#cdb79a"/><stop offset="1" stop-color="#a88f72"/></linearGradient></defs>
+function gloveScene(done,cap){const el=$("#salon");el.innerHTML=`<div class="glove-sc"><svg viewBox="0 0 300 360" class="gl-svg"><defs><linearGradient id="arm" x1="0" x2="1"><stop offset="0" stop-color="#cdb79a"/><stop offset="1" stop-color="#a88f72"/></linearGradient></defs>
   <path d="M110 360L118 230Q120 200 136 196L136 120Q136 108 146 108Q156 108 156 120L158 180L160 96Q160 84 170 84Q180 84 180 96L182 178L186 104Q186 92 196 92Q206 92 206 104L204 186L214 132Q216 122 226 124Q236 128 232 140L222 230Q216 270 200 290L196 360Z" fill="url(#arm)" stroke="#5a4630" stroke-width="2"/>
   <g class="gl-off"><path d="M106 360L114 226Q116 196 134 192L132 116Q132 102 146 102Q160 102 160 116L161 176L156 92Q156 78 170 78Q184 78 184 92L186 174L182 100Q182 86 196 86Q210 86 210 100L208 182L212 128Q216 116 228 118Q242 122 236 138L226 232Q220 274 202 294L200 360Z" fill="#0c0a09" stroke="#2a2420" stroke-width="2"/><path d="M118 330Q156 320 196 330" stroke="#2a2420" stroke-width="2" fill="none"/><ellipse cx="226" cy="150" rx="5" ry="9" fill="#5a1010" opacity=".8"/></g></svg>
-  <p class="gl-cap">Lady Agatha si sfila il guanto sinistro, dito per dito, e lo posa sul bracciolo.</p></div>`;
+  <p class="gl-cap">${cap||"Lady Agatha si sfila il guanto sinistro, dito per dito, e lo posa sul bracciolo."}</p></div>`;
   AU.sfx("drone");setTimeout(done,5200);}
 
 
@@ -1766,7 +2196,7 @@ const LYLE_TIP={
   act2:"«"+"Bugiardi"+", al plurale. Chi l'ha scritto non accusa una persona sola.»",
   act3:"«L'ultima notte. Se c'è un'accusa da fare, va fatta prima di mezzanotte.»"
 };
-function tip(k){if(!G)return;G.tips=G.tips||{};if(G.tips[k])return;G.tips[k]=1;save();lyleSay(LYLE_TIP[k]);}
+function tip(k){if(!G)return;G.tips=G.tips||{};if(G.tips[k])return;const t=(S.tips&&S.tips[k])||LYLE_TIP[k];if(!t)return;G.tips[k]=1;save();lyleSay(t);}
 let lyleT=null;
 function lyleSay(text){const go=()=>{if(!G||!$("#game").classList.contains("on")||$("#chap").classList.contains("on")||$("#salon").classList.contains("on")||$("#film").classList.contains("on")){lyleT=setTimeout(go,900);return;}
     const el=$("#lyle");el.innerHTML=`<div class="ly-pf">${portrait(LYLE.p)}</div><div class="ly-tx"><b>${LYLE.name}</b>${text}</div>`;el.classList.remove("on");void el.offsetWidth;el.classList.add("on");AU.sfx("page");
@@ -1778,6 +2208,7 @@ function lyleHint(){if(!G||G.ended){lyleSay("«Il caso è chiuso. Ora ho soltant
   G.hints=(G.hints||0)+1;save();const R=S.rooms[G.room],act=G.act,seen=(r,o)=>G.seen[r+"."+o.id];
   const avail=(rid)=>S.rooms[rid].objects.filter(o=>objAvail(o)&&!seen(rid,o)&&!(o.req&&!hasItem(o.req)));
   const here=avail(G.room);if(here.length){lyleSay(`«Non abbiamo ancora guardato bene qui. ${here[0].label}, per esempio.»`);return;}
+  if(S.culprit&&charsIn(G.room).includes(S.culprit)&&SLIPS.some(x=>calmOf()<=x.at&&!(G.slips||{})[x.k])){lyleSay("«Sir Alastair ha la calma incrinata. Adesso: «Un'ultima cosa…».»");return;}
   for(const id of charsIn(G.room)){if(canObserve(id)){lyleSay(`«Prima di interrogare ${S.chars[id].short}, la guardi bene: «Osserva», sotto il nome.»`.replace("la guardi",id==="rinaldi"||id==="anselmo"?"lo guardi":"la guardi"));return;}
     const ob=Object.keys(OBJ).find(k=>k.startsWith(id+"|")&&(G.log[id]||[]).some(l=>l.k===k.split("|")[1])&&objOpen(k.split("|")[1],id)&&OBJ[k].ok.some(has));
     if(ob){lyleSay(`«${S.chars[id].short} ha detto una cosa che non torna, e lei ha il reperto per dimostrarlo. Rilegga il colloquio.»`);return;}}
@@ -1811,9 +2242,9 @@ function reportData(){const e=G.ended,raw=Object.keys(S.clues).filter(id=>S.clue
   add("Esito dell'accusa",e.title,endPts,40);
   add("Reperti raccolti",`${nRaw} su ${raw.length}`,Math.round(nRaw/raw.length*10),10);
   add("Deduzioni",`${nDed} su ${dd.length}`,Math.round(nDed/(dd.length||1)*15),15);
-  add("Prove nel salone",sl.n?`${sl.ok} su ${sl.n}${sl.dec?" · decisiva":""}`:"—",sl.n?Math.round(sl.ok/sl.n*15):0,15);
-  const nRead=Object.values(G.read||{}).filter(v=>v===1).length,nObj=Object.keys(G.obj||{}).length;
-  add("Letture riuscite",`${nRead} su ${Object.keys(READ).length}`,nRead,6);
+  add(S.trap?"Prove nel confronto":"Prove nel salone",sl.n?`${sl.ok} su ${sl.n}${sl.dec?" · decisiva":""}`:"—",sl.n?Math.round(sl.ok/sl.n*15):0,15);
+  const nRead=Object.keys(G.read||{}).filter(k=>G.read[k]===1&&S.chars[k]).length,nObj=Object.keys(G.obj||{}).length;
+  const nReadTot=Object.keys(READ).filter(k=>S.chars[k]).length;add("Letture riuscite",`${nRead} su ${nReadTot}`,Math.round(nRead/(nReadTot||1)*6),6);
   add("Obiezioni accolte",nObj?`${nObj}`:"nessuna",Math.min(6,nObj*2),6);
   const actPts=G.forced?0:[10,10,8,5][G.act]||5;
   add("Accusa formulata",G.forced?"dopo la mezzanotte, troppo tardi":S.acts[G.act].label.split("·")[1].trim(),actPts,10);
@@ -1828,7 +2259,7 @@ function showReport(){const r=reportData(),rec=setBest(S.id,r.tot),best=getBest(
   <div class="rp-tot"><span>Punteggio</span><b id="rpN">0</b><i>/ 100</i></div>
   <div class="rp-stamp" style="animation-delay:${(.5+r.rows.length*.22).toFixed(2)}s">${r.title}</div>
   ${rec?`<div class="rp-rec">Nuovo record per questo caso</div>`:`<div class="rp-rec dim">Il tuo record: ${best}</div>`}
-  <div class="rp-med">${nw.length?`<div class="rp-mk">Nuove medaglie</div>${nw.map(m=>`<div class="mitem">${medalIcon(1)}<div><b>${m.name}</b><span>${m.desc}</span></div></div>`).join("")}`:""}<div class="rp-mc">Medaglie del caso: ${Object.keys(gotAll).length} su ${MEDALS.length}</div></div>
+  <div class="rp-med">${nw.length?`<div class="rp-mk">Nuove medaglie</div>${nw.map(m=>`<div class="mitem">${medalIcon(1)}<div><b>${m.name}</b><span>${m.desc}</span></div></div>`).join("")}`:""}<div class="rp-mc">Medaglie del caso: ${Object.keys(gotAll).length} su ${(S.medals||MEDALS).length}</div></div>
   <div class="rp-ly"><div class="ly-pf">${portrait(LYLE.p)}</div><p><b>${LYLE.name}</b>${r.lyle}</p></div>
   <div class="rp-acts"><button class="btn red" onclick="closeReport();newGame(S.id)">Rigioca il caso</button>${G.ended.kind!=="vera"?`<button class="btn ink" onclick="closeReport();revealTruth()">Rivela la verità</button>`:""}<button class="btn ink" onclick="closeReport();toMenu()">Menu principale</button><button class="btn ink" onclick="closeReport()">Chiudi</button></div></div>`;
   el.classList.add("on");el.scrollTop=0;
@@ -1887,7 +2318,8 @@ let objMode=null;
 function objOpen(k,who){who=who||talkWith;const o=OBJ[who+"|"+k];return !!o&&!(G.obj||{})[who+"|"+k]&&!(o.unlock&&has(o.unlock));}
 function objStart(k){finishType();lyleHide();objMode=k;pickOpen=true;AU.sfx("page");renderTalk();}
 function objPick(id){const key=talkWith+"|"+objMode,o=OBJ[key];objMode=null;pickOpen=false;G.obj=G.obj||{};
-  if(o.ok.includes(id)){G.obj[key]=1;save();objFx();setTimeout(()=>{pushLog("Obiezione! — "+S.clues[id].name,o.a,true,o.unlock);},1300);}
+  if(id==="e_ago")G.agoKnown=1;
+  if(o.ok.includes(id)){G.obj[key]=1;if(o.calm)pressCulprit(o.calm);save();objFx();setTimeout(()=>{pushLog("Obiezione! — "+S.clues[id].name,o.a,true,o.unlock);},1300);}
   else{G.wrongObj=(G.wrongObj||0)+1;save();AU.sfx("tick");pushLog("Obiezione — "+S.clues[id].name,OBJ_NO[G.wrongObj%OBJ_NO.length],false);}}
 function objFx(){AU.sfx("gavel");AU.duck&&AU.duck();const f=document.createElement("div");f.className="objfx";f.innerHTML=`<span>Obiezione!</span>`;document.body.appendChild(f);shake();setTimeout(()=>f.remove(),1400);}
 
@@ -1955,17 +2387,158 @@ const MEDALS=[
   {id:"perfect",name:"Infallibile",desc:"Finale vero senza un solo errore: nessun collegamento, obiezione o lettura sbagliati.",ok:()=>G.ended.kind==="vera"&&!G.wrongDed&&!G.wrongObj&&!Object.values(G.read||{}).includes(-1)}
 ];
 function getMed(){try{return JSON.parse(localStorage.getItem(MED)||"{}")}catch(e){return {}}}
-function earnMedals(){const m=getMed(),k=S.id,got=m[k]=m[k]||{},nw=[];MEDALS.forEach(x=>{let ok=false;try{ok=x.ok()}catch(e){}if(ok&&!got[x.id]){got[x.id]=1;nw.push(x);}});try{localStorage.setItem(MED,JSON.stringify(m))}catch(e){}return nw;}
+function earnMedals(){const m=getMed(),k=S.id,got=m[k]=m[k]||{},nw=[];(S.medals||MEDALS).forEach(x=>{let ok=false;try{ok=x.ok()}catch(e){}if(ok&&!got[x.id]){got[x.id]=1;nw.push(x);}});try{localStorage.setItem(MED,JSON.stringify(m))}catch(e){}return nw;}
 function medalIcon(on){return `<svg viewBox="0 0 40 52" class="mdl${on?"":" off"}"><path d="M12 0h16l-4 16h-8z" fill="${on?"#8a1414":"#3a302a"}"/><circle cx="20" cy="32" r="16" fill="${on?"url(#gGold)":"#3a342e"}"/><circle cx="20" cy="32" r="11.5" fill="none" stroke="${on?"#6e4f22":"#2a2420"}" stroke-width="1.4"/><path d="M20 24l2.4 5 5.4.6-4 3.7 1.1 5.3L20 36l-4.9 2.6 1.1-5.3-4-3.7 5.4-.6z" fill="${on?"#6e4f22":"#2a2420"}"/></svg>`;}
-function openMedals(){AU.sfx("page");const got=(getMed()[CASE_RAVEN.id])||{},n=MEDALS.filter(m=>got[m.id]).length;
-  $("#medals").innerHTML=`<div class="p-head"><div><h2>Medaglie</h2><p>Le ceneri di Ravenscourt · ${n} su ${MEDALS.length}</p></div><button class="p-back" onclick="closePanels();buildTitle()">‹ Indietro</button></div>
-  <div class="mgrid">${MEDALS.map(m=>`<div class="mitem${got[m.id]?"":" off"}">${medalIcon(got[m.id])}<div><b>${m.name}</b><span>${m.desc}</span></div></div>`).join("")}</div>`;
+function openMedals(){AU.sfx("page");const all=getMed(),cases=STORIES.filter(st=>!st.locked);
+  $("#medals").innerHTML=`<div class="p-head"><div><h2>Medaglie</h2><p>${medalCount()} su ${medalTotal()} ottenute</p></div><button class="p-back" onclick="closePanels();buildTitle()">‹ Indietro</button></div>`+cases.map(st=>{const got=all[st.id]||{},L=st.medals||MEDALS;return `<div class="mcase"><h3>${st.num} · ${st.title}</h3><div class="mgrid">${L.map(m=>`<div class="mitem${got[m.id]?"":" off"}">${medalIcon(got[m.id])}<div><b>${m.name}</b><span>${m.desc}</span></div></div>`).join("")}</div></div>`;}).join("");
   $("#medals").classList.add("on");}
+function medalTotal(){return STORIES.filter(st=>!st.locked).reduce((a,st)=>a+(st.medals||MEDALS).length,0);}
+function medalCount(){const all=getMed();return STORIES.filter(st=>!st.locked).reduce((a,st)=>a+Object.keys(all[st.id]||{}).length,0);}
+
+/* =====================================================================
+   CASO II · motore del giallo rovesciato
+   ===================================================================== */
+(function(){const C=CASE_EXPRESS,ch=C.chars;
+  ch.pell={name:"Dott. Henry Pell",short:"Pell",age:38,role:"Patologo, già assistente di Sir Alastair",deadFrom:0,
+    bio:"Patologo all'Infermeria Reale di Edimburgo. Per quattro anni assistente di Sir Alastair a Londra. Astemio, dattilografo provetto, caricava l'orologio ogni sera alle undici. Aveva un dossier.",p:{},loc:[]};
+  Object.keys(ch).forEach(k=>ch[k].p.k=k);
+  ch.graham.sched={0:[[8*60,"scomp4"],[9*60,"ristorante"],[1e9,"scomp7"]],1:[[13*60,"fumatori"],[1e9,"scomp7"]],2:[[17*60,"ristorante"],[1e9,"scomp7"]]};
+  ch.cobb.sched={0:[[8*60+30,"ristorante"],[1e9,"fumatori"]]};
+  ch.margaret.sched={1:[[13*60,"ristorante"],[1e9,"scomp5"]]};
+  Object.assign(CHARFIG,{graham:{k:"coat"},margaret:{k:"gown",bun:1},macrae:{k:"coat"},lennox:{k:"coat"},cobb:{k:"coat"},dougal:{k:"coat"},pell:{k:"coat"}});
+  ch.graham.p.lapels=1;ch.lennox.p.lapels=1;
+  Object.assign(ENGR,{
+    graham:{w:15,h:46,jaw:1,age:2,lids:1,brow:-.5,mouth:"smirk",hair:"silver",beard:"tash",dress:"coat",col:"wing",acc:"cravat"},
+    pell:{w:14,h:44,jaw:-1,age:0,lids:0,brow:.5,mouth:"soft",hair:"slick",dress:"grey",col:"wing",acc:"ribbon"},
+    margaret:{w:13.5,h:44,jaw:-2,age:1,lids:1,brow:-1,mouth:"thin",hair:"bun",dress:"dark",col:"high",acc:"ribbon"},
+    macrae:{w:16.5,h:44,jaw:2,age:2,lids:1,brow:1,mouth:"soft",hair:"rcap",beard:"chops",dress:"coat",col:"plain",acc:""},
+    lennox:{w:16,h:45,jaw:2,age:1,lids:0,brow:1,mouth:"soft",hair:"slick",beard:"walrus",dress:"coat",col:"wing",acc:"monocle"},
+    cobb:{w:18,h:42,jaw:2,age:1,lids:0,brow:0,mouth:"smirk",hair:"bald",dress:"grey",col:"wing",acc:"specs"},
+    dougal:{w:16.5,h:45,jaw:3,age:2,lids:1,brow:1.5,mouth:"thin",hair:"rcap",beard:"full",dress:"maid",col:"plain",acc:""}});
+  Object.assign(EV,{e_rito:{t:"margaret"},e_porta:{t:"margaret"},e_fischio:{t:"lennox"},e_dattilo:{t:"cobb"},e_fumo:{t:"dougal"},e_mani:{t:"lennox"},e_ammissione:{t:"graham"},e_toddy_fuori:{t:"graham"},
+    e_obs_graham:{t:"graham"},e_obs_margaret:{t:"margaret"},e_obs_lennox:{t:"lennox"},e_obs_cobb:{t:"cobb"},
+    e_biglietto:{doc:"typed",head:"",body:"Non posso più guardarmi allo specchio.\nHo fallito come medico\ne come uomo.\n\nMargaret, perdonami.\n\nH."},
+    e_taccuino:{doc:"hand",paper:"agenda",body:"Martedì. G. sarà sul treno.\nGli do tempo fino a Inverness:\no rinuncia alla nomina,\no il dossier va al Consiglio Medico."},
+    e_registro:{doc:"ledger",head:"Registro di servizio — Carrozza E",rows:[["22:40","tè","n. 4",""],["23:20","toddy","n. 4","ord. Sir A. G."],["23:30","toddy","n. 4","lasciato fuori"],["01:00","stufa","coperta","riposo nel 3"]]},
+    e_segnapunti:{doc:"ledger",head:"Whist col morto — punti",rows:[["Inizio","23:05","",""],["Graham","+412","",""],["Lennox","−180","",""],["Sir A. lascia","01:15","va a letto",""]]},
+    e_lettera_g:{doc:"hand",body:"Saremo sullo stesso treno,\nscompartimento 4.\nMi porti la sua risposta\nprima di Inverness.\n\nH. P."},
+    e_cenere:{doc:"hand",burnt:1,body:"…registro operatorio…\nOspedale di San Bartolomeo, 1909\n…undici decessi…\n…intervento Graham…"},
+    e_laudano:{a:"vial2"},e_toddy:{a:"glass"},e_orologio:{a:"watch"},e_tazze:{a:"cups2"},e_ago:{a:"foot"},e_macchina:{a:"typer"},e_nastro:{a:"ribbon"},e_servizio:{a:"cups2"},e_borsa:{a:"vials"},e_parete:{a:"drag"}});
+  EVA.watch=()=>VEL+`<path d="M150 20q-6 30 0 50" stroke="#c9ccd0" stroke-width="3" fill="none"/><circle cx="150" cy="16" r="8" fill="none" stroke="#c9ccd0" stroke-width="4"/><circle cx="150" cy="112" r="56" fill="#c9ccd0"/><circle cx="150" cy="112" r="48" fill="#f3efe4"/>${Array.from({length:12},(_,i)=>{const a=i*30*Math.PI/180;return `<path d="M${(150+40*Math.sin(a)).toFixed(1)} ${(112-40*Math.cos(a)).toFixed(1)}L${(150+45*Math.sin(a)).toFixed(1)} ${(112-45*Math.cos(a)).toFixed(1)}" stroke="#2b1d10" stroke-width="2"/>`}).join("")}<path d="M150 112L132 104" stroke="#1a120c" stroke-width="4" stroke-linecap="round"/><path d="M150 112L159 146" stroke="#1a120c" stroke-width="2.5" stroke-linecap="round"/><circle cx="150" cy="112" r="3" fill="#1a120c"/>`;
+  EVA.cups2=()=>VEL+`<rect x="60" y="130" width="180" height="16" rx="6" fill="#c9ccd0"/><g transform="translate(110 128)"><path d="M-26 -50h52l-6 46h-40z" fill="#fbf8f0" stroke="#bfb6a3"/><path d="M26 -40q16 0 12 14q-4 10 -16 8" stroke="#fbf8f0" stroke-width="5" fill="none"/></g><g transform="translate(196 128)"><path d="M-26 -50h52l-6 46h-40z" fill="#fbf8f0" stroke="#bfb6a3"/><path d="M-26 -50h52" stroke="#c9a45c" stroke-width="4"/><path d="M26 -40q16 0 12 14q-4 10 -16 8" stroke="#fbf8f0" stroke-width="5" fill="none"/><ellipse cx="0" cy="-10" rx="14" ry="3" fill="#e9e4d6"/></g>`;
+  EVA.foot=()=>`<rect width="300" height="200" fill="#e8e2d4"/><path d="M40 200Q30 120 90 100Q160 86 230 96Q270 104 274 130Q270 150 230 150L160 160Q110 170 100 200Z" fill="#d8bfa0" stroke="#a88a6a" stroke-width="2"/>${[0,1,2,3,4].map(i=>`<ellipse cx="${232+i*0}" cy="${102+i*11}" rx="${16-i*1.6}" ry="6" fill="#d8bfa0" stroke="#a88a6a"/>`).join("")}<circle cx="236" cy="140" r="3" fill="#6a2a3a"/><circle cx="236" cy="140" r="9" fill="#7a3a5a" opacity=".3"/><circle cx="236" cy="140" r="22" fill="none" stroke="#8a1414" stroke-width="2" stroke-dasharray="4 3"/>`;
+  EVA.typer=()=>VEL+`<g transform="translate(150 160) scale(2.6)">${P.typer()}</g>`;
+  EVA.ribbon=()=>`<rect width="300" height="200" fill="#5a5a5e"/><rect width="300" height="200" fill="url(#hatchX)" opacity=".2"/><path d="M150 70q-30 -26 -40 -6q10 18 40 6zM150 70q30 -26 40 -6q-10 18 -40 6z" fill="#3a6aaa"/><path d="M146 72l-18 70l14 -8l8 16l4 -76zM154 72l18 70l-14 -8l-8 16l-4 -76z" fill="#2a5a9a"/><circle cx="150" cy="70" r="6" fill="#4a7aba"/>`;
+  EVA.vial2=()=>VEL+`<ellipse cx="150" cy="166" rx="60" ry="9" fill="#000" opacity=".45"/><path d="M128 70h44v90q0 6 -6 6h-32q-6 0 -6 -6z" fill="#6a4014" opacity=".75" stroke="#e8f0f3" stroke-width="1.5"/><rect x="136" y="50" width="28" height="22" fill="#2a190e"/><rect x="132" y="96" width="36" height="40" fill="#efe4c8"/><text x="150" y="112" text-anchor="middle" font-size="6.5" fill="#2b1d10" font-family="Special Elite,monospace">TINTURA</text><text x="150" y="122" text-anchor="middle" font-size="6.5" fill="#2b1d10" font-family="Special Elite,monospace">D'OPPIO</text><path d="M134 78l8 60" stroke="#fff" opacity=".35" stroke-width="3"/>`;
+  // ritratti: pezzi nuovi
+  READ.graham={clue:"e_obs_graham",opts:[
+    {t:"La spilla della cravatta",reply:"Una perla vera, montata a Bond Street. Sir Alastair segue il tuo sguardo. «Un regalo di una duchessa grata. Le piace?»"},
+    {t:"Le mani",ok:1,say:"«Ha le nocche arrossate e screpolate, Sir Alastair. Le ha strofinate con il sapone fenicato a lungo, stanotte. Più a lungo che dopo un'operazione.»",reply:"Sir Alastair si guarda le mani, poi le mette in tasca, con naturalezza. «Il freddo, avvocato. Il riscaldamento è ridotto.»"},
+    {t:"L'orologio d'oro",reply:"Un orologio d'oro, perfettamente in orario. Sir Alastair lo carica davanti a te, con un sorriso. «Abitudine.»"}]};
+  READ.margaret={clue:"e_obs_margaret",opts:[
+    {t:"Il nastrino azzurro",reply:"Il nastrino della Lega della Temperanza, come quello del fratello. Lo sapevi già."},
+    {t:"Gli occhi",ok:1,say:"«Lei non dorme da molte notti, signorina. E stanotte era sveglia: il libro sulla sua cuccetta ha il segnalibro all'ultima pagina.»",reply:"Margaret ti fissa. «Sì. Ero sveglia. E ho sentito cose che nessuno mi ha chiesto.»"},
+    {t:"Le scarpe",reply:"Stivaletti da maestra, consumati sul davanti. Margaret cammina molto. Niente di più."}]};
+  READ.lennox={clue:"e_obs_lennox",opts:[
+    {t:"La fiaschetta",ok:1,say:"«Lei beve, capitano, ma non perde mai il conto: il suo segnapunti è tenuto come un registro di compagnia, con l'ora d'inizio e l'ora di fine.»",reply:"Lennox si raddrizza. «Vent'anni di furieri, signore. Le ore non le sbaglio nemmeno ubriaco.»"},
+    {t:"Il monocolo",reply:"Un monocolo che il capitano non usa: lo porta perché fa colonnello. Non dice nulla del caso."},
+    {t:"Le medaglie al panciotto",reply:"Il nastrino del Sudafrica. Lennox se ne accorge e ti racconta Paardeberg, per dieci minuti."}]};
+  READ.cobb={clue:"e_obs_cobb",opts:[
+    {t:"La cravatta a farfalla",reply:"Una farfalla a pois, molto Glasgow. Cobb ne è fiero. Nient'altro."},
+    {t:"Il campionario",reply:"Una valigetta di campioni: nastri, rulli, carta carbone. Cobb te ne regala un rotolo."},
+    {t:"Il pollice destro",ok:1,say:"«Ha un callo sul lato del pollice destro, signor Cobb: la barra spaziatrice. Batte a dieci dita da vent'anni. Se le chiedo di guardare una pagina battuta a macchina, la sua opinione vale quella di un perito.»",reply:"Cobb arrossisce di piacere. «Ottanta parole al minuto, signore. Mi porti la pagina, e le dico chi l'ha battuta.»"}]};
+  Object.assign(OBJ,{
+    "graham|alibi0":{ok:["d2_tazza","e_servizio"],unlock:"e_ammissione",calm:25,a:"«Una tazza.» Sir Alastair sorride, e cambia storia senza battere ciglio. «Va bene, avvocato: alle dieci e tre quarti ho portato a Henry una tazza di tè. Per fare pace. Sono rimasto un quarto d'ora e me ne sono andato. Non l'ho detto perché non volevo essere l'ultimo ad averlo visto vivo. Lei capisce.»"},
+    "graham|crime0":{ok:["e_ago"],calm:25,ago:1,a:"Il colore gli scivola via dalla faccia, e torna. «Un'iniezione? Morfina, allora: Henry se la faceva da sé, lo sapevano tutti a Edimburgo.» Lo hai colpito. Ma adesso sa che tu sai dell'ago."},
+    "graham|react:e_toddy":{ok:["e_nastro","d2_toddy"],calm:25,a:"«Astemio?» Una pausa minima. «Allora l'avrà bevuto per mandare giù il laudano. Un uomo che vuole morire non bada alla Lega della Temperanza.» Ma ha smesso di fischiettare."},
+    "graham|react:e_orologio":{ok:["e_rito","d2_ora"],calm:20,a:"«Abitudini da bambino.» Sir Alastair si stringe nelle spalle. «La sera in cui decidi di morire non carichi l'orologio.» È una buona risposta. Ma per un attimo ha guardato l'orologio come si guarda un testimone."},
+    "graham|alibi1":{ok:["e_porta","d2_visita","d2_fischio","e_fumo"],calm:25,a:"Sir Alastair ride. «Una porta che si apre in un treno fermo? Il vento, avvocato.» Ma le dita, sul bracciolo, tamburellano. Senza ritmo."},
+    "graham|slip1":{ok:["e_nastro","d2_toddy"],calm:20,a:"«Ho detto whisky? Intendevo… il laudano.» Per la prima volta in tutta la giornata, Sir Alastair si corregge."},
+    "graham|slip2":{ok:["e_toddy"],calm:20,a:"Gli metti davanti il bicchiere, vuoto, trovato dentro lo scompartimento. Sir Alastair apre la bocca e la richiude. «Sarà stato Henry», dice infine. «Dopo.» Ma tu e lui sapete che cosa dice l'orologio."}
+  });
+  Object.assign(TAVOLE,{e_rito:{who:"margaret",cap:"«Allora alle undici era già…»"},e_dattilo:{who:"cobb",cap:"«Non è la stessa mano, avvocato.»"},e_ammissione:{who:"graham",cap:"«Non volevo essere l'ultimo ad averlo visto vivo. Lei capisce.»"},e_toddy_fuori:{who:"graham",cap:"«Avrei dovuto bussare.»"}});
+})();
+
+/* ---------- «Un'ultima cosa…»: il sangue freddo del colpevole ---------- */
+const SLIPS=[
+  {at:75,k:"slip1",a:"«Un'ultima cosa? Lei è come una zanzara, avvocato.» Ride. «Gliene dico una io: il povero Henry, a Edimburgo, beveva come una spugna. Era quello, il suo vero problema. Il whisky.»"},
+  {at:50,k:"slip2",unlock:"e_toddy_fuori",a:"Sir Alastair sbuffa. «Va bene. Quando sono andato a letto, all'una e un quarto, sono passato davanti al 4. Il bicchiere del toddy era ancora lì per terra, intatto. Avrei dovuto bussare. Ecco, è contento? Avrei dovuto bussare.»"},
+  {at:25,k:"slip3",a:"Per la prima volta alza la voce. «Lei non ha niente, avvocato! Un orologio fermo, una tazza, le chiacchiere di una zitella che non dorme!» Si ricompone subito. Troppo tardi: lo hanno sentito tutti."}];
+const LAST_NO=["«Un'ultima cosa? Me l'ha detto anche dieci minuti fa.»","«Avvocato, il capitano mi aspetta per la rivincita.»","Sir Alastair sorride, paziente, e non dice niente.","«Lei mi ricorda un mio vecchio professore. Anche lui non finiva mai le domande. È morto di polmonite.»"];
+function calmOf(){return G.calm==null?100:G.calm;}
+function pressCulprit(n){if(!S.culprit)return;const b=calmOf();G.calm=Math.max(0,b-n);if(b>50&&G.calm<=50)setTimeout(()=>tip("calm"),2600);}
+function lastThing(){const s=SLIPS.find(x=>calmOf()<=x.at&&!(G.slips||{})[x.k]);AU.sfx("page");pickOpen=false;objMode=null;
+  if(s){G.slips=G.slips||{};G.slips[s.k]=1;save();pushLog("Ah, un'ultima cosa…",s.a,true,s.unlock,s.k);return;}
+  G.lastNo=(G.lastNo||0)+1;save();pushLog("Ah, un'ultima cosa…",LAST_NO[G.lastNo%LAST_NO.length],false);
+  if(calmOf()>75)setTimeout(()=>lyleSay("«Così non cede. Gli serve pressione: torni con un reperto che lo smentisce, e mostri o obietti.»"),900);}
+function calmMeter(){const c=calmOf();return `<div class="calm"><span>Sangue freddo</span><i><b style="width:${c}%"></b></i></div>`;}
+
+/* ---------- La trappola ---------- */
+let TP=null;
+function trapScene(onDone){lyleHide();clearTimeout(lyleT);TP={i:0,res:[],trap:false,onDone,r:null};$("#salon").classList.add("on");AU.sfx("drone");renderTrap();}
+function renderTrap(){const T=S.trap,st=T.steps[TP.i];
+  const ring=T.cast.map((id,i)=>{const c=S.chars[id];return `<div class="seat s${i} ${id===S.culprit?"focus acc":""}"><div class="pf">${portrait(c.p)}</div><div class="nm">${c.short}</div></div>`;}).join("");
+  const res=TP.r?`<p class="sres ${TP.r.ok?"ok":"no"}">${TP.r.text}</p>`:"";
+  $("#salon").innerHTML=`<div class="s-top"><div class="eb">Carrozza ristorante · La trappola</div><div class="s-prog">${T.steps.map((_,i)=>`<i class="${i<TP.i?"d":i===TP.i?"c":""}"></i>`).join("")}</div></div>
+  <div class="s-ring"><div class="fire"></div>${ring}</div>
+  <div class="s-text"><p class="ssay">${st.say}</p>${res}</div>
+  <div class="s-act">${TP.r?`<button class="btn red" onclick="trapNext()">${TP.i<T.steps.length-1?"Avanti":"Concludi"}</button>`:
+    `<div class="s-lab">${st.lab}</div><div class="strip">${G.clues.map(id=>`<button class="${S.clues[id].cat==="Deduzione"?"ded":""}" onclick="trapPick('${id}')">${evThumb(id)}<span>${S.clues[id].name}</span></button>`).join("")}</div>
+    ${st.secret?"":`<button class="btn ink sm" onclick="trapPick(null)">Non ho una prova</button>`}`}</div>`;}
+function trapPick(id){const st=S.trap.steps[TP.i];let ok=!!id&&st.ok.includes(id),text;
+  if(id==="e_ago"&&!st.secret)G.agoKnown=1;
+  if(st.secret){if(ok&&!G.agoKnown){TP.trap=true;text=`<span class="pres">«…e il segno dell'ago, naturalmente.»</span> Sir Alastair, già in piedi, si volta: «Ma quale ago? Tra le dita del piede sinistro non c'era nessun…» Si ferma. Nessuno, oltre a te e al dottor Lyle, sapeva dell'ago. Nessuno sapeva dove fosse.`;AU.sfx("gavel");AU.duck();}
+    else if(ok){ok=false;text=`<span class="pres">«…e il segno dell'ago.»</span> Sir Alastair sorride. «Tra le dita del piede, sì. Ne parla tutto il treno, avvocato.» Lo sapeva già: qualcuno gliel'ha detto. La trappola non scatta.`;}
+    else text=`<span class="pres">«…${id?S.clues[id].name.toLowerCase():"niente"}.»</span> Sir Alastair ti guarda con compatimento. «È tutto, avvocato? Allora, con permesso.» Non è cascato in niente.`;}
+  else{TP.res[TP.i]=ok;text=(id?`<span class="pres">Presenti: ${S.clues[id].name}.</span> `:"")+(ok?st.good:st.bad);}
+  TP.r={ok,text};AU.sfx(ok?"stamp":"tick");if(ok)pressCulprit(15);renderTrap();}
+function trapNext(){TP.r=null;TP.i++;AU.sfx("page");if(TP.i<S.trap.steps.length){renderTrap();return;}
+  const sl={res:TP.res,trap:TP.trap,ok:TP.res.filter(Boolean).length+(TP.trap?1:0),n:S.trap.steps.length,dec:TP.trap,failed:[]};
+  const e=TP.onDone(sl),fin=()=>{$("#salon").classList.remove("on");showEnding();};
+  if(e.kind==="vera")gloveScene(fin,"Sir Alastair si sfila i guanti, con calma, dito per dito, come dopo un intervento.");else{shake();lightning();setTimeout(fin,500);}}
+
+/* ---------- Medaglie del caso II ---------- */
+CASE_RAVEN.medals=MEDALS;
+CASE_EXPRESS.medals=[
+  {id:"vera",name:"Un'ultima cosa",desc:"Ottieni il finale vero.",ok:()=>G.ended.kind==="vera"},
+  {id:"trap",name:"Il segreto dell'ago",desc:"Fai scattare la trappola finale.",ok:()=>G.salon&&G.salon.trap},
+  {id:"calm",name:"Sangue caldo",desc:"Porta a zero il sangue freddo di Sir Alastair.",ok:()=>calmOf()<=0},
+  {id:"slips",name:"Lingua lunga",desc:"Strappa a Sir Alastair tutti e tre i passi falsi.",ok:()=>Object.keys(G.slips||{}).length>=3},
+  {id:"ded",name:"Mente deduttiva",desc:"Scopri tutte le deduzioni del caso.",ok:()=>S.deductions.every(d=>has(d.id))},
+  {id:"typist",name:"Due dita",desc:"Ottieni la perizia del signor Cobb sul biglietto.",ok:()=>has("e_dattilo")},
+  {id:"tune",name:"I Pirati di Penzance",desc:"Riconosci il motivetto dell'una e venti.",ok:()=>has("d2_fischio")},
+  {id:"nohint",name:"Senza Lyle",desc:"Finale vero senza chiedere suggerimenti.",ok:()=>G.ended.kind==="vera"&&!G.hints},
+  {id:"fast",name:"Prima del soccorso",desc:"Finale vero facendo scattare la trappola entro l'Atto II.",ok:()=>G.ended.kind==="vera"&&G.act<=1&&!G.forced},
+  {id:"perfect",name:"Infallibile",desc:"Finale vero senza un solo errore.",ok:()=>G.ended.kind==="vera"&&!G.wrongDed&&!G.wrongObj&&!Object.values(G.read||{}).includes(-1)}
+];
+
+/* ---------- Il prologo giocabile: sei tu l'assassino ---------- */
+function filmRoom(id,o){return roomSVG(id,Object.assign({night:true,nofig:true},o||{}));}
+CASE_EXPRESS.film=[
+  {dur:5600,html:`<div class="film-title"><div class="k">Caso II</div><h1>L'Espresso<br>delle Highlands</h1>${ORN}<p class="ft-sub">Questa volta, l'assassino sei tu.</p></div>`,run:(el,T)=>AU.sfx("drone")},
+  {img:"trainNight",dur:8600,cam:["scale(1.25) translate(6%,1%)","scale(1.06) translate(-2%,0)"],snow:true,place:"Linea delle Highlands · martedì 14 gennaio 1913, 22:30",cap:"Il notturno per Inverness sale verso il passo di Drumochter, nella neve.",cap2:"A bordo, Sir Alastair Graham, chirurgo del Re. E l'uomo che può distruggerlo.",cap2At:4300,run:(el,T)=>{AU.sfx("train");T(()=>AU.sfx("whistle"),2200);}},
+  {svg:()=>filmRoom("ristorante"),dur:6000,cam:["scale(1.12)","scale(1.02)"],place:"22:45 · Carrozza ristorante",cap:"Sir Alastair lascia la cena con una tazza di tè in mano. «Per fare pace con Henry», dice al cameriere.",
+   choice:{prompt:"Che cosa versi nel tè?",opts:[{t:"Arsenico",r:"Troppo lento, troppo noto. Un chirurgo non è un avvelenatore da romanzo."},{t:"Cloralio, poche gocce",ok:1,r:"Pell dormirà in dieci minuti. E non sentirà niente."},{t:"Niente: parlerai e basta",r:"Pell non è uno sciocco. Non ti lascerebbe avvicinare."}]}},
+  {svg:()=>filmRoom("scomp4",{figs:[["pell",0]]}),dur:6000,cam:["scale(1.05)","scale(1.16) translate(2%,2%)"],place:"22:50 · Scompartimento 4",cap:"Henry Pell beve il tè. Parlate di Londra, degli undici. Poi gli si chiudono gli occhi.",
+   choice:{prompt:"Ora. Come?",opts:[{t:"Il cuscino",r:"Lascia piccole emorragie negli occhi. Lo sa qualunque patologo. E Pell era un patologo."},{t:"Laudano in gola",r:"Un uomo addormentato non beve. Tossisce, si sveglia."},{t:"Morfina, tra le dita del piede",ok:1,r:"Dove nessun medico di provincia guarderà mai. E l'unico medico a bordo sei tu."}]}},
+  {dur:9600,html:`<div class="tele"><div class="th">Sulla macchina di Henry Pell</div><div class="tb" id="teleb"></div><div class="ts">— con due dita</div></div>`,svgBg:()=>filmRoom("scomp4"),cap:"Batte il biglietto d'addio sulla macchina di Pell. Con due dita: non ha mai imparato.",capAt:6800,
+   run:(el,T)=>{const txt="NON POSSO PIU GUARDARMI ALLO SPECCHIO. HO FALLITO COME MEDICO E COME UOMO. MARGARET, PERDONAMI.\n\nH.";let i=0;T(()=>{const b=$("#teleb");const iv=setInterval(()=>{if(!b||!b.isConnected){clearInterval(iv);return;}i++;b.textContent=txt.slice(0,i);if(txt[i-1]!==" ")AU.sfx("key");if(i>=txt.length)clearInterval(iv);},48+Math.random()*34);filmT.push(iv);},400);}},
+  {svg:()=>filmRoom("scomp4"),dur:5000,cam:["scale(1.14) translate(-2%,0)","scale(1.03)"],place:"22:58",cap:"Ora la messinscena.",
+   choice:{prompt:"Che cosa fai, prima di uscire?",opts:[{t:"Svuoti il laudano nel lavabo, pulisci la boccetta, prendi il dossier",ok:1,r:"Una boccetta vuota, un biglietto, nessun dossier. Un uomo stanco che ha deciso di andarsene."},{t:"Lasci il dossier: lo bruci dopo",r:"E se qualcuno lo trovasse prima? No. Il dossier viene con te."}]}},
+  {svg:()=>filmRoom("fumatori"),dur:6000,cam:["scale(1.1)","scale(1.02)"],place:"23:05 · Salottino fumatori",cap:"Whist con il capitano Lennox e il signor Cobb. Sir Alastair fischietta. Non sbaglia una mano.",
+   run:(el,T)=>{T(()=>AU.sfx("tune"),1200);},
+   choice:{prompt:"23:20. All'alibi serve un'ultima pennellata.",opts:[{t:"Vai a dare la buonanotte a Pell, davanti al capitano",r:"Bussare alla porta di un morto, con un testimone accanto? Nemmeno per sogno."},{t:"Ordini al conduttore un toddy per Pell, da lasciare fuori dalla porta",ok:1,r:"Alle undici e mezza Pell «riceverà» il suo toddy: un uomo vivo, alle undici e mezza. E il medico che stabilirà l'ora della morte sarai tu."}]}},
+  {img:"trainStuck",dur:8200,cam:["scale(1.3) translate(-3%,3%)","scale(1.05)"],snow:true,place:"23:40 · Passo di Drumochter",cap:"La neve ferma il treno.",cap2:"Questo, Sir Alastair non l'aveva previsto.",cap2At:4000,run:(el,T)=>{AU.sfx("wind");T(()=>lightning(),2600);}},
+  {svg:()=>filmRoom("corridoio"),dur:8400,cam:["scale(1.04)","scale(1.18) translate(0,2%)"],place:"01:15 · Corridoio della carrozza letti",cap:"Il toddy è ancora lì, davanti alla porta del 4. Lo porta dentro, lo vuota nel lavabo, lascia il bicchiere sul tavolino.",cap2:"Fischiettando. Nel silenzio del treno fermo.",cap2At:4600,run:(el,T)=>{T(()=>AU.sfx("tune"),4900);}},
+  {svg:()=>filmRoom("dispensa"),dur:5000,cam:["scale(1.1)","scale(1.02)"],place:"01:30 · Dispensa del conduttore",cap:"Il conduttore dorme nel 3. La stufa è coperta, ma la brace è viva.",
+   choice:{prompt:"Il dossier degli undici nomi.",opts:[{t:"Lo getti dal finestrino",r:"Il treno è fermo. Domattina sarebbe lì, nella neve, sotto il tuo finestrino."},{t:"Lo bruci nella stufa del conduttore",ok:1,r:"Due minuti, e gli undici nomi sono cenere. Dal comignolo esce un filo di fumo, nel buio."}]}},
+  {dur:6400,html:`<div class="film-title"><h1>Il delitto perfetto.</h1>${ORN}<p class="ft-sub">Domattina tu e il dottor Lyle vi sveglierete sullo stesso treno.<br>Sai già chi è stato. Ora dimostralo.</p></div>`,run:(el,T)=>AU.sfx("drone")}
+];
 
 /* ---------------- ALTRI CASI (in preparazione) ---------------- */
 const STORIES=[
   CASE_RAVEN,
-  {id:"highlands",num:"Caso II",title:"L'Espresso delle Highlands",year:"Linea di Inverness, gennaio 1913",issue:"N. II · Gennaio 1913",art:"train",blurb:"Un vagone letto fermo nella neve sotto il passo di Drumochter, un colonnello morto nel suo scompartimento chiuso dall'interno e undici passeggeri che giurano di aver dormito.",locked:true},
+  CASE_EXPRESS,
   {id:"faro",num:"Caso III",title:"La Sposa del Faro",year:"Cornovaglia, agosto 1913",issue:"N. III · Agosto 1913",art:"lighthouse",blurb:"Un matrimonio sull'isolotto del faro di St. Morwenna, isolato dalla burrasca. Al mattino la sposa manca, e la lanterna è spenta.",locked:true}
 ];
 
@@ -2011,6 +2584,7 @@ const AU={ctx:null,on:true,master:null,
     if(n==="gavel")[0,.45].forEach(k=>{this.tone(110,t+k,.002,.8,.4,"triangle");this.burst(t+k,.12,"bandpass",800,.6,1.5);});
     if(n==="crackle")this.burst(t,.012+Math.random()*.02,"highpass",1800+Math.random()*2400,.04+Math.random()*.08);
     if(n==="eureka"){[523.3,659.3,784,1046.5].forEach((f,i)=>this.tone(f,t+i*.09,.01,.12,1.8));this.tone(261.6,t,.02,.18,2.2,"triangle");}
+    if(n==="tune"){[[784,0],[784,.18],[784,.36],[988,.54],[880,.9],[784,1.08],[659,1.26],[784,1.62],[880,1.8],[784,1.98]].forEach(([f,d])=>{const o=c.createOscillator();o.frequency.setValueAtTime(f*1.003,t+d);o.frequency.linearRampToValueAtTime(f,t+d+.05);const v=c.createOscillator();v.frequency.value=6;const vg=c.createGain();vg.gain.value=6;v.connect(vg).connect(o.frequency);this.env(o,t+d,.02,.05,.16);o.start(t+d);o.stop(t+d+.25);v.start(t+d);v.stop(t+d+.25);});this.burst(t,2.2,"bandpass",2600,.012,1);}
     if(n==="drip"){const o=c.createOscillator();o.frequency.setValueAtTime(1500+Math.random()*700,t);o.frequency.exponentialRampToValueAtTime(700,t+.12);this.env(o,t,.002,.06,.18);o.start(t);o.stop(t+.25);}
     if(n==="creak"){const o=c.createOscillator();o.type="sawtooth";o.frequency.setValueAtTime(95,t);o.frequency.linearRampToValueAtTime(70,t+.8);const f=c.createBiquadFilter();f.type="bandpass";f.frequency.value=700;f.Q.value=9;o.connect(f);this.env(f,t,.2,.035,.7);o.start(t);o.stop(t+1.1);}
     if(n==="clk"){this.burst(t,.02,"highpass",3000,.07);}
@@ -2087,7 +2661,7 @@ function buildTitle(){
   $("#title").onclick=started?null:startGame;}
 function menuHTML(){const sv=loadSave(),st=sv&&!sv.ended&&STORIES.find(s=>s.id===sv.story&&!s.locked);let i=0;
   const b=(cls,on,t,sub)=>`<button class="${cls}" style="animation-delay:${(.08+i++*.08).toFixed(2)}s" onclick="${on}">${t}${sub?`<small>${sub}</small>`:""}</button>`;
-  return `<nav class="t-menu">${st?b("main","continueGame()","Continua l'indagine",`${st.title} · ${(st.acts[sv.act]||st.acts[0]).label}`):""}${b(st?"":"main","openArchive()","Nuova indagine","L'archivio dei casi")}${b("","replayFilm()","Il prologo","Rivedi il filmato d'apertura")}${b("","openMedals()","Medaglie",(()=>{const g=getMed()[CASE_RAVEN.id]||{};return Object.keys(g).length+" su "+MEDALS.length+" ottenute"})())}${b("","openOptions()","Impostazioni")}${b("","howTo()","Come si gioca")}</nav>`;}
+  return `<nav class="t-menu">${st?b("main","continueGame()","Continua l'indagine",`${st.title} · ${(st.acts[sv.act]||st.acts[0]).label}`):""}${b(st?"":"main","openArchive()","Nuova indagine","L'archivio dei casi")}${b("","replayFilm()","Il prologo","Rivedi il filmato d'apertura")}${b("","openMedals()","Medaglie",medalCount()+" su "+medalTotal()+" ottenute")}${b("","openOptions()","Impostazioni")}${b("","howTo()","Come si gioca")}</nav>`;}
 function startGame(){if(started)return;started=true;entered=true;if(coarse()&&fullPref)goFull();AU.init();AU.music(true,"title");lightning(true);setTimeout(()=>AU.sfx("thunder"),300);
   $("#title").onclick=null;$("#tmenu").innerHTML=menuHTML();}
 function showTitle(){closePanels();$("#game").classList.remove("on");$("#title").classList.add("on");buildTitle();snow(true);if(started)AU.music(true,"title");if(AU.ctx)AU.setRoom(null);}
@@ -2131,7 +2705,7 @@ let filmT=[],filmEnd=null;
 function playFilm(shots,onDone){AU.init();AU.music(true,"title");
   const f=$("#film");f.innerHTML=`<div id="shots"></div><div class="bars"></div><div class="cap"><p id="capt"></p></div><button class="fskip" id="skipb">Salta ›</button>`;
   f.style.opacity="1";f.style.transition="";f.classList.add("on");document.body.classList.add("filming");
-  let idx=-1,cur=null,ended=false;
+  let idx=-1,cur=null,ended=false,waiting=false;
   const T=(fn,ms)=>{const t=setTimeout(fn,ms);filmT.push(t);return t;};
   const clear=()=>{filmT.forEach(clearTimeout);filmT=[];};
   const finish=()=>{if(ended)return;ended=true;clear();f.style.transition="opacity 1.1s";f.style.opacity="0";AU.music(false);
@@ -2139,7 +2713,7 @@ function playFilm(shots,onDone){AU.init();AU.music(true,"title");
   filmEnd=finish;
   const next=()=>{clear();idx++;if(idx>=shots.length){finish();return;}const sh=shots[idx];
     const el=document.createElement("div");el.className="shot";
-    el.innerHTML=`<div class="cam">${sh.img?`<img src="${artURL(sh.img)}" alt="">`:""}</div><div class="tint"></div>${sh.html||""}`;
+    el.innerHTML=`<div class="cam">${sh.img?`<img src="${artURL(sh.img)}" alt="">`:""}${sh.svg?sh.svg():""}${sh.svgBg?`<div style="position:absolute;inset:0;opacity:.35">${sh.svgBg()}</div>`:""}</div><div class="tint"></div>${sh.html||""}`;
     $("#shots").appendChild(el);const old=cur;cur=el;
     requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add("on")));
     if(old)setTimeout(()=>old.remove(),1500);
@@ -2150,8 +2724,11 @@ function playFilm(shots,onDone){AU.init();AU.music(true,"title");
     if(sh.cap2)T(()=>{c.classList.remove("on");T(()=>{c.innerHTML=sh.cap2;c.classList.add("on");},700);},sh.cap2At);
     T(()=>c.classList.remove("on"),sh.dur-700);
     if(sh.run)sh.run(el,T);
+    if(sh.choice){waiting=true;T(()=>{c.classList.remove("on");const ch=document.createElement("div");ch.className="fchoice";ch.innerHTML=`<p>${sh.choice.prompt}</p>${sh.choice.opts.map((o,i)=>`<button data-i="${i}">${o.t}</button>`).join("")}<div class="fr" id="fr"></div>`;el.appendChild(ch);
+      ch.onclick=e=>{e.stopPropagation();const b=e.target.closest("button");if(!b)return;const o=sh.choice.opts[+b.dataset.i];const fr=ch.querySelector("#fr");fr.textContent=o.r;fr.className="fr "+(o.ok?"ok":"no");AU.sfx(o.ok?"stamp":"tick");
+        if(o.ok){ch.querySelectorAll("button").forEach(x=>x.disabled=true);b.classList.add("ok");T(()=>{waiting=false;next();},2900);}else{b.disabled=true;b.classList.add("no");}};},sh.capAt?sh.capAt+2600:3600);return;}
     T(next,sh.dur);};
-  f.onclick=e=>{if(e.target.id==="skipb"){AU.sfx("page");finish();return;}if(ended)return;AU.init();next();};
+  f.onclick=e=>{if(e.target.id==="skipb"){AU.sfx("page");finish();return;}if(ended||waiting)return;AU.init();next();};
   next();}
 
 /* le inquadrature del prologo di Ravenscourt */
@@ -2197,10 +2774,10 @@ function nav(){const T=[["room","Stanza"],["map","Mappa"],["notes","Taccuino"],[
 function setTab(t){if(G.tab!==t)AU.sfx("page");G.tab=t;save();render();$("#main").scrollTop=0;if(t==="board")tip("board");if(t==="accuse"&&!G.ended)tip("accuse");}
 
 /* ---------------- STANZA ---------------- */
-function roomSVG(id){const A=ROOMART[id],act=G.act;let s=`<svg class="scn" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${shellSVG(A)}`;
-  A.props(act).forEach(p=>{s+=tr(p[1],p[2],p[3]||1,P[p[0]](p[4]||{}));});
+function roomSVG(id,o={}){const A=ROOMART[id],act=G.act;let s=`<svg class="scn" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${shellSVG(A)}`;
+  A.props(act,o).forEach(p=>{s+=tr(p[1],p[2],p[3]||1,P[p[0]](p[4]||{}));});
   (A.lights||[]).forEach(l=>s+=`<circle cx="${l[0]}" cy="${l[1]}" r="${l[2]}" fill="url(#${l[3]})" style="mix-blend-mode:screen"/>`);
-  const slots=A.slots||DEFSLOTS;charsIn(id).forEach((cid,i)=>{const sl=slots[i%slots.length];s+=`<g class="fig" onclick="openTalk('${cid}')">${tr(sl[0],sl[1],.95,figure(CHARFIG[cid]||{k:"coat"},S.chars[cid].short))}</g>`;});
+  const slots=A.slots||DEFSLOTS;(o.figs?o.figs.map(f=>f[0]):o.nofig?[]:charsIn(id)).forEach((cid,i)=>{const sl=slots[i%slots.length];s+=`<g class="fig" onclick="openTalk('${cid}')">${tr(sl[0],sl[1],.95,figure(CHARFIG[cid]||{k:"coat"},S.chars[cid].short))}</g>`;});
   s+=`<rect width="800" height="450" fill="url(#hatch)" opacity=".07" pointer-events="none"/><rect width="800" height="450" fill="url(#gVig)" pointer-events="none"/>`;
   return s+`</svg>`;}
 /* i bagliori sono elementi HTML sopra l'SVG statico: animarli non costringe il browser a ridisegnare la scena */
@@ -2217,15 +2794,15 @@ function roomView(){const R=S.rooms[G.room],pres=charsIn(G.room),objs=R.objects.
 /* ---------------- MAPPA ---------------- */
 function roomPinXY(r){return [r.x+r.w/2+18,r.y+r.h/2+10];}
 function mapSVG(){const m=S.map;let s=`<svg viewBox="-6 -46 352 456" xmlns="http://www.w3.org/2000/svg">`;
-  s+=`<text x="170" y="-28" text-anchor="middle" style="font-family:'IM Fell English SC';font-size:15px;letter-spacing:3px">Ravenscourt Hall</text><text x="170" y="-15" text-anchor="middle" style="font-style:italic;font-size:8.5px">pianta dei tre livelli, rilevata nell'anno 1781</text>${tr(322,-24,.8,COMPASS)}`;
+  s+=`<text x="170" y="-28" text-anchor="middle" style="font-family:'IM Fell English SC';font-size:15px;letter-spacing:3px">${S.mapTitle||"Ravenscourt Hall"}</text><text x="170" y="-15" text-anchor="middle" style="font-style:italic;font-size:8.5px">${S.mapSub||"pianta dei tre livelli, rilevata nell'anno 1781"}</text>${tr(322,-24,.8,COMPASS)}`;
   m.labels.forEach(l=>s+=`<text x="${l.x}" y="${l.y}" style="font-family:'IM Fell English SC';font-size:8.5px;letter-spacing:2px;fill:#7a5a3a">${l.t}</text>`);
-  s+=`<g stroke="#6a5236" stroke-width=".8">${[0,1,2,3,4,5,6].map(i=>`<path d="M${128+i*12} 98v30"/>`).join("")}</g><text x="170" y="122" text-anchor="middle" style="font-size:7px;font-style:italic">scalone</text>`;
+  if(!m.nostairs)s+=`<g stroke="#6a5236" stroke-width=".8">${[0,1,2,3,4,5,6].map(i=>`<path d="M${128+i*12} 98v30"/>`).join("")}</g><text x="170" y="122" text-anchor="middle" style="font-size:7px;font-style:italic">scalone</text>`;
   m.rooms.forEach(r=>{const R=S.rooms[r.id],lk=roomLocked(r.id),cur=G.room===r.id,crime=G.act>=R.crimeFrom,vis=G.visited[r.id];
     s+=`<g class="rm" onclick="goRoom('${r.id}')"><rect class="wall" x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}" fill="${cur?"rgba(160,24,24,.14)":"rgba(255,250,235,.22)"}" stroke="#3b2a1a" stroke-width="3"/>`;
     if(lk)s+=`<rect x="${r.x+2}" y="${r.y+2}" width="${r.w-4}" height="${r.h-4}" fill="url(#hatchInk)" opacity=".35"/>`;
-    s+=glyph(MAPG[r.id],r.x,r.y,r.w,r.h);
+    s+=glyph(MAPG[r.id],r.x,r.y,r.w,r.h)||"";
     let dx,dy,vert;if(r.w>200){dx=r.x+r.w/2;dy=r.y;vert=false;}else if(r.x+r.w<=120){dx=r.x+r.w;dy=r.y+r.h/2;vert=true;}else if(r.x>=220){dx=r.x;dy=r.y+r.h/2;vert=true;}else{dx=r.x+r.w/2;dy=r.y+r.h;vert=false;}
-    s+=vert?`<rect x="${dx-2.5}" y="${dy-6}" width="5" height="12" fill="#e2d2ad"/><path d="M${dx} ${dy-6}a12 12 0 0 ${r.x>=220?1:0} ${r.x>=220?10:-10} 10" stroke="#6a5236" stroke-width=".6" fill="none"/>`:`<rect x="${dx-6}" y="${dy-2.5}" width="12" height="5" fill="#e2d2ad"/>`;
+    if(!m.nodoors)s+=vert?`<rect x="${dx-2.5}" y="${dy-6}" width="5" height="12" fill="#e2d2ad"/><path d="M${dx} ${dy-6}a12 12 0 0 ${r.x>=220?1:0} ${r.x>=220?10:-10} 10" stroke="#6a5236" stroke-width=".6" fill="none"/>`:`<rect x="${dx-6}" y="${dy-2.5}" width="12" height="5" fill="#e2d2ad"/>`;
     s+=`<text x="${r.x+6}" y="${r.y+13}" style="font-size:10px;font-style:italic">${R.mapName||R.name}</text>`;
     if(lk)s+=`<g transform="translate(${r.x+r.w-14} ${r.y+r.h-14})" stroke="#3b2a1a" fill="none" stroke-width="1.2"><rect x="-5" y="-1" width="10" height="8"/><path d="M-3 -1v-3a3 3 0 016 0v3"/></g>`;
     if(crime)s+=`<g transform="translate(${r.x+r.w-14} ${r.y+12})"><path d="M-6 -6L6 6M6 -6L-6 6" stroke="#8a1414" stroke-width="2.4"/><path d="M5 6v6" stroke="#8a1414" stroke-width="1.2"/></g>`;
@@ -2264,7 +2841,7 @@ function viewItem(it){showPlate("Oggetto",S.items[it],`<div class="art">${itemAr
 function showPlate(tag,title,art,body,nw){$("#plate").innerHTML=`<div class="pl" id="pl"><div class="tag">${tag}</div><h2>${title}</h2>${art}${body}${nw?`<div class="stamp">Agli atti</div>`:""}<div class="acts"><button class="btn ink" onclick="closePlate(${nw?`'${nw}'`:""})">Riponi</button></div></div>`;
   $("#plate").classList.add("on");$("#plate").scrollTop=0;AU.sfx("page");if(nw){setTimeout(()=>AU.sfx("stamp"),420);setTimeout(()=>AU.sfx("clue"),760);}}
 function closePlate(fly){if(fly)flyToNotes(fly);$("#plate").classList.remove("on");if(G&&!G.ended)setTimeout(()=>lyleCheck(fly),700);}
-function lyleCheck(fly){if(fly&&LYLE_DED[fly]){lyleSay(LYLE_DED[fly]);return;}G.tips=G.tips||{};
+function lyleCheck(fly){if(fly==="e_ago"){tip("ago");return;}const ld=(S.lyleDed&&S.lyleDed[fly])||LYLE_DED[fly];if(fly&&ld){lyleSay(ld);return;}G.tips=G.tips||{};
   if(G.clues.length&&!G.tips.firstClue){tip("firstClue");return;}
   if(G.tips.firstClue&&!G.tips.dedReady&&dedOpen()&&!G.clues.some(c=>S.clues[c].cat==="Deduzione")){tip("dedReady");return;}
   if(G.actions<=2&&!G.tips.candles){tip("candles");return;}}
@@ -2281,9 +2858,9 @@ function renderTalk(typeIdx){const c=S.chars[talkWith],log=G.log[talkWith]||[];
   let L=log.length?log.map((l,i)=>`${l.q?`<div class="q">${l.q}</div>`:""}<div class="a${l.r?" react":""}"${i===typeIdx?` id="typing"`:""}>${l.a}</div>${l.k&&objOpen(l.k)&&!log.slice(i+1).some(x=>x.k===l.k)?`<button class="objb${objMode===l.k?" on":""}" onclick="event.stopPropagation();objStart('${l.k}')">Obietta!</button>`:""}`).join(""):`<div class="a muted">${c.short} ti osserva in silenzio, in attesa della prima domanda.</div>`;
   if(obsMode)L=obsHTML();
   const sh=G.shown[talkWith]||[];
-  $("#talk").innerHTML=`<div class="tk-glow"></div><div class="tk-head"><div class="pf">${portrait(c.p)}</div><div class="tk-id"><div class="np">${c.name}</div><div class="role">${c.role}, ${c.age} anni</div>${canObserve(talkWith)?`<button class="obsb" onclick="obsOpen()">Osserva</button>`:""}</div><button class="tk-close" onclick="closeTalk()" aria-label="Chiudi">✕</button></div>
+  $("#talk").innerHTML=`<div class="tk-glow"></div><div class="tk-head"><div class="pf">${portrait(c.p)}</div><div class="tk-id"><div class="np">${c.name}</div><div class="role">${c.role}, ${c.age} anni</div>${talkWith===S.culprit?calmMeter():""}${canObserve(talkWith)?`<button class="obsb" onclick="obsOpen()">Osserva</button>`:""}</div><button class="tk-close" onclick="closeTalk()" aria-label="Chiudi">✕</button></div>
   <div class="tk-log" id="tklog" onclick="finishType()">${L}</div>
-  <div class="tk-act"><div class="topics"><button onclick="talk('alibi')">Dov'era?</button><button onclick="talk('crime')">Il delitto</button><button onclick="talk('others')">Gli altri</button><button onclick="talk('self')">Di sé</button><button class="show" onclick="${objMode?"objMode=null;pickOpen=false;renderTalk()":"togglePick()"}">${objMode?"Annulla l'obiezione":pickOpen?"Chiudi il taccuino":"Mostra un reperto"}</button></div>
+  <div class="tk-act"><div class="topics"><button onclick="talk('alibi')">Dov'era?</button><button onclick="talk('crime')">Il delitto</button><button onclick="talk('others')">Gli altri</button><button onclick="talk('self')">Di sé</button>${talkWith===S.culprit?`<button class="last" onclick="lastThing()">Un'ultima cosa…</button>`:""}<button class="show" onclick="${objMode?"objMode=null;pickOpen=false;renderTalk()":"togglePick()"}">${objMode?"Annulla l'obiezione":pickOpen?"Chiudi il taccuino":"Mostra un reperto"}</button></div>
   ${objMode?`<div class="objlab">Con quale reperto contesti la frase?</div>`:""}${pickOpen?(G.clues.length?`<div class="strip">${G.clues.map(id=>`<button class="${!objMode&&sh.includes(id)?"shown":""}" onclick="${objMode?"objPick":"showClue"}('${id}')">${evThumb(id)}<span>${S.clues[id].name}</span></button>`).join("")}</div>`:`<p class="muted center">Il taccuino è ancora vuoto.</p>`):""}</div>`;
   const lg=$("#tklog");lg.scrollTop=lg.scrollHeight;if(typeIdx!==undefined)typeIt();}
 function typeIt(){const el=$("#typing");if(!el)return;const full=el.textContent;el.textContent="";let i=0;clearInterval(typer);
@@ -2291,7 +2868,7 @@ function typeIt(){const el=$("#typing");if(!el)return;const full=el.textContent;
   el.dataset.full=full;}
 function finishType(){const el=$("#typing");if(el&&typer){clearInterval(typer);typer=null;el.textContent=el.dataset.full;el.removeAttribute("id");}}
 function togglePick(){pickOpen=!pickOpen;lyleHide();renderTalk();}
-function pushLog(q,a,react,unlock,k){finishType();const L=(G.log[talkWith]=G.log[talkWith]||[]);L.push({q,a,r:!!react,k});if(k&&objOpen(k))setTimeout(()=>tip("objection"),1800);if(unlock&&TAVOLE[unlock]&&!has(unlock))setTimeout(()=>{finishType();showTavola(unlock);},Math.min(5000,a.length*9+900));const idx=L.length-1;
+function pushLog(q,a,react,unlock,k){finishType();const L=(G.log[talkWith]=G.log[talkWith]||[]);L.push({q,a,r:!!react,k});if(k&&objOpen(k))setTimeout(()=>tip("objection"),1800);if(unlock&&TAVOLE[unlock]&&!has(unlock))setTimeout(()=>{if(["#salon","#film","#chap"].some(x=>$(x).classList.contains("on")))return;finishType();showTavola(unlock);},Math.min(5000,a.length*9+900));const idx=L.length-1;
   if(unlock&&addClue(unlock)){L.push({q:"",a:`<span class="nc"><b>Nuovo reperto nel taccuino</b>${S.clues[unlock].name}</span>`});setTimeout(()=>AU.sfx("clue"),500);}
   save();renderTalk(idx);nav();if(unlock)setTimeout(()=>{if(!$("#talk").classList.contains("on"))lyleCheck();},300);}
 function talk(topic){const c=S.chars[talkWith],u=c.unlock||{};let q,a,un;
@@ -2303,7 +2880,7 @@ function talk(topic){const c=S.chars[talkWith],u=c.unlock||{};let q,a,un;
 function showClue(id){const c=S.chars[talkWith];let r=c.react&&c.react[id],text,un;
   if(Array.isArray(r))r=r.find(x=>(x.minAct||0)<=G.act);
   if(r){if(typeof r==="string")text=r;else{text=r.text;un=r.unlock;}}else text=c.def[(G.clues.indexOf(id)+talkWith.length)%c.def.length];
-  (G.shown[talkWith]=G.shown[talkWith]||[]);if(!G.shown[talkWith].includes(id))G.shown[talkWith].push(id);
+  (G.shown[talkWith]=G.shown[talkWith]||[]);if(!G.shown[talkWith].includes(id))G.shown[talkWith].push(id);if(id==="e_ago")G.agoKnown=1;if(talkWith===S.culprit&&r&&r.press){G.pressed=G.pressed||{};if(!G.pressed[id]){G.pressed[id]=1;pressCulprit(10);}}
   pickOpen=false;AU.sfx("page");pushLog("Gli mostri: "+S.clues[id].name,text,!!r,un,r?"react:"+id:null);}
 
 /* ---------------- TACCUINO ---------------- */
@@ -2338,6 +2915,10 @@ let rsT=null;window.addEventListener("resize",()=>{clearTimeout(rsT);rsT=setTime
 
 /* ---------------- ACCUSA ---------------- */
 function accuseView(){
+  if(S.inverted&&!G.ended){accAns={who:S.culprit};const T=S.trap;return `<div class="court"><div class="plaque"><span class="fl"></span><h2>La trappola</h2><span class="fl r"></span></div><p class="desc">${G.forced?"La locomotiva fischia. Adesso o mai più.":"Riunirai tutti nella carrozza ristorante. Per ogni passo dovrai presentare la prova giusta. E alla fine, tendere la trappola."}</p>
+  <div class="qblock"><h3>Che cosa dovrai dimostrare</h3>${T.steps.map((st,i)=>`<div class="opt"><span class="bx"></span><span>${st.secret?"Un dettaglio che solo l'assassino può conoscere. Uno che non hai rivelato a nessuno.":st.say.replace(/[«»]/g,"")}</span></div>`).join("")}</div>
+  ${G.agoKnown?`<div class="warnbar">Hai già rivelato a qualcuno un dettaglio che dovevi tenere per te. In un treno fermo, le voci corrono.</div>`:""}
+  <button class="btn red big" onclick="confirmAccuse()">Riunisci tutti nel ristorante</button></div>`;}
   if(G.ended)return `<div class="court"><div class="plaque"><span class="fl"></span><h2>Caso chiuso</h2><span class="fl r"></span></div><p class="desc">Hai formulato la tua accusa: «${G.ended.title}».</p><div class="row c"><button class="btn red" onclick="showReport()">La pagella</button><button class="btn" onclick="showEnding()">Rileggi il finale</button>${G.ended.kind!=="vera"?`<button class="btn" onclick="revealTruth()">Rivela la verità</button>`:""}<button class="btn red" onclick="newGame('${S.id}',true)">Ricomincia</button><button class="btn" onclick="toMenu()">Archivio</button></div></div>`;
   let h=`<div class="court"><div class="plaque"><span class="fl"></span><h2>L'accusa</h2><span class="fl r"></span></div><p class="desc">${G.forced?"Non c'è più tempo. Devi accusare adesso.":"Si accusa una volta sola. Le ipotesi barrate richiedono prove che non hai ancora trovato."}</p>`;
   S.accusation.forEach((q,qi)=>{h+=`<div class="qblock"><h3><span class="qn">${["I","II","III","IV"][qi]}.</span> ${q.q}</h3>`;
@@ -2347,8 +2928,8 @@ function accuseView(){
   const ready=S.accusation.every(q=>accAns[q.id]);
   return h+`<button class="btn red big" ${ready?"":"disabled"} onclick="confirmAccuse()">Pronuncia l'accusa</button></div>`;}
 function pick(q,v){accAns[q]=v;AU.sfx("page");const y=$("#main").scrollTop;render();$("#main").scrollTop=y;}
-function confirmAccuse(){note("Ne sei sicuro?",`<p>Stai per accusare formalmente <b>${S.chars[accAns.who].name}</b>, davanti a tutti. Non si torna indietro.</p><div class="row"><button class="btn red" onclick="closeOv();doAccuse()">Accuso</button><button class="btn ink" onclick="closeOv()">Aspetta</button></div>`,true);}
-function doAccuse(){AU.sfx("gavel");lyleHide();G.answers={...accAns};save();setTimeout(()=>salonScene(finishAccuse),500);}
+function confirmAccuse(){if(S.inverted)accAns={who:S.culprit};note("Ne sei sicuro?",`<p>${S.inverted?`Stai per tendere la trappola a <b>${S.chars[accAns.who].name}</b>, davanti a tutti.`:`Stai per accusare formalmente <b>${S.chars[accAns.who].name}</b>, davanti a tutti.`} Non si torna indietro.</p><div class="row"><button class="btn red" onclick="closeOv();doAccuse()">Accuso</button><button class="btn ink" onclick="closeOv()">Aspetta</button></div>`,true);}
+function doAccuse(){AU.sfx("gavel");lyleHide();G.answers={...accAns};save();setTimeout(()=>S.trap?trapScene(finishAccuse):salonScene(finishAccuse),500);}
 function finishAccuse(sl){const e=S.ending(accAns,G,sl);G.ended=e;G.salon=sl;save();setDone(S.id,e.kind);render();return e;}
 function endButtons(){return `<button class="btn red" id="rp">La pagella del caso</button>${G.ended.kind!=="vera"?`<button class="btn" id="rv">Rivela la verità</button>`:""}<button class="btn red" id="ng">Rigioca il caso</button><button class="btn" id="mn">Menu principale</button>`;}
 function bindEnd(){const rp=$("#rp");if(rp)rp.onclick=()=>showReport();const rv=$("#rv");if(rv)rv.onclick=()=>revealTruth();$("#ng").onclick=()=>{$("#chap").classList.remove("on");newGame(S.id);};$("#mn").onclick=()=>{$("#chap").classList.remove("on");toMenu();};}
