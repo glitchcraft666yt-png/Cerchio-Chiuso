@@ -392,6 +392,12 @@ body.filming #snow{z-index:52}
 @keyframes gloveOff{0%{transform:none}30%{transform:translateY(-10px)}100%{transform:translate(70px,-380px) rotate(18deg);opacity:0}}
 .gl-cap{font-family:'IM Fell English',serif;font-style:italic;color:var(--paper2);font-size:1.2rem;margin-top:16px;opacity:0;animation:pin 1.2s 1.2s forwards}
 
+/* il compagno */
+#lyle{position:fixed;left:10px;right:10px;bottom:calc(66px + var(--sb));z-index:44;max-width:560px;margin:0 auto;display:flex;gap:10px;align-items:flex-start;background:#efe4c8;background-image:var(--noise);background-blend-mode:multiply;color:var(--sepia);padding:10px 12px;box-shadow:0 14px 34px rgba(0,0,0,.7),0 0 0 1px #8a6a2a;cursor:pointer;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .35s,transform .35s}
+#lyle.on{opacity:1;transform:none;pointer-events:auto}
+#lyle .ly-pf{width:52px;flex:0 0 52px}#lyle .ly-pf svg{width:100%;display:block}
+#lyle .ly-tx{font-size:1rem;line-height:1.4;font-style:italic}#lyle .ly-tx b{display:block;font-style:normal;font-family:'IM Fell English SC',serif;font-weight:400;letter-spacing:.1em;font-size:.78rem;color:var(--blood)}
+.ib.lyleb{width:40px;height:40px;padding:0}.ib.lyleb svg{width:34px;height:40px}
 /* finestre */
 .ov{position:fixed;inset:0;z-index:45;background:rgba(4,3,2,.86);display:none;align-items:center;justify-content:center;padding:16px}
 .ov.on{display:flex}
@@ -413,6 +419,7 @@ body.filming #snow{z-index:52}
   <div class="hud">
     <button class="ib" id="bMenu" onclick="pause()" aria-label="Pausa"></button>
     <div class="ttl"><div class="act" id="hAct"></div><div class="rm" id="hRoom"></div></div>
+    <button class="ib lyleb" id="bLyle" onclick="lyleHint()" aria-label="Chiedi al dottor Lyle"></button>
     <button class="ib" id="bWait" onclick="askWait()" aria-label="Lascia passare il tempo"></button>
     <div class="watch"><div class="cands" id="cands"></div>
       <div><svg class="w" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="url(#gGold)"/><circle cx="20" cy="20" r="16" fill="#efe4c8"/><g id="wticks"></g><line id="wh" x1="20" y1="20" x2="20" y2="11" stroke="#1a120c" stroke-width="2" stroke-linecap="round" style="transform-origin:20px 20px;transition:transform 1.2s cubic-bezier(.5,0,.3,1)"/><line id="wm" x1="20" y1="20" x2="20" y2="7" stroke="#1a120c" stroke-width="1.2" stroke-linecap="round" style="transform-origin:20px 20px;transition:transform 1.2s cubic-bezier(.5,0,.3,1)"/><circle cx="20" cy="20" r="1.6" fill="#8a1414"/></svg><div class="tm" id="hTime"></div></div>
@@ -425,6 +432,7 @@ body.filming #snow{z-index:52}
 <div id="plate" onclick="if(event.target===this)closePlate()"></div>
 <div id="chap"></div>
 <div id="salon"></div>
+<div id="lyle" onclick="lyleHide()"></div>
 <div class="ov" id="ov" onclick="if(event.target===this)closeOv()"><div class="sheet" id="sheet"></div></div>
 <div id="film"></div>
 <div id="fade"></div><div id="flash"></div><div id="vig"></div><div id="grain"></div>
@@ -991,7 +999,7 @@ const CASE_RAVEN = {
      intro:[
       "Julian Ashcombe giace sul tappeto persiano, il collo piegato in un angolo che nessun vivo può assumere.",
       "Lady Agatha è sulla soglia. Non piange. «Nessuno lasci la casa», dice. Come se qualcuno potesse.",
-      "Le candele accanto all'orologio sono il tempo che ti resta: ogni stanza costa un quarto d'ora."
+      "Il dottor Lyle, che ti ha seguito da Londra per tenere gli appunti, ti stringe il braccio. «Le candele accanto all'orologio sono il tempo che ci resta. Ogni stanza, un quarto d'ora.»"
      ]},
     {label:"Atto II · Sabato mattina", title:"La cappella", start:7*60+30, actions:10, room:"cappella",
      intro:[
@@ -1514,11 +1522,11 @@ const CASE_RAVEN = {
 };
 
 /* ---------------- FINALI ---------------- */
-CASE_RAVEN.ending = function(ans,g){
+CASE_RAVEN.endingBase = function(ans,g,sl){
   const dead = g.flags.rinaldiMorto;
   const R = (k,title,eyebrow,paras)=>({kind:k,title,eyebrow,paras});
   if(ans.who==="allegra"){
-    const score=(ans.lorenzo==="jacopo")+(ans.why==="parricida")+(ans.lie==="rinaldi");
+    const score=(ans.lorenzo==="jacopo")+(ans.why==="parricida")+(ans.lie==="rinaldi")-(sl&&!sl.dec?1:0)-(sl&&sl.failed.length>=2?1:0);
     if(score===3) return R("vera","La verità","Finale vero",[
       "Li hai riuniti nel salone. Hai parlato a lungo. Quando hai finito, l'unico rumore era il fuoco.",
       "«Lady Agatha. Julian ha avvelenato suo padre il 2 maggio, con la digitalina del dottore. Lei lo ha saputo da lui, e lo ha ucciso venerdì notte. Senza esitare, perché da trentatré anni credeva che non fosse figlio di Lionel, ma del suo peccato. Di Malcolm Reid.»",
@@ -1566,6 +1574,14 @@ CASE_RAVEN.ending = function(ans,g){
 };
 
 Object.keys(CASE_RAVEN.chars).forEach(k=>CASE_RAVEN.chars[k].p.k=k);
+CASE_RAVEN.ending=function(ans,g,sl){const e=CASE_RAVEN.endingBase(ans,g,sl);if(!sl)return e;
+  const names=sl.failed.map(id=>CASE_RAVEN.chars[id].short),lst=names.length>1?names.slice(0,-1).join(", ")+" e "+names[names.length-1]:names[0];
+  const add=[];
+  if(ans.who==="allegra"&&!sl.dec)add.push("Nel salone ti è mancata la prova decisiva. Lady Agatha l'ha capito un istante prima di te, e da quell'istante ha smesso di avere paura.");
+  if(names.length)add.push(`Quella notte nessuna prova ha scagionato ${lst}. Il sospetto è rimasto nella stanza come il fumo del camino, e per mesi, a Princetown, ${names.length>1?"di loro si è parlato":"se n'è parlato"} sottovoce.`);
+  if(add.length)e.paras.splice(e.paras.length-1,0,...add);
+  if(ans.who==="allegra"&&sl.dec&&!names.length&&e.kind!=="vera")e.paras.splice(1,0,"Nel salone le tue prove hanno retto, una dopo l'altra. Ma la catena dei perché aveva un anello debole.");
+  return e;};
 /* ---------------- DEDUZIONI: collegare due reperti ---------------- */
 CASE_RAVEN.deductions=[
   {id:"d_sinistra",name:"L'assassino usa la sinistra",th:{A:2},a:["c_fermacarte","c_bugiardi","c_taglio"],b:["c_bicchiere_sx","c_ricamo","c_mancina","c_lettera_allegra","c_guanti"],
@@ -1616,7 +1632,7 @@ function tryDeduce(){const [a,b]=dedSel;if(!a||!b)return;const d=dedFor(a,b);ded
   if(d&&!has(d.id)){addClue(d.id);save();AU.sfx("eureka");
     showPlate("Deduzione",d.name,clueArt(d.id),`<p class="got center">Collegati: ${S.clues[a].name} · ${S.clues[b].name}</p>`,d.id);render();return;}
   const y=$("#main").scrollTop;render();$("#main").scrollTop=y;
-  if(d)toast("Questa deduzione l'hai già fatta.");else{G.wrongDed=(G.wrongDed||0)+1;save();toast(WRONG_DED[G.wrongDed%WRONG_DED.length]);AU.sfx("tick");}}
+  if(d)toast("Questa deduzione l'hai già fatta.");else{G.wrongDed=(G.wrongDed||0)+1;save();lyleSay(LYLE_WRONG[G.wrongDed%LYLE_WRONG.length]);AU.sfx("tick");}}
 function toast(t){let el=$("#toast");if(!el){el=document.createElement("div");el.id="toast";document.body.appendChild(el);}el.textContent=t;el.classList.remove("on");void el.offsetWidth;el.classList.add("on");}
 function dedCard(id){const k=S.clues[id];return `<div class="dedcard"><div class="dk">∴ Deduzione</div><h3>${k.name}</h3><div class="dt">${k.text}</div></div>`;}
 function dedThumb(){return `<svg viewBox="0 0 300 200"><rect width="300" height="200" fill="#1c140e"/><g transform="rotate(-3 150 100)"><rect x="70" y="20" width="160" height="166" fill="#e9d29a"/><rect x="78" y="28" width="144" height="150" fill="none" stroke="#8a6a2a" stroke-width="2"/><text x="150" y="122" text-anchor="middle" font-size="74" fill="#6a4a14" font-family="IM Fell English, serif">∴</text></g></svg>`;}
@@ -1638,7 +1654,7 @@ const SALON={
 };
 let SL=null;
 function salonScene(onDone){const who=accAns.who,dead=G.flags.rinaldiMorto,order=["sofia","rina","rinaldi","allegra"].filter(id=>id!==who&&!(id==="rinaldi"&&dead));
-  SL={steps:[...order.map(id=>({t:"clear",who:id})),{t:"accuse",who}],i:0,done:{},cleared:{},picked:false,onDone};
+  SL={steps:[...order.map(id=>({t:"clear",who:id})),{t:"accuse",who}],i:0,done:{},cleared:{},picked:false,onDone,dec:false,failed:[]};
   const el=$("#salon");el.classList.add("on");AU.sfx("drone");renderSalon();}
 function renderSalon(){const st=SL.steps[SL.i],who=accAns.who,ids=["allegra","rinaldi","sofia","rina"];
   const ring=ids.map((id,i)=>{const c=S.chars[id],dead=id==="rinaldi"&&G.flags.rinaldiMorto,cls=[SL.cleared[id]?"cleared":"",st.who===id?"focus":"",id===who?"acc":"",dead?"gone":""].join(" ");
@@ -1655,18 +1671,71 @@ function renderSalon(){const st=SL.steps[SL.i],who=accAns.who,ids=["allegra","ri
     <div class="strip">${ev.map(id=>`<button class="${S.clues[id].cat==="Deduzione"?"ded":""}" onclick="salonPick('${id}')">${evThumb(id)}<span>${S.clues[id].name}</span></button>`).join("")}</div>
     <button class="btn ink sm" onclick="salonPick(null)">Non ho una prova</button>`}</div>`;}
 function salonPick(id){const st=SL.steps[SL.i],info=st.t==="clear"?SALON.clear[st.who]:SALON.accuse[st.who],ok=!!id&&info.ok.includes(id);
-  if(st.t==="clear"&&ok)SL.cleared[st.who]=1;
+  if(st.t==="clear"&&ok)SL.cleared[st.who]=1;if(st.t==="clear"&&!ok)SL.failed.push(st.who);if(st.t==="accuse")SL.dec=ok;
   SL.res={ok,text:(id?`<span class="pres">Presenti: ${S.clues[id].name}.</span> `:"")+(ok?info.good:info.bad)};
   SL.score=(SL.score||0)+(ok?1:0);AU.sfx(ok?"stamp":"tick");if(ok&&st.t==="accuse")AU.sfx("gavel");renderSalon();}
 function salonNext(){SL.res=null;SL.i++;AU.sfx("page");if(SL.i<SL.steps.length){renderSalon();return;}
-  const fin=()=>{$("#salon").classList.remove("on");SL.onDone&&SL.onDone();};
-  if(G.ended&&G.ended.kind==="vera")gloveScene(fin);else{shake();lightning();setTimeout(fin,500);}}
+  const e=SL.onDone({dec:SL.dec,failed:SL.failed.slice()}),fin=()=>{$("#salon").classList.remove("on");showEnding();};
+  if(e.kind==="vera")gloveScene(fin);else{shake();lightning();setTimeout(fin,500);}}
 function gloveScene(done){const el=$("#salon");el.innerHTML=`<div class="glove-sc"><svg viewBox="0 0 300 360" class="gl-svg"><defs><linearGradient id="arm" x1="0" x2="1"><stop offset="0" stop-color="#cdb79a"/><stop offset="1" stop-color="#a88f72"/></linearGradient></defs>
   <path d="M110 360L118 230Q120 200 136 196L136 120Q136 108 146 108Q156 108 156 120L158 180L160 96Q160 84 170 84Q180 84 180 96L182 178L186 104Q186 92 196 92Q206 92 206 104L204 186L214 132Q216 122 226 124Q236 128 232 140L222 230Q216 270 200 290L196 360Z" fill="url(#arm)" stroke="#5a4630" stroke-width="2"/>
   <g class="gl-off"><path d="M106 360L114 226Q116 196 134 192L132 116Q132 102 146 102Q160 102 160 116L161 176L156 92Q156 78 170 78Q184 78 184 92L186 174L182 100Q182 86 196 86Q210 86 210 100L208 182L212 128Q216 116 228 118Q242 122 236 138L226 232Q220 274 202 294L200 360Z" fill="#0c0a09" stroke="#2a2420" stroke-width="2"/><path d="M118 330Q156 320 196 330" stroke="#2a2420" stroke-width="2" fill="none"/><ellipse cx="226" cy="150" rx="5" ry="9" fill="#5a1010" opacity=".8"/></g></svg>
   <p class="gl-cap">Lady Agatha si sfila il guanto sinistro, dito per dito, e lo posa sul bracciolo.</p></div>`;
   AU.sfx("drone");setTimeout(done,5200);}
 
+
+/* ---------------- IL COMPAGNO: il dottor Edward Lyle ---------------- */
+const LYLE={name:"Dott. Edward Lyle",short:"Lyle",p:{k:"lyle"}};
+ENGR.lyle={w:14.5,h:43,jaw:0,age:0,lids:0,brow:.5,mouth:"soft",hair:"slick",beard:"tash",dress:"coat",col:"wing",acc:""};
+const LYLE_DED={
+  d_sinistra:"«Mancino!» Lyle quasi lo grida, poi abbassa la voce. «Ha visto come tiene le mani, a cena, Lady Agatha? Sempre la destra sopra la sinistra. Come chi nasconde qualcosa.»",
+  d_messinscena:"«Un uomo drogato non lotta. Chi ha rovesciato quelle sedie voleva farci credere a una rissa. Quindi non era abbastanza forte per una rissa vera.»",
+  d_tisana:"«Una tazza pulita che fa da alibi. Lo scriverò così: il delitto della tazza vuota.» Lyle annota, soddisfatto.",
+  d_parricidio:"Lyle si siede, pallido. «Allora il primo delitto è di maggio. E l'assassino di Sir Lionel è il primo cadavere di stanotte.»",
+  d_menzogna:"«Il sangue non mente, l'aveva detto il prete.» Lyle si passa una mano sul viso. «Ma i medici sì. Che vergogna, per la professione.»",
+  d_somiglianza:"«Lo stesso mento. Ce l'aveva davanti agli occhi da trent'anni, e ci ha visto un altro uomo. Non c'è cecità peggiore.»",
+  d_movente:"«"+"Rimedierò io"+"…» Lyle rilegge due volte. «Non è il movente di un'avida. È quello di una vedova. Il più pericoloso.»",
+  d_cantina:"«Una donna, dunque. Restano poche signore, in questa casa.» Lyle conta sulle dita, e si ferma.",
+  d_arma:"«L'arma viene da una stanza chiusa a chiave. E la chiave l'ha una sola persona.»",
+  d_alibi_sophia:"«Povera signora Blake. Aveva il movente migliore di tutti, e non ha ucciso nessuno.» Lyle sembra quasi sollevato.",
+  d_kitty:"«La governante ha mentito per proteggere qualcuno. In questa casa, c'è una sola persona che Kitty proteggerebbe.»",
+  d_prete:"«Ha parlato con la madre, e la madre lo ha zittito.» Lyle si fa il segno della croce, lui che non è nemmeno cattolico."
+};
+const LYLE_WRONG=["Lyle si gratta il mento. «Mi perdoni, ma non vedo il nesso.»","«Due fatti veri non fanno sempre una verità», mormora Lyle.","«Suggestivo», dice Lyle. «Ma un giudice riderebbe.»","Lyle scuote la testa. «Il filo non regge. Proviamo a tirarne un altro.»","«Una coincidenza, temo. Non ancora una deduzione.»","«Interessante. Ma non ci porta da nessuna parte.»"];
+const LYLE_TIP={
+  start:"«Cominci dai bagliori: quello che brilla merita uno sguardo. E le sagome sono persone: le interroghi, e mostri loro quello che trova.»",
+  firstClue:"«Agli atti. Quando ne avremo un paio, proviamo a collegarli: è così che si ragiona, non collezionando.»",
+  dedReady:"«Ha già abbastanza per una prima deduzione. Apra il taccuino, alla scheda Deduzioni, e colleghi due reperti.»",
+  candles:"«Le candele si consumano. Scelga bene la prossima stanza: il tempo, stanotte, è l'unica cosa che non possiamo cercare.»",
+  board:"«Il filo rosso. Diffidi delle teorie che spiegano tutto tranne un dettaglio: è sempre il dettaglio ad avere ragione.»",
+  accuse:"«Si accusa una volta sola. Poi, nel salone, dovrà dimostrarlo davanti a tutti: una prova per scagionare ogni innocente, una per inchiodare il colpevole.»",
+  act1:"«Un prete. Qualcuno ha paura di ciò che si dice in confessione.»",
+  act2:"«"+"Bugiardi"+", al plurale. Chi l'ha scritto non accusa una persona sola.»",
+  act3:"«L'ultima notte. Se c'è un'accusa da fare, va fatta prima di mezzanotte.»"
+};
+function tip(k){if(!G)return;G.tips=G.tips||{};if(G.tips[k])return;G.tips[k]=1;save();lyleSay(LYLE_TIP[k]);}
+let lyleT=null;
+function lyleSay(text){const go=()=>{if(!G||!$("#game").classList.contains("on")||$("#chap").classList.contains("on")||$("#salon").classList.contains("on")||$("#film").classList.contains("on")){lyleT=setTimeout(go,900);return;}
+    const el=$("#lyle");el.innerHTML=`<div class="ly-pf">${portrait(LYLE.p)}</div><div class="ly-tx"><b>${LYLE.name}</b>${text}</div>`;el.classList.remove("on");void el.offsetWidth;el.classList.add("on");AU.sfx("page");
+    clearTimeout(lyleT);lyleT=setTimeout(()=>el.classList.remove("on"),Math.max(5500,text.length*65));};
+  clearTimeout(lyleT);go();}
+function lyleHide(){clearTimeout(lyleT);$("#lyle").classList.remove("on");}
+function reactFor(c,id){let r=c.react&&c.react[id];if(Array.isArray(r))r=r.find(x=>(x.minAct||0)<=G.act);return r;}
+function lyleHint(){if(!G||G.ended){lyleSay("«Il caso è chiuso. Ora ho soltanto da scrivere.»");return;}
+  G.hints=(G.hints||0)+1;save();const R=S.rooms[G.room],act=G.act,seen=(r,o)=>G.seen[r+"."+o.id];
+  const avail=(rid)=>S.rooms[rid].objects.filter(o=>objAvail(o)&&!seen(rid,o)&&!(o.req&&!hasItem(o.req)));
+  const here=avail(G.room);if(here.length){lyleSay(`«Non abbiamo ancora guardato bene qui. ${here[0].label}, per esempio.»`);return;}
+  for(const id of charsIn(G.room)){const c=S.chars[id],u=c.unlock||{};
+    for(const [k,lab] of [["alibi","dove si trovava"],["crime","del delitto"],["others","degli altri"]]){const cl=u[k==="others"?"others":k+act];if(cl&&!has(cl)){lyleSay(`«Credo che ${c.short} sappia di più. Le chieda ${lab}.»`.replace("Le chieda",c.mk==="Dr"||id==="anselmo"?"Gli chieda":"Le chieda"));return;}}}
+  for(const id of Object.keys(S.chars)){if(!alive(id)||!S.chars[id].loc||!S.chars[id].loc[act])continue;const c=S.chars[id];
+    for(const cl of G.clues){const r=reactFor(c,cl);if(r&&typeof r==="object"&&r.unlock&&!has(r.unlock)){lyleSay(`«Proviamo a mostrare «${S.clues[cl].name}» a ${c.short}. Ho l'impressione che non lo prenderebbe bene.»`);return;}}}
+  const d=(S.deductions||[]).find(d=>!has(d.id)&&d.a.some(has)&&d.b.some(has));
+  if(d){const a=d.a.find(has);lyleSay(`«Ripensi a «${S.clues[a].name}». C'è qualcos'altro, nel taccuino, che parla della stessa cosa. Provi a collegarli.»`);return;}
+  if(hasItem("chiave_torretta")&&!G.visited.torretta){lyleSay("«Abbiamo la chiave della torretta. Sir Lionel ci teneva qualcosa che non voleva mostrare a nessuno.»");return;}
+  if(hasItem("chiavi_elena")&&!G.seen["studio.archivio"]){lyleSay("«Le chiavi di Helena. Nello studio c'è uno schedario di ferro che aspetta proprio quelle.»");return;}
+  const other=Object.keys(S.rooms).find(rid=>rid!==G.room&&!roomLocked(rid)&&avail(rid).length);
+  if(other){lyleSay(`«${G.visited[other]?"In "+S.rooms[other].name.toLowerCase()+" c'è ancora qualcosa da vedere":"Non siamo ancora stati in "+S.rooms[other].name.toLowerCase()}. Ci vorrà un quarto d'ora, ma ne vale la pena.»`);return;}
+  lyleSay(act<S.acts.length-1?"«Credo che questa notte non abbia altro da dirci. Lasciamo passare il tempo: clessidra, in alto.»":"«Abbiamo tutto quello che c'era da trovare. È il momento di accusare.»");}
 
 /* ---------------- ALTRI CASI (in preparazione) ---------------- */
 const STORIES=[
@@ -1804,7 +1873,7 @@ function newGame(id,confirmFirst){
 function continueGame(){G=loadSave();S=STORIES.find(s=>s.id===G.story);if(!S){G=null;return;}accAns={};wAng.last=null;closePanels();AU.music(false);
   $("#title").classList.remove("on");$("#game").classList.add("on");snow(false);render();}
 function replayFilm(){const st=STORIES.find(s=>s.film);if(!st)return;S=S||st;playFilm(st.film,()=>{buildTitle();AU.music(true);});}
-function actIntro(i){const a=S.acts[i];chapter({eb:a.label,title:a.title,paras:a.intro,art:a.room,mood:i<3?"murder":"storm",onDone:()=>{render();}});}
+function actIntro(i){const a=S.acts[i];chapter({eb:a.label,title:a.title,paras:a.intro,art:a.room,mood:i<3?"murder":"storm",onDone:()=>{render();setTimeout(()=>tip(i?"act"+i:"start"),900);}});}
 
 /* ---------------- FILMATO ---------------- */
 let filmT=[],filmEnd=null;
@@ -1874,7 +1943,7 @@ function hud(){const a=S.acts[G.act];$("#hAct").textContent=a.label;$("#hRoom").
   $("#wm").style.transform=`rotate(${wAng.m}deg)`;$("#wh").style.transform=`rotate(${wAng.h}deg)`;}
 function nav(){const T=[["room","Stanza"],["map","Mappa"],["notes","Taccuino"],["board","Bacheca"],["accuse","Accusa"]];
   $("#nav").innerHTML=T.map(t=>`<button data-tab="${t[0]}" class="${G.tab===t[0]?"on":""}" onclick="setTab('${t[0]}')">${IC[t[0]]}<span>${t[1]}</span>${t[0]==="notes"&&G.newClues.length?`<i class="dot"></i>`:""}</button>`).join("");}
-function setTab(t){if(G.tab!==t)AU.sfx("page");G.tab=t;save();render();$("#main").scrollTop=0;}
+function setTab(t){if(G.tab!==t)AU.sfx("page");G.tab=t;save();render();$("#main").scrollTop=0;if(t==="board")tip("board");if(t==="accuse"&&!G.ended)tip("accuse");}
 
 /* ---------------- STANZA ---------------- */
 function roomSVG(id){const A=ROOMART[id],act=G.act;let s=`<svg class="scn" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${shellSVG(A)}`;
@@ -1943,7 +2012,11 @@ function viewClue(id){const k=S.clues[id],dd=k.cat==="Deduzione";showPlate(dd?"D
 function viewItem(it){showPlate("Oggetto",S.items[it],`<div class="art">${itemArt(it)}</div>`,"",null);}
 function showPlate(tag,title,art,body,nw){$("#plate").innerHTML=`<div class="pl" id="pl"><div class="tag">${tag}</div><h2>${title}</h2>${art}${body}${nw?`<div class="stamp">Agli atti</div>`:""}<div class="acts"><button class="btn ink" onclick="closePlate(${nw?`'${nw}'`:""})">Riponi</button></div></div>`;
   $("#plate").classList.add("on");$("#plate").scrollTop=0;AU.sfx("page");if(nw){setTimeout(()=>AU.sfx("stamp"),420);setTimeout(()=>AU.sfx("clue"),760);}}
-function closePlate(fly){if(fly)flyToNotes(fly);$("#plate").classList.remove("on");}
+function closePlate(fly){if(fly)flyToNotes(fly);$("#plate").classList.remove("on");if(G&&!G.ended)setTimeout(()=>lyleCheck(fly),700);}
+function lyleCheck(fly){if(fly&&LYLE_DED[fly]){lyleSay(LYLE_DED[fly]);return;}G.tips=G.tips||{};
+  if(G.clues.length&&!G.tips.firstClue){tip("firstClue");return;}
+  if(G.tips.firstClue&&!G.tips.dedReady&&dedOpen()&&!G.clues.some(c=>S.clues[c].cat==="Deduzione")){tip("dedReady");return;}
+  if(G.actions<=2&&!G.tips.candles){tip("candles");return;}}
 function flyToNotes(cid){const src=document.querySelector("#pl .art,#pl .doc,#pl .testi"),btn=document.querySelector('.nav button[data-tab="notes"]');if(!src||!btn)return;
   const a=src.getBoundingClientRect(),b=btn.getBoundingClientRect(),d=document.createElement("div");d.className="fly";d.innerHTML=evThumb(cid);d.style.left=(a.left+a.width/2-50)+"px";d.style.top=(a.top+a.height/2-33)+"px";document.body.appendChild(d);
   requestAnimationFrame(()=>requestAnimationFrame(()=>{d.style.transform=`translate(${b.left+b.width/2-(a.left+a.width/2)}px,${b.top+b.height/2-(a.top+a.height/2)}px) scale(.18) rotate(24deg)`;d.style.opacity=".3";}));
@@ -1951,7 +2024,7 @@ function flyToNotes(cid){const src=document.querySelector("#pl .art,#pl .doc,#pl
 
 /* ---------------- INTERROGATORI ---------------- */
 function openTalk(id){talkWith=id;pickOpen=false;AU.sfx("door");$("#talk").classList.add("on");renderTalk();}
-function closeTalk(){talkWith=null;const t=$("#talk");if(t)t.classList.remove("on");}
+function closeTalk(){const was=talkWith;talkWith=null;const t=$("#talk");if(t)t.classList.remove("on");if(was&&G&&!G.ended)setTimeout(()=>lyleCheck(),500);}
 let typer=null;
 function renderTalk(typeIdx){const c=S.chars[talkWith],log=G.log[talkWith]||[];
   let L=log.length?log.map((l,i)=>`${l.q?`<div class="q">${l.q}</div>`:""}<div class="a${l.r?" react":""}"${i===typeIdx?` id="typing"`:""}>${l.a}</div>`).join(""):`<div class="a muted">${c.short} ti osserva in silenzio, in attesa della prima domanda.</div>`;
@@ -1968,7 +2041,7 @@ function finishType(){const el=$("#typing");if(el&&typer){clearInterval(typer);t
 function togglePick(){pickOpen=!pickOpen;renderTalk();}
 function pushLog(q,a,react,unlock){finishType();const L=(G.log[talkWith]=G.log[talkWith]||[]);L.push({q,a,r:!!react});const idx=L.length-1;
   if(unlock&&addClue(unlock)){L.push({q:"",a:`<span class="nc"><b>Nuovo reperto nel taccuino</b>${S.clues[unlock].name}</span>`});setTimeout(()=>AU.sfx("clue"),500);}
-  save();renderTalk(idx);nav();}
+  save();renderTalk(idx);nav();if(unlock)setTimeout(()=>{if(!$("#talk").classList.contains("on"))lyleCheck();},300);}
 function talk(topic){const c=S.chars[talkWith],u=c.unlock||{};let q,a,un;
   if(topic==="alibi"){q="Dov'era?";a=byAct(c.alibi);un=u["alibi"+G.act];}
   if(topic==="crime"){q="Il delitto";a=byAct(c.crime);un=u["crime"+G.act];}
@@ -2023,10 +2096,11 @@ function accuseView(){
   return h+`<button class="btn red big" ${ready?"":"disabled"} onclick="confirmAccuse()">Pronuncia l'accusa</button></div>`;}
 function pick(q,v){accAns[q]=v;AU.sfx("page");const y=$("#main").scrollTop;render();$("#main").scrollTop=y;}
 function confirmAccuse(){note("Ne sei sicuro?",`<p>Stai per accusare formalmente <b>${S.chars[accAns.who].name}</b>, davanti a tutti. Non si torna indietro.</p><div class="row"><button class="btn red" onclick="closeOv();doAccuse()">Accuso</button><button class="btn ink" onclick="closeOv()">Aspetta</button></div>`,true);}
-function doAccuse(){AU.sfx("gavel");const e=S.ending(accAns,G);G.ended=e;G.answers={...accAns};save();setDone(S.id,e.kind);render();setTimeout(()=>salonScene(showEnding),500);}
+function doAccuse(){AU.sfx("gavel");lyleHide();G.answers={...accAns};save();setTimeout(()=>salonScene(finishAccuse),500);}
+function finishAccuse(sl){const e=S.ending(accAns,G,sl);G.ended=e;G.salon=sl;save();setDone(S.id,e.kind);render();return e;}
 function endButtons(){return `${G.ended.kind!=="vera"?`<button class="btn" id="rv">Rivela la verità</button>`:""}<button class="btn red" id="ng">Rigioca il caso</button><button class="btn" id="mn">Menu principale</button>`;}
 function bindEnd(){const rv=$("#rv");if(rv)rv.onclick=()=>revealTruth();$("#ng").onclick=()=>{$("#chap").classList.remove("on");newGame(S.id);};$("#mn").onclick=()=>{$("#chap").classList.remove("on");toMenu();};}
-function showEnding(){const e=G.ended;chapter({eb:e.eyebrow,title:e.title,paras:e.paras,mood:"end",end:true,buttons:endButtons()});bindEnd();}
+function showEnding(){const e=G.ended;chapter({eb:"Dagli appunti del dottor Lyle · "+e.eyebrow,title:e.title,paras:e.paras,mood:"end",end:true,buttons:endButtons()});bindEnd();}
 function revealTruth(sure){if(!sure){$("#chap").classList.remove("on");note("Leggere la soluzione?",`<p>Vedrai la ricostruzione completa del caso, con tutti i colpi di scena.</p><div class="row"><button class="btn red" onclick="closeOv();revealTruth(true)">Rivela</button><button class="btn ink" onclick="closeOv()">Non ancora</button></div>`,true);return;}
   chapter({eb:"La soluzione",title:"Che cosa è successo davvero",paras:S.truth,mood:"end",buttons:`<button class="btn red" id="ng">Rigioca il caso</button><button class="btn" id="mn">Menu principale</button>`});bindEnd();}
 
@@ -2058,7 +2132,7 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden&&snowOn&&!
 /* ---------------- AVVIO ---------------- */
 document.body.insertAdjacentHTML("afterbegin",DEFS);
 (function(){let t="";for(let i=0;i<12;i++){const a=i*30*Math.PI/180;t+=`<path d="M${(20+12.5*Math.sin(a)).toFixed(2)} ${(20-12.5*Math.cos(a)).toFixed(2)}L${(20+14.5*Math.sin(a)).toFixed(2)} ${(20-14.5*Math.cos(a)).toFixed(2)}" stroke="#3b2a1a" stroke-width="${i%3?.6:1.4}"/>`;}$("#wticks").innerHTML=t;})();
-$("#bMenu").innerHTML=IC.menu;$("#bWait").innerHTML=IC.hour;
+$("#bMenu").innerHTML=IC.menu;$("#bLyle").innerHTML=portrait(LYLE.p);$("#bWait").innerHTML=IC.hour;
 snowInit();buildTitle();snow(true);
 document.addEventListener("keydown",e=>{if(!started&&(e.key==="Enter"||e.key===" ")){e.preventDefault();startGame();}});
 
