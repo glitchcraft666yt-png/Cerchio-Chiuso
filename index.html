@@ -103,6 +103,7 @@ body.filming #snow{z-index:52}
 .is-body h3{font-family:'IM Fell English',serif;font-weight:400;font-size:1.65rem;line-height:1.05;margin:3px 0}
 .is-yr{font-style:italic;color:#6a5236;font-size:.93rem}
 .is-bl{margin:8px 0 12px;font-size:.98rem;color:#3b2a1a;flex:1}
+.is-best{font-family:'IM Fell English SC',serif;letter-spacing:.1em;font-size:.8rem;color:#6a5236;margin:-4px 0 10px}.is-best b{color:var(--blood);font-size:1rem}
 .is-acts{display:flex;gap:8px;flex-wrap:wrap}
 .issue .stamp{position:absolute;right:16px;top:58px;transform:rotate(8deg);font-family:'IM Fell English SC',serif;border:2px solid #8a1414;color:#8a1414;background:rgba(233,220,188,.85);padding:2px 8px;font-size:.74rem;letter-spacing:.14em;z-index:2}
 .issue.locked{filter:grayscale(.8) brightness(.55)}
@@ -398,6 +399,27 @@ body.filming #snow{z-index:52}
 #lyle .ly-pf{width:52px;flex:0 0 52px}#lyle .ly-pf svg{width:100%;display:block}
 #lyle .ly-tx{font-size:1rem;line-height:1.4;font-style:italic}#lyle .ly-tx b{display:block;font-style:normal;font-family:'IM Fell English SC',serif;font-weight:400;letter-spacing:.1em;font-size:.78rem;color:var(--blood)}
 .ib.lyleb{width:40px;height:40px;padding:0}.ib.lyleb svg{width:34px;height:40px}
+/* pagella */
+#report{position:fixed;inset:0;z-index:47;display:none;overflow-y:auto;background:rgba(3,2,1,.9);padding:calc(18px + var(--st)) 12px calc(24px + var(--sb))}
+#report.on{display:block;animation:tIn .5s}
+.rp-sheet{max-width:540px;margin:0 auto;background:#efe4c8;background-image:var(--noise);background-blend-mode:multiply;color:var(--sepia);padding:22px 20px 20px;box-shadow:0 30px 70px rgba(0,0,0,.85);position:relative;animation:plIn .6s cubic-bezier(.2,.8,.2,1)}
+.rp-head{text-align:center;border-bottom:2px solid var(--sepia);padding-bottom:10px;margin-bottom:8px}
+.rp-k{font-family:'IM Fell English SC',serif;letter-spacing:.3em;font-size:.76rem;color:var(--blood)}
+.rp-head h2{font-family:'IM Fell English',serif;font-weight:400;font-size:1.8rem;line-height:1.05;margin:4px 0}
+.rp-sub{font-style:italic;color:#6a5236;font-size:.9rem}
+.rp-t{width:100%;border-collapse:collapse}
+.rp-t tr{opacity:0;animation:pin .5s forwards}
+.rp-t td{padding:8px 4px;border-bottom:1px dashed rgba(59,42,26,.35);font-size:1rem;vertical-align:top}
+.rp-t td.v{font-family:'Special Elite',monospace;font-size:.86rem;color:#3b2a1a;text-align:right}
+.rp-t td.p{font-family:'Special Elite',monospace;text-align:right;width:52px;color:#2a5a2a}.rp-t td.p.neg{color:var(--blood)}.rp-t td.p.zero{color:#8a7a5a}
+.rp-tot{display:flex;align-items:baseline;justify-content:flex-end;gap:8px;margin-top:12px;font-family:'IM Fell English SC',serif;letter-spacing:.1em}
+.rp-tot b{font-family:'IM Fell English',serif;font-weight:400;font-size:3rem;line-height:1;color:var(--blood)}.rp-tot i{font-style:normal;color:#6a5236}
+.rp-stamp{display:block;width:max-content;max-width:100%;margin:8px auto 4px;border:3px double #8a1414;color:#8a1414;font-family:'IM Fell English SC',serif;letter-spacing:.1em;padding:5px 14px;font-size:1.15rem;text-align:center;mix-blend-mode:multiply;animation:stampIn2 .5s both cubic-bezier(.3,1.6,.5,1)}
+@keyframes stampIn2{from{transform:rotate(-6deg) scale(2.6);opacity:0}to{transform:rotate(-3deg);opacity:.92}}
+.rp-rec{text-align:center;font-family:'IM Fell English SC',serif;letter-spacing:.12em;font-size:.8rem;color:#2a5a2a}.rp-rec.dim{color:#6a5236}
+.rp-ly{display:flex;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(59,42,26,.35)}.rp-ly .ly-pf{width:52px;flex:0 0 52px}.rp-ly .ly-pf svg{width:100%;display:block}
+.rp-ly p{font-style:italic;font-size:1rem}.rp-ly b{display:block;font-style:normal;font-family:'IM Fell English SC',serif;font-weight:400;letter-spacing:.1em;font-size:.78rem;color:var(--blood)}
+.rp-acts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
 /* finestre */
 .ov{position:fixed;inset:0;z-index:45;background:rgba(4,3,2,.86);display:none;align-items:center;justify-content:center;padding:16px}
 .ov.on{display:flex}
@@ -433,6 +455,7 @@ body.filming #snow{z-index:52}
 <div id="chap"></div>
 <div id="salon"></div>
 <div id="lyle" onclick="lyleHide()"></div>
+<div id="report"></div>
 <div class="ov" id="ov" onclick="if(event.target===this)closeOv()"><div class="sheet" id="sheet"></div></div>
 <div id="film"></div>
 <div id="fade"></div><div id="flash"></div><div id="vig"></div><div id="grain"></div>
@@ -1675,7 +1698,7 @@ function salonPick(id){const st=SL.steps[SL.i],info=st.t==="clear"?SALON.clear[s
   SL.res={ok,text:(id?`<span class="pres">Presenti: ${S.clues[id].name}.</span> `:"")+(ok?info.good:info.bad)};
   SL.score=(SL.score||0)+(ok?1:0);AU.sfx(ok?"stamp":"tick");if(ok&&st.t==="accuse")AU.sfx("gavel");renderSalon();}
 function salonNext(){SL.res=null;SL.i++;AU.sfx("page");if(SL.i<SL.steps.length){renderSalon();return;}
-  const e=SL.onDone({dec:SL.dec,failed:SL.failed.slice()}),fin=()=>{$("#salon").classList.remove("on");showEnding();};
+  const e=SL.onDone({dec:SL.dec,failed:SL.failed.slice(),ok:SL.score||0,n:SL.steps.length}),fin=()=>{$("#salon").classList.remove("on");showEnding();};
   if(e.kind==="vera")gloveScene(fin);else{shake();lightning();setTimeout(fin,500);}}
 function gloveScene(done){const el=$("#salon");el.innerHTML=`<div class="glove-sc"><svg viewBox="0 0 300 360" class="gl-svg"><defs><linearGradient id="arm" x1="0" x2="1"><stop offset="0" stop-color="#cdb79a"/><stop offset="1" stop-color="#a88f72"/></linearGradient></defs>
   <path d="M110 360L118 230Q120 200 136 196L136 120Q136 108 146 108Q156 108 156 120L158 180L160 96Q160 84 170 84Q180 84 180 96L182 178L186 104Q186 92 196 92Q206 92 206 104L204 186L214 132Q216 122 226 124Q236 128 232 140L222 230Q216 270 200 290L196 360Z" fill="url(#arm)" stroke="#5a4630" stroke-width="2"/>
@@ -1736,6 +1759,45 @@ function lyleHint(){if(!G||G.ended){lyleSay("«Il caso è chiuso. Ora ho soltant
   const other=Object.keys(S.rooms).find(rid=>rid!==G.room&&!roomLocked(rid)&&avail(rid).length);
   if(other){lyleSay(`«${G.visited[other]?"In "+S.rooms[other].name.toLowerCase()+" c'è ancora qualcosa da vedere":"Non siamo ancora stati in "+S.rooms[other].name.toLowerCase()}. Ci vorrà un quarto d'ora, ma ne vale la pena.»`);return;}
   lyleSay(act<S.acts.length-1?"«Credo che questa notte non abbia altro da dirci. Lasciamo passare il tempo: clessidra, in alto.»":"«Abbiamo tutto quello che c'era da trovare. È il momento di accusare.»");}
+
+/* ---------------- LA PAGELLA DI FINE CASO ---------------- */
+const BEST="cerchiochiuso_best_v1";
+function getBest(){try{return JSON.parse(localStorage.getItem(BEST)||"{}")}catch(e){return {}}}
+function setBest(id,v){const b=getBest();if(!(b[id]>=v)){b[id]=v;try{localStorage.setItem(BEST,JSON.stringify(b))}catch(e){}return true;}return false;}
+setInterval(()=>{if(G&&!G.ended&&$("#game").classList.contains("on")&&!document.hidden&&!$("#film").classList.contains("on"))G.play=(G.play||0)+5;},5000);
+const GRADES=[[90,"Il miglior investigatore d'Inghilterra","«Lo scriverò così com'è andata, e nessuno mi crederà. Non ha sbagliato un passo.»"],
+  [75,"Ispettore di Scotland Yard","«Un lavoro eccellente. Qualche esitazione, ma i miei lettori non se ne accorgeranno: le taglierò.»"],
+  [55,"Sergente della polizia di contea","«Ci siamo arrivati, alla fine. Per strade un po' tortuose, ma ci siamo arrivati.»"],
+  [35,"Agente di ronda","«Diciamo che questo caso non lo manderò all'editore. Non ancora.»"],
+  [0,"Dilettante della domenica","«Forse è meglio che stavolta gli appunti li tenga per me.»"]];
+function fmtPlay(s){s=s||0;const h=Math.floor(s/3600),m=Math.round(s%3600/60);return h?`${h} h ${String(m).padStart(2,"0")} min`:`${Math.max(1,m)} min`;}
+function reportData(){const e=G.ended,raw=Object.keys(S.clues).filter(id=>S.clues[id].cat!=="Deduzione"),dd=S.deductions||[];
+  const nRaw=G.clues.filter(id=>S.clues[id].cat!=="Deduzione").length,nDed=G.clues.filter(id=>S.clues[id].cat==="Deduzione").length,sl=G.salon||{ok:0,n:0,dec:false,failed:[]};
+  const rows=[];const add=(lab,val,pts,max)=>rows.push({lab,val,pts,max});
+  const endPts={vera:40,quasi:25,parziale:15,errato:0}[e.kind]||0;
+  add("Esito dell'accusa",e.title,endPts,40);
+  add("Reperti raccolti",`${nRaw} su ${raw.length}`,Math.round(nRaw/raw.length*15),15);
+  add("Deduzioni",`${nDed} su ${dd.length}`,Math.round(nDed/(dd.length||1)*20),20);
+  add("Prove nel salone",sl.n?`${sl.ok} su ${sl.n}${sl.dec?" · decisiva":""}`:"—",sl.n?Math.round(sl.ok/sl.n*15):0,15);
+  const actPts=G.forced?0:[10,10,8,5][G.act]||5;
+  add("Accusa formulata",G.forced?"dopo la mezzanotte, troppo tardi":S.acts[G.act].label.split("·")[1].trim(),actPts,10);
+  const h=G.hints||0,w=G.wrongDed||0;
+  add("Suggerimenti di Lyle",h?`${h}`:"nessuno",-Math.min(10,h),0);
+  add("Collegamenti sbagliati",w?`${w}`:"nessuno",-Math.min(5,Math.floor(w/2)),0);
+  const tot=Math.max(0,Math.min(100,rows.reduce((a,r)=>a+r.pts,0))),g=GRADES.find(x=>tot>=x[0]);
+  return {rows,tot,title:g[1],lyle:g[2],play:fmtPlay(G.play)};}
+function showReport(){const r=reportData(),rec=setBest(S.id,r.tot),best=getBest()[S.id];AU.sfx("page");
+  const el=$("#report");el.innerHTML=`<div class="rp-sheet"><div class="rp-head"><div class="rp-k">Rapporto di fine indagine</div><h2>${S.title}</h2><div class="rp-sub">${S.year} · tempo d'indagine ${r.play}</div></div>
+  <table class="rp-t">${r.rows.map((x,i)=>`<tr style="animation-delay:${(.3+i*.22).toFixed(2)}s"><td>${x.lab}</td><td class="v">${x.val}</td><td class="p ${x.pts<0?"neg":x.pts===0?"zero":""}">${x.pts>0?"+":""}${x.pts}</td></tr>`).join("")}</table>
+  <div class="rp-tot"><span>Punteggio</span><b id="rpN">0</b><i>/ 100</i></div>
+  <div class="rp-stamp" style="animation-delay:${(.5+r.rows.length*.22).toFixed(2)}s">${r.title}</div>
+  ${rec?`<div class="rp-rec">Nuovo record per questo caso</div>`:`<div class="rp-rec dim">Il tuo record: ${best}</div>`}
+  <div class="rp-ly"><div class="ly-pf">${portrait(LYLE.p)}</div><p><b>${LYLE.name}</b>${r.lyle}</p></div>
+  <div class="rp-acts"><button class="btn red" onclick="closeReport();newGame(S.id)">Rigioca il caso</button>${G.ended.kind!=="vera"?`<button class="btn ink" onclick="closeReport();revealTruth()">Rivela la verità</button>`:""}<button class="btn ink" onclick="closeReport();toMenu()">Menu principale</button><button class="btn ink" onclick="closeReport()">Chiudi</button></div></div>`;
+  el.classList.add("on");el.scrollTop=0;
+  const n=$("#rpN"),t0=performance.now()+(.4+r.rows.length*.22)*1000;
+  (function tick(t){if(!n.isConnected)return;const k=Math.max(0,Math.min(1,(t-t0)/1200));n.textContent=Math.round(r.tot*k);if(k<1)requestAnimationFrame(tick);else{AU.sfx("stamp");}})(performance.now());}
+function closeReport(){$("#report").classList.remove("on");}
 
 /* ---------------- ALTRI CASI (in preparazione) ---------------- */
 const STORIES=[
@@ -1847,7 +1909,7 @@ function openArchive(){const done=getDone(),sv=loadSave();AU.sfx("page");
   STORIES.forEach(st=>{const cont=sv&&sv.story===st.id&&!sv.ended;
     h+=`<article class="issue${st.locked?" locked":""}"><div class="is-mast"><b>Il Cerchio</b><span>${st.issue}</span></div><div class="is-art"><img src="${artURL(st.art)}" alt="">${st.plate?`<div class="plate">${st.plate}</div>`:""}</div>
     ${st.locked?`<div class="stamp">In preparazione</div>`:done[st.id]?`<div class="stamp">${mark[done[st.id]]}</div>`:""}
-    <div class="is-body"><div class="is-num">${st.num}</div><h3>${st.title}</h3><div class="is-yr">${st.year}</div><p class="is-bl">${st.blurb}</p>
+    <div class="is-body"><div class="is-num">${st.num}</div><h3>${st.title}</h3><div class="is-yr">${st.year}</div><p class="is-bl">${st.blurb}</p>${getBest()[st.id]!=null?`<p class="is-best">Miglior punteggio: <b>${getBest()[st.id]}</b> / 100</p>`:""}
     ${st.locked?"":`<div class="is-acts">${cont?`<button class="btn red" onclick="continueGame()">Continua</button><button class="btn ink" onclick="newGame('${st.id}',true)">Ricomincia</button>`:`<button class="btn red" onclick="newGame('${st.id}')">Apri il fascicolo</button>`}</div>`}</div></article>`;});
   $("#archive").innerHTML=h+`</div>`;$("#archive").classList.add("on");$("#archive").scrollTop=0;}
 function openOptions(){AU.sfx("page");const row=(t,sub,lab,on)=>`<div class="opt-row"><div>${t}${sub?`<small>${sub}</small>`:""}</div><button class="btn ink tog" onclick="${on};openOptions()">${lab}</button></div>`;
@@ -1856,13 +1918,13 @@ function openOptions(){AU.sfx("page");const row=(t,sub,lab,on)=>`<div class="opt
   <div class="opt-row"><div>Cancella i progressi<small>Salvataggio e casi risolti</small></div><button class="btn red tog" onclick="wipeAll()">Cancella</button></div></div>`;
   $("#options").classList.add("on");}
 let fastText=false;try{fastText=localStorage.getItem("cc_fast")==="1"}catch(e){}
-function wipeAll(){note("Cancellare tutto?",`<p>Verranno cancellati il salvataggio in corso e l'elenco dei casi risolti.</p><div class="row"><button class="btn red" onclick="try{localStorage.removeItem(SAVE);localStorage.removeItem(DONE)}catch(e){};closeOv();closePanels();buildTitle()">Cancella</button><button class="btn ink" onclick="closeOv()">Annulla</button></div>`,true);}
+function wipeAll(){note("Cancellare tutto?",`<p>Verranno cancellati il salvataggio in corso e l'elenco dei casi risolti.</p><div class="row"><button class="btn red" onclick="try{localStorage.removeItem(SAVE);localStorage.removeItem(DONE);localStorage.removeItem(BEST)}catch(e){};closeOv();closePanels();buildTitle()">Cancella</button><button class="btn ink" onclick="closeOv()">Annulla</button></div>`,true);}
 function howTo(){note("Come si gioca",`<p>Ogni caso è diviso in <b>atti</b>. In ognuno hai un numero limitato di spostamenti: le candele accanto all'orologio. Ogni stanza raggiunta costa un quarto d'ora.</p>
 <p>Nelle stanze, i <b>bagliori</b> indicano che cosa si può esaminare. Tocca le <b>sagome</b> per interrogare i presenti, e mostra loro i reperti del taccuino: le reazioni giuste aprono nuove piste.</p>
 <p>La <b>Bacheca</b> lega gli indizi alle teorie con il filo rosso. Alcune teorie sono false piste perfettamente coerenti.</p>
 <p>Puoi <b>accusare</b> in ogni momento, una volta sola. Ci sono finali sbagliati, finali parziali e una sola verità.</p>
 <p class="small">Su iPhone, per lo schermo intero aggiungi la pagina alla schermata Home (Condividi → Aggiungi a Home).</p>`);}
-function toMenu(){closeTalk();closeOv();$("#salon").classList.remove("on");$("#plate").classList.remove("on");$("#chap").classList.remove("on");showTitle();}
+function toMenu(){closeTalk();closeOv();closeReport();$("#salon").classList.remove("on");$("#plate").classList.remove("on");$("#chap").classList.remove("on");showTitle();}
 function newGame(id,confirmFirst){
   if(confirmFirst){note("Ricominciare?",`<p>Il fascicolo verrà riaperto da capo e i progressi attuali andranno persi.</p><div class="row"><button class="btn red" onclick="closeOv();newGame('${id}')">Ricomincia</button><button class="btn ink" onclick="closeOv()">Annulla</button></div>`,true);return;}
   S=STORIES.find(s=>s.id===id);
@@ -2086,7 +2148,7 @@ let rsT=null;window.addEventListener("resize",()=>{clearTimeout(rsT);rsT=setTime
 
 /* ---------------- ACCUSA ---------------- */
 function accuseView(){
-  if(G.ended)return `<div class="court"><div class="plaque"><span class="fl"></span><h2>Caso chiuso</h2><span class="fl r"></span></div><p class="desc">Hai formulato la tua accusa: «${G.ended.title}».</p><div class="row c"><button class="btn" onclick="showEnding()">Rileggi il finale</button>${G.ended.kind!=="vera"?`<button class="btn" onclick="revealTruth()">Rivela la verità</button>`:""}<button class="btn red" onclick="newGame('${S.id}',true)">Ricomincia</button><button class="btn" onclick="toMenu()">Archivio</button></div></div>`;
+  if(G.ended)return `<div class="court"><div class="plaque"><span class="fl"></span><h2>Caso chiuso</h2><span class="fl r"></span></div><p class="desc">Hai formulato la tua accusa: «${G.ended.title}».</p><div class="row c"><button class="btn red" onclick="showReport()">La pagella</button><button class="btn" onclick="showEnding()">Rileggi il finale</button>${G.ended.kind!=="vera"?`<button class="btn" onclick="revealTruth()">Rivela la verità</button>`:""}<button class="btn red" onclick="newGame('${S.id}',true)">Ricomincia</button><button class="btn" onclick="toMenu()">Archivio</button></div></div>`;
   let h=`<div class="court"><div class="plaque"><span class="fl"></span><h2>L'accusa</h2><span class="fl r"></span></div><p class="desc">${G.forced?"Non c'è più tempo. Devi accusare adesso.":"Si accusa una volta sola. Le ipotesi barrate richiedono prove che non hai ancora trovato."}</p>`;
   S.accusation.forEach((q,qi)=>{h+=`<div class="qblock"><h3><span class="qn">${["I","II","III","IV"][qi]}.</span> ${q.q}</h3>`;
     if(q.type==="char")h+=`<div class="sus">${q.options.map(id=>{const c=S.chars[id];return `<button class="${accAns[q.id]===id?"on":""}" onclick="pick('${q.id}','${id}')"><div class="pf">${portrait(c.p,!alive(id))}</div><span>${c.short}</span></button>`}).join("")}</div>`;
@@ -2098,8 +2160,8 @@ function pick(q,v){accAns[q]=v;AU.sfx("page");const y=$("#main").scrollTop;rende
 function confirmAccuse(){note("Ne sei sicuro?",`<p>Stai per accusare formalmente <b>${S.chars[accAns.who].name}</b>, davanti a tutti. Non si torna indietro.</p><div class="row"><button class="btn red" onclick="closeOv();doAccuse()">Accuso</button><button class="btn ink" onclick="closeOv()">Aspetta</button></div>`,true);}
 function doAccuse(){AU.sfx("gavel");lyleHide();G.answers={...accAns};save();setTimeout(()=>salonScene(finishAccuse),500);}
 function finishAccuse(sl){const e=S.ending(accAns,G,sl);G.ended=e;G.salon=sl;save();setDone(S.id,e.kind);render();return e;}
-function endButtons(){return `${G.ended.kind!=="vera"?`<button class="btn" id="rv">Rivela la verità</button>`:""}<button class="btn red" id="ng">Rigioca il caso</button><button class="btn" id="mn">Menu principale</button>`;}
-function bindEnd(){const rv=$("#rv");if(rv)rv.onclick=()=>revealTruth();$("#ng").onclick=()=>{$("#chap").classList.remove("on");newGame(S.id);};$("#mn").onclick=()=>{$("#chap").classList.remove("on");toMenu();};}
+function endButtons(){return `<button class="btn red" id="rp">La pagella del caso</button>${G.ended.kind!=="vera"?`<button class="btn" id="rv">Rivela la verità</button>`:""}<button class="btn red" id="ng">Rigioca il caso</button><button class="btn" id="mn">Menu principale</button>`;}
+function bindEnd(){const rp=$("#rp");if(rp)rp.onclick=()=>showReport();const rv=$("#rv");if(rv)rv.onclick=()=>revealTruth();$("#ng").onclick=()=>{$("#chap").classList.remove("on");newGame(S.id);};$("#mn").onclick=()=>{$("#chap").classList.remove("on");toMenu();};}
 function showEnding(){const e=G.ended;chapter({eb:"Dagli appunti del dottor Lyle · "+e.eyebrow,title:e.title,paras:e.paras,mood:"end",end:true,buttons:endButtons()});bindEnd();}
 function revealTruth(sure){if(!sure){$("#chap").classList.remove("on");note("Leggere la soluzione?",`<p>Vedrai la ricostruzione completa del caso, con tutti i colpi di scena.</p><div class="row"><button class="btn red" onclick="closeOv();revealTruth(true)">Rivela</button><button class="btn ink" onclick="closeOv()">Non ancora</button></div>`,true);return;}
   chapter({eb:"La soluzione",title:"Che cosa è successo davvero",paras:S.truth,mood:"end",buttons:`<button class="btn red" id="ng">Rigioca il caso</button><button class="btn" id="mn">Menu principale</button>`});bindEnd();}
