@@ -90,6 +90,24 @@ body.filming #snow{z-index:52}
 .t-ver{position:absolute;left:16px;top:calc(10px + var(--st));z-index:2;font-family:'IM Fell English SC',serif;letter-spacing:.2em;font-size:.66rem;color:rgba(201,164,92,.6)}
 @media(max-width:760px){.t-ver{display:none}}
 #title.out .t-book{transition:opacity .8s;opacity:0}
+#title{touch-action:none}
+.t-book{max-height:calc(100% - 28px - var(--st) - var(--sb));overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;scrollbar-width:thin}
+.t-clip{touch-action:manipulation}
+.t-hint{position:absolute;z-index:3;font-family:'IM Fell English SC',serif;letter-spacing:.16em;font-size:.68rem;color:rgba(236,210,154,.85);pointer-events:none;text-shadow:0 1px 6px #000;animation:pulse 3s infinite}
+.t-hint:before{content:"";position:absolute;inset:-6px -10px;z-index:-1;background:rgba(10,6,3,.55);border-radius:3px}
+@media(max-width:760px){
+  .t-book{top:auto;bottom:calc(10px + var(--sb));max-height:58%;padding:12px 14px 10px 30px}
+  .t-logo{font-size:2.1rem}.t-logo em{margin-top:4px}.t-rule{margin:8px 0 6px}
+  .t-menu button{padding:4px 0;font-size:1.12rem}.t-menu small{font-size:.76rem;margin:-3px 0 2px}
+  .t-clip{padding:8px 12px;max-height:24%;overflow:hidden}.t-clip .ck{margin-bottom:4px}.t-clip .qt{font-size:.9rem}.t-clip .qs{display:none}
+  .t-hint{left:24px;right:24px;text-align:center;font-size:.62rem;line-height:1.5;top:calc(27% + var(--st))}}
+@media(max-height:520px) and (min-width:500px){
+  .t-shade{background:linear-gradient(90deg,transparent 40%,rgba(5,3,2,.6) 100%)}
+  .t-book{top:50%;bottom:auto;right:12px;width:min(400px,50vw);max-height:calc(100% - 20px);padding:12px 16px 10px 30px;transform:translateY(-50%) rotate(-1deg);animation:none}
+  .t-kick{font-size:.6rem}.t-logo{font-size:1.9rem;margin:2px 0 0}.t-logo em{font-size:.36em;margin-top:2px}.t-rule{margin:6px 0 4px}.t-toc{display:none}
+  .t-menu button{padding:2px 0;font-size:1.02rem}.t-menu small{display:none}
+  .t-clip{left:12px;bottom:10px;top:auto;width:min(340px,42vw);max-height:none;padding:8px 12px;transform:rotate(1deg)}.t-clip .qt{font-size:.88rem}.t-clip .qs{display:none}.t-clip .ck{font-size:.56rem}
+  .t-ver{display:none}.t-hint{left:12px;top:10px;text-align:left;right:auto}}
 
 /* ----- PANNELLI (archivio, opzioni) ----- */
 .panel{position:fixed;inset:0;z-index:20;display:none;flex-direction:column;background:rgba(4,5,7,.94);overflow-y:auto;padding:calc(22px + var(--st)) 16px calc(30px + var(--sb))}
@@ -3227,12 +3245,15 @@ let qIdx=0,qTimer=null;
 function quoteHTML(i){const q=QUOTES[i];return `<p class="qt">«${q[0]}»</p><div class="qa">${q[1]}</div><div class="qs">${q[2]}</div>`;}
 function nextQuote(step){const box=$("#tclipq");if(!box)return;qIdx=(qIdx+(step==null?1:step)+QUOTES.length)%QUOTES.length;box.classList.add("out");setTimeout(()=>{if(!box.isConnected)return;box.innerHTML=quoteHTML(qIdx);box.classList.remove("out");},450);clearInterval(qTimer);qTimer=setInterval(()=>{if(!document.hidden&&$("#title").classList.contains("on"))nextQuote();},11000);}
 /* la lente d'ingrandimento */
-function lensInit(){const t=$("#title"),L=$("#tlens");if(!t||!L)return;const Z=2.4,R=95;
-  const place=(x,y)=>{const W=innerWidth,H=innerHeight,cw=Math.max(W,H*16/9),ch=cw*9/16,x0=(W-cw)/2,y0=(H-ch)/2;
-    L.style.transform=`translate(${x-R}px,${y-R}px)`;L.style.backgroundSize=`${cw*Z}px ${ch*Z}px`;L.style.backgroundPosition=`${-((x-x0)*Z-R)}px ${-((y-y0)*Z-R)}px`;};
-  t.onpointermove=e=>{if(e.target.closest(".t-book,.t-clip"))return L.classList.remove("on");L.classList.add("on");place(e.clientX,e.clientY);};
-  t.onpointerleave=()=>L.classList.remove("on");
-  t.addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse"&&!e.target.closest(".t-book,.t-clip")){L.classList.add("on");place(e.clientX,e.clientY);clearTimeout(L._t);L._t=setTimeout(()=>L.classList.remove("on"),1600);}});}
+function lensInit(){const t=$("#title"),L=$("#tlens");if(!t||!L)return;const Z=2.4;let down=false;
+  const place=(x,y,touch)=>{const R=L.offsetWidth/2,W=innerWidth,H=innerHeight,cw=Math.max(W,H*16/9),ch=cw*9/16,x0=(W-cw)/2,y0=(H-ch)/2,cy=touch?Math.max(R+4,y-R-46):y;
+    L.style.transform=`translate(${x-R}px,${cy-R}px)`;L.style.backgroundSize=`${cw*Z}px ${ch*Z}px`;L.style.backgroundPosition=`${-((x-x0)*Z-R)}px ${-((y-y0)*Z-R)}px`;};
+  const onUI=e=>e.target.closest(".t-book,.t-clip");
+  t.onpointermove=e=>{if(e.pointerType==="mouse"){if(onUI(e))return L.classList.remove("on");L.classList.add("on");place(e.clientX,e.clientY);}else if(down)place(e.clientX,e.clientY,true);};
+  t.onpointerleave=e=>{if(e.pointerType==="mouse")L.classList.remove("on");};
+  t.onpointerdown=e=>{if(e.pointerType==="mouse"||onUI(e))return;down=true;clearTimeout(L._t);L.classList.add("on");place(e.clientX,e.clientY,true);const h=$("#thint");if(h)h.remove();};
+  const up=()=>{if(!down)return;down=false;clearTimeout(L._t);L._t=setTimeout(()=>L.classList.remove("on"),900);};
+  t.onpointerup=up;t.onpointercancel=up;}
 
 /* ---------------- TITOLO E MENU ---------------- */
 let started=false;
@@ -3243,13 +3264,13 @@ function buildTitle(){const img=artURL("study");qIdx=Math.floor(Math.random()*QU
 <div class="t-book"><div class="t-kick">Registro dei casi · Anno MCMXIII</div><h1 class="t-logo">Cerchio Chiuso<em>racconti di delitto e deduzione</em></h1><div class="t-rule"></div>
 <div id="tmenu">${started?menuHTML():`<div class="t-press">— Tocca per aprire il registro —</div>`}</div></div>
 <div class="t-clip" onclick="event.stopPropagation();AU.sfx('page');nextQuote()"><div class="ck"><span>Dai taccuini dei grandi investigatori</span><span>›</span></div><div id="tclipq">${quoteHTML(qIdx)}</div></div>
-<div class="t-ver">Londra · uno studio, una lampada, una lente</div>`;
+<div class="t-ver">Londra · uno studio, una lampada, una lente</div>${coarse()&&started?`<div class="t-hint" id="thint">Trascina il dito sulla scena: c’è una lente</div>`:""}`;
   $("#title").onclick=started?null:startGame;lensInit();nextQuote(0);}
 function menuHTML(){const sv=loadSave(),st=sv&&!sv.ended&&STORIES.find(s=>s.id===sv.story&&!s.locked);let i=0;
   const b=(cls,on,t,sub)=>{i++;return `<button class="${cls}" style="animation-delay:${(.08+i*.08).toFixed(2)}s" onclick="${on}"><span class="tm-l">${t}</span><span class="tm-d"></span><span class="tm-p">${ROMAN[i-1]}</span></button>${sub?`<small>${sub}</small>`:""}`;};
   return `<div class="t-toc">Indice</div><nav class="t-menu">${st?b("main","continueGame()","Continua l'indagine",`${st.title} · ${(st.acts[sv.act]||st.acts[0]).label}`):""}${b(st?"":"main","openArchive()","Nuova indagine","L'archivio dei casi")}${b("","replayFilm()","Il prologo")}${b("","openMedals()","Medaglie",medalCount()+" su "+medalTotal()+" ottenute")}${b("","openOptions()","Impostazioni")}${b("","howTo()","Come si gioca")}</nav>`;}
 function startGame(){if(started)return;started=true;entered=true;if(coarse()&&fullPref)goFull();AU.init();AU.music(true,"title");lightning(true);setTimeout(()=>AU.sfx("thunder"),300);
-  $("#title").onclick=null;$("#tmenu").innerHTML=menuHTML();}
+  $("#title").onclick=null;$("#tmenu").innerHTML=menuHTML();if(coarse()&&!$("#thint"))$("#title").insertAdjacentHTML("beforeend",`<div class="t-hint" id="thint">Trascina il dito sulla scena: c’è una lente</div>`);}
 function showTitle(){closePanels();$("#game").classList.remove("on");$("#title").classList.add("on");buildTitle();snow(false);if(started)AU.music(true,"title");if(AU.ctx)AU.setRoom(null);}
 function closePanels(){document.querySelectorAll(".panel.on").forEach(p=>p.classList.remove("on"));}
 function openArchive(){const done=getDone(),sv=loadSave();AU.sfx("page");
