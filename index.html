@@ -551,6 +551,7 @@ body.filming #snow{z-index:52}
 .pmenu{display:flex;flex-direction:column;gap:9px}
 @media(min-width:960px){.chips{gap:10px}.roomtxt{padding-top:22px}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+canvas.lux{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transition:opacity 1.2s}.scene.lux .glow{display:none}
 /* ----- INTERFACCIA: pensata per il pollice ----- */
 .scene .pan{position:relative;width:100%;height:100%}
 .hmeta{display:none}
@@ -3862,7 +3863,7 @@ function openArchive(){const done=getDone(),sv=loadSave();AU.sfx("page");
   $("#archive").innerHTML=h+`</div>`;$("#archive").classList.add("on");$("#archive").scrollTop=0;}
 function openOptions(){AU.sfx("page");const row=(t,sub,lab,on)=>`<div class="opt-row"><div>${t}${sub?`<small>${sub}</small>`:""}</div><button class="btn ink tog" onclick="${on};openOptions()">${lab}</button></div>`;
   $("#options").innerHTML=`<div class="p-head"><div><h2>Impostazioni</h2><p>Le preferenze restano salvate su questo dispositivo.</p></div><button class="p-back" onclick="closePanels();${G&&$("#game").classList.contains("on")?"":"buildTitle()"}">‹ Indietro</button></div>
-  <div class="opts">${row("Effetti sonori","Passi, porte, tuoni, il fuoco",AU.on?"Attivi":"Spenti","AU.toggle()")}${row("Musica","Il tema della brughiera",AU.mus?"Attiva":"Spenta","AU.toggleMusic()")}${row("Schermo intero","",isFull()?"Attivo":"Spento","toggleFull()")}${row("Testo dei capitoli","Velocità con cui compaiono le frasi",fastText?"Rapido":"Normale","fastText=!fastText;try{localStorage.setItem('cc_fast',fastText?'1':'0')}catch(e){}")}${"vibrate" in navigator?row("Vibrazione","Un piccolo colpo quando trovi una prova",hapticOn()?"Attiva":"Spenta","try{localStorage.setItem('cc_haptic',hapticOn()?'0':'1')}catch(e){};buzz(20)"):""}
+  <div class="opts">${row("Effetti sonori","Passi, porte, tuoni, il fuoco",AU.on?"Attivi":"Spenti","AU.toggle()")}${row("Musica","Il tema della brughiera",AU.mus?"Attiva":"Spenta","AU.toggleMusic()")}${row("Schermo intero","",isFull()?"Attivo":"Spento","toggleFull()")}${row("Testo dei capitoli","Velocità con cui compaiono le frasi",fastText?"Rapido":"Normale","fastText=!fastText;try{localStorage.setItem('cc_fast',fastText?'1':'0')}catch(e){}")}${row("Luce viva","Fuoco, candele e luna che illuminano le stanze",LUX.on?"Attiva":"Spenta","LUX.on=!LUX.on;try{localStorage.setItem('cc_lux',LUX.on?'1':'0')}catch(e){}")}${"vibrate" in navigator?row("Vibrazione","Un piccolo colpo quando trovi una prova",hapticOn()?"Attiva":"Spenta","try{localStorage.setItem('cc_haptic',hapticOn()?'0':'1')}catch(e){};buzz(20)"):""}
   <div class="opt-row"><div>Cancella i progressi<small>Salvataggio e casi risolti</small></div><button class="btn red tog" onclick="wipeAll()">Cancella</button></div></div>`;
   $("#options").classList.add("on");}
 let fastText=false;try{fastText=localStorage.getItem("cc_fast")==="1"}catch(e){}
@@ -3958,7 +3959,7 @@ function chapter(o){snow(!o.art);const el=$("#chap"),step=fastText?.35:.85,long=
 
 /* ---------------- RENDER ---------------- */
 function render(){if(!G)return;if(AU.ctx&&$("#game").classList.contains("on"))AU.setRoom(G.room);hud();nav();armBack();const M=$("#main");M.innerHTML=`<div class="wrap">${({room:roomView,map:mapView,notes:notesView,board:boardView,accuse:accuseView})[G.tab]()}</div>`;post();}
-function post(){logSight();if(G.tab==="room"){placeHots();lampInit();panInit();}if(G.tab==="notes")dndInit();if(G.tab==="board"){requestAnimationFrame(drawStrings);setTimeout(drawStrings,120);setTimeout(drawStrings,600);}if(G.tab==="notes"&&G.newClues.length){G.newClues=[];save();setTimeout(nav,600);}}
+function post(){logSight();if(G.tab==="room"){placeHots();lampInit();panInit();luxInit();}else luxStop();if(G.tab==="notes")dndInit();if(G.tab==="board"){requestAnimationFrame(drawStrings);setTimeout(drawStrings,120);setTimeout(drawStrings,600);}if(G.tab==="notes"&&G.newClues.length){G.newClues=[];save();setTimeout(nav,600);}}
 function hud(){const a=S.acts[G.act];$("#hAct").textContent=a.label;let hm=$("#hMeta");if(!hm){hm=document.createElement("div");hm.id="hMeta";hm.className="hmeta";hm.onclick=()=>askWait();$("#hAct").before(hm);}
   hm.innerHTML=`<span class="ac">${a.label.split(" · ")[0]}</span><span>${fmt(G.time)}</span><span class="dots">${Array.from({length:a.actions},(_,i)=>`<i class="${i<G.actions?"":"o"}"></i>`).join("")}</span>`;$("#hRoom").textContent=S.rooms[G.room].name;$("#hTime").textContent=fmt(G.time);
   let c="";for(let i=0;i<a.actions;i++){const lit=i<G.actions;c+=`<svg viewBox="0 0 8 24">${lit?`<path class="flame" d="M4 1q-2.6 3.6 0 6q2.6 -2.4 0 -6z" fill="#ffd27a"/><rect x="1.8" y="8" width="4.4" height="16" fill="#efe6d2"/>`:`<rect x="1.8" y="18" width="4.4" height="6" fill="#7a7062"/><path d="M4 18v-3" stroke="#666" stroke-width=".7"/>`}</svg>`;}$("#cands").innerHTML=c;
@@ -4187,6 +4188,53 @@ function dndInit(){const pg=document.querySelector("#main .journal .pg");if(!pg|
 /* l'app si può installare e funziona anche senza rete */
 if("serviceWorker"in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{});});
 
+/* ---------------- LUCE VIVA: un piccolo shader WebGL sopra la scena ----------------
+   Ogni stanza può dichiarare le sue luci in ROOMART[id].lux: [x, y, raggio, colore, tremolio, tipo].
+   Il buio si stende dove le luci non arrivano; il fuoco tremola e si sposta appena; dalla finestra
+   entra un fascio di luna; nella luce galleggia la polvere. Se il telefono non regge, non si vede niente. */
+const LUX={on:true,raf:0,gl:null};
+try{LUX.on=localStorage.getItem("cc_lux")!=="0";}catch(e){}
+const LUX_FS=`precision mediump float;
+uniform vec2 uR;uniform float uT,uAmb;uniform vec4 uL[4];uniform vec4 uC[4];uniform int uN;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float n(float x){return sin(x*1.7)*.5+sin(x*3.1+1.3)*.3+sin(x*7.3+.7)*.2;}
+void main(){vec2 p=gl_FragCoord.xy;p.y=uR.y-p.y;vec3 L=vec3(0.);float lum=0.;
+ for(int i=0;i<4;i++){if(i>=uN)break;vec4 l=uL[i];vec4 c=uC[i];float fl=c.a;
+  float tp=floor(fl/10.);fl=fract(fl/10.)*10.;
+  vec2 o=vec2(n(uT*2.3+float(i)*4.)*fl*6.,n(uT*1.9+float(i)*7.)*fl*4.);
+  float d=length(p-(l.xy+o))/l.z;float f=pow(max(0.,1.-d),2.2);
+  float k=l.w*(1.+fl*.16*n(uT*9.+float(i)*3.));
+  if(tp>.5){vec2 q=p-l.xy;float ax=-q.x*.42+q.y*.91,ay=-q.x*.91-q.y*.42;float w=l.z*(.3+.22*max(0.,ax)/l.z);
+   float beam=smoothstep(w,w*.3,abs(ay))*smoothstep(-l.z*.1,l.z*.3,ax)*smoothstep(l.z*2.6,l.z*.7,ax);
+   beam*=.7+.3*n(ax*.03+uT*.4);f=f*.6+beam*.5;}
+  L+=c.rgb*f*k;lum+=f*k;}
+ float g=0.;vec2 cell=floor(p/9.);float r=h(cell);if(r>.965){vec2 c2=(cell+.5)*9.+vec2(sin(uT*.6+r*40.)*4.,-mod(uT*6.+r*90.,9.)+4.);float dd=length(p-c2);g=smoothstep(1.6,0.,dd)*min(1.,lum*1.4)*(.5+.5*sin(uT*2.+r*60.));}
+ float dark=uAmb*(1.-clamp(lum*1.35,0.,1.));
+ vec3 glow=L*.42+vec3(1.,.92,.75)*g*.8;
+ gl_FragColor=vec4(glow,dark+min(.5,dot(glow,vec3(.33))));}`;
+function luxStop(){cancelAnimationFrame(LUX.raf);LUX.raf=0;}
+function luxInit(){luxStop();const sc=document.querySelector("#main .scene"),pn=sc&&sc.querySelector(".pan"),A=ROOMART[G.room];
+  if(!pn||!A||!A.lux||!LUX.on||DARK_ROOMS.includes(G.room))return;
+  const cv=document.createElement("canvas");cv.className="lux";pn.insertBefore(cv,pn.querySelector(".glow"));sc.classList.add("lux");
+  const gl=cv.getContext("webgl",{premultipliedAlpha:true,alpha:true,antialias:false});if(!gl){cv.remove();sc.classList.remove("lux");return;}
+  const sh=(t,src)=>{const s=gl.createShader(t);gl.shaderSource(s,src);gl.compileShader(s);return s;};
+  const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,"attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}"));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,LUX_FS));gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){cv.remove();sc.classList.remove("lux");return;}
+  gl.useProgram(pr);const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const al=gl.getAttribLocation(pr,"a");gl.enableVertexAttribArray(al);gl.vertexAttribPointer(al,2,gl.FLOAT,false,0,0);
+  const U=k=>gl.getUniformLocation(pr,k),uR=U("uR"),uT=U("uT"),uA=U("uAmb"),uL=U("uL"),uC=U("uC"),uN=U("uN");
+  const COL={warm:[1,.62,.26],fire:[1,.45,.12],cand:[1,.75,.4],moon:[.55,.7,1],cold:[.6,.72,.9]};
+  const Q=Math.min(1,(window.devicePixelRatio||1))*.5,still=matchMedia("(prefers-reduced-motion: reduce)").matches;let W=0,H=0,last=0;
+  const size=()=>{const w=pn.clientWidth,h=pn.clientHeight;W=Math.max(2,Math.round(w*Q));H=Math.max(2,Math.round(h*Q));cv.width=W;cv.height=H;gl.viewport(0,0,W,H);
+    const k=Math.max(w/800,h/450),ox=(w-800*k)/2,oy=(h-450*k)/2,Ls=new Float32Array(16),Cs=new Float32Array(16);
+    A.lux.slice(0,4).forEach((l,i)=>{const c=COL[l[3]]||COL.warm;Ls.set([(ox+l[0]*k)*Q,(oy+l[1]*k)*Q,l[2]*k*Q,l[5]||1],i*4);Cs.set([c[0],c[1],c[2],(l[6]==="beam"?10:0)+(l[4]||0)],i*4);});
+    gl.uniform2f(uR,W,H);gl.uniform4fv(uL,Ls);gl.uniform4fv(uC,Cs);gl.uniform1i(uN,Math.min(4,A.lux.length));gl.uniform1f(uA,A.luxAmb!=null?A.luxAmb:.5);};
+  size();cv.style.opacity="0";requestAnimationFrame(()=>cv.style.opacity="1");
+  const draw=t=>{if(!cv.isConnected||G.tab!=="room"){luxStop();return;}LUX.raf=requestAnimationFrame(draw);if(document.hidden||t-last<33)return;last=t;
+    if(Math.round(pn.clientWidth*Q)!==W)size();gl.uniform1f(uT,t/1000);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);};
+  if(still){gl.uniform1f(uT,1);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);}else LUX.raf=requestAnimationFrame(draw);}
+
+ROOMART.salone.lux=[[400,262,330,"fire",1,1.15],[400,64,320,"cand",.25,.7],[560,212,150,"moon",0,.9,"beam"]];ROOMART.salone.luxAmb=.58;
 /* ---------------- BACHECA ---------------- */
 function theoryScore(k){let pos=[],neg=[],sum=0;G.clues.forEach(id=>{const v=(S.clues[id].th||{})[k]||0;if(v>0)pos.push(id);if(v<0)neg.push(id);sum+=v;});return {pos,neg,sum};}
 function pcard(id,neg,i){const rot=((id.length*7+i*13)%9)-4;return `<div class="pcard${neg?" neg":""}" style="transform:rotate(${rot}deg)" onclick="viewClue('${id}')"><span class="pin"></span>${evThumb(id)}<span>${S.clues[id].name}</span></div>`;}
