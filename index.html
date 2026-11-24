@@ -4036,7 +4036,7 @@ function endAct(){closeTalk();
 /* ---------------- REPERTI ---------------- */
 function addClue(id){if(!id||has(id))return false;G.clues.push(id);G.newClues.push(id);buzz(S.clues[id]&&S.clues[id].cat==="Deduzione"?[18,50,30]:14);return true;}
 function clueArt(cid){if(S.clues[cid]&&S.clues[cid].cat==="Deduzione")return dedCard(cid);const e=EV[cid]||{};if(e.doc)return docHTML(e);if(e.t){const c=S.chars[e.t];return `<div class="testi"><div class="pf">${portrait(c.p,!alive(e.t))}</div><div class="tq">${S.clues[cid].text}</div></div>`;}return `<div class="art">${evArt(cid)}</div>`;}
-function examine(oid){const R=S.rooms[G.room],o=R.objects.find(x=>x.id===oid);if(!o)return;
+function examine(oid){const R=S.rooms[G.room],o=R.objects.find(x=>x.id===oid);if(!o)return;LUX.lastOid=oid;
   if(o.req&&!hasItem(o.req)){AU.sfx("door");note(o.label,`<p>${o.reqMsg}</p>`,true);return;}
   G.seen[G.room+"."+o.id]=1;let nw=null,item=null;if(o.clue&&addClue(o.clue))nw=o.clue;if(o.item&&!hasItem(o.item)){G.items.push(o.item);item=o.item;}
   save();const cid=o.clue;let art="";if(cid)art=clueArt(cid);else if(item)art=`<div class="art">${itemArt(item)}</div>`;
@@ -4048,7 +4048,7 @@ function linkFrom(id){closePlate();dedSel=[id];noteTab="deduz";dedCat="all";setT
 function viewItem(it){showPlate("Oggetto",S.items[it],`<div class="art">${itemArt(it)}</div>`,"",null);}
 function showPlate(tag,title,art,body,nw,extra){$("#plate").innerHTML=`<div class="pl" id="pl"><div class="tag">${tag}</div><h2>${title}</h2>${art}${body}${nw?`<div class="stamp">Agli atti</div>`:""}<div class="acts">${extra||""}<button class="btn ink" onclick="closePlate(${nw?`'${nw}'`:""})">Riponi</button></div></div>`;
   $("#plate").classList.add("on");armBack();$("#plate").scrollTop=0;AU.sfx("page");if(nw){setTimeout(()=>AU.sfx("stamp"),420);setTimeout(()=>AU.sfx("clue"),760);}}
-function closePlate(fly){if(fly)flyToNotes(fly);$("#plate").classList.remove("on");if(G&&!G.ended)setTimeout(()=>lyleCheck(fly),700);}
+function closePlate(fly){if(fly)flyToNotes(fly);if(LUX.lastOid){const o=LUX.lastOid;LUX.lastOid=null;setTimeout(()=>luxPulse(o),60);}$("#plate").classList.remove("on");if(G&&!G.ended)setTimeout(()=>lyleCheck(fly),700);}
 function lyleCheck(fly){if(fly==="e_ago"){tip("ago");return;}const ld=(S.lyleDed&&S.lyleDed[fly])||LYLE_DED[fly];if(fly&&ld){lyleSay(ld);return;}G.tips=G.tips||{};
   if(G.clues.length&&!G.tips.firstClue){tip("firstClue");return;}
   if(G.tips.firstClue&&!G.tips.dedReady&&dedOpen()&&!G.clues.some(c=>S.clues[c].cat==="Deduzione")){tip("dedReady");return;}
@@ -4188,51 +4188,72 @@ function dndInit(){const pg=document.querySelector("#main .journal .pg");if(!pg|
 /* l'app si può installare e funziona anche senza rete */
 if("serviceWorker"in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{});});
 
-/* ---------------- LUCE VIVA: un piccolo shader WebGL sopra la scena ----------------
-   Ogni stanza può dichiarare le sue luci in ROOMART[id].lux: [x, y, raggio, colore, tremolio, tipo].
-   Il buio si stende dove le luci non arrivano; il fuoco tremola e si sposta appena; dalla finestra
-   entra un fascio di luna; nella luce galleggia la polvere. Se il telefono non regge, non si vede niente. */
-const LUX={on:true,raf:0,gl:null};
+/* ---------------- LUCE VIVA: un solo shader WebGL, riusato da tutte le stanze ----------------
+   Le luci di ogni stanza nascono dalle sue sorgenti (ROOMART[id].lights) e dai camini/stufe in scena.
+   Di notte la finestra lascia entrare un raggio di luna; di giorno una luce grigia e diffusa.
+   In più: la candela che porti col dito (o col mouse) e un bagliore quando trovi qualcosa.
+   Ottimizzato: un solo contesto, mezza risoluzione, 30 fps, pausa sotto i pannelli e a schermo spento,
+   qualità che scende da sola se il telefono fatica. */
+const LUX={on:true,raf:0,gl:null,cv:null,Q:.5,slow:0,ptr:{x:0,y:0,a:0,ta:0},pulse:{x:0,y:0,t:-9},geo:null};
 try{LUX.on=localStorage.getItem("cc_lux")!=="0";}catch(e){}
 const LUX_FS=`precision mediump float;
-uniform vec2 uR;uniform float uT,uAmb;uniform vec4 uL[4];uniform vec4 uC[4];uniform int uN;
+uniform vec2 uR;uniform float uT,uAmb;uniform vec4 uL[6];uniform vec4 uC[6];uniform int uN;uniform vec4 uP;uniform vec4 uK;
 float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float n(float x){return sin(x*1.7)*.5+sin(x*3.1+1.3)*.3+sin(x*7.3+.7)*.2;}
 void main(){vec2 p=gl_FragCoord.xy;p.y=uR.y-p.y;vec3 L=vec3(0.);float lum=0.;
- for(int i=0;i<4;i++){if(i>=uN)break;vec4 l=uL[i];vec4 c=uC[i];float fl=c.a;
-  float tp=floor(fl/10.);fl=fract(fl/10.)*10.;
+ for(int i=0;i<6;i++){if(i>=uN)break;vec4 l=uL[i];vec4 c=uC[i];float fl=c.a;float tp=floor(fl/10.);fl=fract(fl/10.)*10.;
   vec2 o=vec2(n(uT*2.3+float(i)*4.)*fl*6.,n(uT*1.9+float(i)*7.)*fl*4.);
-  float d=length(p-(l.xy+o))/l.z;float f=pow(max(0.,1.-d),2.2);
-  float k=l.w*(1.+fl*.16*n(uT*9.+float(i)*3.));
+  float d=length(p-(l.xy+o))/l.z;float f=pow(max(0.,1.-d),2.2);float k=l.w*(1.+fl*.16*n(uT*9.+float(i)*3.));
   if(tp>.5){vec2 q=p-l.xy;float ax=-q.x*.42+q.y*.91,ay=-q.x*.91-q.y*.42;float w=l.z*(.3+.22*max(0.,ax)/l.z);
-   float beam=smoothstep(w,w*.3,abs(ay))*smoothstep(-l.z*.1,l.z*.3,ax)*smoothstep(l.z*2.6,l.z*.7,ax);
-   beam*=.7+.3*n(ax*.03+uT*.4);f=f*.6+beam*.5;}
+   float beam=smoothstep(w,w*.3,abs(ay))*smoothstep(-l.z*.1,l.z*.3,ax)*smoothstep(l.z*2.6,l.z*.7,ax);beam*=.7+.3*n(ax*.03+uT*.4);f=f*.6+beam*.5;}
   L+=c.rgb*f*k;lum+=f*k;}
- float g=0.;vec2 cell=floor(p/9.);float r=h(cell);if(r>.965){vec2 c2=(cell+.5)*9.+vec2(sin(uT*.6+r*40.)*4.,-mod(uT*6.+r*90.,9.)+4.);float dd=length(p-c2);g=smoothstep(1.6,0.,dd)*min(1.,lum*1.4)*(.5+.5*sin(uT*2.+r*60.));}
- float dark=uAmb*(1.-clamp(lum*1.35,0.,1.));
- vec3 glow=L*.42+vec3(1.,.92,.75)*g*.8;
+ if(uK.w>.01){float d=length(p-uK.xy)/uK.z;float f=pow(max(0.,1.-d),2.)*uK.w*(1.+.12*n(uT*11.));L+=vec3(1.,.7,.38)*f;lum+=f;}
+ if(uP.w>.5){float a=uP.z;float d=length(p-uP.xy);float ring=smoothstep(14.,0.,abs(d-a*160.))*(1.-a);float core=smoothstep(60.,0.,d)*(1.-a)*.8;L+=vec3(1.,.85,.5)*(ring+core);lum+=ring+core;}
+ float g=0.;vec2 cell=floor(p/9.);float r=h(cell);if(r>.965){vec2 c2=(cell+.5)*9.+vec2(sin(uT*.6+r*40.)*4.,-mod(uT*6.+r*90.,9.)+4.);g=smoothstep(1.6,0.,length(p-c2))*min(1.,lum*1.4)*(.5+.5*sin(uT*2.+r*60.));}
+ float dark=uAmb*(1.-clamp(lum*1.35,0.,1.));vec3 glow=L*.42+vec3(1.,.92,.75)*g*.8;
  gl_FragColor=vec4(glow,dark+min(.5,dot(glow,vec3(.33))));}`;
+function luxNight(){const t=G.time%1440;return t>=19*60+30||t<6*60+30;}
+/* le luci della stanza, ricavate dalla scena */
+function luxLights(A){if(A.lux)return A.lux;const L=[],night=luxNight();
+  (A.lights||[]).forEach(([x,y,r,g])=>{if(g==="gCold")L.push(night?[x,y-20,Math.max(130,r*.85),"moon",0,.85,"beam"]:[x,y,r*1.2,"day",0,.32]);else L.push([x,y,r*1.15,"warm",.35,.95]);});
+  A.props(G.act,{}).forEach(p=>{if(p[0]==="fire"||p[0]==="stove")L.unshift([p[1],p[2]-38*(p[3]||1),300*(p[3]||1),"fire",1,1.1]);});
+  return L.slice(0,5);}
 function luxStop(){cancelAnimationFrame(LUX.raf);LUX.raf=0;}
-function luxInit(){luxStop();const sc=document.querySelector("#main .scene"),pn=sc&&sc.querySelector(".pan"),A=ROOMART[G.room];
-  if(!pn||!A||!A.lux||!LUX.on||DARK_ROOMS.includes(G.room))return;
-  const cv=document.createElement("canvas");cv.className="lux";pn.insertBefore(cv,pn.querySelector(".glow"));sc.classList.add("lux");
-  const gl=cv.getContext("webgl",{premultipliedAlpha:true,alpha:true,antialias:false});if(!gl){cv.remove();sc.classList.remove("lux");return;}
+function luxGL(){if(LUX.gl)return LUX.gl;const cv=document.createElement("canvas");cv.className="lux";
+  const gl=cv.getContext("webgl",{premultipliedAlpha:true,alpha:true,antialias:false,powerPreference:"low-power"});if(!gl)return null;
   const sh=(t,src)=>{const s=gl.createShader(t);gl.shaderSource(s,src);gl.compileShader(s);return s;};
   const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,"attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}"));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,LUX_FS));gl.linkProgram(pr);
-  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){cv.remove();sc.classList.remove("lux");return;}
-  gl.useProgram(pr);const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS))return null;gl.useProgram(pr);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
   const al=gl.getAttribLocation(pr,"a");gl.enableVertexAttribArray(al);gl.vertexAttribPointer(al,2,gl.FLOAT,false,0,0);
-  const U=k=>gl.getUniformLocation(pr,k),uR=U("uR"),uT=U("uT"),uA=U("uAmb"),uL=U("uL"),uC=U("uC"),uN=U("uN");
-  const COL={warm:[1,.62,.26],fire:[1,.45,.12],cand:[1,.75,.4],moon:[.55,.7,1],cold:[.6,.72,.9]};
-  const Q=Math.min(1,(window.devicePixelRatio||1))*.5,still=matchMedia("(prefers-reduced-motion: reduce)").matches;let W=0,H=0,last=0;
-  const size=()=>{const w=pn.clientWidth,h=pn.clientHeight;W=Math.max(2,Math.round(w*Q));H=Math.max(2,Math.round(h*Q));cv.width=W;cv.height=H;gl.viewport(0,0,W,H);
-    const k=Math.max(w/800,h/450),ox=(w-800*k)/2,oy=(h-450*k)/2,Ls=new Float32Array(16),Cs=new Float32Array(16);
-    A.lux.slice(0,4).forEach((l,i)=>{const c=COL[l[3]]||COL.warm;Ls.set([(ox+l[0]*k)*Q,(oy+l[1]*k)*Q,l[2]*k*Q,l[5]||1],i*4);Cs.set([c[0],c[1],c[2],(l[6]==="beam"?10:0)+(l[4]||0)],i*4);});
-    gl.uniform2f(uR,W,H);gl.uniform4fv(uL,Ls);gl.uniform4fv(uC,Cs);gl.uniform1i(uN,Math.min(4,A.lux.length));gl.uniform1f(uA,A.luxAmb!=null?A.luxAmb:.5);};
-  size();cv.style.opacity="0";requestAnimationFrame(()=>cv.style.opacity="1");
-  const draw=t=>{if(!cv.isConnected||G.tab!=="room"){luxStop();return;}LUX.raf=requestAnimationFrame(draw);if(document.hidden||t-last<33)return;last=t;
-    if(Math.round(pn.clientWidth*Q)!==W)size();gl.uniform1f(uT,t/1000);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);};
-  if(still){gl.uniform1f(uT,1);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);}else LUX.raf=requestAnimationFrame(draw);}
+  const U={};["uR","uT","uAmb","uL","uC","uN","uP","uK"].forEach(k=>U[k]=gl.getUniformLocation(pr,k));
+  cv.addEventListener("webglcontextlost",e=>{e.preventDefault();luxStop();LUX.gl=null;LUX.cv=null;});
+  LUX.cv=cv;LUX.U=U;return LUX.gl=gl;}
+const LUXCOL={warm:[1,.62,.26],fire:[1,.45,.12],cand:[1,.75,.4],moon:[.55,.7,1],day:[.78,.84,.92],cold:[.6,.72,.9]};
+function luxInit(){luxStop();const sc=document.querySelector("#main .scene"),pn=sc&&sc.querySelector(".pan"),A=ROOMART[G.room];
+  if(!pn||!A||A.out||!LUX.on||DARK_ROOMS.includes(G.room))return;const gl=luxGL();if(!gl)return;const cv=LUX.cv,U=LUX.U;
+  pn.insertBefore(cv,pn.querySelector(".glow"));sc.classList.add("lux");cv.style.opacity="0";requestAnimationFrame(()=>requestAnimationFrame(()=>cv.style.opacity="1"));
+  const lights=luxLights(A),night=luxNight(),amb=A.luxAmb!=null?A.luxAmb:night?.55:.3;let W=0,H=0,last=0,acc=0,frames=0;
+  const size=()=>{const w=pn.clientWidth,h=pn.clientHeight,Q=LUX.Q*Math.min(1.5,window.devicePixelRatio||1);W=Math.max(2,Math.round(w*Q));H=Math.max(2,Math.round(h*Q));cv.width=W;cv.height=H;gl.viewport(0,0,W,H);
+    const k=Math.max(w/800,h/450),ox=(w-800*k)/2,oy=(h-450*k)/2,Ls=new Float32Array(24),Cs=new Float32Array(24);LUX.geo={Q,k,ox,oy};
+    lights.forEach((l,i)=>{const c=LUXCOL[l[3]]||LUXCOL.warm;Ls.set([(ox+l[0]*k)*Q,(oy+l[1]*k)*Q,l[2]*k*Q,l[5]||1],i*4);Cs.set([c[0],c[1],c[2],(l[6]==="beam"?10:0)+(l[4]||0)],i*4);});
+    gl.uniform2f(U.uR,W,H);gl.uniform4fv(U.uL,Ls);gl.uniform4fv(U.uC,Cs);gl.uniform1i(U.uN,lights.length);gl.uniform1f(U.uAmb,amb);};
+  size();
+  /* la candela che porti tu */
+  const P=LUX.ptr;P.a=0;P.ta=0;const move=e=>{const r=pn.getBoundingClientRect();P.x=e.clientX-r.left;P.y=e.clientY-r.top;};
+  pn.onpointermove=e=>{move(e);if(e.pointerType==="mouse")P.ta=.55;};pn.onpointerdown=e=>{move(e);P.ta=.75;};
+  pn.onpointerleave=e=>{if(e.pointerType==="mouse")P.ta=0;};pn.onpointerup=pn.onpointercancel=e=>{if(e.pointerType!=="mouse")P.ta=0;};
+  const covered=()=>["#talk","#plate","#chap","#salon","#film","#pick","#tav"].some(s=>{const el=$(s);return el&&el.classList.contains("on");});
+  const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const frame=t=>{const g=LUX.geo;gl.uniform1f(U.uT,t/1000);P.a+=(P.ta-P.a)*.12;gl.uniform4f(U.uK,P.x*g.Q,P.y*g.Q,95*g.k*g.Q,P.a);
+    const pa=(t/1000-LUX.pulse.t)/.9;gl.uniform4f(U.uP,LUX.pulse.x*g.Q,LUX.pulse.y*g.Q,Math.max(0,pa),pa>=0&&pa<1?1:0);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);};
+  const draw=t=>{if(!cv.isConnected||G.tab!=="room"){luxStop();return;}LUX.raf=requestAnimationFrame(draw);if(document.hidden||covered())return;const dt=t-last;if(dt<33)return;last=t;
+    if(Math.round(pn.clientWidth*LUX.Q*Math.min(1.5,window.devicePixelRatio||1))!==W)size();
+    if(dt<200){acc+=dt;frames++;if(frames===60){if(acc/frames>48&&LUX.Q>.3){LUX.Q=.3;size();}acc=0;frames=0;}}
+    frame(t);};
+  if(still)frame(1000);else LUX.raf=requestAnimationFrame(draw);}
+/* un bagliore dove hai trovato qualcosa */
+function luxPulse(oid){const A=ROOMART[G.room],g=LUX.geo,p=A&&A.hot&&A.hot[oid];if(!g||!p||!LUX.raf)return;const x=A.mirror?p[0]:p[0];LUX.pulse={x:g.ox+x*g.k,y:g.oy+p[1]*g.k,t:performance.now()/1000};}
 
 ROOMART.salone.lux=[[400,262,330,"fire",1,1.15],[400,64,320,"cand",.25,.7],[560,212,150,"moon",0,.9,"beam"]];ROOMART.salone.luxAmb=.58;
 /* ---------------- BACHECA ---------------- */
