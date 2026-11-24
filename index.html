@@ -1821,7 +1821,7 @@ const CASE_EXPRESS={
         {id:"toddy",label:"Il bicchiere del toddy",clue:"e_toddy",text:"Un bicchiere da toddy della compagnia, vuoto, con la fetta di limone e il chiodo di garofano sul fondo. Odora di whisky e di laudano. MacRae giura di averlo lasciato fuori dalla porta alle undici e mezza."},
         {id:"orologio",label:"L'orologio da tasca",clue:"e_orologio",text:"Un orologio d'argento appeso al gancio della cuccetta. Fermo alle 5:52. Lo scuoti: riparte. Non è rotto. Si è semplicemente scaricato."},
         {id:"tazze",label:"Il vassoio del tè",clue:"e_tazze",text:"Il vassoio che MacRae ha portato alle 22:40, con una tazza. Ma le tazze sono due. La seconda ha il bordo dorato del vagone ristorante e, sul fondo, un deposito biancastro dall'odore acre e dolciastro."},
-        {id:"corpo_g",label:"Il corpo",when:g=>locOf("graham")==="scomp4",text:"Sir Alastair è chino sul corpo e ti sbarra il passo con un sorriso. «Lasci fare a un medico, avvocato. Laudano, senza dubbio. Nessun segno di violenza.» Ti conviene tornare quando non c'è."},
+        {id:"corpo_g",label:"Il corpo",when:g=>locOf("graham")==="scomp4",text:"Sir Alastair è chino sul corpo e ti sbarra il passo con un sorriso. «Lasci fare a me, avvocato: il medico sono io. Laudano, senza dubbio. Nessun segno di violenza.» Fai un passo indietro, verso il corridoio. Va bene, pensi. Controllerò più tardi, da solo."},
         {id:"corpo",label:"Il corpo",clue:"e_ago",when:g=>locOf("graham")!=="scomp4",text:"Sollevi il lenzuolo dal fondo della cuccetta. I piedi nudi di Pell. Tra il quarto e il quinto dito del sinistro, un forellino minuscolo con un alone livido. Lyle trattiene il fiato. «Un'iniezione. Dove nessun medico di provincia guarderebbe mai.» Poi, piano: «Non lo dica a nessuno. Un segreto, in mano nostra, vale più di una prova.»"},
         {id:"macchina",label:"La macchina per scrivere",clue:"e_macchina",text:"Una portatile pieghevole americana, l'ultima novità. Nella custodia, tre lettere battute da Pell nei giorni scorsi: margini perfetti, battute uniformi, nessun errore. Mani da dattilografo."},
         {id:"cappotto",label:"Il cappotto appeso",clue:"e_nastro",text:"Un cappotto grigio, consumato ai polsi. All'occhiello, un nastrino azzurro: la Lega della Temperanza. Chi lo porta ha giurato di non toccare alcol."},
@@ -2188,7 +2188,7 @@ const LYLE_DED={
 };
 const LYLE_WRONG=["Lyle si gratta il mento. «Mi perdoni, ma non vedo il nesso.»","«Due fatti veri non fanno sempre una verità», mormora Lyle.","«Suggestivo», dice Lyle. «Ma un giudice riderebbe.»","Lyle scuote la testa. «Il filo non regge. Proviamo a tirarne un altro.»","«Una coincidenza, temo. Non ancora una deduzione.»","«Interessante. Ma non ci porta da nessuna parte.»"];
 const LYLE_TIP={
-  start:"«Cominci dai bagliori: quello che brilla merita uno sguardo. E le sagome sono persone: le interroghi, e mostri loro quello che trova.»",
+  start:"«Cominci dai bagliori: quello che brilla merita uno sguardo. E le sagome sono persone: le interroghi, e mostri loro quello che trova. Un'ultima cosa: tenga d'occhio l'orologio. In una casa come questa la gente si sposta, ora dopo ora, e una stanza occupata adesso può essere libera tra un quarto d'ora.»",
   firstClue:"«Agli atti. Quando ne avremo un paio, proviamo a collegarli: è così che si ragiona, non collezionando.»",
   dedReady:"«Ha già abbastanza per una prima deduzione. Apra il taccuino, alla scheda Deduzioni, e colleghi due reperti.»",
   candles:"«Le candele si consumano. Scelga bene la prossima stanza: il tempo, stanotte, è l'unica cosa che non possiamo cercare.»",
@@ -2297,7 +2297,7 @@ function closeReport(){$("#report").classList.remove("on");}
   ROOMART.camera_allegra.hot.catino=[462,300];ROOMART.camera_allegra.hot.catino2=[462,300];
   SALON.accuse.allegra.ok.push("c_catino");
   C.acts[0].plate="«Nessuno lasci la casa», disse Lady Agatha.";C.acts[1].plate="Una corda legata a niente.";C.acts[2].plate="Una parola sola, scritta col sangue.";C.acts[3].plate="«Prima di mezzanotte», disse il dottor Lyle.";
-  LYLE_TIP.act1="«Un prete. Qualcuno ha paura di ciò che si dice in confessione. E tenga d'occhio l'orologio: stamattina la gente, in questa casa, si sposta.»";
+  LYLE_TIP.act1="«Un prete. Qualcuno ha paura di ciò che si dice in confessione.»";
   LYLE_TIP.lamp="«Qui sotto la luce è poca. Muova la lampada: tocchi o trascini sulla scena.»";
   LYLE_TIP.objection="«Ha sentito? Quello che ha appena detto non torna. Se ha il reperto giusto, tocchi «Obietta!» accanto alla frase.»";
   LYLE_TIP.observe="«Prima di parlare, guardi. Tocchi «Osserva» sotto il nome: un dettaglio giusto vale dieci domande.»";
@@ -2685,6 +2685,7 @@ function openOptions(){AU.sfx("page");const row=(t,sub,lab,on)=>`<div class="opt
 let fastText=false;try{fastText=localStorage.getItem("cc_fast")==="1"}catch(e){}
 function wipeAll(){note("Cancellare tutto?",`<p>Verranno cancellati il salvataggio in corso e l'elenco dei casi risolti.</p><div class="row"><button class="btn red" onclick="try{localStorage.removeItem(SAVE);localStorage.removeItem(DONE);localStorage.removeItem(BEST);localStorage.removeItem(MED)}catch(e){};closeOv();closePanels();buildTitle()">Cancella</button><button class="btn ink" onclick="closeOv()">Annulla</button></div>`,true);}
 function howTo(){note("Come si gioca",`<p>Ogni caso è diviso in <b>atti</b>. In ognuno hai un numero limitato di spostamenti: le candele accanto all'orologio. Ogni stanza raggiunta costa un quarto d'ora.</p>
+<p>I personaggi <b>si spostano con l'orologio</b>: chi adesso è in una stanza, tra un quarto d'ora può essere altrove. La mappa mostra dove si trova ciascuno.</p>
 <p>Nelle stanze, i <b>bagliori</b> indicano che cosa si può esaminare. Tocca le <b>sagome</b> per interrogare i presenti, e mostra loro i reperti del taccuino: le reazioni giuste aprono nuove piste.</p>
 <p>La <b>Bacheca</b> lega gli indizi alle teorie con il filo rosso. Alcune teorie sono false piste perfettamente coerenti.</p>
 <p>Puoi <b>accusare</b> in ogni momento, una volta sola. Ci sono finali sbagliati, finali parziali e una sola verità.</p>
