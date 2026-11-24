@@ -732,7 +732,7 @@ function portrait(p,dead,attrs){
   if(e.col==="mil")neck+=`<path d="M40 84H60V91H40Z" fill="#7a2a1a"/><path d="M40 84H60V91H40Z" fill="${H1}"/><path d="M41 86H59" stroke="#c9a45c" stroke-width="1"/>`;
   // capelli dietro
   if(e.hair==="veil")back=`<path d="M${50-w-8} 124L${50-w-6} 60Q${50-w-4} 20 50 18Q${50+w+4} 20 ${50+w+6} 60L${50+w+8} 124Z" fill="#4a3a2a"/><path d="M${50-w-8} 124L${50-w-6} 60Q${50-w-4} 20 50 18Q${50+w+4} 20 ${50+w+6} 60L${50+w+8} 124Z" fill="${H2}"/><path d="M${50-w-8} 124L${50-w-6} 60Q${50-w-4} 20 50 18Q${50+w+4} 20 ${50+w+6} 60L${50+w+8} 124Z" fill="${H1}"/>`;
-  if(e.hair==="long")back=`<path d="M${50-w-6} 104Q${50-w-9} 50 ${50-w+2} 32Q50 22 ${50+w-2} 32Q${50+w+9} 50 ${50+w+6} 104Q50 96 ${50-w-6} 104Z" fill="#5a4630"/><path d="M${50-w-6} 104Q${50-w-9} 50 ${50-w+2} 32Q50 22 ${50+w-2} 32Q${50+w+9} 50 ${50+w+6} 104Q50 96 ${50-w-6} 104Z" fill="${H1}"/>`;
+  if(e.hair==="long")back=`<path d="M${50-w-6} 104Q${50-w-9} 50 ${50-w+2} 32Q50 22 ${50+w-2} 32Q${50+w+9} 50 ${50+w+6} 104Q50 96 ${50-w-6} 104Z" fill="${e.hc||"#5a4630"}"/><path d="M${50-w-6} 104Q${50-w-9} 50 ${50-w+2} 32Q50 22 ${50+w-2} 32Q${50+w+9} 50 ${50+w+6} 104Q50 96 ${50-w-6} 104Z" fill="${H1}"/>`;
   if(e.hair==="bun")back=`<circle cx="50" cy="${cy-3}" r="8" fill="#6a5640"/><circle cx="50" cy="${cy-3}" r="8" fill="${H1}"/>`+L(`M44 ${cy-3}a6 6 0 0 1 12 0`,.7);
   // viso
   const sh=`M${50+w*.35} ${cy+3}Q${50+w+1} 44 ${50+w} 54Q${50+w} ${62+j} ${50+w*.55} ${70+j*.7}Q${50+w*.2} ${chin-2} ${50+w*.1} ${chin}Q${50+w*.7} 60 ${50+w*.35} ${cy+3}Z`;
@@ -764,7 +764,7 @@ function portrait(p,dead,attrs){
   // capelli davanti
   const top=`M${50-w-1} 52Q${50-w-3} ${cy-3} 50 ${cy-4}Q${50+w+3} ${cy-3} ${50+w+1} 52`;
   if(e.hair==="slick")hair=`<path d="${top}Q${50+w-2} 40 52 ${cy+5}Q50 ${cy+8} 47 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="#3a2c1e"/><path d="${top}Q${50+w-2} 40 52 ${cy+5}Q50 ${cy+8} 47 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${H2}"/>`+L(`M44 ${cy-1}Q52 ${cy-3} 60 ${cy+3}M42 ${cy+2}Q50 ${cy} 58 ${cy+5}`,.5);
-  if(e.hair==="long"||e.hair==="bun")hair=`<path d="${top}Q${50+w-3} 38 50 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${e.hair==="bun"?"#6a5640":"#5a4630"}"/><path d="${top}Q${50+w-3} 38 50 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${H1}"/>`+L(`M50 ${cy-4}V${cy+4}`,.7);
+  if(e.hair==="long"||e.hair==="bun")hair=`<path d="${top}Q${50+w-3} 38 50 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${e.hc||(e.hair==="bun"?"#6a5640":"#5a4630")}"/><path d="${top}Q${50+w-3} 38 50 ${cy+4}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${H1}"/>`+L(`M50 ${cy-4}V${cy+4}`,.7);
   if(e.hair==="grey")hair=`<path d="M${50-w-1} 54Q${50-w-2} 38 ${50-w*.5} ${cy+1}L${50-w*.4} 46ZM${50+w+1} 54Q${50+w+2} 38 ${50+w*.5} ${cy+1}L${50+w*.4} 46Z" fill="#b8ac98"/>`+L(`M${50-w-1} 54Q${50-w-2} 38 ${50-w*.5} ${cy+1}M${50+w+1} 54Q${50+w+2} 38 ${50+w*.5} ${cy+1}`,.7)+L(`M44 ${cy+1}Q50 ${cy-1} 56 ${cy+1}`,.4);
   if(e.hair==="bald")hair=`<path d="M${50-w-1} 56Q${50-w-2} 46 ${50-w+2} 42L${50-w+3} 56ZM${50+w+1} 56Q${50+w+2} 46 ${50+w-2} 42L${50+w-3} 56Z" fill="#cfc4b0"/>`+L(`M${50-w-1} 56Q${50-w-2} 46 ${50-w+2} 42M${50+w+1} 56Q${50+w+2} 46 ${50+w-2} 42`,.6)+L(`M42 ${cy+4}Q46 ${cy+2} 50 ${cy+2}`,.6);
   if(e.hair==="veil")hair=`<path d="${top}Q${50+w-3} 38 50 ${cy+5}Q${50-w+3} 38 ${50-w-1} 52Z" fill="#3a2c1e"/><path d="${top}Q${50+w-3} 38 50 ${cy+5}Q${50-w+3} 38 ${50-w-1} 52Z" fill="${H2}"/><path d="M${50-w-5} 44Q50 ${cy-12} ${50+w+5} 44" stroke="${INK}" stroke-width="1.4" stroke-dasharray=".8 1.4" fill="none"/>`;
@@ -915,6 +915,56 @@ Object.assign(ROOMART,{
   locomotiva:{wall:"iron",floor:"iron",dark:.38,lights:[[400,260,240,"gWarm"],[100,140,140,"gCold"]],
     props:(a,o)=>[["firebox",400,330,1,{coal:true}],["twin",100,170,.8,{w:90,h:90,night:o.night,seed:40}],["twin",700,170,.8,{w:90,h:90,night:o.night,seed:41}]],
     hot:{giornale_m:[560,200],manometri:[290,130],forno:[400,250]},slots:[[220,448],[600,450]]}
+});
+
+/* ---------------- CASO III: SCENE DELLO SCOGLIO ---------------- */
+/* esterni: cielo, mare e scogli al posto della stanza */
+function shellOut(A,o){const night=o&&o.night,r=rng(A.seed||5);let foam="";for(let i=0;i<18;i++){const x=r()*800,y=232+r()*60;foam+=`<path d="M${x.toFixed(0)} ${y.toFixed(0)}q14 -6 28 0" stroke="#e8eef2" stroke-width="2" fill="none" opacity="${(.3+r()*.4).toFixed(2)}"/>`;}
+  return `<defs><linearGradient id="osk${A.seed}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${night?"#05080d":"#4a5564"}"/><stop offset="1" stop-color="${night?"#1a2430":"#a9b4bf"}"/></linearGradient><linearGradient id="osea${A.seed}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${night?"#0e1a24":"#3a5466"}"/><stop offset="1" stop-color="${night?"#04080c":"#1c2c38"}"/></linearGradient></defs>
+<rect width="800" height="450" fill="url(#osk${A.seed})"/><path d="M0 70q120 -30 260 -6q140 -26 300 0q140 -20 240 10V0H0Z" fill="${night?"#0a0f16":"#3a4450"}" opacity=".7"/>
+<rect y="230" width="800" height="220" fill="url(#osea${A.seed})"/>${foam}${A.land?`<path d="M0 232Q60 200 140 214T300 212T420 226H0Z" fill="${night?"#0c1218":"#4a5244"}"/>`:""}`;}
+/* la lente di Fresnel e la lanterna */
+P.lens=(o={})=>{let rings="";for(let i=0;i<7;i++)rings+=`<path d="M${-70+i*3} ${-150+i*14}H${70-i*3}" stroke="#d6e6ee" stroke-width="3" opacity=".7"/><path d="M${-70+i*3} ${-60-i*12}H${70-i*3}" stroke="#d6e6ee" stroke-width="3" opacity=".7"/>`;
+  return `<ellipse cx="0" cy="-110" rx="${o.dark?40:150}" ry="${o.dark?30:120}" fill="url(#gWarm)" opacity="${o.dark?.2:.85}"/><rect x="-80" y="-170" width="160" height="130" rx="20" fill="#b9d2de" opacity=".35" stroke="#c9a45c" stroke-width="5"/>${rings}<rect x="-14" y="-122" width="28" height="26" rx="6" fill="${o.dark?"#3a3a3a":"#fff2c0"}"/><path d="M-90 -40H90L70 0H-70Z" fill="#2a2420"/><path d="M-90 -40H90" stroke="#c9a45c" stroke-width="4"/>`;};
+P.pump=()=>`<rect x="-16" y="-110" width="32" height="110" fill="#5a5048"/><circle cx="0" cy="-130" r="22" fill="#efe6d2" stroke="#c9a45c" stroke-width="5"/><path d="M0 -130l12 -10" stroke="#1a120c" stroke-width="3"/><path d="M20 -90h40v-30" stroke="#c9a45c" stroke-width="5" fill="none"/><rect x="52" y="-140" width="16" height="20" fill="#3a3028"/>`;
+P.railing=(o={})=>`<path d="M-400 0H400" stroke="#1a1a1c" stroke-width="7"/><path d="M-400 -70H400" stroke="#1a1a1c" stroke-width="6"/>${Array.from({length:21},(_,i)=>`<path d="M${-400+i*40} 0V-70" stroke="#1a1a1c" stroke-width="4"/>`).join("")}${o.veil?`<path d="M60 -70q20 30 4 70q30 -20 70 10q-10 -40 20 -60q-40 10 -60 -24z" fill="#f4f1ea" opacity=".82"/><path d="M60 -70q8 4 10 0" stroke="#bfb6a3" stroke-width="3"/>`:""}`;
+P.tower=(o={})=>`<path d="M-70 0L-50 -420H50L70 0Z" fill="#e8e2d6"/><path d="M-64 -100h128M-58 -220h116M-54 -330h108" stroke="#8a1414" stroke-width="34"/><path d="M-70 0L-50 -420" stroke="#9a948a" stroke-width="3"/><rect x="-14" y="-60" width="28" height="60" rx="12" fill="#2a1a10"/>`;
+P.rocks=(o={})=>`<path d="M-220 0Q-200 -60 -150 -70Q-110 -100 -60 -80Q-20 -110 30 -86Q80 -100 120 -70Q180 -64 220 0Z" fill="#2a2826"/><path d="M-150 -70Q-110 -100 -60 -80M30 -86Q80 -100 120 -70" stroke="#4a4844" stroke-width="3" fill="none"/><path d="M-200 -10q40 -20 80 -6q40 -16 90 -2q50 -14 90 4" stroke="#4a6a3a" stroke-width="6" fill="none" opacity=".7"/>${o.shoe?`<path d="M40 -92q10 -10 26 -6l8 6h-30z" fill="#f4f1ea" stroke="#bfb6a3"/>`:""}`;
+P.causeway=(o={})=>`<path d="M-420 60L-260 -10L-120 -30L40 -40L200 -46L420 -52V60Z" fill="#3a3630"/><path d="M-420 60L-260 -10L-120 -30L40 -40L200 -46L420 -52" stroke="#5a564e" stroke-width="4" fill="none"/>${Array.from({length:30},(_,i)=>`<ellipse cx="${-400+i*28}" cy="${-20+((i*7)%30)}" rx="12" ry="4" fill="#2a4a2a" opacity=".6"/>`).join("")}
+<path d="M-40 -40Q-30 -150 20 -170Q70 -160 80 -40Z" fill="#26241f"/><path d="M-30 -60Q-20 -140 20 -160" stroke="#4a4840" stroke-width="3" fill="none"/>${o.blood?`<ellipse cx="30" cy="-80" rx="14" ry="6" fill="#5a1010" opacity=".75"/>`:""}<path d="M90 -44q40 30 90 10" stroke="#0e1a24" stroke-width="28" fill="none"/><path d="M96 -40q40 26 80 8" stroke="#3a5466" stroke-width="10" fill="none"/>${o.lamp?`<g transform="translate(140 -26) rotate(30)"><rect x="-10" y="-24" width="20" height="24" fill="#2a2420"/><rect x="-7" y="-20" width="14" height="14" fill="#9ab0b8" opacity=".5"/></g>`:""}`;
+P.mainland=()=>`<path d="M-420 0Q-300 -60 -160 -40Q0 -80 160 -50Q300 -70 420 -30V20H-420Z" fill="#3a4238"/><rect x="200" y="-80" width="20" height="30" fill="#2a2a2a"/><path d="M196 -80l14 -12l14 12z" fill="#2a2a2a"/>`;
+P.boat=()=>`<path d="M-160 -20Q-150 20 -60 26H120Q170 20 180 -30Z" fill="#2a3a4a"/><path d="M-160 -20H180" stroke="#e8e2d4" stroke-width="5"/><path d="M-150 -6Q-50 14 170 -14" stroke="#8a1414" stroke-width="4" fill="none"/><path d="M0 -20v-12" stroke="#4a3a2a" stroke-width="6"/>`;
+P.nets=()=>`<path d="M-80 0Q-90 -90 -40 -110Q20 -120 60 -90Q90 -50 80 0Z" fill="#4a4030"/><path d="M-80 0Q-90 -90 -40 -110Q20 -120 60 -90Q90 -50 80 0Z" fill="url(#hatchX)" opacity=".5"/>${[-50,-10,30].map(x=>`<circle cx="${x}" cy="-60" r="9" fill="#c98a3a" stroke="#6a4a1a"/>`).join("")}`;
+P.hooks=(o={})=>`<rect x="-120" y="-200" width="240" height="10" fill="#3a2414"/>${o.gaff!==false?`<path d="M-80 -190V10" stroke="#5a3a1a" stroke-width="7"/><path d="M-80 10q0 18 -16 20q-14 0 -16 -14" stroke="#4a4a4a" stroke-width="6" fill="none"/>`:""}<path d="M-20 -190V-40" stroke="#5a3a1a" stroke-width="6"/><g transform="translate(60 -150)">${P.lantern?`<path d="M0 -40v18" stroke="#2a2420" stroke-width="3"/><rect x="-14" y="-22" width="28" height="36" fill="#2a2420"/><rect x="-10" y="-18" width="20" height="20" fill="#5a5048"/>`:""}</g>`;
+P.dog=()=>`<ellipse cx="0" cy="-4" rx="54" ry="8" fill="#000" opacity=".35"/><ellipse cx="0" cy="-16" rx="46" ry="17" fill="#6a5a46"/><ellipse cx="-6" cy="-12" rx="30" ry="9" fill="#e8e2d4" opacity=".85"/><circle cx="38" cy="-26" r="14" fill="#6a5a46"/><path d="M34 -24q6 8 14 2" stroke="#e8e2d4" stroke-width="4" fill="none"/><path d="M42 -38l9 -11l3 13z" fill="#4a3e30"/><path d="M-46 -16q-18 -4 -22 10" stroke="#6a5a46" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="44" cy="-28" r="1.6" fill="#1a120c"/>`;
+P.dress=()=>`<path d="M-30 0L-20 -90Q0 -110 20 -90L30 0Q60 10 70 30H-70Q-60 10 -30 0Z" fill="#f4f1ea" stroke="#cfc6b4"/><path d="M-20 -90Q0 -100 20 -90L14 -60H-14Z" fill="#e8e2d4"/>${P.chair({c:"#8a7a6a"})}`;
+P.cdoorS=(o={})=>`<rect x="-46" y="-220" width="92" height="220" fill="#4a3424"/><rect x="-38" y="-210" width="76" height="200" fill="none" stroke="#2a1a10" stroke-width="3"/><rect x="${o.open?-46:30}" y="-120" width="${o.open?20:16}" height="10" fill="#8a8a8a"/><rect x="24" y="-124" width="26" height="18" rx="3" fill="#5a5a5a"/><circle cx="-26" cy="-110" r="5" fill="#c9a45c"/>`;
+
+Object.assign(ROOMART,{
+  salotto:{wall:"damG",floor:"parquet",lights:[[400,250,280,"gWarm"]],
+    props:(a,o)=>[["portrait",255,215,1.1],["fire",400,300,1],["win",560,250,.95,{seed:6,cc:"#1f3a2e"}],["clock",640,300,1],["rug",400,405,1.1],["armchair",215,398,1.05,{c:"#1f3a2e"}],["dtable",400,430,.6]],
+    hot:{ospiti:[250,150],torta:[400,370],biglietti:[575,250]},slots:[[300,446],[520,448],[640,450]]},
+  camera_sposa:{wall:"damV",floor:"parquet",lights:[[268,190,150,"gWarm"],[595,180,170,"gCold"]],
+    props:(a,o)=>[["canopy",410,300,1],["dresser",240,322,1,{candle:true}],["win",595,240,.9,{cc:"#e8e2d4",seed:8}],["rug",400,422,1,{c:"#2d2132"}],["dress",640,430,.8],["wardrobe",120,300,.9]],
+    hot:{letto:[410,300],cloralio:[235,262],abito:[640,350],cassetto:[240,300],messale:[330,320],portagioie:[200,262]},slots:[[480,446],[300,448]]},
+  dispensa_m:{wall:"plaster",floor:"flag",lights:[[240,260,210,"gWarm"],[570,190,170,"gCold"]],
+    props:(a,o)=>[["stove",240,300,1],["pots",420,104,1],["cdoorS",600,300,1,{open:false}],["ktable",420,412,1.1]],
+    hot:{chiavistello:[624,186],scarpe_d:[420,350],ganci:[420,110]}},
+  lanterna:{out:false,wall:"plaster",floor:"iron",dark:.3,lights:[[400,120,240,"gWarm"]],
+    props:(a,o)=>[["lens",400,250,1.25,{dark:o.night&&o.dark}],["win",150,250,.85,{curt:false,seed:2}],["win",650,250,.85,{curt:false,seed:3}],["pump",230,410,1],["ftable",590,410,.9,{glass:false}]],
+    hot:{registro_f:[560,330],tazza:[600,320],pompa:[230,290],ringhiera:[650,160],almanacco:[520,340]},slots:[[330,448],[500,450]]},
+  scogli:{out:true,seed:7,lights:[],
+    props:(a,o)=>[["tower",150,420,1],["rocks",470,430,1.4,{shoe:a===0}]],
+    hot:{scarpetta:[540,300],segni:[400,400],galleria_v:[150,120]},slots:[[650,446],[330,448]]},
+  casetta:{wall:"plaster",floor:"flag",lights:[[240,280,200,"gWarm"]],
+    props:(a,o)=>[["stove",240,300,.9],["win",520,250,.8,{curt:false,seed:4}],["credenza",640,330,.8],["ktable",420,420,1],["dog",170,420,1.1],["book",420,348,1]],
+    hot:{bromuro:[640,250],bibbia:[420,340],cane:[175,385],cardigan:[520,370],tazze_c:[300,250]},slots:[[560,448],[330,448]]},
+  capanno:{wall:"brick",floor:"flag",dark:.4,lights:[[400,200,230,"gCold"]],
+    props:(a,o)=>[["boat",420,400,1.2],["nets",650,420,1],["hooks",200,330,1,{gaff:true}],...(a>=2?[["body",400,440,.9,{sheet:true}]]:[])],
+    hot:{gaffa:[120,280],gonna:[650,360],lanterna_j:[260,190],corpo3:[400,410],ferita:[440,420],bottone:[350,425]},slots:[[600,448],[250,448]]},
+  passerella:{out:true,seed:11,land:true,lights:[],
+    props:(a,o)=>[["mainland",400,232,1],["causeway",400,400,1,{blood:true,lamp:true}]],
+    hot:{pulpito:[420,290],gola:[540,370],alga:[330,380],valigia:[600,400]},slots:[[200,446],[680,448]]}
 });
 
 /* ---------------- REPERTI ---------------- */
@@ -2032,6 +2082,223 @@ const CASE_EXPRESS={
   ]
 };
 
+/* ---------------- CASO III: LA SPOSA DEL FARO ---------------- */
+const CASE_FARO={
+  id:"faro",num:"Caso III",title:"La Sposa del Faro",
+  year:"Cornovaglia · agosto 1913",issue:"N. III · Agosto 1913",art:"lighthouse",
+  plate:"«Era sonnambula da bambina», disse la cameriera.",
+  blurb:"Uno scoglio con un faro, una passerella che emerge solo con la bassa marea, un matrimonio isolato dalla burrasca. Al mattino la sposa manca, e alle tre di notte la lanterna era spenta. Il caso più difficile dell'archivio.",
+  start:{room:"camera_sposa"},
+  mapTitle:"Lo scoglio di St. Morwenna",mapSub:"rilievo della Trinity House, con la passerella di bassa marea",
+  accuseTitle:"La ricostruzione",
+  accuseDesc:"Ricostruisci la notte, ora per ora. Ogni carta richiede una prova. Poi nomina chi ha ucciso, se qualcuno ha ucciso.",
+  acts:[
+    {label:"Atto I · Domenica mattina",title:"La sonnambula",start:7*60+30,actions:8,room:"camera_sposa",plate:"«La signora non c'è!»",
+     intro:["Alle 6:30 la cameriera Hester grida per tutta Morwenna House: la sposa non è nel suo letto.","Alle 6:45 il capitano Tremayne trova sugli scogli, sotto il faro, una scarpetta di raso bianco. In cima, alla ringhiera della galleria, sventola il velo.","«Era sonnambula da bambina», singhiozza Hester. Sir Josiah ha già deciso: una disgrazia. Tu sei qui per scoprire chi mandava le lettere anonime alla sposa. Adesso hai un caso più grande."]},
+    {label:"Atto II · Domenica, mezzogiorno",title:"La sposa che mente",start:12*60,actions:8,room:"salotto",plate:"Una tavola delle maree e un appuntamento.",
+     intro:["La burrasca si sfoga sugli scogli. La barca non può partire, il telegrafo tace.","Sir Josiah ha ordinato le gramaglie. Il capitano Tremayne non parla con nessuno.","Ma nella camera della sposa qualcosa non torna, e Hester evita il tuo sguardo."]},
+    {label:"Atto III · Domenica pomeriggio",title:"La passerella",start:15*60+30,actions:8,room:"capanno",plate:"La seconda bassa marea del giorno.",
+     intro:["Alle 15:37 la marea si ritira come la notte prima. La passerella riemerge dal mare, nera e lucida.","E nella gola sotto il Pulpito, incastrata tra le rocce, c'è Isolde Penrose. In stivaletti e mantello da viaggio.","Una barca arriva da terra con la calma del pomeriggio. A bordo c'è Tom Kitto, il vice guardiano. È bianco come un lenzuolo."]}
+  ],
+  forced:{eyebrow:"Domenica, 17:30",title:"L'alta marea",paras:["Il mare ha di nuovo coperto la passerella. Arriva la barca della polizia di Penzance.","Il sergente vuole un nome e una spiegazione, adesso. Hai quello che hai."]},
+  items:{},
+  theories:{
+    A:{name:"La sonnambula: una caduta",desc:"Isolde, sonnambula, è salita in galleria ed è caduta in mare. Il velo e la scarpetta lo dimostrano. Così dice Sir Josiah."},
+    B:{name:"La fuga: è in America",desc:"Isolde ha inscenato la propria morte ed è fuggita con la bassa marea delle 3:12. È viva, da qualche parte."},
+    C:{name:"Il marito geloso",desc:"Il capitano Tremayne ha litigato con la sposa la notte delle nozze ed è salito in galleria. Una spinta, e il mare ha fatto il resto."},
+    T:{name:"Qualcuno sapeva della marea",hiddenName:"Un'ombra sulla passerella…",desc:"Qualcuno conosceva il piano della sposa e l'ha aspettata dove nessuno avrebbe potuto vederla."}
+  },
+  clues:{
+    f_letto:{name:"Il letto intatto",cat:"Osservazione",th:{A:-2,B:1},text:"Il letto della sposa non è stato disfatto. La camicia da notte è piegata sul cuscino. Isolde non si è mai coricata."},
+    f_cloralio:{name:"Il cloralio della sposa",cat:"Reperto",th:{},text:"Una boccetta di cloralio prescritta dal dottor Vane per l'emicrania. È piena fino al segno: Isolde non ne ha preso, e non ne ha dato a nessuno."},
+    f_vestiti:{name:"Il vestito da viaggio",cat:"Osservazione",th:{A:-1,B:2},text:"Nell'armadio mancano il tailleur da viaggio grigio, gli stivaletti e il mantello. L'abito da sposa è disteso sulla sedia, con cura."},
+    f_lettere:{name:"Le lettere anonime",cat:"Documento",th:{},text:"Tre lettere senza firma, in stampatello: «Non sposarlo». Carta della casa, inchiostro viola. Le hai lette prima del matrimonio: per questo Sir Josiah ti ha fatto venire."},
+    f_portagioie:{name:"Il portagioie vuoto",cat:"Osservazione",th:{B:2},text:"Il portagioie della sposa è vuoto. Le perle della madre, l'anello di zaffiri. Una sonnambula non si porta i gioielli."},
+    f_registro_faro:{name:"Il registro del faro",cat:"Documento",th:{A:1},text:"Di pugno del guardiano: «03:00 bruciatore difettoso. Riacceso 03:20. Nessun passaggio in galleria.» L'inchiostro di quelle tre righe è più fresco del resto della pagina."},
+    f_tazza:{name:"La tazza della cioccolata",cat:"Reperto",th:{T:1},text:"Sul tavolino della stanza di guardia, la tazza della cioccolata di mezzanotte. Fredda, con un deposito granuloso sul fondo, salato e amaro."},
+    f_pompa:{name:"La pompa del bruciatore",cat:"Osservazione",th:{A:-1,T:1},text:"Il bruciatore a vapore di petrolio va pompato ogni mezz'ora. Se nessuno lo pompa, la pressione cala e la fiamma si spegne da sola in circa due ore e mezza."},
+    f_velo:{name:"Il velo annodato",cat:"Reperto",th:{A:-2,B:1},text:"Il velo è legato alla ringhiera della galleria con un nodo piano, ben stretto, da ricamatrice. Ed è fradicio: ha preso tutta la pioggia della notte, che è finita alle 2:30."},
+    f_almanacco:{name:"L'almanacco delle maree",cat:"Documento",th:{B:1,T:1},text:"Nell'almanacco del guardiano, 16 agosto, sizigia: bassa marea alle 03:12 e alle 15:37. La passerella resta scoperta per circa tre quarti d'ora intorno all'ora di minima."},
+    f_scarpetta:{name:"La scarpetta di raso",cat:"Reperto",th:{A:-1,B:1},text:"Una scarpetta da sposa, posata su una sporgenza sopra la linea delle alghe. È asciutta, dentro e fuori. Non ha preso la pioggia della notte: qualcuno l'ha messa lì dopo le 2:30."},
+    f_chiavistello:{name:"Il chiavistello della dispensa",cat:"Osservazione",th:{A:-1,B:1},text:"La porta della dispensa, che dà sul sentiero verso la passerella, è stata aperta dall'interno: il chiavistello è tirato, e sulla soglia c'è la sabbia del sentiero."},
+    f_scarpe_d:{name:"Le orme nella dispensa",cat:"Osservazione",th:{B:1},text:"Sul pavimento della dispensa, orme di stivaletti da donna, piccoli e stretti, che vanno verso la porta. Nessuna torna indietro."},
+    f_bromuro:{name:"Le polveri di bromuro",cat:"Reperto",th:{T:2},text:"Nella credenza della casetta, una scatola di polveri di bromuro prescritte dal dottor Vane a «Miss J. Hosking». Ne mancano due dalla scatola aperta ieri."},
+    f_lanterna_j:{name:"La lanterna cieca",cat:"Reperto",th:{T:1},text:"Appesa nel capanno, la lanterna cieca della casetta. Lo stoppino è bruciato di fresco, e sul vetro c'è una crosta di sale."},
+    f_foto_tom:{name:"La fotografia nel messale",cat:"Reperto",th:{B:2},text:"Nel messale di Isolde, la fotografia di un giovane in divisa da guardiano dei fari. Sul retro: «T. K. — St. Morwenna, giugno 1913». Tom Kitto, il vice guardiano."},
+    f_banca:{name:"La lettera della banca",cat:"Documento",th:{B:2},text:"Banca di Falmouth, 14 agosto: «Come da sue istruzioni, le consegniamo in contanti la somma di 400 sterline.» Due giorni prima delle nozze."},
+    f_gaffa:{name:"La gaffa del capanno",cat:"Reperto",th:{T:2},text:"La gaffa d'ottone e ferro è stata rimessa al gancio sbagliato. Il ferro ha ruggine fresca, da acqua di mare, e nel gancio è rimasto impigliato un lungo capello biondo."},
+    f_gonna:{name:"La gonna sotto le reti",cat:"Reperto",th:{T:2},text:"Arrotolata sotto le reti, una gonna di lana scura con l'orlo ancora umido d'acqua di mare. Impigliata all'orlo, un'alga rossa e ricciuta."},
+    f_bibbia:{name:"La lettera nella Bibbia",cat:"Documento",th:{T:3},text:"Nella Bibbia di Jenna, tra le pagine del Cantico dei Cantici, una lettera di Tom a Isolde: «Domenica, la bassa marea delle 3:12. Ti aspetto in fondo alla passerella con il calesse. Porta solo il necessario. T.»"},
+    f_cardigan:{name:"Il cardigan di Jenna",cat:"Reperto",th:{T:2},text:"Nel baule di Jenna, un cardigan di lana grigia con i bottoni di corno. Ne manca uno, il terzo: il filo è strappato, non tagliato."},
+    f_alga:{name:"L'alga del Pulpito",cat:"Osservazione",th:{T:1},text:"Sul Pulpito, la roccia a metà della passerella, cresce un'alga rossa e ricciuta che sullo scoglio non c'è da nessun'altra parte. Si trova solo lì, dove la corrente batte."},
+    f_lanterna_i:{name:"La lanterna di Isolde",cat:"Reperto",th:{B:-2,T:1},text:"Incastrata nella gola sotto il Pulpito, una lanterna da viaggio con il vetro rotto. Le iniziali sul manico: I. P."},
+    f_valigia:{name:"La valigetta",cat:"Reperto",th:{B:-2},text:"Una valigetta di cuoio, fradicia, tra le rocce della gola. Dentro, i gioielli della madre e 400 sterline in banconote incollate dall'acqua."},
+    f_corpo:{name:"Il corpo di Isolde",cat:"Osservazione",th:{A:-2,B:-3,T:1},text:"Isolde indossa il tailleur da viaggio, gli stivaletti e il mantello. Nessuna sonnambula. Ed è morta: non c'è nessuna America."},
+    f_ferita:{name:"La ferita a mezzaluna",cat:"Testimonianza",th:{A:-2,T:2},text:"Il dottor Vane: sulla tempia, una ferita a mezzaluna, netta, con un foro al centro. Non è la roccia: è un ferro curvo con una punta. È stata colpita, poi è finita in acqua."},
+    f_bottone:{name:"Il bottone di corno",cat:"Reperto",th:{T:2},text:"Stretto nella mano destra di Isolde, un bottone di corno con quattro fori e un filo di lana grigia ancora attaccato."},
+    f_sonno:{name:"Il guardiano dormiva",cat:"Testimonianza",th:{A:-2,T:1},text:"Hosking ammette: si è addormentato poco dopo la cioccolata di mezzanotte e si è svegliato alle quattro meno cinque, intirizzito. Ha riacceso la lanterna e ha scritto il falso nel registro."},
+    f_piano:{name:"Il piano della sposa",cat:"Testimonianza",th:{A:-3,B:3},text:"Hester confessa: Isolde voleva sparire e farsi credere morta. Il velo l'ha legato lei alle 23:30, la scarpetta l'ha posata Hester alle sei. Alle tre Isolde doveva attraversare la passerella con la bassa marea, verso Tom."},
+    f_lite:{name:"La lite delle undici",cat:"Testimonianza",th:{C:2},text:"Tremayne ammette: alle 23 la sposa gli ha detto che non sarebbe mai stata sua moglie. Lui ha rotto un bicchiere contro il muro."},
+    f_galleria_01:{name:"Il capitano in galleria",cat:"Testimonianza",th:{C:1},text:"Hosking: all'una e dieci il capitano è salito in galleria a fumare, da solo. È ridisceso alle una e venti. Il guardiano era sveglio e l'ha visto."},
+    f_rumori:{name:"Rumori nella camera della sposa",cat:"Testimonianza",th:{C:-2},text:"Tremayne, dal camerino accanto: verso le tre e un quarto ha sentito muoversi nella camera della sposa, e ha pensato che fosse lei. Era Hester, che fingeva di essere la padrona."},
+    f_cane:{name:"Il cane delle tre",cat:"Testimonianza",th:{T:1},text:"Hester: il cane del guardiano ha abbaiato una volta sola, verso le tre meno cinque, quando la signora è uscita. Poi più niente, per tutta la notte."},
+    f_ricetta:{name:"La ricetta del dottore",cat:"Testimonianza",th:{T:1},text:"Il dottor Vane: a Isolde ha prescritto il cloralio per l'emicrania. A Jenna Hosking il bromuro, a giugno, perché non dormiva più da quando Tom l'aveva lasciata."},
+    f_due_luci:{name:"Due luci sulla passerella",cat:"Testimonianza",th:{B:-2,T:3},text:"Tom: alle tre e dieci, dal fondo della passerella, ha visto due luci. Una veniva dalla casa. L'altra era ferma a metà, al Pulpito, e si è accesa all'improvviso. Poi una si è spenta, e l'altra è tornata indietro."},
+    f_posta:{name:"La cassetta della posta",cat:"Testimonianza",th:{T:2},text:"Tom: la sua lettera per Isolde l'ha lasciata giovedì nella cassetta del faro, come tutta la posta per lo scoglio. La posta la ritira e la smista Jenna."},
+    f_guardiacoste:{name:"Il registro della guardia costiera",cat:"Documento",th:{A:-1,T:1},text:"Tom ha portato il telegramma della stazione di Porthcarrow: «Faro di St. Morwenna spento dalle 03:04 alle 03:58. Vento calato tra le 02:30 e le 04:00.»"},
+    f_obs_tremayne:{name:"Le nocche del capitano",cat:"Osservazione",th:{C:1},text:"Le nocche della mano destra di Tremayne sono escoriate e fasciate male. Ha colpito qualcosa di duro, di recente."},
+    f_obs_hester:{name:"Il dito di Hester",cat:"Osservazione",th:{},text:"L'indice destro di Hester è macchiato d'inchiostro viola. Lo stesso inchiostro delle lettere anonime."},
+    f_obs_hosking:{name:"Gli occhi del guardiano",cat:"Osservazione",th:{A:-1},text:"Hosking ha la lingua impastata e le pupille piccole come capocchie di spillo. Non è il sonno di chi ha vegliato: è il sonno di chi ha dormito troppo, e male."},
+    f_obs_jenna:{name:"Le mani di Jenna",cat:"Osservazione",th:{T:1},text:"Jenna ha le mani screpolate dal sale fino ai polsi, come chi le ha tenute nell'acqua di mare. E porta un cardigan nuovo: le pieghe del baule sono ancora visibili."}
+  },
+  map:{nostairs:true,nodoors:true,
+    labels:[{t:"MORWENNA HOUSE",x:10,y:14},{t:"IL FARO",x:230,y:14},{t:"CASETTA DEL GUARDIANO",x:10,y:174},{t:"LA PASSERELLA (BASSA MAREA)",x:10,y:294}],
+    rooms:[{id:"salotto",x:10,y:20,w:108,h:70},{id:"camera_sposa",x:122,y:20,w:102,h:70},{id:"dispensa_m",x:10,y:96,w:214,h:60},{id:"lanterna",x:230,y:20,w:100,h:70},{id:"scogli",x:230,y:96,w:100,h:60},{id:"casetta",x:10,y:180,w:150,h:90},{id:"capanno",x:166,y:180,w:164,h:90},{id:"passerella",x:10,y:300,w:320,h:92}],deco:''},
+  rooms:{
+    salotto:{name:"Salotto di Morwenna House",mapName:"Salotto",crimeFrom:99,
+      desc:["Il salotto dove ieri sera si è brindato agli sposi. I bicchieri sono ancora sul tavolo, la torta a metà. Dalle finestre, solo mare in tempesta.","Sir Josiah ha fatto coprire lo specchio con un drappo nero. Si aspetta che il mare restituisca qualcosa.","Gli ospiti si sono radunati qui, intorno al fuoco. Nessuno ha fame."],
+      objects:[
+        {id:"ospiti",label:"Il libro degli ospiti",text:"«Agli sposi, che il mare li protegga.» Firme di parenti, il dottor Vane, il capitano Lennox di Truro. In fondo, a matita, una mano infantile: «Jenna H.», con uno scarabocchio sopra, come se avesse cambiato idea."},
+        {id:"torta",label:"La torta nuziale",text:"Tre piani di glassa bianca, tagliata una volta sola. La sposa ha mangiato una fetta piccola e ha lasciato la tavola presto, ricorda il cameriere: «Sembrava avere fretta che la serata finisse.»"},
+        {id:"biglietti",label:"I biglietti d'auguri",text:"Biglietti dalla costa, dalla miniera, dalla Trinity House. Uno solo senza firma: «Che tu sia felice quanto meriti.» La stessa carta delle lettere anonime, ma la grafia è diversa: rotonda, da maestra."}]},
+    camera_sposa:{name:"Camera della sposa",mapName:"Camera sposa",crimeFrom:99,
+      desc:["La camera nuziale, con il letto a baldacchino e le finestre sul faro. La cameriera Hester siede in un angolo e si tormenta il grembiule.","La camera è stata riordinata. L'abito da sposa è ancora sulla sedia: Sir Josiah non vuole che lo si tocchi.","Hester sta piegando le cose della padrona in un baule. Piange in silenzio."],
+      objects:[
+        {id:"letto",label:"Il letto",clue:"f_letto",text:"Le coperte rimboccate, il cuscino intatto. Sopra, piegata con cura, la camicia da notte di batista con le iniziali ricamate. Isolde non si è mai coricata. Una sonnambula, per camminare nel sonno, prima deve dormire."},
+        {id:"cloralio",label:"La boccetta sul comò",clue:"f_cloralio",text:"Cloralio idrato, «per l'emicrania», con l'etichetta del dottor Vane. La boccetta è piena fino al segno di carta che il dottore ci ha incollato sopra. Nessuno ne ha preso."},
+        {id:"abito",label:"L'abito da sposa",clue:"f_vestiti",text:"Disteso sulla sedia, il velo staccato. Apri l'armadio: mancano il tailleur da viaggio grigio, gli stivaletti allacciati e il mantello di lana. La sposa, stanotte, si è vestita per uscire."},
+        {id:"cassetto",label:"Il cassetto della scrivania",clue:"f_lettere",text:"Le tre lettere anonime che Sir Josiah ti ha mostrato una settimana fa. «Non sposarlo.» Inchiostro viola, stampatello incerto. Isolde le aveva tenute, legate con un nastro."},
+        {id:"portagioie",label:"Il portagioie",clue:"f_portagioie",text:"Un portagioie di madreperla, aperto e vuoto. Hester dice che ieri sera c'erano le perle della madre e l'anello di zaffiri. Le sonnambule non si portano dietro i gioielli."},
+        {id:"messale",label:"Il messale",clue:"f_foto_tom",from:1,text:"Il messale di Isolde, con il nastro alla messa nuziale. Tra le pagine, una fotografia: un giovane in divisa da guardiano dei fari, sorridente, sullo sfondo del faro. Sul retro: «T. K. — St. Morwenna, giugno 1913»."},
+        {id:"lettera_banca",label:"La cartella dei documenti",clue:"f_banca",from:1,text:"Nella cartella di cuoio di Isolde, tra il contratto di nozze e il passaporto, una lettera della Banca di Falmouth: 400 sterline ritirate in contanti il 14 agosto. Il passaporto è nuovo, rilasciato a luglio."}]},
+    dispensa_m:{name:"Dispensa di Morwenna House",mapName:"Dispensa",crimeFrom:99,
+      desc:["La dispensa della villa: rame, pietra, una porta bassa che dà sul sentiero tra gli scogli. Fa freddo, e c'è odore di mare.","La cuoca ha acceso la stufa. La porta sul sentiero è stata richiusa.","La porta sul sentiero sbatte nel vento. Dal vetro si vede la passerella, scoperta."],
+      objects:[
+        {id:"chiavistello",label:"La porta sul sentiero",clue:"f_chiavistello",text:"La porta bassa che dà sul sentiero verso la passerella. Il chiavistello è tirato: è stata aperta dall'interno. Sulla soglia, la sabbia scura del sentiero, che la pioggia non ha ancora lavato via."},
+        {id:"scarpe_d",label:"Il pavimento",clue:"f_scarpe_d",text:"Sul pavimento di lastre, orme asciutte di stivaletti da donna, piccoli e stretti, che vanno dalla scala della servitù fino alla porta. Nessuna orma torna indietro."},
+        {id:"ganci",label:"I ganci delle lanterne",text:"Una fila di ganci per le lanterne della casa. Ne manca una, la lanterna da viaggio con il manico d'ottone. La cuoca giura che ieri sera c'era."}]},
+    lanterna:{name:"La stanza della lanterna",mapName:"Faro",crimeFrom:99,
+      desc:["In cima alla scala a chiocciola, la stanza di guardia e, sopra, la grande lente di Fresnel. Il guardiano Hosking non ti guarda negli occhi. Dalla porta di vetro si esce sulla galleria.","La lente gira, lenta, anche di giorno. Hosking la lucida come se volesse cancellare qualcosa.","La stanza è vuota. Il guardiano è sceso alla passerella."],
+      objects:[
+        {id:"registro_f",label:"Il registro del faro",clue:"f_registro_faro",text:"Il registro di servizio, scritto con una calligrafia da scuola serale. «03:00 bruciatore difettoso. Riacceso 03:20. Nessun passaggio in galleria.» L'inchiostro di quelle righe è più nero e più fresco di quello sopra."},
+        {id:"tazza",label:"La tazza della cioccolata",clue:"f_tazza",text:"Una tazza smaltata con una crosta di cioccolata fredda. La inclini: sul fondo c'è un deposito granuloso, bianco. Lo assaggi con la punta del dito: salato e amaro. Non è zucchero."},
+        {id:"pompa",label:"La pompa del bruciatore",clue:"f_pompa",text:"Il bruciatore a vapore di petrolio ha un manometro e una pompa a mano. Hosking, controvoglia, spiega: va pompato ogni mezz'ora. Se nessuno lo pompa, la pressione cala e la fiamma si spegne da sola, in un paio d'ore."},
+        {id:"ringhiera",label:"La ringhiera della galleria",clue:"f_velo",text:"Esci sulla galleria, nel vento. Il velo è legato alla ringhiera con un nodo piano, stretto, da ricamatrice. Il vento strappa, non annoda. Ed è fradicio: era qui da prima che smettesse di piovere."},
+        {id:"almanacco",label:"L'almanacco delle maree",clue:"f_almanacco",text:"L'almanacco della Trinity House, consumato agli angoli. 16 agosto, sizigia: bassa marea alle 03:12 e alle 15:37. Hosking: «Con la sizigia la passerella resta scoperta tre quarti d'ora. Ma con quel mare, stanotte, non ci passava nessuno.»"}]},
+    scogli:{name:"Gli scogli sotto il faro",mapName:"Scogli",crimeFrom:99,
+      desc:["Gli scogli neri ai piedi del faro, battuti dalle onde. Più su, la galleria; più giù, il mare che ribolle.","Il capitano Tremayne scruta il mare da ore, con il cannocchiale.","La marea è bassa. Gli scogli sono coperti di alghe brune."],
+      objects:[
+        {id:"scarpetta",label:"La scarpetta di raso",clue:"f_scarpetta",to:0,text:"Una scarpetta da sposa di raso bianco, posata su una sporgenza a tre metri sopra la linea delle alghe. La tocchi: asciutta, dentro e fuori. La pioggia è finita alle 2:30. Una cosa caduta dalla galleria durante la notte sarebbe fradicia."},
+        {id:"segni",label:"La linea delle alghe",text:"Le alghe segnano fin dove arriva l'alta marea. Sotto la galleria, il mare è profondo e la corrente porta al largo. Chi cade di qui non torna. Sir Josiah ci conta."},
+        {id:"galleria_v",label:"La galleria, vista da sotto",text:"Da quaggiù il velo sulla ringhiera sembra una bandiera bianca. La galleria è a trenta metri. Per arrivarci, bisogna passare dalla stanza del guardiano."}]},
+    casetta:{name:"La casetta del guardiano",mapName:"Casetta",crimeFrom:99,
+      desc:["La casetta di Hosking e di sua figlia Jenna: una cucina con la stufa, una Bibbia sul tavolo, un cane che dorme davanti al fuoco.","Il cane sonnecchia. Sul fornello, la zuppa per il padre.","La stufa è spenta. La casa è silenziosa."],
+      objects:[
+        {id:"bromuro",label:"La credenza",clue:"f_bromuro",text:"Barattoli di zucchero, tè, sale. E una scatola di cartone della farmacia di Penzance: polveri di bromuro di potassio, «Miss J. Hosking, una la sera per dormire. Dott. Vane». La scatola è stata aperta ieri: mancano due polveri."},
+        {id:"bibbia",label:"La Bibbia di famiglia",clue:"f_bibbia",when:g=>locOf("jenna")!=="casetta",text:"Una Bibbia pesante con i nomi della famiglia sul frontespizio. Si apre da sola al Cantico dei Cantici. Tra le pagine, una lettera che non è per Jenna: «Domenica, la bassa marea delle 3:12. Ti aspetto in fondo alla passerella con il calesse. Porta solo il necessario. T.»"},
+        {id:"bibbia_j",label:"La Bibbia di famiglia",when:g=>locOf("jenna")==="casetta",text:"Allunghi la mano verso la Bibbia, e Jenna la sposta verso di sé, senza dire niente. «È di mia madre», mormora. Non insisti. Non adesso."},
+        {id:"cane",label:"Il cane",text:"Un vecchio cane da pastore che dorme davanti alla stufa. Alza la testa, ti annusa, sbadiglia. Con chi conosce è docile come un agnello. Con gli estranei, dicono, abbaia come un dannato."},
+        {id:"cardigan",label:"Il baule di Jenna",clue:"f_cardigan",from:2,when:g=>locOf("jenna")!=="casetta",text:"Il baule di Jenna, ai piedi del letto. In fondo, sotto la biancheria, un cardigan di lana grigia con i bottoni di corno. Ne manca uno, il terzo. Il filo è strappato, non tagliato."},
+        {id:"tazze_c",label:"Il fornello",text:"Un pentolino con il fondo di cioccolata bruciata. Jenna la prepara ogni notte al padre, alle dodici e un quarto, prima del turno di guardia. «Da quando è morta la mamma», dice."}]},
+    capanno:{name:"Il capanno delle barche",mapName:"Capanno",crimeFrom:2,
+      desc:["Il capanno delle barche, sotto la casetta: una lancia capovolta, reti, gaffe, lanterne. Odore di catrame e di alghe.","Il vento entra dalle fessure. Le reti oscillano.","Sul pavimento, sotto un telo, il corpo di Isolde Penrose. Il dottor Vane è inginocchiato accanto. Tom Kitto non riesce a guardarla."],
+      objects:[
+        {id:"lanterna_j",label:"La lanterna cieca",clue:"f_lanterna_j",text:"Una lanterna cieca, con lo sportello che chiude la luce. Appartiene alla casetta. Lo stoppino è bruciato di fresco, e sul vetro c'è una crosta di sale secco. È stata fuori, con il mare."},
+        {id:"gaffa",label:"La gaffa",clue:"f_gaffa",from:1,text:"Una gaffa da barca, lunga due metri, con il gancio di ferro. È appesa al gancio sbagliato. Il ferro ha la ruggine arancione, fresca, dell'acqua di mare. E nel gancio è rimasto impigliato un lungo capello biondo."},
+        {id:"gonna",label:"Le reti",clue:"f_gonna",from:1,text:"Sollevi le reti ammucchiate nell'angolo. Sotto, arrotolata, una gonna di lana scura da donna, con l'orlo ancora umido d'acqua salata. All'orlo è impigliata un'alga rossa e ricciuta."},
+        {id:"corpo3",label:"Il corpo di Isolde",clue:"f_corpo",from:2,text:"Sollevi il telo. Isolde Penrose ha ventisei anni, e indossa il tailleur da viaggio grigio, gli stivaletti allacciati, il mantello. Non è caduta dal faro in camicia da notte. Stava partendo. E non è mai arrivata."},
+        {id:"bottone",label:"La mano destra",clue:"f_bottone",from:2,text:"La mano destra di Isolde è chiusa a pugno. Il dottor Vane te la apre con delicatezza. Dentro, un bottone di corno a quattro fori, con un filo di lana grigia ancora attaccato."}]},
+    passerella:{name:"La passerella",mapName:"Passerella",crimeFrom:2,
+      lock:g=>g.act<2?"La passerella è sotto due metri di mare in burrasca. Riemergerà solo con la bassa marea.":g.time>=16*60+15?"La marea è risalita: la passerella è di nuovo sott'acqua. Il mare non aspetta nessuno.":null,
+      desc:[null,null,"La passerella di roccia emerge dal mare, nera, coperta d'alghe, per quattrocento metri fino alla costa. A metà, il Pulpito: una roccia alta come un uomo. Sotto, la gola dove la corrente gira."],
+      objects:[
+        {id:"pulpito",label:"Il Pulpito",clue:"f_alga",text:"La roccia a metà strada. Sul lato verso il mare, un'alga rossa e ricciuta che non hai visto da nessun'altra parte sullo scoglio. Hosking: «Cresce solo qui, dove batte la corrente.» E sulla pietra, all'altezza di una testa, una macchia scura che il mare non ha lavato del tutto."},
+        {id:"gola",label:"La gola",clue:"f_lanterna_i",text:"La gola tra le rocce, dove hanno trovato il corpo. Incastrata più in basso, una lanterna da viaggio con il vetro rotto. Sul manico d'ottone, le iniziali: I. P. È la lanterna che mancava dai ganci della dispensa."},
+        {id:"alga",label:"Le pozze di marea",text:"Pozze d'acqua ferma tra le rocce, piene di granchi. Qui la sabbia è troppo bagnata per tenere un'orma. Il mare cancella tutto, due volte al giorno."},
+        {id:"valigia",label:"Tra le rocce",clue:"f_valigia",text:"Una valigetta di cuoio, fradicia, incastrata tra due rocce. Dentro, le perle della madre, l'anello di zaffiri e un pacchetto di banconote incollate dall'acqua: 400 sterline. Chi l'ha uccisa non lo ha fatto per i soldi."}]}
+  },
+  chars:{
+    tremayne:{name:"Cap. Edward Tremayne",short:"Tremayne",mk:"ET",age:34,role:"Lo sposo, armatore di Falmouth",
+      bio:"Ricco, bello, abituato a ottenere quello che vuole. Ha sposato Isolde ieri a mezzogiorno. Stamattina ha trovato lui la scarpetta.",
+      p:{},loc:["salotto","scogli","salotto"],
+      alibi:["«Ho dormito nel camerino. La sposa aveva l'emicrania, me l'ha detto chiaro. Non ho sentito niente.»","«Sono stato sugli scogli tutta la mattina. Se il mare la restituisce, voglio essere io a trovarla.»","«Qui. A guardare un uomo che non conosco piangere mia moglie.»"],
+      unlock:{crime1:"f_lite"},
+      crime:["«Sonnambula. Me l'avessero detto prima, l'avrei legata al letto.» Si accorge di quello che ha detto, e si volta.","«Avevamo litigato. Va bene? Alle undici. Mi ha detto che non sarebbe mai stata mia moglie, non in quel senso. Ho rotto un bicchiere contro il muro. Poi sono andato a dormire.»","«Chi è quel Kitto? Che cosa era, per lei?»"],
+      self:"«Tre navi, due velieri, una casa a Falmouth. E una moglie per dodici ore.»",
+      others:"«Sir Josiah mi ha venduto sua figlia per salvare le miniere. Hester mi odia. Il dottore beve. Il guardiano è un fanatico, sua figlia una ragazza strana: stamattina mi ha guardato come se volesse ringraziarmi di qualcosa.»",
+      react:{f_lettere:"«Lettere anonime. Le ha scritte qualcuno che non voleva questo matrimonio. Cioè tutti, tranne Sir Josiah.»",f_foto_tom:"Prende la fotografia, la guarda a lungo e te la restituisce senza una parola. Le nocche gli diventano bianche.",f_piano:"«Fuggita. Con un guardiano dei fari.» Ride, una risata terribile. «E io la cercavo sugli scogli.»",f_corpo:"Il capitano si appoggia al muro. Per la prima volta, sembra un uomo e non un armatore.",f_velo:"«Annodato? Isolde faceva nodi da marinaio meglio dei miei mozzi. Gliel'aveva insegnato suo padre.»"},
+      def:["«Non ne so niente.»","«Lo chieda a Sir Josiah. È lui l'esperto di affari di famiglia.»","«Mi lasci in pace, avvocato.»"]},
+    josiah:{name:"Sir Josiah Penrose",short:"Sir Josiah",mk:"JP",age:61,role:"Padre della sposa, proprietario di miniere",
+      bio:"Le miniere di stagno dei Penrose sono sull'orlo del fallimento. Il matrimonio con Tremayne doveva salvarle. Vuole a tutti i costi che sia stata una disgrazia.",
+      p:{},loc:["salotto","salotto","salotto"],
+      alibi:["«A letto, alle dodici e mezza. Ho cinquantun anni di miniera nei polmoni: dormo come un sasso.»","«Qui. Ad aspettare il mare.»","«Qui.»"],
+      crime:["«Una disgrazia. Mia figlia era sonnambula da bambina. È salita in galleria, ed è caduta. Non voglio sentire altro.»","«Non voglio scandali. Le miniere danno pane a quattrocento famiglie.»","«Mia figlia.» Non riesce a dire altro."],
+      self:"«Ho tirato fuori stagno da sotto il mare per quarant'anni. Ho perso una moglie e tre fratelli in miniera. Adesso il mare si prende anche lei.»",
+      others:"«Tremayne è un uomo d'affari. Hester è affezionata, ma è una sciocca. Hosking è il miglior guardiano della costa. Vane è un amico di famiglia.»",
+      react:{f_letto:"«Non si era coricata? Sarà salita in galleria prima di dormire. I sonnambuli…» Si ferma. Sa anche lui che non ha senso.",f_banca:"«Quattrocento sterline?» Impallidisce. «Erano i suoi risparmi. La dote di sua madre.»",f_piano:"Sir Josiah si siede. «Voleva scappare da me. Non dal matrimonio. Da me.»",f_corpo:"Il vecchio non piange. Si limita a togliersi il cappello, e lo tiene tra le mani."},
+      def:["«Non capisco.»","«Non voglio sapere queste cose.»","«Faccia quello che deve, avvocato.»"]},
+    hester:{name:"Hester Pascoe",short:"Hester",mk:"HP",age:40,role:"Cameriera della sposa",
+      bio:"Al servizio di Isolde da quando aveva sei anni. Le ha fatto da madre. Giura che la padrona era sonnambula da bambina.",
+      p:{},loc:["camera_sposa","salotto","camera_sposa"],
+      alibi:["«Ho dormito nella stanzetta qui accanto. Alle sei e mezza sono entrata per svegliarla, e il letto era vuoto. Era sonnambula da bambina, signore, glielo giuro.»","«Ho detto tutto, signore. La signora camminava nel sonno.»","«A sistemare le sue cose. Qualcuno deve farlo.»"],
+      crime:["«È caduta. È caduta dal faro. Me l'ha sempre detto la madre: Isolde non va lasciata sola le notti di luna.»","«Il cane? Ha abbaiato una volta, verso le tre meno cinque. Poi più niente, per tutta la notte. Non avevo chiuso occhio.»","«Lei è morta. E io ho aiutato a farla uscire. Io.»"],
+      unlock:{crime1:"f_cane"},
+      self:"«Vent'anni con la signorina Isolde. Le ho insegnato a cucire, a fare i nodi, a dire le preghiere. Lei mi ha insegnato a leggere.»",
+      others:"«Il capitano è un uomo duro. Sir Josiah ha venduto la figlia. Jenna Hosking è una brava ragazza, ma non sorride più da giugno.»",
+      react:{f_lettere:"Hester abbassa gli occhi. «Non so niente di quelle lettere.» Nasconde la mano destra nel grembiule.",f_obs_hester:"Hester si guarda il dito viola. «Sì. Le ho scritte io. Volevo che non si sposasse. Non con lui, non per i soldi del padre.» Piange. «Non ho fatto niente di male, signore.»",f_foto_tom:"«Tom.» Le sfugge, e si porta la mano alla bocca.",f_corpo:"Hester cade in ginocchio. «Doveva essere in salvo. Doveva essere in salvo, a quest'ora.»",f_due_luci:"«Due luci? Ma la signora era sola! Le ho dato io la lanterna, l'ho vista andare. Era sola.»"},
+      def:["«Non lo so, signore.»","«Chieda a Sir Josiah.»","«Per carità, signore.»"]},
+    vane:{name:"Dott. Lucian Vane",short:"Vane",mk:"LV",age:52,role:"Medico di famiglia dei Penrose",
+      bio:"Medico condotto di Penzance e amico di famiglia. Ha visto nascere Isolde. Beve un po' troppo, e lo sa.",
+      p:{},loc:["salotto","salotto","capanno"],
+      alibi:["«A letto, nella stanza degli ospiti. Ho preso una polvere per dormire. Alla mia età, dopo un matrimonio…»","«Qui. Mi hanno chiesto di restare per Sir Josiah, che ha il cuore debole.»","«Qui, con lei. Qualcuno deve farlo.»"],
+      unlock:{crime1:"f_ricetta",crime2:"f_ferita"},
+      crime:["«Sonnambula? Isolde?» Aggrotta la fronte. «Da bambina, forse, una volta. Ma non l'ho mai curata per questo.»","«Prescrizioni? A Isolde il cloralio, per l'emicrania. E a giugno il bromuro a Jenna Hosking, la figlia del guardiano: non dormiva più da quando il fidanzato l'aveva lasciata. Povera ragazza.»","«Guardi la tempia. Una ferita a mezzaluna, netta, con un foro al centro. Non è roccia: è un ferro curvo con la punta. L'hanno colpita, e poi è finita in acqua. Nei polmoni c'è poca acqua: era già quasi morta.»"],
+      self:"«Trent'anni di medicina condotta. Parti, febbri, annegati. La Cornovaglia ti insegna che il mare restituisce sempre quello che prende. Prima o poi.»",
+      others:"«Sir Josiah è un uomo orgoglioso. Il capitano è un animale di lusso. Hester è una santa. Hosking è un buon uomo. Sua figlia… la figlia ha sofferto molto, quest'estate.»",
+      react:{f_tazza:"Il dottore assaggia il deposito sulla punta della lingua. «Bromuro di potassio. Una dose da cavallo. Chi l'ha bevuto ha dormito come un morto per tre ore.»",f_bromuro:"«Le polveri che ho prescritto a Jenna. Una la sera. Ne mancano due?» Ti guarda, e smette di sorridere.",f_cloralio:"«La boccetta è piena. Ci avevo messo il segno io. Isolde non ne ha preso nemmeno una goccia.»",f_gaffa:"Esamina il gancio della gaffa, poi pensa alla ferita. Non dice niente. Annuisce, una volta.",f_obs_hosking:"«Pupille a spillo, lingua impastata: bromuro, o oppio. Quell'uomo non ha vegliato. È stato drogato.»"},
+      def:["«Non saprei dirle.»","«Sono un medico, non un poliziotto.»","«Mi scusi, ho bisogno di un goccio.»"]},
+    hosking:{name:"Jacob Hosking",short:"Hosking",mk:"JH",age:54,role:"Guardiano del faro",
+      bio:"Ventidue anni al faro di St. Morwenna. Metodista, vedovo, severo. Il faro è la sua vita. Stanotte, dice, era di guardia.",
+      p:{},loc:["lanterna","lanterna","passerella"],
+      alibi:["«Di guardia, dalla mezzanotte alle quattro. Sveglio, come sempre. Il bruciatore si è guastato alle tre, l'ho riacceso alle tre e venti. Nessuno è passato in galleria.»","«Al faro. Il faro non si lascia.»","«Alla passerella, finché il mare la lascia scoperta.»"],
+      unlock:{crime0:"f_galleria_01"},
+      crime:["«All'una e dieci il capitano è salito in galleria a fumare. Gli ho detto di stare attento. È sceso dieci minuti dopo. Poi nessuno, glielo giuro sulla Bibbia.»","«Con quel mare non si passava. Nessuno poteva attraversare la passerella, stanotte.»","«L'abbiamo trovata io e Tom, nella gola, alle tre e quaranta di oggi pomeriggio. Il mare l'ha restituita.»"],
+      self:"«Ventidue anni a tenere accesa questa luce. Mai una notte al buio. Mai.» La voce gli si incrina.",
+      others:"«Il capitano è un uomo senza Dio. Sir Josiah è un padrone giusto. Tom Kitto era un buon vice, finché non gli ha girato la testa una signora. Mia figlia è una brava ragazza.»",
+      react:{f_tazza:"«La cioccolata della mezzanotte. Me la porta Jenna, ogni notte.» Guarda il deposito sul fondo e non dice altro.",f_pompa:"«Ogni mezz'ora. Lo so meglio di lei.» Ma la voce gli trema.",f_obs_hosking:"«Ho gli occhi stanchi. Sono vecchio.»",f_guardiacoste:"Il guardiano si siede sul gradino. «Dalle tre e quattro alle quattro meno due.» Si copre la faccia. «Un'ora al buio. Ventidue anni, e un'ora al buio.»",f_bibbia:"«La Bibbia di mia moglie.» Legge la lettera, e la carta gli trema tra le dita. «Jenna», dice. Solo il nome."},
+      def:["«Non lo so.»","«Il Signore sa tutto. Lo chieda a Lui.»","«Devo tornare al faro.»"]},
+    jenna:{name:"Jenna Hosking",short:"Jenna",mk:"JN",age:22,role:"Figlia del guardiano",
+      bio:"È cresciuta sullo scoglio. Conosce ogni roccia della passerella, ogni marea. Era fidanzata con Tom Kitto fino a giugno. Da allora, dicono, non dorme più.",
+      p:{},loc:["casetta","casetta","casetta"],
+      alibi:["«Ho portato la cioccolata a mio padre a mezzanotte e un quarto, come sempre. Poi ho dormito fino alle sei. Il cane dorme con me: se fossi uscita, avrebbe abbaiato.»","«In casa. Il vento era troppo forte per uscire.»","«In casa. Dove dovrei essere?»"],
+      crime:["«Povera signora. Il mare di qui non perdona chi non lo conosce.»","«Tom? Era il mio fidanzato. A giugno mi ha restituito l'anello. Non c'è altro da dire.»","«Se l'è presa il mare. Il mare si prende sempre quello che vuole.»"],
+      self:"«Sono nata in questa casetta. Mia madre è morta qui. Conosco la passerella a occhi chiusi: ci camminavo da bambina, con la bassa marea, a raccogliere le alghe.»",
+      others:"«Mio padre è il miglior guardiano della Cornovaglia. Il capitano è un signore. Hester mi vuole bene. Tom… Tom ha fatto la sua scelta.»",
+      react:{f_bromuro:"«Le mie polveri.» Un attimo di silenzio. «Ne ho prese due. Non dormo, da giugno.»",f_tazza:"«La cioccolata di mio padre. La faccio da quando è morta la mamma.» Guarda altrove.",f_foto_tom:"Il viso di Jenna non si muove. Solo le mani si chiudono sul grembiule.",f_lanterna_j:"«Quella lanterna è sempre lì. L'avrà usata mio padre.»",f_gonna:"«Non è mia. Le gonne scure le hanno tutte, sullo scoglio.»",f_due_luci:"Jenna impallidisce. «Tom vede luci ovunque. Era sconvolto.»",f_obs_jenna:"Jenna nasconde le mani sotto il grembiule. «Ho lavato i panni, stamattina. Col freddo che fa.»"},
+      def:["«Non so niente.»","«Lo chieda a mio padre.»","«Devo preparare la zuppa.»"]},
+    tom:{name:"Tom Kitto",short:"Tom",mk:"TK",age:27,role:"Vice guardiano del faro",
+      bio:"Vice guardiano di St. Morwenna. Ieri notte era a terra, in licenza. Era il fidanzato di Jenna Hosking. Poi ha conosciuto Isolde Penrose.",
+      p:{},loc:[null,null,"capanno"],hidden:g=>g.act<2&&!has("f_foto_tom")&&!has("f_piano"),
+      alibi:[null,null,"«A terra. Con il calesse, in fondo alla passerella, dalle tre meno un quarto alle quattro. L'ho aspettata. Non è mai arrivata.»"],
+      unlock:{alibi2:"f_due_luci",crime2:"f_posta",others:"f_guardiacoste"},
+      crime:[null,null,"«La lettera? L'ho lasciata giovedì nella cassetta del faro, come tutta la posta per lo scoglio. La ritira Jenna. L'ha sempre ritirata Jenna.» Si ferma, e capisce. «Dio mio.»"],
+      self:"«Volevamo andare in America. Lei aveva i soldi, io due mani. Bastava attraversare la passerella.»",
+      others:"«Ho portato il telegramma della guardia costiera di Porthcarrow. Guardi gli orari. Guardi a che ora si è spento il faro.»",
+      react:{f_bibbia:"Tom legge la sua lettera nella Bibbia di Jenna. Non dice niente. Gli scendono le lacrime, e non le asciuga.",f_bottone:"«Corno. Jenna ha un cardigan grigio con i bottoni di corno. Gliel'ha fatto sua madre.»",f_lanterna_j:"«La lanterna cieca della casetta. La luce ferma al Pulpito si è accesa all'improvviso, come quando si apre lo sportello.»",f_corpo:"Tom non riesce a guardare."},
+      def:["«Non lo so.»","«Mi lasci stare.»","«Lei doveva arrivare.»"]},
+    isolde:{name:"Isolde Penrose",short:"Isolde",age:26,role:"La sposa",deadFrom:0,st:g=>g.act<2?"Scomparsa":"Morta",
+      bio:"Figlia unica di Sir Josiah. Bella, colta, testarda. Ha sposato il capitano Tremayne ieri a mezzogiorno. Stamattina non c'era più.",p:{},loc:[]}
+  },
+  truth:[
+    "Isolde Penrose non voleva sposare il capitano Tremayne. Amava Tom Kitto, il vice guardiano del faro, e aveva deciso di sparire facendosi credere morta.",
+    "Il piano era suo, e Hester l'aiutò. Alle 23:30, durante la visita alla lanterna, Isolde annodò il velo alla ringhiera. Alle 2:55 uscì dalla dispensa, vestita da viaggio, con la valigetta e una lanterna, per attraversare la passerella con la bassa marea delle 3:12. Tom l'aspettava all'altro capo. Alle sei Hester posò la scarpetta sugli scogli e raccontò del sonnambulismo.",
+    "Ma la lettera di Tom era passata per la cassetta della posta del faro, e la posta la ritirava Jenna Hosking, la ragazza che Tom aveva lasciato a giugno. Jenna la lesse, e la tenne nella Bibbia.",
+    "A mezzanotte e un quarto Jenna mise due polveri di bromuro nella cioccolata del padre. Hosking si addormentò di guardia; nessuno pompò il bruciatore, e alle 3:04 la lanterna del faro si spense da sola. Nessuno la spense.",
+    "Alle tre Jenna uscì dalla casetta. Il cane, che dormiva con lei, non abbaiò. Aspettò al Pulpito con la lanterna cieca chiusa. Quando Isolde arrivò, aprì lo sportello e la colpì con la gaffa. Isolde le strappò un bottone del cardigan, e cadde nella gola. Jenna tornò indietro prima della marea.",
+    "Alle quattro meno cinque Hosking si svegliò, riaccese la lanterna e scrisse il falso nel registro, per vergogna. Tutti mentivano, quella notte: la sposa, la cameriera, il guardiano. Solo Jenna aveva detto, a modo suo, la verità: il mare si prende quello che vuole."
+  ]
+};
+
 /* finale: la trappola nella carrozza ristorante */
 CASE_EXPRESS.trap={
   cast:["graham","margaret","lennox","macrae"],
@@ -2301,7 +2568,7 @@ function reportData(){const e=G.ended,raw=Object.keys(S.clues).filter(id=>S.clue
   add("Esito dell'accusa",e.title,endPts,40);
   add("Reperti raccolti",`${nRaw} su ${raw.length}`,Math.round(nRaw/raw.length*10),10);
   add("Deduzioni",`${nDed} su ${dd.length}`,Math.round(nDed/(dd.length||1)*15),15);
-  add(S.trap?"Prove nel confronto":"Prove nel salone",sl.n?`${sl.ok} su ${sl.n}${sl.dec?" · decisiva":""}`:"—",sl.n?Math.round(sl.ok/sl.n*15):0,15);
+  add(S.trap||S.confronto?"Prove nel confronto":"Prove nel salone",sl.n?`${sl.ok} su ${sl.n}${sl.dec?" · decisiva":""}`:"—",sl.n?Math.round(sl.ok/sl.n*15):0,15);
   const nRead=Object.keys(G.read||{}).filter(k=>G.read[k]===1&&S.chars[k]).length,nObj=Object.keys(G.obj||{}).length;
   const nReadTot=Object.keys(READ).filter(k=>S.chars[k]).length;add("Letture riuscite",`${nRead} su ${nReadTot}`,Math.round(nRead/(nReadTot||1)*6),6);
   add("Obiezioni accolte",nObj?`${nObj}`:"nessuna",Math.min(6,nObj*2),6);
@@ -2379,7 +2646,7 @@ function objStart(k){finishType();lyleHide();objMode=k;renderTalk();if(!G.clues.
   openPicker({title:"Obiezione!",sub:"Con quale reperto contesti la frase di "+S.chars[talkWith].short+"?",act:"Obietta",onPick:objPick,onCancel:()=>{objMode=null;renderTalk();}});}
 function objPick(id){const key=talkWith+"|"+objMode,o=OBJ[key];objMode=null;pickOpen=false;G.obj=G.obj||{};
   if(id==="e_ago")G.agoKnown=1;
-  if(o.ok.includes(id)){G.obj[key]=1;if(o.calm)pressCulprit(o.calm);save();objFx();setTimeout(()=>{pushLog("Obiezione! — "+S.clues[id].name,o.a,true,o.unlock);},1300);}
+  if(o.ok.includes(id)){G.obj[key]=1;if(o.calm)pressCulprit(o.calm);save();objFx();const who=talkWith;setTimeout(()=>{if(talkWith===who){pushLog("Obiezione! — "+S.clues[id].name,o.a,true,o.unlock);return;}(G.log[who]=G.log[who]||[]).push({q:"Obiezione! — "+S.clues[id].name,a:o.a,r:true});if(o.unlock&&addClue(o.unlock)){G.log[who].push({q:"",a:`<span class="nc"><b>Nuovo reperto nel taccuino</b>${S.clues[o.unlock].name}</span>`});AU.sfx("clue");}save();nav();},1300);}
   else{G.wrongObj=(G.wrongObj||0)+1;save();AU.sfx("tick");pushLog("Obiezione — "+S.clues[id].name,OBJ_NO[G.wrongObj%OBJ_NO.length],false);}}
 function objFx(){AU.sfx("gavel");AU.duck&&AU.duck();const f=document.createElement("div");f.className="objfx";f.innerHTML=`<span>Obiezione!</span>`;document.body.appendChild(f);shake();setTimeout(()=>f.remove(),1400);}
 
@@ -2536,27 +2803,27 @@ function calmMeter(){const c=calmOf();return `<div class="calm"><span>Sangue fre
 /* ---------- La trappola ---------- */
 let TP=null;
 function trapScene(onDone){lyleHide();clearTimeout(lyleT);TP={i:0,res:[],trap:false,onDone,r:null};$("#salon").classList.add("on");AU.sfx("drone");renderTrap();}
-function renderTrap(){const T=S.trap,st=T.steps[TP.i];
-  const ring=T.cast.map((id,i)=>{const c=S.chars[id];return `<div class="seat s${i} ${id===S.culprit?"focus acc":""}"><div class="pf">${portrait(c.p)}</div><div class="nm">${c.short}</div></div>`;}).join("");
+function renderTrap(){const T=S.trap||S.confronto,st=T.steps[TP.i],foc=T.who||S.culprit;
+  const ring=T.cast.map((id,i)=>{const c=S.chars[id];return `<div class="seat s${i} ${id===foc?"focus acc":""}"><div class="pf">${portrait(c.p)}</div><div class="nm">${c.short}</div></div>`;}).join("");
   const res=TP.r?`<p class="sres ${TP.r.ok?"ok":"no"}">${TP.r.text}</p>`:"";
-  $("#salon").innerHTML=`<div class="s-top"><div class="eb">Carrozza ristorante · La trappola</div><div class="s-prog">${T.steps.map((_,i)=>`<i class="${i<TP.i?"d":i===TP.i?"c":""}"></i>`).join("")}</div></div>
+  $("#salon").innerHTML=`<div class="s-top"><div class="eb">${T.title||"Carrozza ristorante · La trappola"}</div><div class="s-prog">${T.steps.map((_,i)=>`<i class="${i<TP.i?"d":i===TP.i?"c":""}"></i>`).join("")}</div></div>
   <div class="s-ring"><div class="fire"></div>${ring}</div>
   <div class="s-text"><p class="ssay">${st.say}</p>${res}</div>
   <div class="s-act">${TP.r?`<button class="btn red" onclick="trapNext()">${TP.i<T.steps.length-1?"Avanti":"Concludi"}</button>`:
     `<div class="s-lab">${st.lab}</div><button class="btn red big" onclick="trapOpenPick()">${st.secret?"Scegli il dettaglio":"Scegli la prova"}</button>
     ${st.secret?"":`<button class="btn ink sm" onclick="trapPick(null)">Non ho una prova</button>`}`}</div>`;}
-function trapPick(id){const st=S.trap.steps[TP.i];let ok=!!id&&st.ok.includes(id),text;
+function trapPick(id){const st=(S.trap||S.confronto).steps[TP.i];let ok=!!id&&st.ok.includes(id),text;
   if(id==="e_ago"&&!st.secret)G.agoKnown=1;
   if(st.secret){if(ok&&!G.agoKnown){TP.trap=true;text=`<span class="pres">«…e il segno dell'ago, naturalmente.»</span> Sir Alastair, già in piedi, si volta: «Ma quale ago? Tra le dita del piede sinistro non c'era nessun…» Si ferma. Nessuno, oltre a te e al dottor Lyle, sapeva dell'ago. Nessuno sapeva dove fosse. E se l'avesse visto stamattina, esaminando il corpo, il suo certificato non direbbe «laudano».`;AU.sfx("gavel");AU.duck();}
     else if(ok){ok=false;text=`<span class="pres">«…e il segno dell'ago.»</span> Sir Alastair sorride. «Tra le dita del piede, sì. Ne parla tutto il treno, avvocato.» Lo sapeva già: qualcuno gliel'ha detto. La trappola non scatta.`;}
     else text=`<span class="pres">«…${id?S.clues[id].name.toLowerCase():"niente"}.»</span> Sir Alastair ti guarda con compatimento. «È tutto, avvocato? Allora, con permesso.» Non è cascato in niente.`;}
   else{TP.res[TP.i]=ok;text=(id?`<span class="pres">Presenti: ${S.clues[id].name}.</span> `:"")+(ok?st.good:st.bad);}
   TP.r={ok,text};AU.sfx(ok?"stamp":"tick");if(ok)pressCulprit(15);renderTrap();}
-function trapOpenPick(){const st=S.trap.steps[TP.i];openPicker({title:st.lab,sub:st.say.replace(/<[^>]+>/g,""),act:"Presenta",none:st.secret?null:"Non ho una prova",onPick:trapPick});}
-function trapNext(){TP.r=null;TP.i++;AU.sfx("page");if(TP.i<S.trap.steps.length){renderTrap();return;}
-  const sl={res:TP.res,trap:TP.trap,ok:TP.res.filter(Boolean).length+(TP.trap?1:0),n:S.trap.steps.length,dec:TP.trap,failed:[]};
+function trapOpenPick(){const st=(S.trap||S.confronto).steps[TP.i];openPicker({title:st.lab,sub:st.say.replace(/<[^>]+>/g,""),act:"Presenta",none:st.secret?null:"Non ho una prova",onPick:trapPick});}
+function trapNext(){const TT=S.trap||S.confronto;TP.r=null;TP.i++;AU.sfx("page");if(TP.i<TT.steps.length){renderTrap();return;}
+  const sl={res:TP.res,trap:TP.trap,ok:TP.res.filter(Boolean).length+(TP.trap?1:0),n:TT.steps.length,dec:TP.trap,failed:[]};
   const e=TP.onDone(sl),fin=()=>{$("#salon").classList.remove("on");showEnding();};
-  if(e.kind==="vera")gloveScene(fin,"Sir Alastair si sfila i guanti, con calma, dito per dito, come dopo un intervento.");else{shake();lightning();setTimeout(fin,500);}}
+  if(e.kind==="vera"&&S.trap)gloveScene(fin,"Sir Alastair si sfila i guanti, con calma, dito per dito, come dopo un intervento.");else{shake();lightning();setTimeout(fin,500);}}
 
 /* ---------- Medaglie del caso II ---------- */
 CASE_RAVEN.medals=MEDALS;
@@ -2596,11 +2863,194 @@ CASE_EXPRESS.film=[
   {dur:6400,html:`<div class="film-title"><h1>Il delitto perfetto.</h1>${ORN}<p class="ft-sub">Domattina tu e il dottor Lyle vi sveglierete sullo stesso treno.<br>Sai già chi è stato. Ora dimostralo.</p></div>`,run:(el,T)=>AU.sfx("drone")}
 ];
 
+/* =====================================================================
+   CASO III · La Sposa del Faro
+   ===================================================================== */
+(function(){const C=CASE_FARO,ch=C.chars;
+  Object.keys(ch).forEach(k=>ch[k].p.k=k);ch.tremayne.p.lapels=1;ch.vane.p.lapels=1;ch.josiah.p.lapels=1;
+  ch.hosking.sched={2:[[16*60+15,"passerella"],[1e9,"capanno"]]};
+  ch.jenna.sched={1:[[13*60,"casetta"],[14*60,"lanterna"],[1e9,"casetta"]],2:[[16*60+30,"casetta"],[1e9,"salotto"]]};
+  Object.assign(CHARFIG,{tremayne:{k:"coat"},josiah:{k:"coat"},hester:{k:"gown",bun:1,apron:1},vane:{k:"coat"},hosking:{k:"coat"},jenna:{k:"gown",long:1},tom:{k:"coat"},isolde:{k:"gown",long:1}});
+  Object.assign(ENGR,{
+    tremayne:{w:15.5,h:45,jaw:2,age:0,lids:1,brow:-1,mouth:"smirk",hair:"slick",beard:"tash",dress:"coat",col:"wing",acc:"cravat"},
+    josiah:{w:17,h:46,jaw:3,age:3,lids:1,brow:1.5,mouth:"thin",hair:"grey",beard:"chops",dress:"coat",col:"wing",acc:""},
+    hester:{w:15,h:43,jaw:0,age:2,lids:1,brow:0,mouth:"thin",hair:"cap",dress:"maid",col:"plain",acc:"apron"},
+    vane:{w:16,h:44,jaw:1,age:2,lids:1,brow:0,mouth:"soft",hair:"silver",beard:"tash",dress:"coat",col:"wing",acc:"pincenez"},
+    hosking:{w:16.5,h:45,jaw:2,age:2,lids:1,brow:1.5,mouth:"thin",hair:"rcap",beard:"full",dress:"coat",col:"plain",acc:""},
+    jenna:{w:13.5,h:42,jaw:-2,age:0,lids:1,brow:-.5,mouth:"thin",hair:"long",hc:"#1e1712",dress:"dark",col:"plain",acc:""},
+    tom:{w:14.5,h:43,jaw:0,age:0,lids:0,brow:0,mouth:"soft",hair:"rcap",dress:"coat",col:"plain",acc:""},
+    isolde:{w:13.5,h:43,jaw:-2,age:0,lids:0,brow:0,mouth:"full",hair:"long",hc:"#d8b878",dress:"grey",col:"lace",acc:"pearls"}});
+  Object.assign(EV,{f_piano:{t:"hester"},f_lite:{t:"tremayne"},f_galleria_01:{t:"hosking"},f_rumori:{t:"tremayne"},f_cane:{t:"hester"},f_ricetta:{t:"vane"},f_due_luci:{t:"tom"},f_posta:{t:"tom"},f_ferita:{t:"vane"},f_sonno:{t:"hosking"},
+    f_obs_tremayne:{t:"tremayne"},f_obs_hester:{t:"hester"},f_obs_hosking:{t:"hosking"},f_obs_jenna:{t:"jenna"},
+    f_lettere:{doc:"caps",body:"NON SPOSARLO.\nNON PER I SOLDI.\nNON PER LUI."},
+    f_registro_faro:{doc:"ledger",head:"Faro di St. Morwenna — registro",rows:[["00:00","inizio guardia","J. H.",""],["01:10","cap. Tremayne in galleria","",""],["03:00","bruciatore difettoso","",""],["03:20","riacceso","nessun passaggio",""]]},
+    f_almanacco:{doc:"form",head:"Trinity House — Almanacco delle maree",sub:"Agosto 1913 · St. Morwenna",rows:[["16 ago, bassa marea","03:12"],["16 ago, bassa marea","15:37"],["Passerella scoperta","± 25 min"]],note:"Sizigia: maree vive."},
+    f_banca:{doc:"typed",head:"BANCA DI FALMOUTH",body:"Falmouth, 14 agosto 1913.\n\nGentile Miss Penrose,\ncome da sue istruzioni le consegniamo in contanti la somma di\n£ 400.\n\nCon osservanza."},
+    f_bibbia:{doc:"hand",body:"Domenica, la bassa marea delle 3:12.\nTi aspetto in fondo alla passerella\ncon il calesse.\nPorta solo il necessario.\n\nT."},
+    f_guardiacoste:{doc:"typed",head:"GUARDIA COSTIERA — PORTHCARROW",body:"FARO ST MORWENNA SPENTO DALLE 03.04 ALLE 03.58 STOP VENTO CALATO TRA 02.30 E 04.00 STOP"},
+    f_velo:{a:"lace"},f_tazza:{a:"cup"},f_cloralio:{a:"vial2"},f_bromuro:{a:"vials"},f_gaffa:{a:"gaff"},f_bottone:{a:"button"},f_cardigan:{a:"button"},f_scarpetta:{a:"shoe"},f_lanterna_j:{a:"lamp"},f_lanterna_i:{a:"lamp"},f_alga:{a:"weed"},f_gonna:{a:"weed"},f_foto_tom:{a:"photo",v:"city",cap:"T. K. — St. Morwenna, 1913"},f_corpo:{a:"shoe"},f_valigia:{a:"rcase"},f_letto:{a:"setting"},f_vestiti:{a:"setting"},f_portagioie:{a:"rcase"},f_pompa:{a:"vials"},f_chiavistello:{a:"key"},f_scarpe_d:{a:"prints"}});
+  EVA.gaff=()=>VEL+`<path d="M30 160L250 50" stroke="#5a3a1a" stroke-width="9"/><path d="M250 50q26 -14 30 10q2 20 -18 22" stroke="#6a6a6a" stroke-width="7" fill="none"/><path d="M258 62q30 30 -10 60" stroke="#e8d088" stroke-width="1.2" fill="none" opacity=".9"/><circle cx="262" cy="80" r="3" fill="#8a4a1a"/>`;
+  EVA.button=()=>VEL+`<circle cx="150" cy="100" r="44" fill="#8a6a44" stroke="#5a4428" stroke-width="4"/><circle cx="150" cy="100" r="34" fill="none" stroke="#6a5030" stroke-width="2"/>${[[136,86],[164,86],[136,114],[164,114]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="#2a1e12"/>`).join("")}<path d="M164 86q40 -40 90 -30" stroke="#9a9a9a" stroke-width="3" fill="none"/>`;
+  EVA.shoe=()=>VEL+`<path d="M60 140Q70 100 120 96L200 92Q240 92 250 120L252 142Q160 150 60 140Z" fill="#f4f1ea" stroke="#bfb6a3" stroke-width="2"/><path d="M200 92q20 -30 40 -24" stroke="#f4f1ea" stroke-width="6" fill="none"/><path d="M234 142v26h12v-26" fill="#d8d0c0"/>`;
+  EVA.lamp=()=>VEL+`<path d="M150 30v20" stroke="#2a2420" stroke-width="5"/><path d="M118 50h64l-6 100h-52z" fill="#2a2420"/><rect x="126" y="62" width="48" height="70" fill="#9ab0b8" opacity=".45"/><path d="M130 70l40 50" stroke="#fff" opacity=".4" stroke-width="3"/><circle cx="150" cy="110" r="6" fill="#3a2a1a"/>${Array.from({length:12},(_,i)=>`<circle cx="${130+(i*7)%40}" cy="${70+(i*11)%60}" r="2" fill="#fff" opacity=".6"/>`).join("")}`;
+  EVA.weed=()=>VEL+`${Array.from({length:9},(_,i)=>`<path d="M${80+i*18} 170q-20 -40 0 -70q20 -30 -6 -60" stroke="#9a2a3a" stroke-width="${5-i%3}" fill="none"/>`).join("")}<path d="M40 176h220" stroke="#3a3630" stroke-width="10"/>`;
+  READ.tremayne={clue:"f_obs_tremayne",opts:[
+    {t:"Il garofano all'occhiello",reply:"Il garofano delle nozze, appassito. Tremayne non se l'è tolto. Non dice niente che tu non sappia."},
+    {t:"La mano destra",ok:1,say:"«Ha le nocche della destra escoriate e fasciate male, capitano. Ieri sera ha colpito qualcosa di duro. Un muro, direi, non una persona: non c'è sangue d'altri sulla fascia.»",reply:"Tremayne nasconde la mano. «Un muro, sì. Lei è molto acuto, avvocato. Peccato che serva a poco.»"},
+    {t:"Gli stivali",reply:"Stivali fradici fino al polpaccio. Ha cercato tra gli scogli tutta la mattina. Lo sapevi."}]};
+  READ.hester={clue:"f_obs_hester",opts:[
+    {t:"Il grembiule",reply:"Un grembiule inamidato, perfetto. Hester è una cameriera di prim'ordine. Nient'altro."},
+    {t:"L'indice destro",ok:1,say:"«Ha l'indice destro macchiato d'inchiostro viola, Hester. Lo stesso inchiostro delle lettere anonime che ho in tasca.»",reply:"Hester si nasconde la mano nel grembiule, e diventa rossa fino alla radice dei capelli."},
+    {t:"Gli occhi",reply:"Occhi gonfi di pianto. In questa casa, stamattina, piangono quasi tutti."}]};
+  READ.hosking={clue:"f_obs_hosking",opts:[
+    {t:"La divisa",reply:"La divisa della Trinity House, spazzolata con cura. Hosking è un uomo d'ordine. Lo sapevi."},
+    {t:"Le mani",reply:"Mani grandi, nere di petrolio fino alle unghie. Le mani di un guardiano."},
+    {t:"Gli occhi",ok:1,say:"«Ha la lingua impastata e le pupille piccole come capocchie di spillo, Hosking. Non è la stanchezza di chi ha vegliato. È il sonno di chi ha dormito troppo, e male.»",reply:"Il guardiano si volta verso la lente, e la lucida con più forza."}]};
+  READ.jenna={clue:"f_obs_jenna",opts:[
+    {t:"I capelli",reply:"Capelli neri raccolti in fretta. Jenna è pallida, ma è pallida da giugno, dicono."},
+    {t:"Il cardigan",reply:"Un cardigan di lana nuovo, ancora con le pieghe del baule. Ne ha cambiato uno? Non dice niente, per ora."},
+    {t:"Le mani",ok:1,say:"«Ha le mani screpolate dal sale fino ai polsi, Jenna. Come chi le ha tenute a lungo nell'acqua di mare. Non nell'acqua dei panni: quella non screpola così.»",reply:"Jenna nasconde le mani sotto il grembiule. «Ho lavato i panni. Col freddo.»"}]};
+  Object.assign(OBJ,{
+    "hosking|alibi0":{ok:["f_tazza","f_pompa","f_obs_hosking","d3_sonno"],unlock:"f_sonno",a:"Il guardiano guarda la tazza, poi la pompa, poi te. Si siede sul gradino della scala. «Mi sono addormentato. Dopo la cioccolata. Mi sono svegliato alle quattro meno cinque, gelato, e il faro era al buio.» Si copre la faccia. «Ventidue anni. Ho scritto il falso sul registro. Dio mi perdoni.»"},
+    "hosking|alibi1":{ok:["f_tazza","f_pompa","f_obs_hosking","d3_sonno"],unlock:"f_sonno",a:"Hosking chiude gli occhi. «Va bene. Dormivo. Mi sono svegliato alle quattro meno cinque e il faro era spento. Ho scritto il falso sul registro.» Una pausa. «Non so come sia successo. Non mi addormento mai.»"},
+    "hosking|crime1":{ok:["f_guardiacoste","f_almanacco"],a:"«Il vento calato?» Hosking legge, e si passa una mano sulla barba. «Tra le due e mezza e le quattro. Con la sizigia.» Ti guarda. «Allora si passava. Si passava benissimo.»"},
+    "hester|alibi0":{ok:["f_letto","f_vestiti","f_velo","f_scarpetta","f_portagioie","d3_nodo","d3_uscita"],a:"Hester impallidisce. «Il letto… sì. Non si era coricata. Sarà salita prima.» Le trema la voce. Sta ancora difendendo qualcosa, e non è una bugia sua."},
+    "hester|alibi1":{ok:["f_banca","f_foto_tom","f_almanacco","d3_fuga"],unlock:"f_piano",a:"Hester guarda la fotografia di Tom, o la lettera della banca, e qualcosa in lei si scioglie. Ride e piange insieme. «Non è caduta! È viva, signore! Il velo l'ha legato lei, la scarpetta l'ho messa io alle sei. Alle tre è passata dalla passerella, con la bassa marea. Tom l'aspettava. A quest'ora sono a Plymouth. È viva!»"},
+    "tremayne|alibi0":{ok:["f_galleria_01"],unlock:"f_rumori",a:"«Va bene: all'una e dieci sono salito a fumare in galleria. Ho guardato il mare e ho pensato di buttarmi.» Ride, amaro. «Poi sono tornato a letto. E verso le tre e un quarto ho sentito qualcuno muoversi nella camera della sposa. Ho pensato: almeno lei dorme. Non sono entrato.»"},
+    "jenna|alibi0":{ok:["f_lanterna_j","d3_cane","f_obs_jenna","f_gonna"],a:"Jenna non abbassa gli occhi. «Sono uscita un momento, va bene? A vedere se la barca era legata, col vento. Cinque minuti.» Una bugia nuova, detta bene. Ma adesso sai che è uscita."},
+    "jenna|alibi2":{ok:["d3_alga","d3_due","f_gonna","f_lanterna_j"],a:"Jenna stringe il grembiule. «Ero in casa.» Ma la voce le si rompe a metà della frase, e non la riprende."},
+    "jenna|crime2":{ok:["d3_bottone","f_cardigan","f_bottone"],a:"Jenna guarda il bottone di corno. Per la prima volta, non risponde niente. Si porta una mano al collo, dove una volta portava l'anello di Tom."}
+  });
+  Object.assign(TAVOLE,{f_piano:{who:"hester",cap:"«Non è caduta! È viva, signore!»"},f_due_luci:{who:"tom",cap:"«Due luci. Poi una sola.»"},f_sonno:{who:"hosking",cap:"«Ventidue anni. Dio mi perdoni.»"},f_posta:{who:"tom",cap:"«La ritira Jenna.» Si ferma, e capisce."}});
+})();
+CASE_FARO.deductions=[
+  {id:"d3_nodo",name:"Una messinscena",th:{A:-3,B:1},a:["f_velo"],b:["f_scarpetta","f_letto"],text:"Il velo è annodato, e fradicio della pioggia della notte. La scarpetta è asciutta, posata dopo le 2:30. Nessuno è caduto dal faro: qualcuno ha preparato la scena di una caduta."},
+  {id:"d3_uscita",name:"È uscita vestita per partire",th:{A:-2,B:2},a:["f_letto","f_chiavistello"],b:["f_vestiti","f_scarpe_d"],text:"Non si è mai coricata. Si è messa gli stivaletti e il tailleur da viaggio ed è uscita dalla porta della dispensa, verso la passerella. Non tornando."},
+  {id:"d3_fuga",name:"La fuga delle 3:12",th:{B:3},a:["f_banca","f_portagioie"],b:["f_almanacco","f_foto_tom"],text:"Quattrocento sterline in contanti, i gioielli, un passaporto nuovo. E la passerella scoperta alle 3:12, con un uomo che l'aspettava a terra. La sposa non è caduta: è fuggita."},
+  {id:"d3_sonno",name:"Si è spenta da sola",th:{A:-1,T:1},a:["f_tazza"],b:["f_pompa","f_registro_faro"],text:"Il bruciatore va pompato ogni mezz'ora. Se il guardiano dorme, la fiamma si spegne da sola. Nessuno ha spento la lanterna: qualcuno ha addormentato il guardiano."},
+  {id:"d3_bromuro",name:"Il bromuro di Jenna",th:{T:3},a:["f_tazza"],b:["f_bromuro","f_ricetta"],text:"Nella cioccolata del guardiano c'era bromuro, non il cloralio della sposa, che è intatto. Il bromuro l'ha prescritto Vane a Jenna. La cioccolata la prepara Jenna."},
+  {id:"d3_cane",name:"Il cane che non abbaiò",th:{T:2},a:["f_cane"],b:["f_lanterna_j","f_obs_jenna"],text:"Il cane ha abbaiato alle 2:55, per la sposa che usciva dalla villa. Non ha abbaiato per chi è uscito dalla casetta, con la lanterna cieca: qualcuno che conosceva, e con cui dormiva."},
+  {id:"d3_due",name:"La seconda luce",th:{T:3,B:-2},a:["f_due_luci"],b:["f_lanterna_j"],text:"La luce ferma al Pulpito si è accesa all'improvviso, come quando si apre lo sportello di una lanterna cieca. E la lanterna cieca della casetta ha lo stoppino bruciato e il sale sul vetro."},
+  {id:"d3_alga",name:"La gonna è stata al Pulpito",th:{T:3},a:["f_gonna"],b:["f_alga"],text:"L'alga rossa impigliata all'orlo della gonna nascosta sotto le reti cresce solo sul Pulpito. Chi portava quella gonna, stanotte, è stato lì."},
+  {id:"d3_gaffa",name:"L'arma è la gaffa",th:{T:2},a:["f_gaffa"],b:["f_ferita"],text:"La ferita a mezzaluna con il foro al centro ha la forma esatta del gancio della gaffa. Che è stata rimessa al gancio sbagliato, con la ruggine fresca e un capello biondo."},
+  {id:"d3_bottone",name:"Il bottone di Jenna",th:{T:3},a:["f_bottone"],b:["f_cardigan"],text:"Il bottone di corno nella mano di Isolde viene dal cardigan grigio nascosto nel baule di Jenna. Il filo è strappato: glielo ha strappato lei, cadendo."},
+  {id:"d3_lettera",name:"Jenna sapeva",th:{T:3},a:["f_bibbia"],b:["f_posta"],text:"La lettera di Tom con l'ora della marea è passata per la cassetta del faro, e la posta la ritira Jenna. Ora è nella sua Bibbia. Jenna sapeva dove e quando."},
+  {id:"d3_hester",name:"Hester era nella camera",th:{C:-1},a:["f_rumori"],b:["f_piano"],text:"Alle tre e un quarto, nella camera della sposa, qualcuno si muoveva per far credere che Isolde dormisse: era Hester. Non poteva essere al Pulpito."},
+  {id:"d3_buio",name:"Un'ora al buio",th:{T:1},a:["f_guardiacoste"],b:["f_sonno","f_registro_faro"],text:"La guardia costiera ha visto il faro spento dalle 3:04 alle 3:58, non dalle 3 alle 3:20 come dice il registro. E il vento era calato: alle tre la passerella si poteva attraversare."}
+];
+CASE_FARO.deductions.forEach(d=>{CASE_FARO.clues[d.id]={name:d.name,cat:"Deduzione",th:d.th,text:d.text};});
+CASE_FARO.accusation=[
+  {id:"t1",q:"23:30 · Che cosa succede sulla galleria del faro?",options:[{id:"vento",t:"Il vento strappa il velo alla sposa"},{id:"velo",t:"Isolde annoda il proprio velo alla ringhiera",req:["f_velo","d3_nodo","f_piano"]},{id:"lite",t:"Tremayne strappa il velo durante la lite",req:["f_lite"]}]},
+  {id:"t2",q:"00:15 · Che cosa beve il guardiano?",options:[{id:"cloralio",t:"La cioccolata, con il cloralio della sposa",req:["f_cloralio"]},{id:"niente",t:"Niente di strano: veglia fino alle quattro"},{id:"bromuro",t:"La cioccolata di Jenna, con due polveri di bromuro",req:["d3_bromuro"]}]},
+  {id:"t3",q:"02:55 · Chi esce dalla porta della dispensa?",options:[{id:"sonnamb",t:"Nessuno: Isolde sale in galleria nel sonno"},{id:"isolde",t:"Isolde, vestita da viaggio, con la valigetta e la lanterna",req:["d3_uscita","f_piano"]},{id:"hester",t:"Hester, per posare la scarpetta sugli scogli",req:["f_scarpetta"]}]},
+  {id:"t4",q:"03:00 · Chi esce dalla casetta del guardiano?",options:[{id:"nessuno",t:"Nessuno: nella casetta dormono tutti"},{id:"hosking",t:"Il guardiano, a controllare la barca"},{id:"jenna",t:"Jenna, con la lanterna cieca. Il cane non abbaia.",req:["d3_cane","d3_due","f_lanterna_j"]}]},
+  {id:"t5",q:"03:04 · Chi spegne la lanterna del faro?",options:[{id:"isolde",t:"Isolde, per attraversare al buio"},{id:"hester",t:"Hester, su ordine della padrona",req:["f_piano"]},{id:"hosking",t:"Il guardiano, per un guasto del bruciatore",req:["f_registro_faro"]},{id:"nessuno",t:"Nessuno: senza la pompa, la fiamma si spegne da sola",req:["d3_sonno","f_pompa"]}]},
+  {id:"t6",q:"03:15 · Che cosa succede al Pulpito?",options:[{id:"fuga",t:"Isolde raggiunge Tom e fugge verso l'America",req:["d3_fuga","f_piano"]},{id:"scivola",t:"Isolde scivola sulle alghe e cade nella gola",req:["f_corpo"]},{id:"gaffa",t:"Qualcuno la aspetta e la colpisce con la gaffa",req:["d3_gaffa","f_ferita"]}]},
+  {id:"t7",q:"03:58 · Che cosa fa il guardiano?",options:[{id:"ripara",t:"Ripara il bruciatore guasto e lo annota"},{id:"falso",t:"Si sveglia, riaccende la lanterna e falsifica il registro",req:["f_sonno","d3_buio"]}]},
+  {id:"who",q:"Chi ha ucciso Isolde Penrose?",type:"char",options:["tremayne","hester","hosking","vane","jenna","josiah"]}
+];
+CASE_FARO.confronto={who:"jenna",title:"Salotto di Morwenna House · Il confronto",cast:["jenna","hosking","tom","hester"],steps:[
+  {say:"«Jenna. Stanotte non hai dormito.»",lab:"Presenta la prova che Jenna era sulla passerella",ok:["d3_alga","d3_due","d3_cane","f_gonna","f_lanterna_j"],good:"«Il cane non ha abbaiato per te. La tua lanterna cieca ha il sale sul vetro. E l'alga del Pulpito era impigliata alla tua gonna, sotto le reti.» Hosking si volta verso la figlia, lentamente.",bad:"Jenna ti guarda senza espressione. «Ero in casa. Il cane è testimone.»"},
+  {say:"«E sapevi dove aspettarla, e a che ora.»",lab:"Presenta la prova che Jenna conosceva l'appuntamento",ok:["d3_lettera","f_bibbia","f_posta"],good:"Posi sul tavolo la lettera di Tom, trovata nella Bibbia. «La posta per lo scoglio la ritiri tu.» Tom si copre la faccia con le mani.",bad:"«Quale appuntamento? Io non sapevo niente di loro due.»"},
+  {say:"«E lei, prima di cadere, ti ha strappato questo.»",lab:"Presenta la prova decisiva",ok:["d3_bottone","f_bottone","f_cardigan"],good:"Il bottone di corno, sul tavolo, accanto al cardigan grigio con il filo strappato. Jenna lo guarda a lungo. Poi, piano, sorride.",bad:"Jenna non abbassa gli occhi. «Lei non ha niente, avvocato. Solo il mare. E il mare non parla.»"}]};
+
+CASE_FARO.ending=function(ans,g,sl){const R=(k,title,eyebrow,paras)=>({kind:k,title,eyebrow,paras});
+  const right={t1:"velo",t2:"bromuro",t3:"isolde",t4:"jenna",t5:"nessuno",t6:"gaffa",t7:"falso"},tl=Object.keys(right).filter(k=>ans[k]===right[k]).length,res=(sl&&sl.res)||[],pr=res.filter(Boolean).length;
+  if(ans.t3==="sonnamb")return R("errato","La sonnambula","Finale errato",[
+    "Hai confermato la versione di Sir Josiah: una sposa sonnambula, una galleria, il mare.","Il sergente di Penzance chiuse il verbale in mezz'ora. Sir Josiah ti strinse la mano. Il capitano Tremayne ereditò la dote.","Alle 15:37 del giorno dopo, con la bassa marea, un pescatore trovò nella gola sotto il Pulpito il corpo di una donna in stivaletti da viaggio. Nessuno pensò di chiederti perché una sonnambula si fosse messa gli stivaletti.","Lo scoglio aveva mentito, e tu gli hai creduto. Rigioca."]);
+  if(ans.t6==="fuga")return R("errato","È in America","Finale errato",[
+    "Hai annunciato a tutti la verità, o quella che sembrava la verità: Isolde è viva. Ha inscenato la propria morte ed è fuggita con Tom Kitto verso l'America.","Hester pianse di gioia. Sir Josiah si chiuse nello studio. Il capitano Tremayne ruppe un altro bicchiere.","Poi, alle quattro del pomeriggio, una barca arrivò da terra con la calma del mare. A bordo c'era Tom Kitto, solo. «Non è mai arrivata», disse. «L'ho aspettata fino alle quattro.»","Tutto quello che avevi scoperto era vero. Ti sei fermato a metà. Rigioca."]);
+  if(ans.who!=="jenna"){const W={
+    tremayne:"Hai accusato il capitano Tremayne. Era il colpevole perfetto: geloso, violento, in galleria all'una. Ma all'una e venti era già sceso, e alle tre e un quarto era nel camerino, ad ascoltare Hester che fingeva di essere la sposa. I suoi avvocati lo fecero uscire in una settimana.",
+    hester:"Hai accusato Hester Pascoe. Aveva mentito su tutto, aveva scritto le lettere, aveva posato la scarpetta. Ma alle tre e un quarto era nella camera della sposa, e il capitano l'aveva sentita attraverso la parete. Hester aveva aiutato Isolde a fuggire. Non l'aveva uccisa.",
+    hosking:"Hai accusato il guardiano Hosking. Aveva mentito sul registro, e il faro era stato al buio per un'ora. Ma dormiva: drogato con la cioccolata di mezzanotte. Chi gliel'aveva preparata, la cioccolata?",
+    vane:"Hai accusato il dottor Vane. Aveva le medicine, aveva un debole per la sposa. Ma il bromuro l'aveva prescritto lui, e la sua stessa ricetta indicava un'altra persona.",
+    josiah:"Hai accusato Sir Josiah. Voleva la versione dell'incidente a ogni costo, per lo scandalo e per le miniere. Ma un padre che vuole nascondere uno scandalo non è un padre che uccide la figlia, e alle tre Sir Josiah russava così forte che lo sentiva tutta la villa."};
+    return R("errato","La persona sbagliata","Finale errato",[W[ans.who]||W.tremayne,"Quella notte, sullo scoglio, la sola persona a cui nessuno aveva fatto domande andò a dormire presto. Il cane dormiva con lei.","Hai seguito le bugie di tutti. Non quella giusta. Rigioca."]);}
+  if(tl>=6&&pr>=2&&res[2])return R("vera","Il mare restituisce","Finale vero",[
+    "Li hai riuniti nel salotto di Morwenna House, con la marea che risaliva. Hai raccontato la notte ora per ora: il velo annodato alle 23:30, la cioccolata di mezzanotte, la porta della dispensa alle 2:55.",
+    "«Nessuno ha spento il faro, signori. Si è spento da solo, perché il guardiano dormiva. E il guardiano dormiva perché qualcuno gli aveva messo nella cioccolata due polveri di bromuro.»",
+    "Hosking non guarda te. Guarda sua figlia.",
+    "«Alle tre il cane non ha abbaiato, Jenna. Non per te. Hai aspettato al Pulpito con la lanterna cieca chiusa. Quando lei è arrivata, hai aperto lo sportello. Tom ha visto la tua luce accendersi.»",
+    "Jenna Hosking non piange. Si porta una mano al collo, dove una volta c'era l'anello di Tom. «L'avevo letto nella sua lettera», dice, piano. «La bassa marea delle tre e dodici. Pensavo: se il mare se la prende, nessuno lo saprà mai. Il mare si prende sempre quello che vuole.»",
+    "«Io lo conoscevo da quando avevo sei anni», aggiunge, guardando Tom. «Lei da tre mesi.»",
+    "Il sergente di Penzance arrivò con la barca delle sei. Jacob Hosking accompagnò la figlia fino alla barca, poi risalì la scala del faro e accese la lanterna, alle otto in punto, come ogni sera per ventidue anni.",
+    "Quella notte non si spense nemmeno per un minuto.",
+    "Hai ricostruito la notte, ora per ora. Il caso più difficile dell'archivio."]);
+  if(tl>=4&&pr>=1)return R("quasi","Una ragazza del faro","Finale parzialmente corretto",[
+    "Hai indicato Jenna Hosking, e avevi ragione. Ma la tua ricostruzione della notte aveva dei buchi, e la difesa li trovò tutti.",
+    "Al processo di Bodmin, l'avvocato di Jenna sostenne che Isolde era scivolata sulle alghe del Pulpito, e che la ragazza era uscita solo per cercarla. La giuria ascoltò, e non seppe decidere.",
+    "Jenna fu condannata per occultamento e falsa testimonianza. Tre anni.","Tom Kitto lasciò la Trinity House e partì per l'America da solo, con un biglietto per due.",
+    "Hai trovato l'assassina. Non tutta la notte. Rigioca per ricostruirla."]);
+  return R("parziale","Il dubbio","Finale parzialmente corretto",[
+    "Hai accusato Jenna Hosking, ma senza una ricostruzione solida né una prova che la legasse alla passerella.","Il sergente la interrogò per un'ora. Jenna rispose a ogni domanda con calma, e il cane dormiva ai suoi piedi.","Il caso fu chiuso come «morte per annegamento, circostanze non chiarite».","Avevi il nome giusto e nient'altro. Rigioca."]);
+};
+CASE_FARO.tips={
+  start:"«Una sposa sonnambula, uno scoglio da cui non si esce, un faro che si spegne. Troppe cose impossibili in una notte sola: quando succede, di solito qualcuno mente. Forse più di uno.»",
+  act1:"«Se la sposa è uscita vestita da viaggio, non dormiva. E chi esce di notte da uno scoglio ha bisogno di un'ora precisa, e di qualcuno che lo aspetti.»",
+  act2:"«La passerella resterà scoperta fino alle 16:15, poi il mare se la riprende. E alle 17:30 arriva la polizia di Penzance. Non sprechi la marea.»"
+};
+CASE_FARO.lyleDed={
+  d3_nodo:"«Il vento strappa, non annoda. E una scarpetta asciutta dopo una notte di pioggia è una scarpetta posata, non caduta. Qualcuno ha apparecchiato la tavola per noi.»",
+  d3_uscita:"«Una sonnambula in stivaletti allacciati. Non l'ho mai vista in trent'anni di letture.»",
+  d3_fuga:"«È fuggita!» Lyle sembra quasi felice. «Allora è viva. Allora…» Si ferma. «Allora perché ho questa brutta sensazione?»",
+  d3_sonno:"«Nessuno ha spento il faro. È questo il trucco: tutti cercavamo una mano, e non c'era nessuna mano.»",
+  d3_bromuro:"«Il bromuro della ragazza nella cioccolata del padre.» Lyle si toglie gli occhiali. «Che cosa terribile, se è quello che penso.»",
+  d3_cane:"«Il cane che non abbaiò.» Lyle sorride, triste. «Il mio autore preferito ci avrebbe scritto un racconto intero.»",
+  d3_due:"«La seconda luce. Qualcuno aspettava al Pulpito, al buio, con lo sportello chiuso.»",
+  d3_alga:"«L'alga del Pulpito sulla gonna sotto le reti. Il mare cancella le orme, ma le alghe restano attaccate.»",
+  d3_gaffa:"«La gaffa del capanno. Un'arma che tutti, sullo scoglio, hanno sotto gli occhi ogni giorno.»",
+  d3_bottone:"«L'ultima cosa che ha fatto Isolde Penrose, avvocato, è stata strappare un bottone. Per noi.»",
+  d3_lettera:"«La lettera di Tom nella Bibbia di Jenna. Non ha avuto il cuore di bruciarla. L'amore è il peggior complice.»",
+  d3_hester:"«Hester recitava la parte della padrona addormentata. Una bugia d'amore, non di sangue.»",
+  d3_buio:"«Un'ora al buio, e il vento calato. Alle tre, la passerella si attraversava benissimo. Chiunque poteva farlo. Chiunque sapesse.»"
+};
+CASE_FARO.medals=[
+  {id:"vera",name:"Il mare restituisce",desc:"Ottieni il finale vero.",ok:()=>G.ended.kind==="vera"},
+  {id:"lamp",name:"Nessuna mano",desc:"Scopri che nessuno ha spento la lanterna.",ok:()=>(G.answers||{}).t5==="nessuno"},
+  {id:"dog",name:"Il cane che non abbaiò",desc:"Ottieni la deduzione del cane.",ok:()=>has("d3_cane")},
+  {id:"tide",name:"Prima della marea",desc:"Esamina il Pulpito prima che il mare copra la passerella.",ok:()=>has("f_alga")},
+  {id:"timeline",name:"Ora per ora",desc:"Ricostruisci tutta la notte senza un errore.",ok:()=>{const a=G.answers||{};return a.t1==="velo"&&a.t2==="bromuro"&&a.t3==="isolde"&&a.t4==="jenna"&&a.t5==="nessuno"&&a.t6==="gaffa"&&a.t7==="falso";}},
+  {id:"ded",name:"Mente deduttiva",desc:"Scopri tutte le deduzioni del caso.",ok:()=>S.deductions.every(d=>has(d.id))},
+  {id:"read",name:"Occhio clinico",desc:"Riesci in tutte le letture dei personaggi.",ok:()=>["tremayne","hester","hosking","jenna"].every(k=>(G.read||{})[k]===1)},
+  {id:"obj",name:"Obiezione accolta",desc:"Vinci almeno quattro obiezioni.",ok:()=>Object.keys(G.obj||{}).length>=4},
+  {id:"nohint",name:"Senza Lyle",desc:"Finale vero senza chiedere suggerimenti.",ok:()=>G.ended.kind==="vera"&&!G.hints},
+  {id:"perfect",name:"Infallibile",desc:"Finale vero senza un solo errore.",ok:()=>G.ended.kind==="vera"&&!G.wrongDed&&!G.wrongObj&&!Object.values(G.read||{}).includes(-1)}
+];
+
+/* il faro nella notte: acceso e spento */
+function faFaro(o={}){const r=rng(17);let waves="";for(let i=0;i<40;i++){const x=r()*1600,y=600+r()*300;waves+=`<path d="M${x.toFixed(0)} ${y.toFixed(0)}q30 -14 60 0" stroke="#c8d4dc" stroke-width="3" fill="none" opacity="${(.25+r()*.4).toFixed(2)}"/>`;}
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#02040a"/><stop offset="1" stop-color="#18222e"/></linearGradient><linearGradient id="bm" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff2c0" stop-opacity=".55"/><stop offset="1" stop-color="#fff2c0" stop-opacity="0"/></linearGradient><radialGradient id="wg"><stop offset="0" stop-color="#ffb850" stop-opacity=".5"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>${FA_VIG}</defs>
+<rect width="1600" height="900" fill="url(#sk)"/><path d="M0 120q200 -60 420 -10q200 -50 420 0q220 -40 420 10q200 -10 340 30V0H0Z" fill="#0a1018"/>
+${o.dark?"":`<path d="M880 300L1600 140V420Z" fill="url(#bm)"/><path d="M880 300L0 210V330Z" fill="url(#bm)" opacity=".5" transform="scale(-1 1) translate(-1760 0)"/>`}
+<path d="M0 560Q260 520 520 556T1040 540T1600 560V900H0Z" fill="#0c1820"/>${waves}
+<path d="M120 700L180 600L300 580L420 600L520 640L560 700Z" fill="#05070a"/><path d="M500 690L1300 650" stroke="#1a2228" stroke-width="10" opacity="${o.low?1:.3}"/>
+<path d="M620 640L700 540L860 520L1000 540L1080 620L1100 660Z" fill="#05070a"/>
+<path d="M840 520L852 260H908L920 520Z" fill="#e8e2d6"/><path d="M842 470h76M846 400h68M850 330h60" stroke="#8a1414" stroke-width="22"/><rect x="836" y="226" width="88" height="36" fill="${o.dark?"#1a1a1a":"#fff0c0"}"/><path d="M828 226h104l-52 -36z" fill="#05070a"/><rect x="828" y="260" width="104" height="8" fill="#05070a"/>
+${o.dark?"":`<circle cx="880" cy="244" r="60" fill="url(#wg)"/>`}
+<g fill="#05070a"><rect x="660" y="470" width="150" height="70"/><path d="M650 472L735 420L820 472Z"/><rect x="940" y="500" width="70" height="40"/><path d="M934 502L975 476L1016 502Z"/></g>
+${[[680,490],[712,490],[744,490],[776,490]].map(([x,y],i)=>`<rect x="${x}" y="${y}" width="16" height="22" fill="${i===1&&!o.dark?"#f4b860":"#141a24"}"/>`).join("")}<rect x="962" y="512" width="14" height="16" fill="#f4b860" opacity="${o.dark?.4:.9}"/>
+<path d="M1300 640Q1420 600 1600 610V700H1300Z" fill="#141c18"/><circle cx="1360" cy="628" r="4" fill="#f4b860"/><circle cx="1420" cy="622" r="3" fill="#f4b860"/>
+${faFlakes(90,23,1600,900,.3).replace(/r="[0-9.]+"/g,'r="1.2"')}
+<rect width="1600" height="900" fill="url(#vg)"/></svg>`;}
+FILMART.lighthouseNight=()=>faFaro();FILMART.lighthouseDark=()=>faFaro({dark:1});FILMART.lighthouse=()=>faFaro();
+
+CASE_FARO.film=[
+  {dur:5600,html:`<div class="film-title"><div class="k">Caso III</div><h1>La Sposa<br>del Faro</h1>${ORN}<p class="ft-sub">Il caso più difficile dell'archivio.</p></div>`,run:(el,T)=>AU.sfx("drone")},
+  {img:"lighthouseNight",dur:8000,cam:["scale(1.25) translate(-4%,2%)","scale(1.05)"],place:"Scoglio di St. Morwenna · sabato 16 agosto 1913, 22:40",cap:"La burrasca isola lo scoglio. Il cavo del telegrafo si spezza.",cap2:"Sullo scoglio restano gli sposi, gli invitati, il guardiano del faro e sua figlia. E voi due.",run:(el,T)=>{AU.sfx("wind");T(()=>lightning(),2600);}},
+  {svg:()=>roomSVG("lanterna",{night:true,nofig:true}),dur:6000,cam:["scale(1.12)","scale(1.02)"],place:"23:30 · La stanza della lanterna",cap:"La sposa vuole mostrare a tutti la grande lente nella tempesta. È allegra, per la prima volta in tutto il giorno."},
+  {svg:()=>roomSVG("camera_sposa",{night:true,nofig:true}),dur:6000,cam:["scale(1.04)","scale(1.14) translate(1%,1%)"],place:"00:30 · Morwenna House",cap:"Gli sposi si ritirano in camere separate. La sposa ha l'emicrania, dice. Lo sposo rompe un bicchiere contro il muro."},
+  {img:"lighthouseDark",dur:8000,cam:["scale(1.05)","scale(1.2) translate(2%,1%)"],place:"03:04 · Dalla costa",cap:"La guardia costiera di Porthcarrow annota una cosa che non succedeva da ventidue anni.",cap2:"Il faro di St. Morwenna è spento.",run:(el,T)=>{T(()=>AU.sfx("thunder"),1800);}},
+  {svg:()=>roomSVG("camera_sposa",{nofig:true}),dur:5000,cam:["scale(1.1)","scale(1.02)"],place:"06:30",cap:"La cameriera Hester trova il letto della sposa vuoto.",run:(el,T)=>{T(()=>AU.sfx("scream"),900);}},
+  {svg:()=>roomSVG("scogli",{nofig:true}),dur:6000,cam:["scale(1.18) translate(-3%,2%)","scale(1.03)"],place:"06:45 · Gli scogli sotto il faro",cap:"Una scarpetta di raso bianco sugli scogli. In cima al faro, un velo che sventola."},
+  {dur:6200,html:`<div class="film-title"><h1>Uno scoglio<br>da cui non si esce.</h1>${ORN}<p class="ft-sub">Tu e il dottor Lyle eravate ospiti delle nozze.<br>Adesso siete gli unici a fare domande.</p></div>`,run:(el,T)=>AU.sfx("drone")}
+];
+
 /* ---------------- ALTRI CASI (in preparazione) ---------------- */
 const STORIES=[
   CASE_RAVEN,
   CASE_EXPRESS,
-  {id:"faro",num:"Caso III",title:"La Sposa del Faro",year:"Cornovaglia, agosto 1913",issue:"N. III · Agosto 1913",art:"lighthouse",blurb:"Un matrimonio sull'isolotto del faro di St. Morwenna, isolato dalla burrasca. Al mattino la sposa manca, e la lanterna è spenta.",locked:true}
+  CASE_FARO
 ];
 
 /* =====================================================================
@@ -2844,7 +3294,7 @@ function nav(){const T=[["room","Stanza"],["map","Mappa"],["notes","Taccuino"],[
 function setTab(t){if(G.tab!==t)AU.sfx("page");G.tab=t;save();render();$("#main").scrollTop=0;if(t==="board")tip("board");if(t==="accuse"&&!G.ended)tip("accuse");}
 
 /* ---------------- STANZA ---------------- */
-function roomSVG(id,o={}){const A=ROOMART[id],act=G.act;let s=`<svg class="scn" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${shellSVG(A)}`;
+function roomSVG(id,o={}){const A=ROOMART[id],act=G.act;let s=`<svg class="scn" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${A.out?shellOut(A,o):shellSVG(A)}`;
   A.props(act,o).forEach(p=>{s+=tr(p[1],p[2],p[3]||1,P[p[0]](p[4]||{}));});
   (A.lights||[]).forEach(l=>s+=`<circle cx="${l[0]}" cy="${l[1]}" r="${l[2]}" fill="url(#${l[3]})" style="mix-blend-mode:screen"/>`);
   const slots=A.slots||DEFSLOTS;(o.figs?o.figs.map(f=>f[0]):o.nofig?[]:charsIn(id)).forEach((cid,i)=>{const sl=slots[i%slots.length];s+=`<g class="fig" onclick="openTalk('${cid}')">${tr(sl[0],sl[1],.95,figure(CHARFIG[cid]||{k:"coat"},S.chars[cid].short))}</g>`;});
@@ -3016,8 +3466,8 @@ function notesView(){let h=`<div class="journal"><div class="ribbons">${[["indiz
     cats.forEach(([cat,lab])=>{const list=G.clues.filter(id=>S.clues[id].cat===cat);if(!list.length)return;h+=`<div class="jsect">${lab}</div>`;
       list.slice().reverse().forEach(id=>{const k=S.clues[id];h+=`<div class="entry${G.newClues.includes(id)?" new":""}" onclick="viewClue('${id}')"><div class="th">${evThumb(id)}</div><div><h4>${k.name}</h4><p>${k.text}</p></div></div>`;});});}
   if(noteTab==="deduz")h+=dedView();
-  if(noteTab==="persone")Object.keys(S.chars).forEach(id=>{const c=S.chars[id],al=alive(id),where=al&&locOf(id);
-    h+=`<div class="dossier${al?"":" dead"}"><div class="pf">${portrait(c.p,!al)}</div><div><h4>${c.name}</h4><div class="role">${c.role}, ${c.age} anni</div><p>${c.bio}</p><div class="st${al?"":" d"}">${al?"In vita · "+(where?S.rooms[where].name:"—"):"Deceduto"}</div>${where&&where!==G.room?`<button class="btn ink sm" onclick="goRoom('${where}')">Raggiungi · ¼ d'ora</button>`:""}</div></div>`;});
+  if(noteTab==="persone")Object.keys(S.chars).forEach(id=>{const c=S.chars[id],al=alive(id),where=al&&locOf(id),stx=c.st?c.st(G):null,shownDead=!al&&stx!=="Scomparsa";if(c.hidden&&c.hidden(G))return;
+    h+=`<div class="dossier${shownDead?" dead":""}"><div class="pf">${portrait(c.p,shownDead)}</div><div><h4>${c.name}</h4><div class="role">${c.role}, ${c.age} anni</div><p>${c.bio}</p><div class="st${al?"":" d"}">${al?"In vita · "+(where?S.rooms[where].name:"—"):(stx||"Deceduto")}</div>${where&&where!==G.room?`<button class="btn ink sm" onclick="goRoom('${where}')">Raggiungi · ¼ d'ora</button>`:""}</div></div>`;});
   if(noteTab==="oggetti")h+=G.items.length?G.items.map(i=>`<div class="entry" onclick="viewItem('${i}')"><div class="th">${itemArt(i)}</div><div><h4>${S.items[i]}</h4></div></div>`).join(""):`<p class="hand">Non porti niente con te, a parte la borsa dell'avvocato.</p>`;
   return h+`</div></div>`;}
 
@@ -3046,8 +3496,8 @@ function accuseView(){
   ${G.agoKnown?`<div class="warnbar">Hai già rivelato a qualcuno un dettaglio che dovevi tenere per te. In un treno fermo, le voci corrono.</div>`:""}
   <button class="btn red big" onclick="confirmAccuse()">Riunisci tutti nel ristorante</button></div>`;}
   if(G.ended)return `<div class="court"><div class="plaque"><span class="fl"></span><h2>Caso chiuso</h2><span class="fl r"></span></div><p class="desc">Hai formulato la tua accusa: «${G.ended.title}».</p><div class="row c"><button class="btn red" onclick="showReport()">La pagella</button><button class="btn" onclick="showEnding()">Rileggi il finale</button>${G.ended.kind!=="vera"?`<button class="btn" onclick="revealTruth()">Rivela la verità</button>`:""}<button class="btn red" onclick="newGame('${S.id}',true)">Ricomincia</button><button class="btn" onclick="toMenu()">Archivio</button></div></div>`;
-  let h=`<div class="court"><div class="plaque"><span class="fl"></span><h2>L'accusa</h2><span class="fl r"></span></div><p class="desc">${G.forced?"Non c'è più tempo. Devi accusare adesso.":"Si accusa una volta sola. Le ipotesi barrate richiedono prove che non hai ancora trovato."}</p>`;
-  S.accusation.forEach((q,qi)=>{h+=`<div class="qblock"><h3><span class="qn">${["I","II","III","IV"][qi]}.</span> ${q.q}</h3>`;
+  let h=`<div class="court"><div class="plaque"><span class="fl"></span><h2>${S.accuseTitle||"L'accusa"}</h2><span class="fl r"></span></div><p class="desc">${G.forced?"Non c'è più tempo. Devi accusare adesso.":(S.accuseDesc||"Si accusa una volta sola. Le ipotesi barrate richiedono prove che non hai ancora trovato.")}</p>`;
+  S.accusation.forEach((q,qi)=>{h+=`<div class="qblock"><h3><span class="qn">${ROMAN[qi]}.</span> ${q.q}</h3>`;
     if(q.type==="char")h+=`<div class="sus">${q.options.map(id=>{const c=S.chars[id];return `<button class="${accAns[q.id]===id?"on":""}" onclick="pick('${q.id}','${id}')"><div class="pf">${portrait(c.p,!alive(id))}</div><span>${c.short}</span></button>`}).join("")}</div>`;
     else q.options.forEach(o=>{const ok=!o.req||o.req.some(has);h+=ok?`<button class="opt${accAns[q.id]===o.id?" on":""}" onclick="pick('${q.id}','${o.id}')"><span class="bx"></span><span>${o.t}</span></button>`:`<div class="opt lock"><span class="bx"></span><span><s>${o.t}</s><span class="why">Non hai ancora prove per sostenerlo.</span></span></div>`;});
     h+=`</div>`;});
@@ -3055,7 +3505,7 @@ function accuseView(){
   return h+`<button class="btn red big" ${ready?"":"disabled"} onclick="confirmAccuse()">Pronuncia l'accusa</button></div>`;}
 function pick(q,v){accAns[q]=v;AU.sfx("page");const y=$("#main").scrollTop;render();$("#main").scrollTop=y;}
 function confirmAccuse(){if(S.inverted)accAns={who:S.culprit};note("Ne sei sicuro?",`<p>${S.inverted?`Stai per tendere la trappola a <b>${S.chars[accAns.who].name}</b>, davanti a tutti.`:`Stai per accusare formalmente <b>${S.chars[accAns.who].name}</b>, davanti a tutti.`} Non si torna indietro.</p><div class="row"><button class="btn red" onclick="closeOv();doAccuse()">Accuso</button><button class="btn ink" onclick="closeOv()">Aspetta</button></div>`,true);}
-function doAccuse(){AU.sfx("gavel");lyleHide();G.answers={...accAns};save();setTimeout(()=>S.trap?trapScene(finishAccuse):salonScene(finishAccuse),500);}
+function doAccuse(){AU.sfx("gavel");lyleHide();G.answers={...accAns};save();setTimeout(()=>{if(S.trap)trapScene(finishAccuse);else if(S.confronto){if(accAns.who===S.confronto.who)trapScene(finishAccuse);else{finishAccuse({});shake();lightning();setTimeout(showEnding,700);}}else salonScene(finishAccuse);},500);}
 function finishAccuse(sl){const e=S.ending(accAns,G,sl);G.ended=e;G.salon=sl;save();setDone(S.id,e.kind);render();return e;}
 function endButtons(){return `<button class="btn red" id="rp">La pagella del caso</button>${G.ended.kind!=="vera"?`<button class="btn" id="rv">Rivela la verità</button>`:""}<button class="btn red" id="ng">Rigioca il caso</button><button class="btn" id="mn">Menu principale</button>`;}
 function bindEnd(){const rp=$("#rp");if(rp)rp.onclick=()=>showReport();const rv=$("#rv");if(rv)rv.onclick=()=>revealTruth();$("#ng").onclick=()=>{$("#chap").classList.remove("on");newGame(S.id);};$("#mn").onclick=()=>{$("#chap").classList.remove("on");toMenu();};}
