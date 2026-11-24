@@ -552,6 +552,16 @@ body.filming #snow{z-index:52}
 @media(min-width:960px){.chips{gap:10px}.roomtxt{padding-top:22px}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
 canvas.lux{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transition:opacity 1.2s}.scene.lux .glow{display:none}
+.figs{position:absolute;inset:0;pointer-events:none;will-change:transform;transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+.figb{position:absolute;padding:0;background:none;border:0;pointer-events:auto;cursor:pointer;transform-origin:50% 94%;will-change:transform;animation:br2 4.6s infinite ease-in-out}
+.scene.enter .figb{animation:figIn .8s both,br2 4.6s 1s infinite ease-in-out}
+.figb svg{display:block;width:100%;height:100%;overflow:visible}.figb .breathe{animation:none}
+.figb:hover .fbody,.figb:focus-visible .fbody{fill:#2a1c12}.figb:focus-visible{outline:none}
+@keyframes br2{0%,100%{transform:none}50%{transform:scale(1.008,1.018)}}
+@keyframes figIn{from{opacity:0;translate:0 10px}}
+.scene.enter .pan{animation:dolly 1.2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes dolly{from{transform:scale(1.05)}}
+@media(prefers-reduced-motion:reduce){.scene .pan,.figb{animation:none}}
 /* ----- INTERFACCIA: pensata per il pollice ----- */
 .scene .pan{position:relative;width:100%;height:100%}
 .hmeta{display:none}
@@ -3372,7 +3382,7 @@ P.jacket=()=>`<path d="M-40 -10L-34 -96Q0 -110 34 -96L40 -10Z" fill="#7a1414"/><
 P.hole=()=>`<circle r="5" fill="#0a0a0a"/>${[0,1,2,3,4,5].map(i=>`<path d="M0 0L${(Math.cos(i)*22).toFixed(0)} ${(Math.sin(i)*22).toFixed(0)}" stroke="#e8f0f4" stroke-width="1" opacity=".8"/>`).join("")}`;
 P.hdoor=(o={})=>`<rect x="-50" y="-230" width="100" height="230" fill="#3a2212"/><rect x="-42" y="-220" width="38" height="100" fill="#2a170c"/><rect x="4" y="-220" width="38" height="100" fill="#2a170c"/><rect x="-42" y="-110" width="38" height="100" fill="#2a170c"/><rect x="4" y="-110" width="38" height="100" fill="#2a170c"/><circle cx="34" cy="-112" r="5" fill="#c9a45c"/>${o.broken?`<path d="M30 -150l14 -6v20z" fill="#8a8a8a"/><path d="M-50 -60l12 -8M50 -170l-10 6" stroke="#c8b088" stroke-width="3"/>`:""}`;
 const STUDY_PROPS=(a,o,twin)=>[["shelf",110,330,1,{seed:41}],["fire",640,330,.9],["portrait",640,180,.8],twin?["win",400,250,.95,{seed:9,cc:"#1f4a2e"}]:["shut",400,250,.95],["dumb",230,330,.9,{open:!twin&&a===0}],["rug",400,425,1.1,{c:"#2a1a14"}],
-  ["desk",400,420,1.05],...(twin?[["hdoor",760,330,.9],["armchair",560,420,1,{c:"#3a2414"}],["jacket",560,380,.9],["hole",385,170,1]]:[["hdoor",760,330,.9,{broken:true}]]),...(!twin&&a===0&&!o.nofig?[["bodySit",420,402,.9]]:[])];
+  ["desk",400,420,1.05],...(twin?[["hdoor",760,330,.9],["armchair",560,420,1,{c:"#3a2414"}],["jacket",560,380,.9],["hole",385,170,1]]:[["hdoor",760,330,.9,{broken:true}]]),...(!twin&&a===0&&!o.nobody?[["bodySit",420,402,.9]]:[])];
 Object.assign(ROOMART,{
   studio_h:{wall:"damG",floor:"parquet",lights:[[455,290,160,"gWarm"]],props:(a,o)=>STUDY_PROPS(a,o,false),
     hot:{corpo:[420,320],revolver:[470,380],porta:[740,240],persiane:[400,170],lampada:[455,305],montav:[230,215],scrittoio:[370,385],cassetto:[460,405]},slots:[[600,446],[250,448]]},
@@ -3959,7 +3969,7 @@ function chapter(o){snow(!o.art);const el=$("#chap"),step=fastText?.35:.85,long=
 
 /* ---------------- RENDER ---------------- */
 function render(){if(!G)return;if(AU.ctx&&$("#game").classList.contains("on"))AU.setRoom(G.room);hud();nav();armBack();const M=$("#main");M.innerHTML=`<div class="wrap">${({room:roomView,map:mapView,notes:notesView,board:boardView,accuse:accuseView})[G.tab]()}</div>`;post();}
-function post(){logSight();if(G.tab==="room"){placeHots();lampInit();panInit();luxInit();}else luxStop();if(G.tab==="notes")dndInit();if(G.tab==="board"){requestAnimationFrame(drawStrings);setTimeout(drawStrings,120);setTimeout(drawStrings,600);}if(G.tab==="notes"&&G.newClues.length){G.newClues=[];save();setTimeout(nav,600);}}
+function post(){logSight();if(G.tab==="room"){placeHots();placeFigs();lampInit();panInit();luxInit();}else luxStop();if(G.tab==="notes")dndInit();if(G.tab==="board"){requestAnimationFrame(drawStrings);setTimeout(drawStrings,120);setTimeout(drawStrings,600);}if(G.tab==="notes"&&G.newClues.length){G.newClues=[];save();setTimeout(nav,600);}}
 function hud(){const a=S.acts[G.act];$("#hAct").textContent=a.label;let hm=$("#hMeta");if(!hm){hm=document.createElement("div");hm.id="hMeta";hm.className="hmeta";hm.onclick=()=>askWait();$("#hAct").before(hm);}
   hm.innerHTML=`<span class="ac">${a.label.split(" · ")[0]}</span><span>${fmt(G.time)}</span><span class="dots">${Array.from({length:a.actions},(_,i)=>`<i class="${i<G.actions?"":"o"}"></i>`).join("")}</span>`;$("#hRoom").textContent=S.rooms[G.room].name;$("#hTime").textContent=fmt(G.time);
   let c="";for(let i=0;i<a.actions;i++){const lit=i<G.actions;c+=`<svg viewBox="0 0 8 24">${lit?`<path class="flame" d="M4 1q-2.6 3.6 0 6q2.6 -2.4 0 -6z" fill="#ffd27a"/><rect x="1.8" y="8" width="4.4" height="16" fill="#efe6d2"/>`:`<rect x="1.8" y="18" width="4.4" height="6" fill="#7a7062"/><path d="M4 18v-3" stroke="#666" stroke-width=".7"/>`}</svg>`;}$("#cands").innerHTML=c;
@@ -3982,8 +3992,8 @@ function placeHots(){const sc=document.querySelector("#main .scene .pan")||docum
   h.innerHTML=S.rooms[G.room].objects.filter(objAvail).map(o=>{const p=A.hot[o.id];if(!p)return "";const seen=G.seen[G.room+"."+o.id];
     return `<button class="hs${seen?" seen":""}" style="left:${(ox+p[0]*k).toFixed(1)}px;top:${(oy+p[1]*k).toFixed(1)}px" onclick="examine('${o.id}')" aria-label="${o.label}"><i></i><b></b></button>`;}).join("");}
 function roomView(){const R=S.rooms[G.room],pres=charsIn(G.room),objs=R.objects.filter(objAvail);
-  const nSeen=objs.filter(o=>G.seen[G.room+"."+o.id]).length;
-  return `<div class="scene${DARK_ROOMS.includes(G.room)?" dark":""}"><div class="pan">${roomSVG(G.room)}<div class="glow"></div><div class="dust"></div><div class="hots" id="hots"></div>${DARK_ROOMS.includes(G.room)?`<div class="lamp" id="lamp"><i></i></div>`:""}</div></div><div class="roomtxt"><div class="plaque"><span class="fl"></span><h2>${R.name}</h2><span class="fl r"></span></div><p class="desc clamp" onclick="this.classList.toggle('open')">${byAct(R.desc)}</p>
+  const nSeen=objs.filter(o=>G.seen[G.room+"."+o.id]).length,ek=G.room+"|"+G.act,enter=roomView.k!==ek;roomView.k=ek;
+  return `<div class="scene${DARK_ROOMS.includes(G.room)?" dark":""}${enter?" enter":""}"><div class="pan">${roomSVG(G.room,{nofig:true})}<div class="figs" id="figs">${pres.map((cid,i)=>`<button class="figb" style="animation-delay:${enter?(.15+i*.12).toFixed(2)+"s,"+(1+i*1.3).toFixed(1)+"s":(i*1.3).toFixed(1)+"s"}" onclick="openTalk('${cid}')" aria-label="Parla con ${S.chars[cid].short}"><svg viewBox="-60 -210 120 225">${figure(CHARFIG[cid]||{k:"coat"},S.chars[cid].short)}</svg></button>`).join("")}</div><div class="glow"></div><div class="dust"></div><div class="hots" id="hots"></div>${DARK_ROOMS.includes(G.room)?`<div class="lamp" id="lamp"><i></i></div>`:""}</div></div><div class="roomtxt"><div class="plaque"><span class="fl"></span><h2>${R.name}</h2><span class="fl r"></span></div><p class="desc clamp" onclick="this.classList.toggle('open')">${byAct(R.desc)}</p>
   <div class="sect">${pres.length?"Presenti":"Nessuno: solo tu e la casa"}</div>${pres.length?`<div class="chips ppl">${pres.map(id=>`<button class="chip pers" onclick="openTalk('${id}')"><span class="pf">${portrait(S.chars[id].p)}</span>${S.chars[id].short}</button>`).join("")}</div>`:""}
   <div class="sect">Da esaminare${objs.length?`<span class="cnt">· ${nSeen} su ${objs.length}</span>`:""}</div><div class="chips objs">${objs.map(o=>{const seen=G.seen[G.room+"."+o.id],lk=o.req&&!hasItem(o.req);return `<button class="chip ${seen?"seen":""}" onclick="examine('${o.id}')"><span class="gl">${lk?IC.lock:seen?"✓":"✦"}</span>${o.label}</button>`}).join("")}</div>
   ${G.actions<=0?`<div class="warnbar">Le candele si sono consumate. Il prossimo spostamento chiuderà il capitolo.</div>`:""}</div>`;}
@@ -4256,6 +4266,19 @@ function luxInit(){luxStop();const sc=document.querySelector("#main .scene"),pn=
 function luxPulse(oid){const A=ROOMART[G.room],g=LUX.geo,p=A&&A.hot&&A.hot[oid];if(!g||!p||!LUX.raf)return;const x=A.mirror?p[0]:p[0];LUX.pulse={x:g.ox+x*g.k,y:g.oy+p[1]*g.k,t:performance.now()/1000};}
 
 ROOMART.salone.lux=[[400,262,330,"fire",1,1.15],[400,64,320,"cand",.25,.7],[560,212,150,"moon",0,.9,"beam"]];ROOMART.salone.luxAmb=.58;
+
+/* ---------------- VITA DELLE SCENE ---------------- */
+function placeFigs(){const pn=document.querySelector("#main .scene .pan"),F=$("#figs");if(!pn||!F)return;const A=ROOMART[G.room],sl=A.slots||DEFSLOTS;
+  const W=pn.clientWidth,H=pn.clientHeight,k=Math.max(W/800,H/450),ox=(W-800*k)/2,oy=(H-450*k)/2,z=.95*k;
+  F.querySelectorAll(".figb").forEach((b,i)=>{const p=sl[i%sl.length];Object.assign(b.style,{left:(ox+p[0]*k-60*z).toFixed(1)+"px",top:(oy+p[1]*k-210*z).toFixed(1)+"px",width:(120*z).toFixed(1)+"px",height:(225*z).toFixed(1)+"px"});});
+  parInit();}
+/* profondità: i personaggi si spostano rispetto alla stanza quando muovi il mouse o inclini il telefono */
+const PAR={x:0,y:0,raf:0,on:false};
+function parApply(){PAR.raf=0;const F=$("#figs");if(F)F.style.transform=`translate3d(${PAR.x.toFixed(1)}px,${PAR.y.toFixed(1)}px,0)`;}
+function parSet(x,y){PAR.x=Math.max(-7,Math.min(7,x));PAR.y=Math.max(-4,Math.min(4,y));if(!PAR.raf)PAR.raf=requestAnimationFrame(parApply);}
+function parInit(){if(PAR.on)return;PAR.on=true;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  document.addEventListener("pointermove",e=>{if(e.pointerType!=="mouse"||!G||G.tab!=="room")return;parSet((e.clientX/innerWidth-.5)*-12,(e.clientY/innerHeight-.5)*-6);},{passive:true});
+  addEventListener("deviceorientation",e=>{if(!G||G.tab!=="room"||e.gamma==null)return;parSet(e.gamma*.25,(e.beta-45)*.1);},{passive:true});}
 /* ---------------- BACHECA ---------------- */
 function theoryScore(k){let pos=[],neg=[],sum=0;G.clues.forEach(id=>{const v=(S.clues[id].th||{})[k]||0;if(v>0)pos.push(id);if(v<0)neg.push(id);sum+=v;});return {pos,neg,sum};}
 function pcard(id,neg,i){const rot=((id.length*7+i*13)%9)-4;return `<div class="pcard${neg?" neg":""}" style="transform:rotate(${rot}deg)" onclick="viewClue('${id}')"><span class="pin"></span>${evThumb(id)}<span>${S.clues[id].name}</span></div>`;}
